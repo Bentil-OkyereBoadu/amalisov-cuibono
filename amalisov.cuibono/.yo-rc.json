@@ -1,0 +1,19 @@
+{
+  "generator-ui5-ts-app": {
+    "namespace": "amalisov.cuibono",
+    "framework": "SAPUI5",
+    "frameworkVersion": "1.121.0",
+    "author": "pmy09",
+    "initrepo": false,
+    "tstypes": "@sapui5/types",
+    "tstypesVersion": "1.121.0",
+    "appId": "amalisov.cuibono",
+    "appURI": "amalisov/cuibono",
+    "cdnDomain": "ui5.sap.com",
+    "defaultTheme": "sap_horizon",
+    "gte1_98_0": true,
+    "gte1_104_0": true,
+    "gte1_115_0": true,
+    "setupCompleted": true
+  }
+}
