@@ -15,13 +15,15 @@ File or Folder | Purpose
 
 ## Next Steps
 ### To run the backend
-- Open a new terminal and run `cds watch` 
+- In the root folder, open a new terminal and run `npm install`
+- Run `cds watch` to start the backend.
 - (in VS Code simply choose _**Terminal** > Run Task > cds watch_)
 - Start adding content, for example, a [db/schema.cds](db/schema.cds).
 
 ### To run the frontend
 - Open a new terminal and run `cd amalisov.cuibono`
-- In the same terminal run `npm run start`
+- Install node modules by running `npm install`
+- Run `npm run start`
 
 
 ## Learn More
