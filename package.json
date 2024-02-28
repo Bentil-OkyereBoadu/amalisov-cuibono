@@ -19,6 +19,7 @@
   },
   "scripts": {
     "start": "cds-ts watch",
-    "generate-types": "bash ./scripts/generate-types.sh"
+    "generate-types": "bash ./scripts/generate-types.sh",
+    "start-fe": "cd ./amalisov.cuibono && npm run start"
   }
 }

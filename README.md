@@ -25,6 +25,8 @@ File or Folder | Purpose
 - Install node modules by running `npm install`
 - Run `npm run start`
 
+- You can also run `npm run start-fe` in the root folder to start the frontend.
+
 
 ## Learn More
 
