@@ -6,7 +6,7 @@ It contains these folders and files, following our recommended project layout:
 
 File or Folder | Purpose
 ---------|----------
-`app/` | content for UI frontends goes here
+`amalisov.cuibono/` | content for UI frontends goes here
 `db/` | your domain models and data go here
 `srv/` | your service models and code go here
 `package.json` | project metadata and configuration
@@ -14,10 +14,14 @@ File or Folder | Purpose
 
 
 ## Next Steps
-
+### To run the backend
 - Open a new terminal and run `cds watch` 
 - (in VS Code simply choose _**Terminal** > Run Task > cds watch_)
 - Start adding content, for example, a [db/schema.cds](db/schema.cds).
+
+### To run the frontend
+- Open a new terminal and run `cd amalisov.cuibono`
+- In the same terminal run `npm run start`
 
 
 ## Learn More
