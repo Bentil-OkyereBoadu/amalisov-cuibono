@@ -30,6 +30,14 @@
 			"id": "app"
 		},
 
+		"resources": {
+			"css": [
+			  {
+				"uri": "css/style.css"
+			  }
+			]
+		},
+
 		"dependencies": {
 			"minUI5Version": "1.121.0",
 			"libs": {
@@ -51,6 +59,10 @@
 				"settings": {
 					"bundleName": "amalisov.cuibono.i18n.i18n"
 				}
+			},
+			"tranches": {
+			  "type": "sap.ui.model.json.JSONModel",
+			  "uri": "tranches.json"
 			}
 		},
 

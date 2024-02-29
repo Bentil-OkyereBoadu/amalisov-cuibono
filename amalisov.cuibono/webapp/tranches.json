@@ -1,0 +1,52 @@
+{
+    "Tranches": [
+        {
+            "TrancheName": "Pineapple",
+            "Location": 21,
+            "StartDate": "2019-04-01T00:00:00",
+            "EndDate": "2015-04-01T00:00:00",
+            "Status": "Running"
+        },
+        {
+            "TrancheName": "Milk",
+            "Location": 4,
+            "StartDate": "2219-01-01T00:00:00",
+            "EndDate": "2015-02-18T00:00:00",
+            "Status": "Locked"
+        },
+        {
+            "TrancheName": "Canned Beans",
+            "Location": 3,
+            "StartDate": "2029-04-01T00:00:00",
+            "EndDate": "2015-03-02T00:00:00",
+            "Status": "Completed"
+        },
+        {
+            "TrancheName": "Salad",
+            "Location": 2,
+            "StartDate": "2019-04-01T00:00:00",
+            "EndDate": "2015-04-12T00:00:00",
+            "Status": "Locked"
+        },
+        {
+            "TrancheName": "Bread",
+            "Location": 100,
+            "StartDate": "2019-03-09T00:00:00",
+            "EndDate": "2015-01-27T00:00:00",
+            "Status": "Completed"
+        },
+        {
+            "TrancheName": "Juice",
+            "Location": 66,
+            "StartDate": "2019-09-18T00:00:00",
+            "EndDate": "2015-01-27T00:00:00",
+            "Status": "Completed"
+        }, {
+            "TrancheName": "Butter",
+            "Location": 7,
+            "StartDate": "2019-10-21T00:00:00",
+            "EndDate": "2015-01-27T00:00:00",
+            "Status": "Running"
+        }
+    ]
+}
