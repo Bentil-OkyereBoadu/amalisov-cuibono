@@ -133,8 +133,61 @@
             >
                 <headerToolbar>
                     <Toolbar class="sapUiSmallMarginBottom">
-                        <Title text="{i18n>trancheTableHeader}" />
+                        <Input
+                            width="15%"
+                            placeholder="{i18n>searchPlaceholder}"
+                            id="input"
+                            liveChange="onFilterInvoices"
+                        />
 
+                        <Select
+                            width="15%"
+                            autoAdjustWidth="true"
+                            change=""
+                        >
+                            <core:ListItem
+                                key="createdAt"
+                                text="{i18n>runningStatus}"
+                            />
+                            <core:ListItem
+                                key="upvotes"
+                                text="{i18n>lockedStatus}"
+                            />
+                            <core:ListItem
+                                key="upvotes"
+                                text="{i18n>completedStatus}"
+                            />
+                        </Select>
+
+                        <Select
+                            width="15%"
+                            autoAdjustWidth="true"
+                            change=".onSortSelectChange"
+                        >
+                            <core:ListItem
+                                key="createdAt"
+                                text="{i18n>location1}"
+                            />
+                            <core:ListItem
+                                key="upvotes"
+                                text="{i18n>location2}"
+                            />
+                        </Select>
+
+                        <Select
+                            width="15%"
+                            autoAdjustWidth="true"
+                            change=".onSortSelectChange"
+                        >
+                            <core:ListItem
+                                key="createdAt"
+                                text="{i18n>year1}"
+                            />
+                            <core:ListItem
+                                key="upvotes"
+                                text="{i18n>year2}"
+                            />
+                        </Select>
                         <ToolbarSpacer />
 
                         <Button

@@ -116,6 +116,10 @@
 					"pattern": "participant",
 					"name": "participants",
 					"target": "participants"
+				},{
+					"pattern": "tranches",
+					"name": "EditBonusTranche",
+					"target": "EditBonusTranche"
 				}
 			],
 			"targets": {
@@ -135,7 +139,14 @@
 				},
 				"participants": {
 					"viewId": "participants",
-					"viewName": "Participants"
+					"viewName": "Participants",
+				
+					"viewLevel": 0
+				},
+				"EditBonusTranche": {
+					"viewId": "EditBonusTranche",
+					"viewName": "EditBonusTranche",
+					"viewLevel": 1
 				}
 			}
 		}
