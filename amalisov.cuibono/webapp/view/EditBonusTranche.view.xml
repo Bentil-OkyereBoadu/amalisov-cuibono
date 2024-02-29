@@ -1,0 +1,124 @@
+<mvc:View
+    controllerName="amalisov.cuibono.controller.EditBonusTranche"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    core:require="{
+		formatter: 'amalisov/cuibono/model/formatter'
+	}"
+    xmlns:f="sap.ui.layout.form"
+>
+    <Page
+        title="{i18n>appTitle}"
+        id="page"
+    >
+        <content>
+            <Title text="{i18n>titleEdit}" />
+
+            <VBox>
+                <f:SimpleForm
+                    class="sapUiResponsiveMargin form"
+                    minWidth="1024"
+                    editable="true"
+                    layout="ResponsiveGridLayout"
+                    labelSpanL="2"
+                    labelSpanM="2"
+                    emptySpanL="2"
+                    emptySpanM="2"
+                >
+                    <f:content>
+                        <VBox class="tranchItems">
+                            <Label text="{i18n>status}" />
+                            <Text text="Open" />
+                        </VBox>
+
+                        <VBox class="tranchItems">
+                            <Label text="{i18n>trancheName}" />
+                            <Input
+                                id="nameInput"
+                                required="true"
+                                type="Text"
+                                class="sapUiSmallMarginBottom"
+                            />
+                        </VBox>
+
+                        <VBox class="tranchItems">
+                            <Label text="{i18n>trancheLocation}" />
+                            <Select
+                                width="15%"
+                                autoAdjustWidth="true"
+                                change=".onSortSelectChange"
+                            >
+                                <core:ListItem
+                                    key="createdAt"
+                                    text="{i18n>location1}"
+                                />
+                                <core:ListItem
+                                    key="upvotes"
+                                    text="{i18n>location2}"
+                                />
+                            </Select>
+                        </VBox>
+
+                        <VBox class="tranchItems">
+                            <Label text="{i18n>trancheDescription}" />
+                            <TextArea
+                                id="descriptionInput"
+                                required="true"
+                                class="sapUiSmallMarginBottom"
+                            />
+                        </VBox>
+
+                        <VBox class="tranchItems">
+                            <Label text="{i18n>startDate}" />
+                            <DatePicker
+                                id="startDateInput"
+                                placeholder="{i18n>datePlaceholder}"
+                                required="true"
+                                class="sapUiSmallMarginBottom"
+                            />
+                        </VBox>
+
+                        <VBox class="tranchItems">
+                            <Label text="{i18n>endDate}" />
+                            <DatePicker
+                                id="endDateInput"
+                                placeholder="{i18n>datePlaceholder}"
+                                required="true"
+                                class="sapUiSmallMarginBottom"
+                            />
+                        </VBox>
+                    </f:content>
+                    <Button
+                        icon="sap-icon://accept"
+                        type="Accept"
+                        text="Submit"
+                        press=".onSubmit"
+                    />
+                </f:SimpleForm>
+            </VBox>
+
+            <Panel>
+                <Table>
+                    <headerToolbar>
+                        <Toolbar class="sapUiSmallMarginBottom">
+                            <Title text="{i18n>targets}" />
+                            <ToolbarSpacer />
+                            <Button
+                                text="{i18n>newTarget}"
+                                press=""
+                                type="Emphasized"
+                            />
+                        </Toolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column header="{i18n>trancheName}" />
+                        <Column header="{i18n>targetWeight}" />
+                        <Column header="{i18n>targetAchievement}" />
+                    </columns>
+                </Table>
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>

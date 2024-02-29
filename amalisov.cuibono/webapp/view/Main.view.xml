@@ -83,12 +83,17 @@
                             press=""
                             type="Emphasized"
                         />
+
+                        <Button
+                            text="{i18n>createTranche}"
+                            press=".onCreateNewTranche"
+                        />
                     </Toolbar>
                 </headerToolbar>
 
 				
                 <columns>
-                    <Column width="8%">
+                    <Column width="10%">
                         <Label text="{i18n>status}" />
                     </Column>
                     <Column>
@@ -103,7 +108,7 @@
                     <Column>
                         <Label text="{i18n>endDate}" />
                     </Column>
-                    <Column width="4%"/>
+                    <Column width="6%"/>
                 </columns>
 
                 <items>

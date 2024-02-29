@@ -80,12 +80,22 @@
 					"pattern": "",
 					"name": "main",
 					"target": "main"
+				},{
+					"pattern": "tranches",
+					"name": "EditBonusTranche",
+					"target": "EditBonusTranche"
 				}
 			],
 			"targets": {
 				"main": {
 					"viewId": "main",
-					"viewName": "Main"
+					"viewName": "Main",
+					"viewLevel": 0
+				},
+				"EditBonusTranche": {
+					"viewId": "EditBonusTranche",
+					"viewName": "EditBonusTranche",
+					"viewLevel": 1
 				}
 			}
 		}
