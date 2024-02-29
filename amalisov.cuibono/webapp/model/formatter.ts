@@ -15,5 +15,13 @@ export default {
 	},
 	statusEnabled(status: string): boolean {
         return status !== "Completed";
+    },
+
+	formatDate: (sDate: string): string => {
+        if (sDate) {
+            const oDateFormat = DateFormat.getDateInstance({ pattern: "MM.dd.yyyy" });
+            return oDateFormat.format(new Date(sDate));
+        }
+        return sDate;
     }
 };

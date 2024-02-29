@@ -82,6 +82,10 @@
 			"participant": {
 				"type": "sap.ui.model.json.JSONModel",
 				"uri": "participant.json"
+			},
+			"tranches": {
+			  "type": "sap.ui.model.json.JSONModel",
+			  "uri": "tranches.json"
 			}
 		},
 
