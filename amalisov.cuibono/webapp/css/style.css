@@ -4,7 +4,42 @@
 .form{
     display: flex;
     flex-direction: column;
+
+    width: 100% !important;
 }
 .tranchItems{
-    margin-right: 200px;
+ max-width: 50%;
+}
+
+.formRows{
+    gap: 20px;
+}
+
+
+.interactionIcons{
+    gap: 10px;
+}
+
+.icon{
+    color: rgb(6, 161, 146);
+}
+
+
+
+@media (min-width: 600px) {
+   
+}
+
+@media (min-width: 1024px) {
+    
+}
+
+@media screen and (max-width: 480px) {
+    .formRows{
+        flex-direction: column;
+    }
+
+    .tranchItems{
+        max-width: 100%;
+    }
 }

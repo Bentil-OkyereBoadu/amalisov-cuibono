@@ -19,7 +19,6 @@
             <VBox>
                 <f:SimpleForm
                     class="sapUiResponsiveMargin form"
-                    minWidth="1024"
                     editable="true"
                     layout="ResponsiveGridLayout"
                     labelSpanL="2"
@@ -28,97 +27,201 @@
                     emptySpanM="2"
                 >
                     <f:content>
-                        <VBox class="tranchItems">
-                            <Label text="{i18n>status}" />
-                            <Text text="Open" />
-                        </VBox>
+                        <VBox class="formBox">
+                            <VBox class="tranchItems">
+                                <Label text="{i18n>status}" />
+                                <Text text="Open" />
+                            </VBox>
+                            <Hbox class="formRows">
+                                <VBox class="tranchItems">
+                                    <Label text="{i18n>trancheName}" />
+                                    <Input
+                                        id="nameInput"
+                                        required="true"
+                                        type="Text"
+                                        class="sapUiSmallMarginBottom"
+                                    />
+                                </VBox>
 
-                        <VBox class="tranchItems">
-                            <Label text="{i18n>trancheName}" />
-                            <Input
-                                id="nameInput"
-                                required="true"
-                                type="Text"
-                                class="sapUiSmallMarginBottom"
-                            />
-                        </VBox>
+                                <VBox class="tranchItems">
+                                    <Label text="{i18n>trancheLocation}" />
+                                    <Select change=".onSortSelectChange">
+                                        <core:ListItem
+                                            key="createdAt"
+                                            text="{i18n>location1}"
+                                        />
+                                        <core:ListItem
+                                            key="upvotes"
+                                            text="{i18n>location2}"
+                                        />
+                                    </Select>
+                                </VBox>
+                            </Hbox>
 
-                        <VBox class="tranchItems">
-                            <Label text="{i18n>trancheLocation}" />
-                            <Select
-                                width="15%"
-                                autoAdjustWidth="true"
-                                change=".onSortSelectChange"
-                            >
-                                <core:ListItem
-                                    key="createdAt"
-                                    text="{i18n>location1}"
+                            <VBox class="tranchItems">
+                                <Label text="{i18n>trancheDescription}" />
+                                <TextArea
+                                    width="100%"
+                                    id="descriptionInput"
+                                    required="true"
+                                    class="sapUiSmallMarginBottom"
                                 />
-                                <core:ListItem
-                                    key="upvotes"
-                                    text="{i18n>location2}"
-                                />
-                            </Select>
-                        </VBox>
+                            </VBox>
 
-                        <VBox class="tranchItems">
-                            <Label text="{i18n>trancheDescription}" />
-                            <TextArea
-                                id="descriptionInput"
-                                required="true"
-                                class="sapUiSmallMarginBottom"
-                            />
-                        </VBox>
+                            <Hbox class="formRows">
+                                <VBox class="tranchItems">
+                                    <Label text="{i18n>startDate}" />
+                                    <DatePicker
+                                        id="startDateInput"
+                                        placeholder="{i18n>datePlaceholder}"
+                                        required="true"
+                                        class="sapUiSmallMarginBottom"
+                                    />
+                                </VBox>
 
-                        <VBox class="tranchItems">
-                            <Label text="{i18n>startDate}" />
-                            <DatePicker
-                                id="startDateInput"
-                                placeholder="{i18n>datePlaceholder}"
-                                required="true"
-                                class="sapUiSmallMarginBottom"
-                            />
-                        </VBox>
+                                <VBox class="tranchItems">
+                                    <Label text="{i18n>endDate}" />
+                                    <DatePicker
+                                        id="endDateInput"
+                                        placeholder="{i18n>datePlaceholder}"
+                                        required="true"
+                                        class="sapUiSmallMarginBottom"
+                                    />
+                                </VBox>
+                            </Hbox>
 
-                        <VBox class="tranchItems">
-                            <Label text="{i18n>endDate}" />
-                            <DatePicker
-                                id="endDateInput"
-                                placeholder="{i18n>datePlaceholder}"
-                                required="true"
-                                class="sapUiSmallMarginBottom"
-                            />
+                            <Hbox class="formRows">
+                                <VBox class="tranchItems">
+                                    <Label text="{i18n>trancheWeight}" />
+                                    <Input
+                                        id="weightInput"
+                                        required="true"
+                                        type="Text"
+                                        class="sapUiSmallMarginBottom"
+                                    />
+                                </VBox>
+
+                                <VBox class="tranchItems">
+                                    <Label text="{i18n>originDate}" />
+                                    <DatePicker
+                                        id="originDateInput"
+                                        placeholder="{i18n>datePlaceholder}"
+                                        required="true"
+                                        class="sapUiSmallMarginBottom"
+                                    />
+                                </VBox>
+                            </Hbox>
                         </VBox>
                     </f:content>
-                    <Button
-                        icon="sap-icon://accept"
-                        type="Accept"
-                        text="Submit"
-                        press=".onSubmit"
-                    />
                 </f:SimpleForm>
             </VBox>
-
-            <Panel>
-                <Table>
+            <!-- Table -->
+            <Panel class="">
+                <Table items="{tranches>/Targets}">
                     <headerToolbar>
                         <Toolbar class="sapUiSmallMarginBottom">
                             <Title text="{i18n>targets}" />
                             <ToolbarSpacer />
                             <Button
                                 text="{i18n>newTarget}"
-                                press=""
+                                press=".onAddTarget"
+                                class="primaryColor"
                                 type="Emphasized"
                             />
                         </Toolbar>
                     </headerToolbar>
                     <columns>
-                        <Column header="{i18n>trancheName}" />
-                        <Column header="{i18n>targetWeight}" />
-                        <Column header="{i18n>targetAchievement}" />
+                        <Column>
+                            <Label text="{i18n>trancheName}" />
+                        </Column>
+                        <Column>
+                            <Label text="{i18n>targetWeight}" />
+                        </Column>
+                        <Column>
+                            <Label text="{i18n>targetAchievement}" />
+                        </Column>
+                        <Column
+                           
+                            width="6%"
+                        />
                     </columns>
+
+                    <items>
+                        <ColumnListItem>
+                            <Text text="{tranches>TargetName}" />
+                            <Text text="{tranches>TargetWeight}" />
+                            <Text text="{tranches>Achieved}" />
+
+                            <HBox class="interactionIcons">
+                                <core:Icon
+                                    src="sap-icon://edit"
+                                    class="icon"
+                                    press=".onOpenEditDialog"
+                                    visible="{path: 'thread>IsDeleted', formatter: '.formatter.isVisible'}"
+                                />
+
+                                <core:Icon
+                                    src="sap-icon://delete"
+                                    press=".onDeleteAnswer"
+                                    class="icon"
+                                    visible="{path: 'thread>IsDeleted', formatter: '.formatter.isVisible'}"
+                                />
+                            </HBox>
+                        </ColumnListItem>
+                    </items>
                 </Table>
             </Panel>
+            <!--  END OF TABLE -->
+            <Dialog
+                id="editDialog"
+                title="{i18n>addTitle}"
+                class="sapUiResponsiveContentPadding"
+                contentWidth="20%"
+            >
+                <content>
+
+                    <Label text="{i18n>trancheName}" />
+                    <Input
+                        id="s"
+                        required="true"
+                        type="Text"
+                        class="sapUiSmallMarginBottom"
+                    />
+
+                    <Label text="{i18n>targetWeight}" />
+                    <Input
+                        id="ss"
+                        required="true"
+                        type="Text"
+                        class="sapUiSmallMarginBottom"
+                    />
+
+                    <Label text="{i18n>targetAchievement}" />
+                    <Input
+                        id="sss"
+                        required="true"
+                        type="Text"
+                        class="sapUiSmallMarginBottom"
+                    />
+
+                    <Label text="{i18n>trancheDescription}" />
+                    <TextArea
+                        id="editArea"
+                        rows="3"
+                        width="100%"
+                    />
+                </content>
+                <buttons>
+                    <Button
+                        text="{i18n>save}"
+                        press=".onSaveEdit"
+                    />
+                    <Button
+                        text="{i18n>cancel}"
+                        press=".closeAddTarget"
+                    />
+                </buttons>
+            </Dialog>
         </content>
     </Page>
 </mvc:View>

@@ -48,5 +48,29 @@
             "EndDate": "2015-01-27T00:00:00",
             "Status": "Running"
         }
+    ],
+
+    "Targets":[
+        {
+            "TargetName": "Lied",
+            "TargetWeight": 26,
+            "Achieved": "0"
+        }, {
+            "TargetName": "Bonus",
+            "TargetWeight": 7,
+            "Achieved": "9"
+        }, {
+            "TargetName": "Easter",
+            "TargetWeight": 13,
+            "Achieved": "21"
+        }, {
+            "TargetName": "Butter",
+            "TargetWeight": 56,
+            "Achieved": "20"
+        }, {
+            "TargetName": "Fly",
+            "TargetWeight": 10,
+            "Achieved": "30"
+        }
     ]
 }
