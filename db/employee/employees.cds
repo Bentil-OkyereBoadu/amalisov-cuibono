@@ -1,13 +1,13 @@
 namespace amalisov.cuibono.employee;
 
-using amalisov.cuibono.trancheParticipation as trancheParticipation from '../tranchPatricipation/tracheParticipation.model';
 using {
     managed,
     cuid
 } from '@sap/cds/common';
 
-using amalisov.cuibono.department as department from '../department/department.model';
-using amalisov.cuibono.attendance as attendance from '../attendance/attendace.model';
+using amalisov.cuibono.trancheParticipation as trancheParticipation from '../tranchPatricipation/tracheParticipation';
+using amalisov.cuibono.department as department from '../department/department';
+using amalisov.cuibono.attendance as attendance from '../attendance/attendace';
 
 // Person entity
 entity Employees : cuid, managed {
@@ -18,7 +18,6 @@ entity Employees : cuid, managed {
     bonusPercentage       : String;
     trancheParticipations : Association to many trancheParticipation.TrancheParticipation
                                 on trancheParticipations.employee = $self;
-    attendances           : Association to many attendance.Attendance
-                                on attendances.employee = $self;
+    attendances           : Association to attendance.Attendance;
     department            : Association to department.Department;
 }
