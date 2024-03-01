@@ -11,13 +11,12 @@ using amalisov.cuibono.attendance as attendance from '../attendance/attendace';
 
 // Person entity
 entity Employees : cuid, managed {
-    name                  : String;
     firstName             : String;
     lastName              : String;
     email                 : String;
     bonusPercentage       : String;
     trancheParticipations : Association to many trancheParticipation.TrancheParticipation
                                 on trancheParticipations.employee = $self;
-    attendances           : Association to attendance.Attendance;
+    attendance           : Association to attendance.Attendance;
     department            : Association to department.Department;
 }
