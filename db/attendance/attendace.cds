@@ -1,6 +1,6 @@
 namespace amalisov.cuibono.attendance;
 
-using amalisov.cuibono.employee as employee from '../employee/employees.model';
+using amalisov.cuibono.employee as employee from '../employee/employees';
 
 using {
     managed,

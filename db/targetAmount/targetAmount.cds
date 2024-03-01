@@ -1,6 +1,6 @@
 namespace amalisov.cuibono.targetAmount;
 
-using amalisov.cuibono.bonusTranche as bonusTranche from '../bonusTranche/bonusTranche.model';
+using amalisov.cuibono.bonusTranche as bonusTranche from '../bonusTranche/bonusTranche';
 
 using {
     managed,
@@ -12,5 +12,6 @@ entity Target : cuid, managed {
     type         : String;
     weight       : Integer;
     achievement  : Integer;
+    description  : String;
     bonusTranche : Association to bonusTranche.BonusTranche;
 }

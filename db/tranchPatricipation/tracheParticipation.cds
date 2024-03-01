@@ -1,26 +1,28 @@
 namespace amalisov.cuibono.trancheParticipation;
 
-using amalisov.cuibono.employee as employee from '../employee/employees.model';
-using amalisov.cuibono.bonusTranche as bonusTranche from '../bonusTranche/bonusTranche.model';
 using {
     managed,
     cuid
 } from '@sap/cds/common';
 
+using amalisov.cuibono.employee as employee from '../employee/employees';
+using amalisov.cuibono.bonusTranche as bonusTranche from '../bonusTranche/bonusTranche';
+using amalisov.cuibono.department as department from '../department/department';
+
+
 entity TrancheParticipation : cuid, managed {
     localId          : Integer;
     name             : String;
-    department       : String;
-    Tranche          : String;
     Status           : participationStatus;
-    Location         : String;
     startDate        : String;
     endDate          : String;
     weight           : Integer;
-    calculatedAmount : String;
-    finalAmount      : String;
+    calculatedAmount : Decimal;
+    finalAmount      : Decimal;
     excluded         : Boolean default false;
     justtification   : String;
+    location         : String;
+    department       : Association to department.Department;
     employee         : Association to employee.Employees;
     bonusTranche     : Association to bonusTranche.BonusTranche;
 }
