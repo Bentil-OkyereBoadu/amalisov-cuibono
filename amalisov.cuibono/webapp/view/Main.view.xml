@@ -134,60 +134,118 @@
                 <headerToolbar>
                     <Toolbar class="sapUiSmallMarginBottom">
                         <Input
-                            width="15%"
                             placeholder="{i18n>searchPlaceholder}"
                             id="input"
+                            class="searchBar"
                             liveChange="onFilterInvoices"
                         />
-
-                        <Select
-                            width="15%"
-                            autoAdjustWidth="true"
-                            change=""
+                        <fb:FilterBar
+                            id="filterbar"
+                            persistencyKey="myPersKey"
+                            useToolbar="false"
+                            search=".onSearch"
+                            filterChange=".onFilterChange"
+                            afterVariantLoad=".onAfterVariantLoad"
+                            showFilterConfiguration="false"
+                            showClearButton="true"
+                           
                         >
-                            <core:ListItem
-                                key="createdAt"
-                                text="{i18n>runningStatus}"
-                            />
-                            <core:ListItem
-                                key="upvotes"
-                                text="{i18n>lockedStatus}"
-                            />
-                            <core:ListItem
-                                key="upvotes"
-                                text="{i18n>completedStatus}"
-                            />
-                        </Select>
+                            <fb:filterGroupItems>
+                                <!-- <fb:basicSearch>
+                                    <SearchField
+                                        id="searchField"
+                                        search=".onSearch"
+                                        width="100%"
+                                    />
+                                </fb:basicSearch> -->
 
-                        <Select
-                            width="15%"
-                            autoAdjustWidth="true"
-                            change=".onSortSelectChange"
-                        >
-                            <core:ListItem
-                                key="createdAt"
-                                text="{i18n>location1}"
-                            />
-                            <core:ListItem
-                                key="upvotes"
-                                text="{i18n>location2}"
-                            />
-                        </Select>
+                                <fb:FilterGroupItem
+                                    name="Status"
+                                    label="{i18n>status}"
+                                    groupName="Group1"
+                                    visibleInFilterBar="true"
+                                >
+                                    <fb:control>
+                                        <MultiComboBox
+                                            name="{i18n>status}"
+                                            selectionChange=".onSelectionChange"
+                                        >
+                                            <core:Item
+                                                key="createdAt"
+                                                text="{i18n>runningStatus}"
+                                            />
+                                            <core:Item
+                                                key="upvotes"
+                                                text="{i18n>lockedStatus}"
+                                            />
+                                            <core:Item
+                                                key="upvotes"
+                                                text="{i18n>completedStatus}"
+                                            />
+                                        </MultiComboBox>
+                                    </fb:control>
+                                </fb:FilterGroupItem>
+                                <fb:FilterGroupItem
+                                    name="Selection"
+                                    label="{i18n>trancheLocation}"
+                                    groupName="Group1"
+                                    visibleInFilterBar="true"
+                                >
+                                    <fb:control>
+                                        <MultiComboBox
+                                            name="{i18n>trancheLocation}"
+                                            selectionChange=".onSelectionChange"
+                                        >
+                                            <core:Item
+                                                key="createdAt"
+                                                text="{i18n>location1}"
+                                            />
+                                            <core:Item
+                                                key="upvotes"
+                                                text="{i18n>location2}"
+                                            />
+                                        </MultiComboBox>
+                                    </fb:control>
+                                </fb:FilterGroupItem>
+                                <fb:FilterGroupItem
+                                    name="fiscalYear"
+                                    label="{i18n>fiscalYear}"
+                                    groupName="Group1"
+                                    visibleInFilterBar="true"
+                                >
+                                    <fb:control>
+                                        <MultiComboBox
+                                            name="{i18n>fiscalYear}"
+                                            selectionChange=".onSelectionChange"
+                                        >
+                                            <core:Item
+                                                key="createdAt"
+                                                text="{i18n>year1}"
+                                            />
+                                            <core:Item
+                                                key="upvotes"
+                                                text="{i18n>year2}"
+                                            />
+                                        </MultiComboBox>
+                                    </fb:control>
+                                </fb:FilterGroupItem>
+                            </fb:filterGroupItems>
+                        </fb:FilterBar>
+                    </Hbox>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <Table
+                id="productTable"
+                class="productTable"
+                width="auto"
+                items="{tranches>/Tranches}"
+            >
+                <headerToolbar>
+                    <Toolbar class="sapUiSmallMarginBottom">
+                        <Title text="{i18n>trancheTableHeader}" />
 
-                        <Select
-                            width="15%"
-                            autoAdjustWidth="true"
-                            change=".onSortSelectChange"
-                        >
-                            <core:ListItem
-                                key="createdAt"
-                                text="{i18n>year1}"
-                            />
-                            <core:ListItem
-                                key="upvotes"
-                                text="{i18n>year2}"
-                            />
-                        </Select>
                         <ToolbarSpacer />
 
                         <Button
