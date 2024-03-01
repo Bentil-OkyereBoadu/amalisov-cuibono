@@ -18,7 +18,7 @@
     "typescript": "^5.3.3"
   },
   "scripts": {
-    "start": "cds-ts watch",
+    "start": "cds-ts watch --with-mocks --profile development",
     "generate-types": "bash ./scripts/generate-types.sh",
     "start-fe": "cd ./amalisov.cuibono && npm run start"
   }

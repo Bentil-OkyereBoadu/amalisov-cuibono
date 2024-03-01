@@ -12,7 +12,7 @@ export enum ActionDosomething {
   name = "dosomething",
 }
 
-export type ActionDosomethingReturn = Dummy;
+export type ActionDosomethingReturn = string;
 
 export enum Entity {
   Dummy = "amalisov.cuibono.dummy.Dummy",
