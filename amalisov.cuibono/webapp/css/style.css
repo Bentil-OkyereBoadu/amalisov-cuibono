@@ -1,35 +1,31 @@
 .productTable{
     border-radius: 20px;
+    box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.1);
+
 }
 .form{
     display: flex;
     flex-direction: column;
-
     width: 100% !important;
 }
 .tranchItems{
  max-width: 50%;
 }
-
 /* input, select{
     width: 100%;
 } */
-
 .formRows{
     gap: 20px;
 }
-
-
 .interactionIcons{
     gap: 10px;
 }
-
 .icon{
     color: rgb(6, 161, 146);
 }
-
-
-
+.inputs{
+    width: 1000px;
+}
 
 @media (min-width: 600px) {
    

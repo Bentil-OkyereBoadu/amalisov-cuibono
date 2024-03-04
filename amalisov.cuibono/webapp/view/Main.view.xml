@@ -12,6 +12,7 @@
 	}"
 >
     <f:DynamicPage headerExpanded="{/headerExpanded}">
+    
         <f:title>
             <f:DynamicPageTitle>
                 <f:heading>
@@ -19,6 +20,13 @@
                 </f:heading>
             </f:DynamicPageTitle>
         </f:title>
+        <!-- <IconTabHeader>
+		<items>
+			<IconTabFilter key="info" text="Info" />
+			
+			<IconTabFilter key="people" text="People"/>
+		</items>
+	    </IconTabHeader> -->
         <f:header>
             <f:DynamicPageHeader>
                 <f:content>

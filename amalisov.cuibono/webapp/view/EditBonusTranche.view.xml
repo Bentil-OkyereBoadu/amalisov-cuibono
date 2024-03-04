@@ -12,6 +12,7 @@
     <Page
         title="{i18n>appTitle}"
         id="page"
+        floatingFooter="true"
     >
         <content>
             <Title text="{i18n>}" />
@@ -40,7 +41,7 @@
                                         required="true"
                                         type="Text"
                                         width="100%"
-                                        class="sapUiSmallMarginBottom"
+                                        class="sapUiSmallMarginBottom inputs"
                                     />
                                 </VBox>
 
@@ -48,7 +49,8 @@
                                     <Label text="{i18n>trancheLocation}" required="true"/>
                                     <Select 
                                     items="{tranches>/Locations}"
-                                    change=".onSortSelectChange">
+                                    change=".onSortSelectChange"
+                                    class="inputs">
                                         <core:ListItem
                                             key="{tranches>Id}"
                                             text="{tranches>Name}"
@@ -74,7 +76,7 @@
                                         id="startDateInput"
                                         placeholder="{i18n>datePlaceholder}"
                                         required="true"
-                                        class="sapUiSmallMarginBottom"
+                                        class="sapUiSmallMarginBottom inputs"
                                     />
                                 </VBox>
 
@@ -84,7 +86,7 @@
                                         id="endDateInput"
                                         placeholder="{i18n>datePlaceholder}"
                                         required="true"
-                                        class="sapUiSmallMarginBottom"
+                                        class="sapUiSmallMarginBottom inputs"
                                     />
                                 </VBox>
                             </Hbox>
@@ -95,7 +97,7 @@
                                     <Input
                                         id="weightInput"
                                         type="Text"
-                                        class="sapUiSmallMarginBottom"
+                                        class="sapUiSmallMarginBottom inputs"
                                     />
                                 </VBox>
 
@@ -104,7 +106,7 @@
                                     <DatePicker
                                         id="originDateInput"
                                         placeholder="{i18n>datePlaceholder}"
-                                        class="sapUiSmallMarginBottom"
+                                        class="sapUiSmallMarginBottom inputs"
                                     />
                                 </VBox>
                             </Hbox>
@@ -220,5 +222,12 @@
                 </buttons>
             </Dialog>
         </content>
+        <footer>
+            <OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button type="Accept" text="Save"/>
+				<Button type="Reject" text="Cancel"/>
+			</OverflowToolbar>
+        </footer>
     </Page>
 </mvc:View>
