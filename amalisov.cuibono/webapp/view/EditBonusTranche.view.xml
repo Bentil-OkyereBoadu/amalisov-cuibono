@@ -14,11 +14,11 @@
         id="page"
     >
         <content>
-            <Title text="{i18n>titleEdit}" />
+            <Title text="{i18n>}" />
 
             <VBox>
                 <f:SimpleForm
-                    class="sapUiResponsiveMargin form"
+                    class="form"
                     editable="true"
                     layout="ResponsiveGridLayout"
                     labelSpanL="2"
@@ -34,43 +34,42 @@
                             </VBox>
                             <Hbox class="formRows">
                                 <VBox class="tranchItems">
-                                    <Label text="{i18n>trancheName}" />
+                                    <Label text="{i18n>trancheName}" required="true"/>
                                     <Input
                                         id="nameInput"
                                         required="true"
                                         type="Text"
+                                        width="100%"
                                         class="sapUiSmallMarginBottom"
                                     />
                                 </VBox>
 
-                                <VBox class="tranchItems">
-                                    <Label text="{i18n>trancheLocation}" />
-                                    <Select change=".onSortSelectChange">
+                                <VBox class="tranchItems" >
+                                    <Label text="{i18n>trancheLocation}" required="true"/>
+                                    <Select 
+                                    items="{tranches>/Locations}"
+                                    change=".onSortSelectChange">
                                         <core:ListItem
-                                            key="createdAt"
-                                            text="{i18n>location1}"
-                                        />
-                                        <core:ListItem
-                                            key="upvotes"
-                                            text="{i18n>location2}"
+                                            key="{tranches>Id}"
+                                            text="{tranches>Name}"
                                         />
                                     </Select>
                                 </VBox>
                             </Hbox>
 
                             <VBox class="tranchItems">
-                                <Label text="{i18n>trancheDescription}" />
+                                <Label text="{i18n>trancheDescription}"/>
                                 <TextArea
                                     width="100%"
                                     id="descriptionInput"
-                                    required="true"
+                                    rows="4"
                                     class="sapUiSmallMarginBottom"
                                 />
                             </VBox>
 
                             <Hbox class="formRows">
                                 <VBox class="tranchItems">
-                                    <Label text="{i18n>startDate}" />
+                                    <Label text="{i18n>startDate}" required="true"/>
                                     <DatePicker
                                         id="startDateInput"
                                         placeholder="{i18n>datePlaceholder}"
@@ -80,7 +79,7 @@
                                 </VBox>
 
                                 <VBox class="tranchItems">
-                                    <Label text="{i18n>endDate}" />
+                                    <Label text="{i18n>endDate}" required="true"/>
                                     <DatePicker
                                         id="endDateInput"
                                         placeholder="{i18n>datePlaceholder}"
@@ -95,7 +94,6 @@
                                     <Label text="{i18n>trancheWeight}" />
                                     <Input
                                         id="weightInput"
-                                        required="true"
                                         type="Text"
                                         class="sapUiSmallMarginBottom"
                                     />
@@ -106,7 +104,6 @@
                                     <DatePicker
                                         id="originDateInput"
                                         placeholder="{i18n>datePlaceholder}"
-                                        required="true"
                                         class="sapUiSmallMarginBottom"
                                     />
                                 </VBox>
@@ -116,8 +113,8 @@
                 </f:SimpleForm>
             </VBox>
             <!-- Table -->
-            <Panel class="">
-                <Table items="{tranches>/Targets}">
+            <Panel>
+                <Table items="{tranches>/Targets}" width="45%">
                     <headerToolbar>
                         <Toolbar class="sapUiSmallMarginBottom">
                             <Title text="{i18n>targets}" />
@@ -126,7 +123,7 @@
                                 text="{i18n>newTarget}"
                                 press=".onAddTarget"
                                 class="primaryColor"
-                                type="Emphasized"
+                               
                             />
                         </Toolbar>
                     </headerToolbar>

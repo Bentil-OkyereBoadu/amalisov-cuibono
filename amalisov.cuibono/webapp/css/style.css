@@ -11,6 +11,10 @@
  max-width: 50%;
 }
 
+/* input, select{
+    width: 100%;
+} */
+
 .formRows{
     gap: 20px;
 }
@@ -23,6 +27,7 @@
 .icon{
     color: rgb(6, 161, 146);
 }
+
 
 
 

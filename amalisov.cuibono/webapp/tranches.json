@@ -72,5 +72,43 @@
             "TargetWeight": 10,
             "Achieved": "30"
         }
+    ],
+
+    "Locations":[
+        {
+            "Id": 19,
+            "Name": "Germany"
+        },
+        {
+            "Id": 8,
+            "Name": "Ghana"
+        },
+        {
+            "Id": 63,
+            "Name": "Rwanda"
+        },{
+            "Id": 26,
+            "Name": "France"
+        },{
+            "Id": 236,
+            "Name": "Mozambique"
+        },{
+            "Id": 7890,
+            "Name": "South  Africa"
+        }
+    ],
+    "Status":[
+        {
+            "Key":"Running",
+            "Name": "Running"
+        },
+        {
+            "Key":"Locked",
+            "Name": "Locked"
+        },
+        {
+            "Key":"Completed",
+            "Name": "Completed"
+        }
     ]
 }

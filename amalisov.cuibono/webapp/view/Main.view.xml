@@ -23,12 +23,6 @@
             <f:DynamicPageHeader>
                 <f:content>
                     <Hbox>
-                        <Input
-                            placeholder="{i18n>searchPlaceholder}"
-                            id="input"
-                            class="searchBar"
-                            liveChange="onFilterInvoices"
-                        />
                         <fb:FilterBar
                             id="filterbar"
                             persistencyKey="myPersKey"
@@ -38,16 +32,23 @@
                             afterVariantLoad=".onAfterVariantLoad"
                             showFilterConfiguration="false"
                             showClearButton="true"
-                           
                         >
                             <fb:filterGroupItems>
-                                <!-- <fb:basicSearch>
-                                    <SearchField
-                                        id="searchField"
-                                        search=".onSearch"
-                                        width="100%"
-                                    />
-                                </fb:basicSearch> -->
+                                <fb:FilterGroupItem
+                                    name="search"
+                                    label="{i18n>search}"
+                                    groupName="Group1"
+                                    visibleInFilterBar="true"
+                                >
+                                    <fb:control>
+                                        <Input
+                                            placeholder="{i18n>searchPlaceholder}"
+                                            class="searchBar"
+                                            id="search"
+                                            liveChange="onSearch"
+                                        />
+                                    </fb:control>
+                                </fb:FilterGroupItem>
 
                                 <fb:FilterGroupItem
                                     name="Status"
@@ -59,18 +60,11 @@
                                         <MultiComboBox
                                             name="{i18n>status}"
                                             selectionChange=".onSelectionChange"
+                                            items="{tranches>/Status}"
                                         >
                                             <core:Item
-                                                key="createdAt"
-                                                text="{i18n>runningStatus}"
-                                            />
-                                            <core:Item
-                                                key="upvotes"
-                                                text="{i18n>lockedStatus}"
-                                            />
-                                            <core:Item
-                                                key="upvotes"
-                                                text="{i18n>completedStatus}"
+                                                key="{tranches>Key}"
+                                                text="{tranches>Name}"
                                             />
                                         </MultiComboBox>
                                     </fb:control>
@@ -85,14 +79,11 @@
                                         <MultiComboBox
                                             name="{i18n>trancheLocation}"
                                             selectionChange=".onSelectionChange"
+                                            items="{tranches>/Locations}"
                                         >
                                             <core:Item
-                                                key="createdAt"
-                                                text="{i18n>location1}"
-                                            />
-                                            <core:Item
-                                                key="upvotes"
-                                                text="{i18n>location2}"
+                                                key="{tranches>Id}"
+                                                text="{tranches>Name}"
                                             />
                                         </MultiComboBox>
                                     </fb:control>
@@ -180,17 +171,17 @@
                             <core:Icon
                                 src="sap-icon://edit"
                                 class="icon"
-                                press=".onOpenEditDialog"
+                                press=".onEditPress"
                                 visible="{path: 'thread>IsDeleted', formatter: '.formatter.isVisible'}"
                             />
                             <core:Icon
                                 src="sap-icon://copy"
                                 class="icon"
-                                press=".onOpenEditDialog"
+                                press=".onDuplicate"
                             />
                             <core:Icon
                                 src="sap-icon://delete"
-                                press=".onDeleteAnswer"
+                                press=".onDeleteTranche"
                                 class="icon"
                                 visible="{path: 'thread>IsDeleted', formatter: '.formatter.isVisible'}"
                             />
