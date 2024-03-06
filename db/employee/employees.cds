@@ -7,7 +7,7 @@ using {
 
 using amalisov.cuibono.trancheParticipation as trancheParticipation from '../tranchPatricipation/tracheParticipation';
 using amalisov.cuibono.department as department from '../department/department';
-using amalisov.cuibono.attendance as attendance from '../attendance/attendace';
+using amalisov.cuibono.attendance as attendance from '../attendance/attendance';
 
 // Person entity
 entity Employees : cuid, managed {
