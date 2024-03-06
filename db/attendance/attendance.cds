@@ -7,9 +7,9 @@ using {
     cuid
 } from '@sap/cds/common';
 
-
 entity Attendance : cuid, managed {
     startDate : String;
     endDate   : String;
     employee  : Association to employee.Employees;
 }
+

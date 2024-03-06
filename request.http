@@ -1,0 +1,11 @@
+###
+#
+# Get departments
+#
+GET http://localhost:4004/odata/v4/department/Department
+
+###
+#
+# Get employees
+#
+GET http://localhost:4004/odata/v4/employee/Employees

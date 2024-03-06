@@ -7,19 +7,50 @@
   "private": true,
   "dependencies": {
     "@sap/cds": "^7",
+    "@sap/cds-hana": "^2",
     "@sap/cds-odata-v2-adapter-proxy": "^1.9.21",
+    "@sap/xssec": "^3",
+    "@sap/cds-dk": "^7",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.20",
     "cds-routing-handlers": "^3.0.7",
     "express": "^4.18.2",
-    "typedi": "^0.10.0"
-  },
-  "devDependencies": {
-    "@cap-js/sqlite": "^1",
-    "@types/node": "^20.11.20",
+    "passport": "^0",
+    "ts-node": "^10.9.2",
+    "typedi": "^0.10.0",
     "typescript": "^5.3.3"
   },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1"
+  },
   "scripts": {
-    "start": "cds-ts watch --with-mocks --profile development",
+    "start": "npx cds-ts watch",
+    "db:sqlite": "npx cds deploy -2 sqlite:./db.sqlite",
     "generate-types": "bash ./scripts/generate-types.sh",
     "start-fe": "cd ./amalisov.cuibono && npm run start"
+  },
+  "cds": {
+    "requires": {
+      "[production]": {
+        "db": "hana",
+        "auth": {
+          "kind": "basic-auth",
+          "users": {
+            "USER": {
+              "password": "123456",
+              "roles": [
+                "USER"
+              ],
+              "ID": "USER@example.com",
+              "userId": "765d90c4-77e3-47c9-b5c5-374ed9fde7d2",
+              "firstName": "USER",
+              "lastName": "USER",
+              "fullName": "USER",
+              "email": "USER@example.com"
+            }
+          }
+        }
+      }
+    }
   }
 }
