@@ -5,7 +5,6 @@ export interface Target {
   modifiedAt?: Date;
   modifiedBy?: string;
   name: string;
-  type: string;
   weight: number;
   achievement: number;
   description: string;

@@ -23,8 +23,6 @@ export interface TrancheParticipation {
   location: string;
   department?: amalisov.cuibono.department.Department;
   department_ID?: string;
-  employee?: amalisov.cuibono.employee.Employees;
-  employee_ID?: string;
   bonusTranche?: amalisov.cuibono.bonusTranche.BonusTranche;
   bonusTranche_ID?: string;
 }

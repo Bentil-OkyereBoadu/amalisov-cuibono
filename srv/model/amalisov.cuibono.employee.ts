@@ -8,7 +8,6 @@ export interface Employees {
   lastName: string;
   email: string;
   bonusPercentage: string;
-  trancheParticipations?: amalisov.cuibono.trancheParticipation.TrancheParticipation[];
   attendance?: amalisov.cuibono.attendance.Attendance;
   attendance_ID?: string;
   department?: amalisov.cuibono.department.Department;

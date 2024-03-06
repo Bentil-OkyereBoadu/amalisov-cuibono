@@ -24,7 +24,8 @@
     "@cap-js/sqlite": "^1"
   },
   "scripts": {
-    "start": "npx cds-ts watch",
+    "start":"npx cds run",
+    "watch": "npx cds-ts watch",
     "db:sqlite": "npx cds deploy -2 sqlite:./db.sqlite",
     "generate-types": "bash ./scripts/generate-types.sh",
     "start-fe": "cd ./amalisov.cuibono && npm run start"
