@@ -1,16 +1,11 @@
 namespace amalisov.cuibono.trancheParticipation;
 
-using {
-    managed,
-    cuid
-} from '@sap/cds/common';
-
-using amalisov.cuibono.employee as employee from '../employee/employees';
+using {cuid} from '@sap/cds/common';
 using amalisov.cuibono.bonusTranche as bonusTranche from '../bonusTranche/bonusTranche';
 using amalisov.cuibono.department as department from '../department/department';
 
 
-entity TrancheParticipation : cuid, managed {
+entity TrancheParticipation : cuid {
     localId          : Integer;
     name             : String;
     Status           : participationStatus;
@@ -23,8 +18,9 @@ entity TrancheParticipation : cuid, managed {
     justtification   : String;
     location         : String;
     department       : Association to department.Department;
-    employee         : Association to employee.Employees;
     bonusTranche     : Association to bonusTranche.BonusTranche;
+    CreatedAt        : Timestamp @cds.on.insert: $now;
+    UpdatedAt        : Timestamp @cds.on.insert: $now;
 }
 
 type participationStatus : String enum {
