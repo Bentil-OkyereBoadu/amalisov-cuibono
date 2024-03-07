@@ -1,14 +1,13 @@
 namespace amalisov.cuibono.department;
 
 using {
-    managed,
     cuid
 } from '@sap/cds/common';
 
 using amalisov.cuibono.employee as employee from '../employee/employees';
 using amalisov.cuibono.trancheParticipation as trancheParticipation from '../tranchPatricipation/tracheParticipation';
 
-entity Department : cuid, managed {
+entity Department : cuid {
     name                  : String;
     bonus                 : Integer;
     employees             : Association to many employee.Employees

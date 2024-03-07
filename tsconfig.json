@@ -3,7 +3,7 @@
        "target": "es6",
        "module": "commonjs",
        "outDir": "./gen/srv/srv",
-       "rootDir": "./srv",
+       "rootDir": "./",
        "baseUrl": "./",
        "moduleResolution": "node",
        "skipLibCheck": true,
@@ -13,7 +13,10 @@
        "strict": true,
        "strictNullChecks": false,
        "strictPropertyInitialization": false,
-       "esModuleInterop": true
+       "esModuleInterop": true,
+       "emitDecoratorMetadata": true,
+       "experimentalDecorators": true
+     
     },
     "include": [
        "./srv/**/*" 

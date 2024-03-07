@@ -1,4 +1,3 @@
-import { Request } from "@sap/cds";
 import { Action, Handler, Req } from "cds-routing-handlers";
 
 
@@ -10,5 +9,6 @@ export class DoSomethingHandler {
         return 'Success';
     }
 }
+
 
 
