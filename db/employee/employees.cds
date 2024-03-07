@@ -15,6 +15,4 @@ entity Employees : cuid {
     bonusPercentage : String;
     attendance      : Association to attendance.Attendance;
     department      : Association to department.Department;
-    CreatedAt       : Timestamp @cds.on.insert: $now;
-    UpdatedAt       : Timestamp @cds.on.insert: $now;
 }

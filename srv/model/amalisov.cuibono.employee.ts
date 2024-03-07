@@ -1,9 +1,5 @@
 export interface Employees {
   ID: string;
-  createdAt?: Date;
-  createdBy?: string;
-  modifiedAt?: Date;
-  modifiedBy?: string;
   firstName: string;
   lastName: string;
   email: string;

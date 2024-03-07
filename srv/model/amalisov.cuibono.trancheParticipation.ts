@@ -6,10 +6,6 @@ export enum ParticipationStatus {
 
 export interface TrancheParticipation {
   ID: string;
-  createdAt?: Date;
-  createdBy?: string;
-  modifiedAt?: Date;
-  modifiedBy?: string;
   localId: number;
   name: string;
   Status: ParticipationStatus;
@@ -25,6 +21,8 @@ export interface TrancheParticipation {
   department_ID?: string;
   bonusTranche?: amalisov.cuibono.bonusTranche.BonusTranche;
   bonusTranche_ID?: string;
+  CreatedAt: Date;
+  UpdatedAt: Date;
 }
 
 export enum Entity {

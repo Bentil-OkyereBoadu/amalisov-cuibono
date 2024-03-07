@@ -1,9 +1,5 @@
 export interface TargetAmount {
   ID: string;
-  createdAt?: Date;
-  createdBy?: string;
-  modifiedAt?: Date;
-  modifiedBy?: string;
   name: string;
   weight: number;
   achievement: number;

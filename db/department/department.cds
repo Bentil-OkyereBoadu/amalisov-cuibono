@@ -14,6 +14,4 @@ entity Department : cuid {
                                 on employees.department = $self;
     trancheParticipations : Association to many trancheParticipation.TrancheParticipation
                                 on trancheParticipations.department = $self;
-    CreatedAt             : Timestamp @cds.on.insert: $now;
-    UpdatedAt             : Timestamp @cds.on.insert: $now;
 }

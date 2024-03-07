@@ -11,7 +11,5 @@ entity Target : cuid {
     weight       : Integer;
     achievement  : Integer;
     description  : String;
-    CreatedAt: Timestamp @cds.on.insert : $now;
-    UpdatedAt : Timestamp @cds.on.insert : $now ;
     bonusTranche : Association to bonusTranche.BonusTranche;
 }

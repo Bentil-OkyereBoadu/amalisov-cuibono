@@ -1,9 +1,5 @@
 export interface Department {
   ID: string;
-  createdAt?: Date;
-  createdBy?: string;
-  modifiedAt?: Date;
-  modifiedBy?: string;
   name: string;
   bonus: number;
   employees?: amalisov.cuibono.employee.Employees[];

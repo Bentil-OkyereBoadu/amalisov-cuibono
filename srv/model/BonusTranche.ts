@@ -22,10 +22,6 @@ export interface BonusTranche {
 
 export interface Target {
   ID: string;
-  createdAt?: Date;
-  createdBy?: string;
-  modifiedAt?: Date;
-  modifiedBy?: string;
   name: string;
   weight: number;
   achievement: number;
@@ -36,10 +32,6 @@ export interface Target {
 
 export interface TrancheParticipation {
   ID: string;
-  createdAt?: Date;
-  createdBy?: string;
-  modifiedAt?: Date;
-  modifiedBy?: string;
   localId: number;
   name: string;
   Status: ParticipationStatus;
@@ -55,6 +47,8 @@ export interface TrancheParticipation {
   department_ID?: string;
   bonusTranche?: BonusTranche;
   bonusTranche_ID?: string;
+  CreatedAt: Date;
+  UpdatedAt: Date;
 }
 
 export interface BonusTranche {
