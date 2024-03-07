@@ -33,24 +33,30 @@
                                 <Label text="{i18n>status}" />
                                 <Text text="Open" />
                             </VBox>
-                            <Hbox class="formRows">
+                            <Hbox class="formRows firstRow">
                                 <VBox class="tranchItems">
-                                    <Label text="{i18n>trancheName}" required="true"/>
+                                    <Label
+                                        text="{i18n>trancheName}"
+                                        required="true"
+                                    />
                                     <Input
                                         id="nameInput"
                                         required="true"
                                         type="Text"
-                                        width="100%"
                                         class="sapUiSmallMarginBottom inputs"
                                     />
                                 </VBox>
 
-                                <VBox class="tranchItems" >
-                                    <Label text="{i18n>trancheLocation}" required="true"/>
-                                    <Select 
-                                    items="{tranches>/Locations}"
-                                    change=".onSortSelectChange"
-                                    class="inputs">
+                                <VBox class="tranchItems">
+                                    <Label
+                                        text="{i18n>trancheLocation}"
+                                        required="true"
+                                    />
+                                    <Select
+                                        items="{tranches>/Locations}"
+                                        change=".onSortSelectChange"
+                                        class="inputs"
+                                    >
                                         <core:ListItem
                                             key="{tranches>Id}"
                                             text="{tranches>Name}"
@@ -60,7 +66,7 @@
                             </Hbox>
 
                             <VBox class="tranchItems">
-                                <Label text="{i18n>trancheDescription}"/>
+                                <Label text="{i18n>trancheDescription}" />
                                 <TextArea
                                     width="100%"
                                     id="descriptionInput"
@@ -71,7 +77,10 @@
 
                             <Hbox class="formRows">
                                 <VBox class="tranchItems">
-                                    <Label text="{i18n>startDate}" required="true"/>
+                                    <Label
+                                        text="{i18n>startDate}"
+                                        required="true"
+                                    />
                                     <DatePicker
                                         id="startDateInput"
                                         placeholder="{i18n>datePlaceholder}"
@@ -81,7 +90,10 @@
                                 </VBox>
 
                                 <VBox class="tranchItems">
-                                    <Label text="{i18n>endDate}" required="true"/>
+                                    <Label
+                                        text="{i18n>endDate}"
+                                        required="true"
+                                    />
                                     <DatePicker
                                         id="endDateInput"
                                         placeholder="{i18n>datePlaceholder}"
@@ -116,16 +128,19 @@
             </VBox>
             <!-- Table -->
             <Panel>
-                <Table items="{tranches>/Targets}" width="45%">
+                <Table
+                    items="{tranches>/Targets}"
+                    width="45%"
+                >
                     <headerToolbar>
                         <Toolbar class="sapUiSmallMarginBottom">
                             <Title text="{i18n>targets}" />
                             <ToolbarSpacer />
                             <Button
+                                type="Accept"
                                 text="{i18n>newTarget}"
                                 press=".onAddTarget"
                                 class="primaryColor"
-                               
                             />
                         </Toolbar>
                     </headerToolbar>
@@ -139,10 +154,7 @@
                         <Column>
                             <Label text="{i18n>targetAchievement}" />
                         </Column>
-                        <Column
-                           
-                            width="6%"
-                        />
+                        <Column width="10%" />
                     </columns>
 
                     <items>
@@ -178,7 +190,6 @@
                 contentWidth="20%"
             >
                 <content>
-
                     <Label text="{i18n>trancheName}" />
                     <Input
                         id="s"
@@ -224,10 +235,16 @@
         </content>
         <footer>
             <OverflowToolbar>
-				<ToolbarSpacer/>
-				<Button type="Accept" text="Save"/>
-				<Button type="Reject" text="Cancel"/>
-			</OverflowToolbar>
+                <ToolbarSpacer />
+                <Button
+                    type="Accept"
+                    text="Save"
+                />
+                <Button
+                    type="Default"
+                    text="Cancel"
+                />
+            </OverflowToolbar>
         </footer>
     </Page>
 </mvc:View>

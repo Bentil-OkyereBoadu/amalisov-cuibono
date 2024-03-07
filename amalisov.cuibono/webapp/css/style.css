@@ -1,21 +1,13 @@
 .productTable{
     border-radius: 20px;
-    box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.1);
-
-}
-.form{
-    display: flex;
-    flex-direction: column;
-    width: 100% !important;
+    box-shadow: 0px 1px 15px 7px rgba(0, 0, 0, 0.1);
 }
 .tranchItems{
- max-width: 50%;
+    max-width: 55%;
 }
-/* input, select{
-    width: 100%;
-} */
 .formRows{
     gap: 20px;
+    width: 50%;
 }
 .interactionIcons{
     gap: 10px;
@@ -23,23 +15,28 @@
 .icon{
     color: rgb(6, 161, 146);
 }
-.inputs{
-    width: 1000px;
-}
 
 @media (min-width: 600px) {
-   
+    .formRows{
+        gap: 0px;
+        width: 50%;
+    }
+    .firstRow{
+        gap: 30px;
+    }
 }
 
 @media (min-width: 1024px) {
-    
+    .tranchItems{
+        padding-left: 20px;
+        max-width: 30%;
+       }
 }
 
 @media screen and (max-width: 480px) {
     .formRows{
         flex-direction: column;
     }
-
     .tranchItems{
         max-width: 100%;
     }
