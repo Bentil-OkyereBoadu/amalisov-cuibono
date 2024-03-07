@@ -4,7 +4,7 @@
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core"
-    core:require="{
+     core:require="{
 		formatter: 'amalisov/cuibono/model/formatter'
 	}"
     xmlns:f="sap.ui.layout.form"
@@ -130,7 +130,7 @@
             <!-- Table -->
             <Panel>
                 <Table
-                    items="{tranches>/Targets}"
+                    items="{updateModel>/Targets}"
                     width="45%"
                 >
                     <headerToolbar>
@@ -160,9 +160,9 @@
 
                     <items>
                         <ColumnListItem>
-                            <Text text="{tranches>TargetName}" />
-                            <Text text="{tranches>TargetWeight}" />
-                            <Text text="{tranches>Achieved}" />
+                            <Text text="{updateModel>TargetName}" />
+                            <Text text="{updateModel>TargetWeight}" />
+                            <Text text="{updateModel>Achieved}" />
 
                             <HBox class="interactionIcons">
                                 <core:Icon

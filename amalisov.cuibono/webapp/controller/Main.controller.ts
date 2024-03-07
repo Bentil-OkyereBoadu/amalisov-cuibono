@@ -10,6 +10,25 @@ import FilterOperator from "sap/ui/model/FilterOperator";
 import ODataListBinding from "sap/ui/model/odata/v4/ODataListBinding";
 import FilterBar from "sap/ui/comp/filterbar/FilterBar";
 
+interface Target {
+    TargetName: string;
+    TargetWeight: number;
+    Achieved: string;
+}
+
+interface Tranche {
+    ID?: string;
+    TrancheName: string;
+    Location: string;
+    StartDate: string;
+    EndDate: string;
+	OriginDate: string;
+    TrancheWeight: number;
+    Description: string;
+    Status?: string;
+    Targets: Target[];
+}
+
 
 /**
  * @namespace amalisov.cuibono.controller
@@ -63,48 +82,33 @@ export default class Main extends BaseController {
 
 		const oContext = oItem.getBindingContext("tranches");
 		const sTrancheName = oContext.getProperty("TrancheName");
+		const sStatus = oContext.getProperty("Status");
 		const sLocation = oContext.getProperty("Location");
 		const sStartDate = oContext.getProperty("StartDate");
 		const sEndDate = oContext.getProperty("EndDate");
 		const nTrancheWeight = oContext.getProperty("TrancheWeight");
 		const sDescription = oContext.getProperty("Description");
 		const sOriginDate = oContext.getProperty("OriginDate");
+		const aTargets =  oContext.getProperty("Targets");
 
-		// const oModel = new JSONModel({ 
-		// 	TrancheName: sTrancheName, 
-		// 	Location: sLocation,  
-		// 	TrancheWeight: nTrancheWeight,  
-		// 	Description: sDescription,
-		// 	EndDate: sEndDate,
-		// 	StartDate: sStartDate
-		// });
+		const oData: Tranche = {
+			TrancheName: sTrancheName,
+            Location: sLocation,
+            StartDate: sStartDate,
+            EndDate: sEndDate,
+			OriginDate: sOriginDate,
+            TrancheWeight: nTrancheWeight,
+            Description: sDescription,
+            Status: sStatus,
+            Targets: aTargets
+		}
 
-		// this.setModel(oModel, "updateModel");
-		
-		
-		oUpdateModel.setProperty("/TrancheName", sTrancheName);
-		oUpdateModel.setProperty("/Location", sLocation);
-		oUpdateModel.setProperty("/StartDate", sStartDate);
-		oUpdateModel.setProperty("/EndDate", sEndDate);
-		oUpdateModel.setProperty("/TrancheWeight", nTrancheWeight);
-		oUpdateModel.setProperty("/Description", sDescription);
-		oUpdateModel.setProperty("/OriginDate", sOriginDate);
-
-		
-		oUpdateModel.setProperty("/Description", sDescription);
-		oUpdateModel.setProperty("/Description", sDescription);
-		oUpdateModel.setProperty("/Description", sDescription);
-		oUpdateModel.setProperty("/Description", sDescription);
-		oUpdateModel.setProperty("/Description", sDescription);
-
-
-
-		console.log("sdfghjkl", oUpdateModel)
-
+		oUpdateModel.setData(oData);
 	}
 
 	public onDuplicate(oEvent: any): void {
 		const oItem = oEvent.getSource();
+		const oUpdateModel= this.getOwnerComponent().getModel("updateModel") as JSONModel;
 		const oRouter = this.getOwnerComponent().getRouter();
 		oRouter.navTo("EditBonusTranche", {
 			ID: window.encodeURIComponent(
@@ -117,18 +121,22 @@ export default class Main extends BaseController {
 		const sLocation = oContext.getProperty("Location");
 		const nTrancheWeight = oContext.getProperty("TrancheWeight");
 		const sDescription = oContext.getProperty("Description");
+		const sOriginDate = oContext.getProperty("OriginDate");
+		const aTargets =  oContext.getProperty("Targets");
 
-		const oModel = new JSONModel({ 
-			TrancheName: sTrancheName, 
-			Location: sLocation,  
-			TrancheWeight: nTrancheWeight,  
-			Description: sDescription,
-		
-		});
+		const oData: Tranche = {
+			TrancheName: sTrancheName,
+            Location: sLocation,
+            StartDate: '',
+            EndDate: '',
+			OriginDate: sOriginDate,
+            TrancheWeight: nTrancheWeight,
+            Description: sDescription,
+            Status: "",
+            Targets: aTargets
+		}
 
-		this.setModel(oModel, "updateModel");
-
-		// this._sSelectedAnswerID = oContext.getProperty("ID");
+		oUpdateModel.setData(oData);
 	}
 
 	public async onDeleteTranche(oEvent: any): Promise<void>{
@@ -137,8 +145,8 @@ export default class Main extends BaseController {
         const oSource = oEvent.getSource().getBindingContext("tranches");
 		const resourceBundle: ResourceBundle = await this.getResourceBundle();
         const oObjectContext: any = oSource.getObject();
-        const thread_ID: string = oObjectContext.ID;
-		const sPath =("/Tranches("+ thread_ID +")")
+        const ID: string = oObjectContext.ID;
+		const sPath =("/Tranches("+ ID +")")
         try {
             await oModel.delete(sPath);
             oModel.refresh();

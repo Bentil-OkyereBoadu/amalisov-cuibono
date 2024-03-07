@@ -12,7 +12,7 @@ interface Target {
 interface Tranche {
     ID: string;
     TrancheName: string;
-    Location: number;
+    Location: string;
     StartDate: string;
     EndDate: string;
 	OriginDate: string;
@@ -34,7 +34,7 @@ export default {
 		const oData: Tranche = {
 			ID: "",
             TrancheName: "",
-            Location: 0,
+            Location: "",
             StartDate: "",
             EndDate: "",
 			OriginDate: "",

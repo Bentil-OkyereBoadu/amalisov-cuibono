@@ -3,7 +3,7 @@
 		{
 			"ID": "1",
 			"TrancheName": "Pineapple",
-			"Location": 21,
+			"Location": "Germany",
 			"StartDate": "2019-04-01T00:00:00",
 			"EndDate": "2015-04-01T00:00:00",
 			"OriginDate": "9915-04-12T00:00:00",
@@ -41,7 +41,7 @@
 		{
 			"ID": "2",
 			"TrancheName": "Milk",
-			"Location": 4,
+			"Location": "Ghana",
 			"StartDate": "2219-01-01T00:00:00",
 			"EndDate": "2015-02-18T00:00:00",
 			"OriginDate": "1015-04-12T00:00:00",
@@ -79,7 +79,7 @@
 		{
 			"ID": "3",
 			"TrancheName": "Canned Beans",
-			"Location": 3,
+			"Location": "Rwanda",
 			"StartDate": "2029-04-01T00:00:00",
 			"EndDate": "2015-03-02T00:00:00",
 			"OriginDate": "1905-04-12T00:00:00",
@@ -117,7 +117,7 @@
 		{
 			"ID": "4",
 			"TrancheName": "Salad",
-			"Location": 2,
+			"Location": "Germany",
 			"StartDate": "2019-04-01T00:00:00",
 			"EndDate": "2015-04-12T00:00:00",
 			"OriginDate": "1915-04-12T00:00:00",
@@ -155,7 +155,7 @@
 		{
 			"ID": "5",
 			"TrancheName": "Bread",
-			"Location": 100,
+			"Location": "France",
 			"StartDate": "2019-03-09T00:00:00",
 			"EndDate": "2015-01-27T00:00:00",
 			"OriginDate": "2915-04-12T00:00:00",
@@ -193,7 +193,7 @@
 		{
 			"ID": "6",
 			"TrancheName": "Juice",
-			"Location": 66,
+			"Location": "Germany",
 			"StartDate": "2019-09-18T00:00:00",
 			"EndDate": "2015-01-27T00:00:00",
 			"OriginDate": "2015-04-12T00:00:00",
@@ -231,7 +231,7 @@
 		{
 			"ID": "7",
 			"TrancheName": "Butter",
-			"Location": 7,
+			"Location": "South  Africa",
 			"StartDate": "2019-10-21T00:00:00",
 			"EndDate": "2015-01-27T00:00:00",
 			"OriginDate": "1915-04-12T00:00:00",
