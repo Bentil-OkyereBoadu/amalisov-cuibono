@@ -18,6 +18,7 @@ export default class Component extends UIComponent {
 
 		// create the device model
 		this.setModel(models.createDeviceModel(), "device");
+		this.setModel(models.createUpdateModel(), "updateModel");
 
 		// create the views based on the url/hash
 		this.getRouter().initialize();

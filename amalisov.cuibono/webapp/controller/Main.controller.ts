@@ -8,6 +8,7 @@ import Input from "sap/m/Input";
 import Filter from "sap/ui/model/Filter";
 import FilterOperator from "sap/ui/model/FilterOperator";
 import ODataListBinding from "sap/ui/model/odata/v4/ODataListBinding";
+import FilterBar from "sap/ui/comp/filterbar/FilterBar";
 
 
 /**
@@ -15,23 +16,22 @@ import ODataListBinding from "sap/ui/model/odata/v4/ODataListBinding";
  */
 export default class Main extends BaseController {
 	private oModel: JSONModel;
-	public oFilterBar: Control;
-	private oGoButton: Control;
+	public oFilterBar: FilterBar;
+	private oGoButton: FilterBar;
 
 	public onInit(): void {
 		this.oModel = new JSONModel();
 		this.getView().setModel(this.oModel);
-		this.oFilterBar = this.getView().byId("filterbar") as Control;
-		this.oGoButton = this.getView().byId("filterbar") as Control;
+		this.oFilterBar = this.getView().byId("filterbar") as FilterBar;
+		this.oGoButton = this.getView().byId("filterbar") as FilterBar;
 		this.oGoButton.addStyleClass("myCustomFilterBar");
 	}
 
 	public onCreateNewTranche(): void {
-		this.getRouter().navTo("EditBonusTranche");
+		this.getRouter().navTo("CreateTranche");
 	}
 
 	public onSearch():void {
-
 		let sQuery = (this.getView().byId("search") as Input).getValue();
 
 		const oBinding = this.getView()
@@ -52,14 +52,54 @@ export default class Main extends BaseController {
 	}
 
 	public onEditPress(oEvent: any): void {
-
 		const oItem = oEvent.getSource();
+		const oUpdateModel= this.getOwnerComponent().getModel("updateModel") as JSONModel;
 		const oRouter = this.getOwnerComponent().getRouter();
 		oRouter.navTo("EditBonusTranche", {
 			ID: window.encodeURIComponent(
 				oItem.getBindingContext("tranches").getPath().substr(1)
 			),
 		});
+
+		const oContext = oItem.getBindingContext("tranches");
+		const sTrancheName = oContext.getProperty("TrancheName");
+		const sLocation = oContext.getProperty("Location");
+		const sStartDate = oContext.getProperty("StartDate");
+		const sEndDate = oContext.getProperty("EndDate");
+		const nTrancheWeight = oContext.getProperty("TrancheWeight");
+		const sDescription = oContext.getProperty("Description");
+		const sOriginDate = oContext.getProperty("OriginDate");
+
+		// const oModel = new JSONModel({ 
+		// 	TrancheName: sTrancheName, 
+		// 	Location: sLocation,  
+		// 	TrancheWeight: nTrancheWeight,  
+		// 	Description: sDescription,
+		// 	EndDate: sEndDate,
+		// 	StartDate: sStartDate
+		// });
+
+		// this.setModel(oModel, "updateModel");
+		
+		
+		oUpdateModel.setProperty("/TrancheName", sTrancheName);
+		oUpdateModel.setProperty("/Location", sLocation);
+		oUpdateModel.setProperty("/StartDate", sStartDate);
+		oUpdateModel.setProperty("/EndDate", sEndDate);
+		oUpdateModel.setProperty("/TrancheWeight", nTrancheWeight);
+		oUpdateModel.setProperty("/Description", sDescription);
+		oUpdateModel.setProperty("/OriginDate", sOriginDate);
+
+		
+		oUpdateModel.setProperty("/Description", sDescription);
+		oUpdateModel.setProperty("/Description", sDescription);
+		oUpdateModel.setProperty("/Description", sDescription);
+		oUpdateModel.setProperty("/Description", sDescription);
+		oUpdateModel.setProperty("/Description", sDescription);
+
+
+
+		console.log("sdfghjkl", oUpdateModel)
 
 	}
 
@@ -71,16 +111,22 @@ export default class Main extends BaseController {
 				oItem.getBindingContext("tranches").getPath().substr(1)
 			),
 		});
+		
+		const oContext = oItem.getBindingContext("tranches");
+		const sTrancheName = oContext.getProperty("TrancheName");
+		const sLocation = oContext.getProperty("Location");
+		const nTrancheWeight = oContext.getProperty("TrancheWeight");
+		const sDescription = oContext.getProperty("Description");
 
-		// const oSource = oEvent.getSource();
-		// const oContext = oSource.getBindingContext("tranches");
-		// const sContent = oContext.getProperty("Content");
-		// const oModel = new JSONModel({ Content: sContent });
+		const oModel = new JSONModel({ 
+			TrancheName: sTrancheName, 
+			Location: sLocation,  
+			TrancheWeight: nTrancheWeight,  
+			Description: sDescription,
+		
+		});
 
-		// this.setModel(oModel, "updateModel");
-
-		// const oDialog = this.getView().byId("editDialog") as Dialog;
-		// oDialog.open();
+		this.setModel(oModel, "updateModel");
 
 		// this._sSelectedAnswerID = oContext.getProperty("ID");
 	}

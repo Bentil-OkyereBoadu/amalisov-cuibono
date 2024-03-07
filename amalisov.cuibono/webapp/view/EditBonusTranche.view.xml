@@ -56,6 +56,7 @@
                                         items="{tranches>/Locations}"
                                         change=".onSortSelectChange"
                                         class="inputs"
+                                        id="locationSelect"
                                     >
                                         <core:ListItem
                                             key="{tranches>Id}"

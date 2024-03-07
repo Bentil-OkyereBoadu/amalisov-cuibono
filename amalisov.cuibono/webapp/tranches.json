@@ -1,114 +1,306 @@
 {
-    "Tranches": [
-        {
-            "TrancheName": "Pineapple",
-            "Location": 21,
-            "StartDate": "2019-04-01T00:00:00",
-            "EndDate": "2015-04-01T00:00:00",
-            "Status": "Running"
-        },
-        {
-            "TrancheName": "Milk",
-            "Location": 4,
-            "StartDate": "2219-01-01T00:00:00",
-            "EndDate": "2015-02-18T00:00:00",
-            "Status": "Locked"
-        },
-        {
-            "TrancheName": "Canned Beans",
-            "Location": 3,
-            "StartDate": "2029-04-01T00:00:00",
-            "EndDate": "2015-03-02T00:00:00",
-            "Status": "Completed"
-        },
-        {
-            "TrancheName": "Salad",
-            "Location": 2,
-            "StartDate": "2019-04-01T00:00:00",
-            "EndDate": "2015-04-12T00:00:00",
-            "Status": "Locked"
-        },
-        {
-            "TrancheName": "Bread",
-            "Location": 100,
-            "StartDate": "2019-03-09T00:00:00",
-            "EndDate": "2015-01-27T00:00:00",
-            "Status": "Completed"
-        },
-        {
-            "TrancheName": "Juice",
-            "Location": 66,
-            "StartDate": "2019-09-18T00:00:00",
-            "EndDate": "2015-01-27T00:00:00",
-            "Status": "Completed"
-        }, {
-            "TrancheName": "Butter",
-            "Location": 7,
-            "StartDate": "2019-10-21T00:00:00",
-            "EndDate": "2015-01-27T00:00:00",
-            "Status": "Running"
-        }
-    ],
+	"Tranches": [
+		{
+			"ID": "1",
+			"TrancheName": "Pineapple",
+			"Location": 21,
+			"StartDate": "2019-04-01T00:00:00",
+			"EndDate": "2015-04-01T00:00:00",
+			"OriginDate": "9915-04-12T00:00:00",
+			"TrancheWeight": 24,
+			"Description": "First tranche. Bonuses Bonus boooo",
+			"Status": "Running",
+			"Targets": [
+				{
+					"TargetName": "Attend",
+					"TargetWeight": 26,
+					"Achieved": "0"
+				},
+				{
+					"TargetName": "Work",
+					"TargetWeight": 7,
+					"Achieved": "9"
+				},
+				{
+					"TargetName": "Rate",
+					"TargetWeight": 13,
+					"Achieved": "21"
+				},
+				{
+					"TargetName": "Days",
+					"TargetWeight": 56,
+					"Achieved": "20"
+				},
+				{
+					"TargetName": "Pro",
+					"TargetWeight": 10,
+					"Achieved": "30"
+				}
+			]
+		},
+		{
+			"ID": "2",
+			"TrancheName": "Milk",
+			"Location": 4,
+			"StartDate": "2219-01-01T00:00:00",
+			"EndDate": "2015-02-18T00:00:00",
+			"OriginDate": "1015-04-12T00:00:00",
+			"TrancheWeight": 24,
+			"Description": "Second tranche. Bonuses ppp boooo",
+			"Status": "Locked",
+			"Targets": [
+				{
+					"TargetName": "Lied",
+					"TargetWeight": 26,
+					"Achieved": "0"
+				},
+				{
+					"TargetName": "Bonus",
+					"TargetWeight": 7,
+					"Achieved": "9"
+				},
+				{
+					"TargetName": "Easter",
+					"TargetWeight": 13,
+					"Achieved": "21"
+				},
+				{
+					"TargetName": "Butter",
+					"TargetWeight": 56,
+					"Achieved": "20"
+				},
+				{
+					"TargetName": "Fly",
+					"TargetWeight": 10,
+					"Achieved": "30"
+				}
+			]
+		},
+		{
+			"ID": "3",
+			"TrancheName": "Canned Beans",
+			"Location": 3,
+			"StartDate": "2029-04-01T00:00:00",
+			"EndDate": "2015-03-02T00:00:00",
+			"OriginDate": "1905-04-12T00:00:00",
+			"TrancheWeight": 24,
+			"Description": "Third tranche. Bonuses Bonus boooo",
+			"Status": "Completed",
+			"Targets": [
+				{
+					"TargetName": "Yield",
+					"TargetWeight": 26,
+					"Achieved": "0"
+				},
+				{
+					"TargetName": "Bonus",
+					"TargetWeight": 7,
+					"Achieved": "9"
+				},
+				{
+					"TargetName": "Easter",
+					"TargetWeight": 13,
+					"Achieved": "21"
+				},
+				{
+					"TargetName": "Butter",
+					"TargetWeight": 56,
+					"Achieved": "20"
+				},
+				{
+					"TargetName": "Harvest",
+					"TargetWeight": 10,
+					"Achieved": "30"
+				}
+			]
+		},
+		{
+			"ID": "4",
+			"TrancheName": "Salad",
+			"Location": 2,
+			"StartDate": "2019-04-01T00:00:00",
+			"EndDate": "2015-04-12T00:00:00",
+			"OriginDate": "1915-04-12T00:00:00",
+			"TrancheWeight": 64,
+			"Description": "4th tranche. Bonuses Bonus boooo",
+			"Status": "Locked",
+			"Targets": [
+				{
+					"TargetName": "ROI",
+					"TargetWeight": 26,
+					"Achieved": "0"
+				},
+				{
+					"TargetName": "USP",
+					"TargetWeight": 7,
+					"Achieved": "9"
+				},
+				{
+					"TargetName": "Net",
+					"TargetWeight": 13,
+					"Achieved": "21"
+				},
+				{
+					"TargetName": "Gross",
+					"TargetWeight": 56,
+					"Achieved": "20"
+				},
+				{
+					"TargetName": "Tax",
+					"TargetWeight": 10,
+					"Achieved": "30"
+				}
+			]
+		},
+		{
+			"ID": "5",
+			"TrancheName": "Bread",
+			"Location": 100,
+			"StartDate": "2019-03-09T00:00:00",
+			"EndDate": "2015-01-27T00:00:00",
+			"OriginDate": "2915-04-12T00:00:00",
+			"TrancheWeight": 64,
+			"Description": "4th tranche. Bonuses Bonus boooo",
+			"Status": "Completed",
+			"Targets": [
+				{
+					"TargetName": "Stipend",
+					"TargetWeight": 26,
+					"Achieved": "0"
+				},
+				{
+					"TargetName": "Bonus",
+					"TargetWeight": 7,
+					"Achieved": "9"
+				},
+				{
+					"TargetName": "Tranche",
+					"TargetWeight": 13,
+					"Achieved": "21"
+				},
+				{
+					"TargetName": "Expense",
+					"TargetWeight": 56,
+					"Achieved": "20"
+				},
+				{
+					"TargetName": "Margin",
+					"TargetWeight": 10,
+					"Achieved": "30"
+				}
+			]
+		},
+		{
+			"ID": "6",
+			"TrancheName": "Juice",
+			"Location": 66,
+			"StartDate": "2019-09-18T00:00:00",
+			"EndDate": "2015-01-27T00:00:00",
+			"OriginDate": "2015-04-12T00:00:00",
+			"TrancheWeight": 64,
+			"Description": "4th tranche. Bonuses Bonus boooo",
+			"Status": "Completed",
+			"Targets": [
+				{
+					"TargetName": "Stipend",
+					"TargetWeight": 26,
+					"Achieved": "0"
+				},
+				{
+					"TargetName": "Bonus",
+					"TargetWeight": 7,
+					"Achieved": "9"
+				},
+				{
+					"TargetName": "Tranche",
+					"TargetWeight": 13,
+					"Achieved": "21"
+				},
+				{
+					"TargetName": "Expense",
+					"TargetWeight": 56,
+					"Achieved": "20"
+				},
+				{
+					"TargetName": "Margin",
+					"TargetWeight": 10,
+					"Achieved": "30"
+				}
+			]
+		},
+		{
+			"ID": "7",
+			"TrancheName": "Butter",
+			"Location": 7,
+			"StartDate": "2019-10-21T00:00:00",
+			"EndDate": "2015-01-27T00:00:00",
+			"OriginDate": "1915-04-12T00:00:00",
+			"TrancheWeight": 64,
+			"Description": "4th tranche. Bonuses Bonus boooo",
+			"Status": "Running",
+			"Targets": [
+				{
+					"TargetName": "Bonus",
+					"TargetWeight": 7,
+					"Achieved": "9"
+				},
+				{
+					"TargetName": "Tranche",
+					"TargetWeight": 13,
+					"Achieved": "21"
+				},
+				{
+					"TargetName": "Expense",
+					"TargetWeight": 56,
+					"Achieved": "20"
+				},
+				{
+					"TargetName": "Margin",
+					"TargetWeight": 10,
+					"Achieved": "30"
+				}
+			]
+		}
+	],
 
-    "Targets":[
-        {
-            "TargetName": "Lied",
-            "TargetWeight": 26,
-            "Achieved": "0"
-        }, {
-            "TargetName": "Bonus",
-            "TargetWeight": 7,
-            "Achieved": "9"
-        }, {
-            "TargetName": "Easter",
-            "TargetWeight": 13,
-            "Achieved": "21"
-        }, {
-            "TargetName": "Butter",
-            "TargetWeight": 56,
-            "Achieved": "20"
-        }, {
-            "TargetName": "Fly",
-            "TargetWeight": 10,
-            "Achieved": "30"
-        }
-    ],
-
-    "Locations":[
-        {
-            "Id": 19,
-            "Name": "Germany"
-        },
-        {
-            "Id": 8,
-            "Name": "Ghana"
-        },
-        {
-            "Id": 63,
-            "Name": "Rwanda"
-        },{
-            "Id": 26,
-            "Name": "France"
-        },{
-            "Id": 236,
-            "Name": "Mozambique"
-        },{
-            "Id": 7890,
-            "Name": "South  Africa"
-        }
-    ],
-    "Status":[
-        {
-            "Key":"Running",
-            "Name": "Running"
-        },
-        {
-            "Key":"Locked",
-            "Name": "Locked"
-        },
-        {
-            "Key":"Completed",
-            "Name": "Completed"
-        }
-    ]
+	"Locations": [
+		{
+			"Id": 19,
+			"Name": "Germany"
+		},
+		{
+			"Id": 8,
+			"Name": "Ghana"
+		},
+		{
+			"Id": 63,
+			"Name": "Rwanda"
+		},
+		{
+			"Id": 26,
+			"Name": "France"
+		},
+		{
+			"Id": 236,
+			"Name": "Mozambique"
+		},
+		{
+			"Id": 7890,
+			"Name": "South  Africa"
+		}
+	],
+	"Status": [
+		{
+			"Key": "Running",
+			"Name": "Running"
+		},
+		{
+			"Key": "Locked",
+			"Name": "Locked"
+		},
+		{
+			"Key": "Completed",
+			"Name": "Completed"
+		}
+	]
 }

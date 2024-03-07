@@ -84,7 +84,11 @@
 					"name": "main",
 					"target": "main"
 				},{
-					"pattern": "tranches",
+					"pattern": "Create-tranche",
+					"name": "CreateTranche",
+					"target": "CreateTranche"
+				},{
+					"pattern": "edit-tranche",
 					"name": "EditBonusTranche",
 					"target": "EditBonusTranche"
 				}
@@ -95,10 +99,14 @@
 					"viewName": "Main",
 					"viewLevel": 0
 				},
-				"EditBonusTranche": {
+				"CreateTranche": {
 					"viewId": "EditBonusTranche",
 					"viewName": "EditBonusTranche",
 					"viewLevel": 1
+				},"EditBonusTranche": {
+					"viewId": "EditBonusTranche",
+					"viewName": "EditBonusTranche",
+					"viewLevel": 2
 				}
 			}
 		}
