@@ -19,8 +19,6 @@ entity TrancheParticipation : cuid {
     location         : String;
     department       : Association to department.Department;
     bonusTranche     : Association to bonusTranche.BonusTranche;
-    CreatedAt        : Timestamp @cds.on.insert: $now;
-    UpdatedAt        : Timestamp @cds.on.insert: $now;
 }
 
 type participationStatus : String enum {
