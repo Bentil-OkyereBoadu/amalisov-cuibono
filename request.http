@@ -9,3 +9,9 @@ GET http://localhost:4004/odata/v4/department/Department
 # Get employees
 #
 GET http://localhost:4004/odata/v4/employee/Employees
+
+###
+#
+# Get dummy 
+#
+POST  http://localhost:4004/odata/v4/dummy/dosomething
