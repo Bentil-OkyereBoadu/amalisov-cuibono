@@ -7,6 +7,4 @@ entity Attendance : cuid {
     startDate : String;
     endDate   : String;
     employee  : Association to employee.Employees;
-    CreatedAt : Timestamp @cds.on.insert: $now;
-    UpdatedAt : Timestamp @cds.on.insert: $now;
 }

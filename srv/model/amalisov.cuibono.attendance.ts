@@ -1,9 +1,5 @@
 export interface Attendance {
   ID: string;
-  createdAt?: Date;
-  createdBy?: string;
-  modifiedAt?: Date;
-  modifiedBy?: string;
   startDate: string;
   endDate: string;
   employee?: amalisov.cuibono.employee.Employees;

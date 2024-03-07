@@ -2,10 +2,6 @@ import { ParticipationStatus } from "./amalisov.cuibono.trancheParticipation";
 
 export interface TracheParticipation {
   ID: string;
-  createdAt?: Date;
-  createdBy?: string;
-  modifiedAt?: Date;
-  modifiedBy?: string;
   localId: number;
   name: string;
   Status: ParticipationStatus;
@@ -21,6 +17,8 @@ export interface TracheParticipation {
   department_ID?: string;
   bonusTranche?: amalisov.cuibono.bonusTranche.BonusTranche;
   bonusTranche_ID?: string;
+  CreatedAt: Date;
+  UpdatedAt: Date;
 }
 
 export enum Entity {
