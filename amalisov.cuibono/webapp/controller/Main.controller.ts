@@ -54,7 +54,7 @@ export default class Main extends BaseController {
 		let sQuery = (this.getView().byId("search") as Input).getValue();
 
 		const oBinding = this.getView()
-			.byId("productTable")
+			.byId("trancheTable")
 			.getBinding("items") as ODataListBinding; 
 
 		if (sQuery) {

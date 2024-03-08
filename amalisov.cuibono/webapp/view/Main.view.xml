@@ -118,8 +118,8 @@
         </f:header>
         <f:content>
             <Table
-                id="productTable"
-                class="productTable"
+                id="trancheTable"
+                class="trancheTable"
                 width="auto"
                 items="{tranches>/Tranches}"
             >
