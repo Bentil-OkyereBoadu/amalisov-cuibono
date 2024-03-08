@@ -5,7 +5,7 @@ service Dummy {
 
     entity Dummy as projection on Dum.Dummy;
      // Where to call the action 
-    // action dosomething() returns String;
+    action dosomething() returns String;
     function returnSomething() returns String;
 
 }

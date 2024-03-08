@@ -1,6 +1,8 @@
 import { Action, Handler, Req } from "cds-routing-handlers";
+import { Service } from "typedi";
 
 // built handler to do the functionality 
+@Service()
 @Handler()
 export class DoSomethingHandler {
     @Action('dosomething')

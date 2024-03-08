@@ -14,4 +14,13 @@ GET http://localhost:4004/odata/v4/employee/Employees
 #
 # Get dummy 
 #
-GET  http://localhost:4004/odata/v4/dummy/returnSomething()
+POST http://localhost:4004/odata/v4/dummy/dosomething
+Content-Type: application/json
+Authorization: Basic Admin 123456
+
+{
+    "name": "String",
+    "weight": 2, 
+    "achievement": 23, 
+    "trancheId": "95be854c-f870-400b-ba9b-32f79b4ab99f"
+}
