@@ -2,7 +2,7 @@
     xmlns="sap.m"
     xmlns:core="sap.ui.core"
 >
-    <HBox class="pageTitle">
+    <!-- <HBox class="pageTitle">
         <Button
             id="btnRoute"
             text="Bonus Tranches"
@@ -15,5 +15,12 @@
             press=".onNavToRoute2"
             class="textLikeButton"
         />
-    </HBox>
+    </HBox> -->
+
+    <IconTabHeader mode="Inline" select=".onRouteSelection">
+		<items>
+			<IconTabFilter id="bonusNav" key="bonus" text="{i18n>trancheTableHeader}" />
+			<IconTabFilter id="participantNav" key="participant" text="{i18n>participantTitle}"/>
+		</items>
+	</IconTabHeader>
 </core:FragmentDefinition>
