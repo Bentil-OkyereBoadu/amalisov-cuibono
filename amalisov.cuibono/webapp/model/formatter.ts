@@ -4,7 +4,6 @@ export default {
 	formatValue: (value: string) => {
 		return value?.toUpperCase();
 	},
-
 	formatDate: (sDate: string): string => {
         if (sDate) {
             const oDateFormat = DateFormat.getDateInstance({ pattern: "MM.dd.yyyy" });
@@ -16,4 +15,5 @@ export default {
 	statusEnabled(status: string): boolean {
         return status !== "Completed";
     },
+
 };

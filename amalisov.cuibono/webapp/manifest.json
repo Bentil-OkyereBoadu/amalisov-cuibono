@@ -46,7 +46,6 @@
 				"sap.ui.comp": {},
 				"sap.ui.core": {},
 				"sap.ui.fl": {}
-
 			}
 		},
 
@@ -64,10 +63,12 @@
 					"bundleName": "amalisov.cuibono.i18n.i18n"
 				}
 			},
+
 			"tranches": {
 			  "type": "sap.ui.model.json.JSONModel",
 			  "uri": "tranches.json"
 			},
+
 			"participant": {
 				"type": "sap.ui.model.json.JSONModel",
 				"uri": "participant.json"
@@ -88,6 +89,7 @@
 					"pattern": "",
 					"name": "main",
 					"target": "main"
+
 				},{
 					"pattern": "Create-tranche",
 					"name": "CreateTranche",
@@ -96,6 +98,7 @@
 					"pattern": "edit-tranche",
 					"name": "EditBonusTranche",
 					"target": "EditBonusTranche"
+
 				},
 				{
 					"pattern": "participant",
@@ -106,6 +109,7 @@
 			"targets": {
 				"main": {
 					"viewId": "main",
+
 					"viewName": "Main",
 					"viewLevel": 0
 				},
