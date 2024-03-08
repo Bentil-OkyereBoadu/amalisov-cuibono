@@ -63,6 +63,12 @@
 					"bundleName": "amalisov.cuibono.i18n.i18n"
 				}
 			},
+
+			"tranches": {
+			  "type": "sap.ui.model.json.JSONModel",
+			  "uri": "tranches.json"
+			},
+
 			"participant": {
 				"type": "sap.ui.model.json.JSONModel",
 				"uri": "participant.json"
@@ -83,6 +89,16 @@
 					"pattern": "",
 					"name": "main",
 					"target": "main"
+
+				},{
+					"pattern": "Create-tranche",
+					"name": "CreateTranche",
+					"target": "CreateTranche"
+				},{
+					"pattern": "edit-tranche",
+					"name": "EditBonusTranche",
+					"target": "EditBonusTranche"
+
 				},
 				{
 					"pattern": "participant",
@@ -93,11 +109,24 @@
 			"targets": {
 				"main": {
 					"viewId": "main",
-					"viewName": "Main"
+
+					"viewName": "Main",
+					"viewLevel": 0
+				},
+				"CreateTranche": {
+					"viewId": "EditBonusTranche",
+					"viewName": "EditBonusTranche",
+					"viewLevel": 1
+				},"EditBonusTranche": {
+					"viewId": "EditBonusTranche",
+					"viewName": "EditBonusTranche",
+					"viewLevel": 2
 				},
 				"participants": {
 					"viewId": "participants",
-					"viewName": "Participants"
+					"viewName": "Participants",
+				
+					"viewLevel": 0
 				}
 			}
 		}

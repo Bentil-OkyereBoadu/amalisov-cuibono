@@ -1,0 +1,205 @@
+<mvc:View
+    controllerName="amalisov.cuibono.controller.EditBonusTranche"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    core:require="{
+		formatter: 'amalisov/cuibono/model/formatter'
+	}"
+    xmlns:f="sap.ui.layout.form"
+>
+    <Page
+        id="page"
+        floatingFooter="true"
+    >
+        <content>
+        
+                <f:SimpleForm
+                    class="form"
+                    editable="true"
+                    layout="ResponsiveGridLayout"
+                    labelSpanL="2"
+                    labelSpanM="2"
+                    emptySpanL="2"
+                    emptySpanM="2"
+                >
+                    <f:content>
+                        <VBox class="formBox">
+                            <VBox class="tranchItems">
+                                <Label text="{i18n>status}" />
+                                <Text text="Open" />
+                            </VBox>
+                            <Hbox class="formRows firstRow">
+                                <VBox class="tranchItems">
+                                    <Label
+                                        text="{i18n>trancheName}"
+                                        required="true"
+                                    />
+                                    <Input
+                                        id="nameInput"
+                                        required="true"
+                                        type="Text"
+                                        class="sapUiSmallMarginBottom inputs"
+                                    />
+                                </VBox>
+
+                                <VBox class="tranchItems">
+                                    <Label
+                                        text="{i18n>trancheLocation}"
+                                        required="true"
+                                    />
+                                    <Select
+                                        items="{tranches>/Locations}"
+                                        change=".onSortSelectChange"
+                                        class="inputs"
+                                        id="locationSelect"
+                                    >
+                                        <core:ListItem
+                                            key="{tranches>Id}"
+                                            text="{tranches>Name}"
+                                        />
+                                    </Select>
+                                </VBox>
+                            </Hbox>
+
+                            <VBox class="tranchItems">
+                                <Label text="{i18n>trancheDescription}" />
+                                <TextArea
+                                    width="100%"
+                                    id="descriptionInput"
+                                    rows="4"
+                                    class="sapUiSmallMarginBottom"
+                                />
+                            </VBox>
+
+                            <Hbox class="formRows">
+                                <VBox class="tranchItems">
+                                    <Label
+                                        text="{i18n>startDate}"
+                                        required="true"
+                                    />
+                                    <DatePicker
+                                        id="startDateInput"
+                                        placeholder="{i18n>datePlaceholder}"
+                                        required="true"
+                                        class="sapUiSmallMarginBottom inputs"
+                                    />
+                                </VBox>
+
+                                <VBox class="tranchItems">
+                                    <Label
+                                        text="{i18n>endDate}"
+                                        required="true"
+                                    />
+                                    <DatePicker
+                                        id="endDateInput"
+                                        placeholder="{i18n>datePlaceholder}"
+                                        required="true"
+                                        class="sapUiSmallMarginBottom inputs"
+                                    />
+                                </VBox>
+                            </Hbox>
+
+                            <Hbox class="formRows">
+                                <VBox class="tranchItems">
+                                    <Label text="{i18n>trancheWeight}" />
+                                    <Input
+                                        id="weightInput"
+                                        type="Text"
+                                        class="sapUiSmallMarginBottom inputs"
+                                    />
+                                </VBox>
+
+                                <VBox class="tranchItems">
+                                    <Label text="{i18n>originDate}" />
+                                    <DatePicker
+                                        id="originDateInput"
+                                        placeholder="{i18n>datePlaceholder}"
+                                        class="sapUiSmallMarginBottom inputs"
+                                    />
+                                </VBox>
+                            </Hbox>
+                        </VBox>
+                    </f:content>
+                </f:SimpleForm>
+           
+            <!-- Table -->
+            <Panel>
+                <Table
+                    items="{updateModel>/Targets}"
+                    width="45%"
+                >
+                    <headerToolbar>
+                        <Toolbar class="sapUiSmallMarginBottom">
+                            <Title text="{i18n>targets}" />
+                            <ToolbarSpacer />
+                            <Button
+                                type="Accept"
+                                text="{i18n>newTarget}"
+                                press=".onAddTarget"
+                                class="btn"
+                            />
+                        </Toolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column>
+                            <Label text="{i18n>trancheName}" />
+                        </Column>
+                        <Column>
+                            <Label text="{i18n>targetWeight}" />
+                        </Column>
+                        <Column>
+                            <Label text="{i18n>targetAchievement}" />
+                        </Column>
+                        <Column width="10%" />
+                    </columns>
+
+                    <items>
+                        <ColumnListItem>
+                            <Text text="{updateModel>TargetName}" />
+                            <Text text="{updateModel>TargetWeight}" />
+                            <Text text="{updateModel>Achieved}" />
+
+                            <HBox class="interactionIcons">
+                                <core:Icon
+                                    src="sap-icon://edit"
+                                    class="icon"
+                                    press=".onOpenEditDialog"
+                                    visible="{path: 'thread>IsDeleted', formatter: '.formatter.isVisible'}"
+                                />
+
+                                <core:Icon
+                                    src="sap-icon://delete"
+                                    press=".onDeleteAnswer"
+                                    class="icon"
+                                    visible="{path: 'thread>IsDeleted', formatter: '.formatter.isVisible'}"
+                                />
+                            </HBox>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </Panel>
+            <!--  END OF TABLE -->
+
+            <core:Fragment
+                fragmentName="amalisov.cuibono.view.AddTarget"
+                type="XML"
+            />
+            
+        </content>
+        <footer>
+            <OverflowToolbar>
+                <ToolbarSpacer />
+                <Button
+                    type="Accept"
+                    text="Save"
+                />
+                <Button
+                    type="Default"
+                    text="Cancel"
+                />
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>
