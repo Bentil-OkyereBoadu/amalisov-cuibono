@@ -170,7 +170,6 @@
                         <Text text="{tranches>Location}" />
                         <Text
                             text="{formatter: 'formatter.formatDate', path:'tranches>StartDate'}"
-                            state="{= ${UnitsInStock} > 20 ? 'Success' : 'Error'}"
                         />
                         <Text
                             text="{formatter: 'formatter.formatDate', path:'tranches>EndDate'}"
@@ -179,8 +178,7 @@
                             <core:Icon
                                 src="sap-icon://edit"
                                 class="icon"
-                                press=".onEditPress"
-                                visible="{path: 'thread>IsDeleted', formatter: '.formatter.isVisible'}"
+                                press=".onEditPress"                          
                             />
                             <core:Icon
                                 src="sap-icon://copy"
@@ -190,8 +188,7 @@
                             <core:Icon
                                 src="sap-icon://delete"
                                 press=".onDeleteTranche"
-                                class="icon"
-                                visible="{path: 'thread>IsDeleted', formatter: '.formatter.isVisible'}"
+                                class="icon"                            
                             />
                         </HBox>
                     </ColumnListItem>
