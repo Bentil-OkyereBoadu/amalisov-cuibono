@@ -4,7 +4,7 @@
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core"
-     core:require="{
+    core:require="{
 		formatter: 'amalisov/cuibono/model/formatter'
 	}"
     xmlns:f="sap.ui.layout.form"
@@ -184,55 +184,12 @@
                 </Table>
             </Panel>
             <!--  END OF TABLE -->
-            <Dialog
-                id="editDialog"
-                title="{i18n>addTitle}"
-                class="sapUiResponsiveContentPadding"
-                contentWidth="20%"
-            >
-                <content>
-                    <Label text="{i18n>trancheName}" />
-                    <Input
-                        id="s"
-                        required="true"
-                        type="Text"
-                        class="sapUiSmallMarginBottom"
-                    />
 
-                    <Label text="{i18n>targetWeight}" />
-                    <Input
-                        id="ss"
-                        required="true"
-                        type="Text"
-                        class="sapUiSmallMarginBottom"
-                    />
-
-                    <Label text="{i18n>targetAchievement}" />
-                    <Input
-                        id="sss"
-                        required="true"
-                        type="Text"
-                        class="sapUiSmallMarginBottom"
-                    />
-
-                    <Label text="{i18n>trancheDescription}" />
-                    <TextArea
-                        id="editArea"
-                        rows="3"
-                        width="100%"
-                    />
-                </content>
-                <buttons>
-                    <Button
-                        text="{i18n>save}"
-                        press=".onSaveEdit"
-                    />
-                    <Button
-                        text="{i18n>cancel}"
-                        press=".closeAddTarget"
-                    />
-                </buttons>
-            </Dialog>
+            <core:Fragment
+                fragmentName="amalisov.cuibono.view.AddTarget"
+                type="XML"
+            />
+            
         </content>
         <footer>
             <OverflowToolbar>
