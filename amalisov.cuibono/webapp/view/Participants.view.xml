@@ -12,13 +12,6 @@
 	}"
 >
     <f:DynamicPage>
-		<f:title>
-			<f:DynamicPageTitle>
-				<f:actions>
-                    <core:Fragment fragmentName="amalisov.cuibono.view.NavBar" type="XML" />
-				</f:actions>
-			</f:DynamicPageTitle>
-		</f:title>
         <f:header>
             <f:DynamicPageHeader>
                 <f:content>
