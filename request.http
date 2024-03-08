@@ -15,3 +15,19 @@ GET http://localhost:4004/odata/v4/employee/Employees
 # Get dummy 
 #
 POST  http://localhost:4004/odata/v4/dummy/dosomething
+Content-Type: application/json
+
+{
+     "name":"TEST"
+}
+
+###
+#
+# Delete bonus tranche 
+#
+POST http://localhost:4004/odata/v4/bonusTranche/dosomething
+Content-Type: application/json
+
+{
+     "name":"TEST"
+}

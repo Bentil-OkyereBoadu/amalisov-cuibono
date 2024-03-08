@@ -7,6 +7,7 @@ using amalisov.cuibono.trancheParticipation as trancheParti from '../../db/tranc
 service BonusTranche {
     entity BonusTranche as projection on BonusTranc.BonusTranche;
     entity Target  as projection on targt.Target;
-    entity trancheParticipation  as projection on trancheParti.TrancheParticipation;
+    entity trancheParticipation  as projection on trancheParti.TrancheParticipation; 
 
+    action locked(ID:String) returns String
 }
