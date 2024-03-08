@@ -1,0 +1,45 @@
+.btn .sapMBtnInner{
+    background-color: darkgreen !important;
+    border-color: darkgreen !important;
+    background-image: none !important;
+    text-shadow: none !important;
+    color: whitesmoke !important;;
+}
+
+.GoFilterBar .sapMBtnInner {
+    background-color: darkgreen !important;
+    border-color: darkgreen !important;
+    background-image: none !important;
+    text-shadow: none !important;
+    color: whitesmoke !important;;
+}
+
+.sapFDynamicPageTitle{
+    padding: 0 !important;
+    min-height: 2.8rem !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid gray !important;
+    width: 100% !important;
+    justify-content: flex-start;
+}
+
+.pageTitle{
+    justify-content: start;
+    width: 100%;
+    padding-left: 1.9rem;
+    gap: 20px  !important;
+}
+
+.textLikeButton .sapMBtnInner  {
+    color: green !important; 
+    border-color: none !important;
+    padding: 0 !important;
+}
+
+.activeButton {
+    border-bottom: 2px solid green !important; 
+    padding-bottom: 5px;
+}
+
+
+

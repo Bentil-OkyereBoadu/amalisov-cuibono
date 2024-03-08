@@ -6,9 +6,12 @@ framework:
   name: SAPUI5
   version: "1.121.0"
   libraries:
-    - name: sap.m
-    - name: sap.ui.core
     - name: themelib_sap_horizon
+    - name: sap.m
+    - name: sap.f
+    - name: sap.ui.comp
+    - name: sap.ui.core
+    - name: sap.ui.fl
 builder:
   customTasks:
     - name: ui5-tooling-transpile-task

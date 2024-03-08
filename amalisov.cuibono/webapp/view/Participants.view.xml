@@ -1,0 +1,302 @@
+<mvc:View
+    controllerName="amalisov.cuibono.controller.Participants"
+    height="100%"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:svm="sap.ui.comp.smartvariants"
+    core:require="{
+		formatter: 'amalisov/cuibono/model/formatter'
+	}"
+>
+    <f:DynamicPage>
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:actions>
+                    <core:Fragment fragmentName="amalisov.cuibono.view.NavBar" type="XML" />
+				</f:actions>
+			</f:DynamicPageTitle>
+		</f:title>
+        <f:header>
+            <f:DynamicPageHeader>
+                <f:content>
+                    <fb:FilterBar
+                        id="filterbar"
+                        persistencyKey="myPersKey"
+                        useToolbar="false"
+                        showFilterConfiguration="false"
+                    >
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem
+                                name="localId"
+                                label="{i18n>localId}"
+                                groupName="Group1"
+                                visibleInFilterBar="true">
+                                <fb:control>
+                                    <Input
+                                        name="{i18n>localId}"  
+                                        showValueHelp="true"
+                                        valueHelpIconSrc="sap-icon://value-help"
+                                    
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                name="name"
+                                label="{i18n>name}"
+                                groupName="Group1"
+                                visibleInFilterBar="true">
+                                <fb:control>
+                                    <Input
+                                        name="{i18n>name}"               
+                                        showValueHelp="true"
+                                        valueHelpIconSrc="sap-icon://value-help"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                name="department"
+                                label="{i18n>department}"
+                                groupName="Group1"
+                                visibleInFilterBar="true">
+                                <fb:control>
+                                    <Input
+                                        name="{i18n>department}"         
+                                        showValueHelp="true"
+                                        valueHelpIconSrc="sap-icon://value-help"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                name="location"
+                                label="{i18n>location}"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <MultiComboBox
+                                        name="{i18n>location}"
+                               
+                                        items="{participant>/ProductCategories}"
+                                    >
+                                        <core:Item
+                                            key="{participant>key}"
+                                            text="{participant>name}"
+                                        />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                name="fiscalYear"
+                                label="{i18n>fiscalYear}"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <MultiComboBox
+                                        name="{i18n>fiscalYear}"
+                                    >
+                                        <core:Item
+                                            key="key"
+                                            text="name"
+                                        />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                name="tranche"
+                                label="{i18n>tranche}"
+                                groupName="Group1"
+                                visibleInFilterBar="true">
+                                <fb:control>
+                                    <Input
+                                        name="{i18n>tranche}"                                      
+                                        showValueHelp="true"
+                                        valueHelpIconSrc="sap-icon://value-help"
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                name="status"
+                                label="{i18n>status}"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <MultiComboBox
+                                        name="{i18n>status}"
+                                    >
+                                        <core:Item
+                                            key="key"
+                                            text="name"
+                                        />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                name="excluded"
+                                label="{i18n>excluded}"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <MultiComboBox
+                                        name="{i18n>excluded}"
+                                    >
+                                        <core:Item
+                                            key="key"
+                                            text="name"
+                                        />
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <Table
+                id="parameterTable"
+                inset="false"
+                items="{participant>/Parameters}"
+                growingScrollToLoad="true"
+                busyIndicatorDelay="{config>delay}"
+            >
+                <headerToolbar>
+                    <Toolbar class="sapUiSmallMarginBottom">
+                        <Title text="{i18n>participantTitle}" />
+                        <ToolbarSpacer />
+                        <Button
+                            text="{i18n>excludeTranche}"
+                            class="btn"
+                        />
+                        <Button
+                            text="{i18n>overRule}"
+                            class="btn"
+                        />
+                        <Button
+                            icon="sap-icon://sort"
+                            id="sortThreads"
+                        />
+                    </Toolbar>
+                </headerToolbar>
+                <columns>
+                    <Column
+                        width="3%"
+                        minScreenWidth="Tablet"
+                        demandPopin="true"
+                    >
+                        <CheckBox  />
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true"
+                    >
+                        <Label text="{i18n>localId}" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true"
+                    >
+                        <Label text="{i18n>name}" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true"
+                    >
+                        <Label text="{i18n>department}" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true"
+                    >
+                        <Label text="{i18n>tranche}" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true"
+                    >
+                        <Label text="{i18n>status}" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true"
+                    >
+                        <Label text="{i18n>location}" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true"
+                    >
+                        <Label text="{i18n>startDate}" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true"
+                    >
+                        <Label text="{i18n>endDate}" />
+                    </Column>
+                    <Column
+                        width="5%"
+                        minScreenWidth="Tablet"
+                        demandPopin="true"
+                    >
+                        <Label text="{i18n>weight}" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true"
+                    >
+                        <Label text="{i18n>calculatedAmount}" />
+                    </Column>
+                    <Column
+                        minScreenWidth="Tablet"
+                        demandPopin="true"
+                    >
+                        <Label text="{i18n>finalAmount}" />
+                    </Column>
+                    <Column
+                        width="6%"
+                        minScreenWidth="Tablet"
+                        demandPopin="true"
+                    >
+                        <Label text="{i18n>excluded}" />
+                    </Column>
+                    <Column
+                        width="8%"
+                        minScreenWidth="Tablet"
+                        demandPopin="true"
+                    >
+                        <Label text="{i18n>justification}" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem vAlign="Middle">
+                        <cells>
+                            <CheckBox enabled="{ 
+                                path: 'participant>status', 
+                                formatter: 'formatter.statusEnabled' 
+                            }"/>
+                            <ObjectIdentifier title="{participant>localID}" />
+                            <Text text="{participant>name}" />
+                            <Text text="{participant>department}" />
+                            <Text text="{participant>tranche}" />
+                            <Text text="{participant>status}" />
+                            <Text text="{participant>location}" />
+                            <Text text="{participant>startDate}" />
+                            <Text text="{participant>endDate}" />
+                            <Text text="{participant>weight}" />
+                            <Text text="{participant>calculatedAmount}" />
+                            <Text text="{participant>finalAmount}" />
+                            <Text text="{participant>excluded}" />
+                            <Text text="{participant>justification}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
