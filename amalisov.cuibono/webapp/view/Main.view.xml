@@ -19,13 +19,6 @@
                 </f:heading>
             </f:DynamicPageTitle>
         </f:title>
-        <!-- <IconTabHeader>
-		<items>
-			<IconTabFilter key="info" text="Info" />
-			
-			<IconTabFilter key="people" text="People"/>
-		</items>
-	    </IconTabHeader> -->
         <f:header>
             <f:DynamicPageHeader>
                 <f:content>
@@ -120,117 +113,6 @@
                             </fb:filterGroupItems>
                         </fb:FilterBar>
                    
-                </f:content>
-            </f:DynamicPageHeader>
-        </f:header>
-        <f:content>
-            <Table
-                id="productTable"
-                class="productTable"
-                width="auto"
-                items="{tranches>/Tranches}"
-            >
-                <headerToolbar>
-                    <Toolbar class="sapUiSmallMarginBottom">
-                        <Input
-                            placeholder="{i18n>searchPlaceholder}"
-                            id="input"
-                            class="searchBar"
-                            liveChange="onFilterInvoices"
-                        />
-                        <fb:FilterBar
-                            id="filterbar"
-                            persistencyKey="myPersKey"
-                            useToolbar="false"
-                            search=".onSearch"
-                            filterChange=".onFilterChange"
-                            afterVariantLoad=".onAfterVariantLoad"
-                            showFilterConfiguration="false"
-                            showClearButton="true"
-                           
-                        >
-                            <fb:filterGroupItems>
-                                <!-- <fb:basicSearch>
-                                    <SearchField
-                                        id="searchField"
-                                        search=".onSearch"
-                                        width="100%"
-                                    />
-                                </fb:basicSearch> -->
-
-                                <fb:FilterGroupItem
-                                    name="Status"
-                                    label="{i18n>status}"
-                                    groupName="Group1"
-                                    visibleInFilterBar="true"
-                                >
-                                    <fb:control>
-                                        <MultiComboBox
-                                            name="{i18n>status}"
-                                            selectionChange=".onSelectionChange"
-                                        >
-                                            <core:Item
-                                                key="createdAt"
-                                                text="{i18n>runningStatus}"
-                                            />
-                                            <core:Item
-                                                key="upvotes"
-                                                text="{i18n>lockedStatus}"
-                                            />
-                                            <core:Item
-                                                key="upvotes"
-                                                text="{i18n>completedStatus}"
-                                            />
-                                        </MultiComboBox>
-                                    </fb:control>
-                                </fb:FilterGroupItem>
-                                <fb:FilterGroupItem
-                                    name="Selection"
-                                    label="{i18n>trancheLocation}"
-                                    groupName="Group1"
-                                    visibleInFilterBar="true"
-                                >
-                                    <fb:control>
-                                        <MultiComboBox
-                                            name="{i18n>trancheLocation}"
-                                            selectionChange=".onSelectionChange"
-                                        >
-                                            <core:Item
-                                                key="createdAt"
-                                                text="{i18n>location1}"
-                                            />
-                                            <core:Item
-                                                key="upvotes"
-                                                text="{i18n>location2}"
-                                            />
-                                        </MultiComboBox>
-                                    </fb:control>
-                                </fb:FilterGroupItem>
-                                <fb:FilterGroupItem
-                                    name="fiscalYear"
-                                    label="{i18n>fiscalYear}"
-                                    groupName="Group1"
-                                    visibleInFilterBar="true"
-                                >
-                                    <fb:control>
-                                        <MultiComboBox
-                                            name="{i18n>fiscalYear}"
-                                            selectionChange=".onSelectionChange"
-                                        >
-                                            <core:Item
-                                                key="createdAt"
-                                                text="{i18n>year1}"
-                                            />
-                                            <core:Item
-                                                key="upvotes"
-                                                text="{i18n>year2}"
-                                            />
-                                        </MultiComboBox>
-                                    </fb:control>
-                                </fb:FilterGroupItem>
-                            </fb:filterGroupItems>
-                        </fb:FilterBar>
-                    </Hbox>
                 </f:content>
             </f:DynamicPageHeader>
         </f:header>
