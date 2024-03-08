@@ -11,5 +11,9 @@ export default {
             return oDateFormat.format(new Date(sDate));
         }
         return sDate;
+    
+	},
+	statusEnabled(status: string): boolean {
+        return status !== "Completed";
     }
 };

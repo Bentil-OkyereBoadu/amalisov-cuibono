@@ -6,6 +6,8 @@ import ResourceModel from "sap/ui/model/resource/ResourceModel";
 import ResourceBundle from "sap/base/i18n/ResourceBundle";
 import Router from "sap/ui/core/routing/Router";
 import History from "sap/ui/core/routing/History";
+import Button from "sap/m/Button";
+import HashChanger from "sap/ui/core/routing/HashChanger";
 
 /**
  * @namespace amalisov.cuibono.controller
@@ -79,5 +81,37 @@ export default abstract class BaseController extends Controller {
 		} else {
 			this.getRouter().navTo("main", {}, undefined, true);
 		}
+	}
+
+	public onInit(): void {
+		const oRouter = this.getOwnerComponent().getRouter();
+		// eslint-disable-next-line @typescript-eslint/unbound-method
+		oRouter.attachRouteMatched(this.onRouteMatched, this);
+	}
+
+	public onRouteMatched(): void {
+		const oView = this.getView()
+
+		const oRouteButton = oView.byId("btnRoute") as Button;
+		const oRouteButton2 = oView.byId("btnRoute1") as Button;
+
+		const sCurrentHash = HashChanger.getInstance().getHash();
+
+		if (!sCurrentHash) {
+			oRouteButton.addStyleClass("activeButton");
+			oRouteButton2.removeStyleClass("activeButton");
+		} else if (sCurrentHash === "participant") {
+			oRouteButton.removeStyleClass("activeButton");
+		}
+	}
+
+	public onNavToRoute1(): void {
+		const oRouter = this.getOwnerComponent().getRouter();
+		oRouter.navTo("main");
+	}
+
+	public onNavToRoute2(): void {
+		const oRouter = this.getOwnerComponent().getRouter();
+		oRouter.navTo("participants");
 	}
 }

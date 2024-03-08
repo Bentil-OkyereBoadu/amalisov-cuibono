@@ -38,13 +38,25 @@
 			]
 		},
 
+		"resources": {
+			"css": [
+			  {
+				"uri": "css/style.css"
+			  }
+			]
+		},
+
 		"dependencies": {
 			"minUI5Version": "1.121.0",
 			"libs": {
 				"sap.m": {},
 				"sap.f": {},
 				"sap.ui.comp": {},
+				"sap.m": {},
+				"sap.f": {},
+				"sap.ui.comp": {},
 				"sap.ui.core": {},
+				"sap.ui.fl": {}
 				"sap.ui.fl": {}
 			}
 		},
@@ -66,6 +78,10 @@
 			"tranches": {
 			  "type": "sap.ui.model.json.JSONModel",
 			  "uri": "tranches.json"
+			},
+			"participant": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "participant.json"
 			}
 		},
 
@@ -91,6 +107,11 @@
 					"pattern": "edit-tranche",
 					"name": "EditBonusTranche",
 					"target": "EditBonusTranche"
+				},
+				{
+					"pattern": "participant",
+					"name": "participants",
+					"target": "participants"
 				}
 			],
 			"targets": {
@@ -107,6 +128,10 @@
 					"viewId": "EditBonusTranche",
 					"viewName": "EditBonusTranche",
 					"viewLevel": 2
+				},
+				"participants": {
+					"viewId": "participants",
+					"viewName": "Participants"
 				}
 			}
 		}
