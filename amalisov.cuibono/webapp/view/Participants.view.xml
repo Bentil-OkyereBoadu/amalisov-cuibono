@@ -39,7 +39,6 @@
                                         name="{i18n>localId}"  
                                         showValueHelp="true"
                                         valueHelpIconSrc="sap-icon://value-help"
-                                    
                                     />
                                 </fb:control>
                             </fb:FilterGroupItem>
