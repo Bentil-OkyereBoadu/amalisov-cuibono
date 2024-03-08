@@ -1,0 +1,19 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <HBox class="pageTitle">
+        <Button
+            id="btnRoute"
+            text="Bonus Tranches"
+            press=".onNavToRoute1"
+            class="textLikeButton"
+        />
+        <Button
+            id="btnRoute1"
+            text="Participants"
+            press=".onNavToRoute2"
+            class="textLikeButton"
+        />
+    </HBox>
+</core:FragmentDefinition>

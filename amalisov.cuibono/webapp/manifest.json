@@ -30,11 +30,22 @@
 			"id": "app"
 		},
 
+		"resources": {
+			"css": [
+			  {
+				"uri": "css/style.css"
+			  }
+			]
+		},
+
 		"dependencies": {
 			"minUI5Version": "1.121.0",
 			"libs": {
+				"sap.m": {},
+				"sap.f": {},
+				"sap.ui.comp": {},
 				"sap.ui.core": {},
-				"sap.m": {}
+				"sap.ui.fl": {}
 			}
 		},
 
@@ -51,6 +62,10 @@
 				"settings": {
 					"bundleName": "amalisov.cuibono.i18n.i18n"
 				}
+			},
+			"participant": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "participant.json"
 			}
 		},
 
@@ -68,12 +83,21 @@
 					"pattern": "",
 					"name": "main",
 					"target": "main"
+				},
+				{
+					"pattern": "participant",
+					"name": "participants",
+					"target": "participants"
 				}
 			],
 			"targets": {
 				"main": {
 					"viewId": "main",
 					"viewName": "Main"
+				},
+				"participants": {
+					"viewId": "participants",
+					"viewName": "Participants"
 				}
 			}
 		}
