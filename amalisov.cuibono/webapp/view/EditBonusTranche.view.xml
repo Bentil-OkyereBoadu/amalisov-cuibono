@@ -10,14 +10,11 @@
     xmlns:f="sap.ui.layout.form"
 >
     <Page
-        title="{i18n>appTitle}"
         id="page"
         floatingFooter="true"
     >
         <content>
-            <Title text="{i18n>}" />
-
-            <VBox>
+        
                 <f:SimpleForm
                     class="form"
                     editable="true"
@@ -126,7 +123,7 @@
                         </VBox>
                     </f:content>
                 </f:SimpleForm>
-            </VBox>
+           
             <!-- Table -->
             <Panel>
                 <Table
@@ -141,7 +138,7 @@
                                 type="Accept"
                                 text="{i18n>newTarget}"
                                 press=".onAddTarget"
-                                class="primaryColor"
+                                class="btn"
                             />
                         </Toolbar>
                     </headerToolbar>

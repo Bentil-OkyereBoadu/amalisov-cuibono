@@ -43,7 +43,7 @@ export default class Main extends BaseController {
 		this.getView().setModel(this.oModel);
 		this.oFilterBar = this.getView().byId("filterbar") as FilterBar;
 		this.oGoButton = this.getView().byId("filterbar") as FilterBar;
-		this.oGoButton.addStyleClass("myCustomFilterBar");
+		this.oGoButton.addStyleClass("GoFilterBar");
 	}
 
 	public onCreateNewTranche(): void {

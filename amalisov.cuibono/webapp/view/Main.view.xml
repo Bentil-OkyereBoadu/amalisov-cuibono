@@ -29,9 +29,9 @@
                             useToolbar="false"
                             search=".onSearch"
                             filterChange=".onFilterChange"
-                            afterVariantLoad=".onAfterVariantLoad"
+                           
                             showFilterConfiguration="false"
-                            showClearButton="true"
+                            
                         >
                             <fb:filterGroupItems>
                                 <fb:FilterGroupItem
@@ -131,6 +131,7 @@
 
                         <Button
                             text="{i18n>createTranche}"
+                            class="btn"
                             press=".onCreateNewTranche"
                         />
                     </Toolbar>
@@ -156,7 +157,7 @@
                 </columns>
 
                 <items>
-                    <ColumnListItem>
+                    <ColumnListItem vAlign="Middle">
                         <Text text="{tranches>Status}" />
                         <Text text="{tranches>TrancheName}" />
                         <Text text="{tranches>Location}" />
