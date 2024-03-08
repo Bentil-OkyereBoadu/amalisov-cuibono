@@ -13,7 +13,7 @@
             id="btnRoute1"
             text="Participants"
             press=".onNavToRoute2"
-            class="textLikeButton activeButton"
+            class="textLikeButton"
         />
     </HBox>
 </core:FragmentDefinition>
