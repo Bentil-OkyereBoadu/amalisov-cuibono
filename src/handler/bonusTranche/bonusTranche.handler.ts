@@ -1,13 +1,15 @@
 import { BeforeDelete, Handler, Next, Req, Srv} from 'cds-routing-handlers';
-// import {Service} from 'typedi';
+import {Service} from 'typedi';
 import cds,{Request} from '@sap/cds'
-import { SanitizedEntity } from 'srv/model/amalisov.cuibono.bonusTranche';
+import { SanitizedEntity } from '../../../srv/model/amalisov.cuibono.bonusTranche';
 
+@Service()
 @Handler(SanitizedEntity.BonusTranche)
 export class TrancheLockedHandler {
     @BeforeDelete()
     public async trancheLocked(@Srv() srv:any,@Req() req: Request, @Next() next:any): Promise<any> {
         const { BonusTranche } = cds.entities('amalisov.cuibono.bonusTranche');
+        console.log('access granted!!!!!!!!!!!!!')
         const { ID }: { ID: string } = req.params as unknown as { ID: string };
         try {
             const tx = cds.transaction(req);
