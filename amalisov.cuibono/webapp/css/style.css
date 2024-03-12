@@ -97,7 +97,8 @@
         max-width: 30%;
        }
        .sapMSltWithArrow > .sapMSltLabel, .sapMSltWithArrow .sapMSelectListItemBase {
-        padding: 0 7rem 0 0.625rem;
+        width: 200px;
+        padding: 0 5rem 0 0.625rem;
     }
      .textArea{
         width: 105%;
