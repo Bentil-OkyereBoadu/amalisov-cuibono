@@ -12,105 +12,13 @@
 	}"
 >
     <f:DynamicPage headerExpanded="{/headerExpanded}">
-        <f:title>
-          
-        </f:title>
-        <f:header>
-            <f:DynamicPageHeader>
-                <f:content>
-                    
-                        <fb:FilterBar
-                            id="filterbar"
-                            persistencyKey="myPersKey"
-                            useToolbar="false"
-                            search=".onSearch"
-                            filterChange=".onFilterChange"
-                           
-                            showFilterConfiguration="false"
-                            
-                        >
-                            <fb:filterGroupItems>
-                                <fb:FilterGroupItem
-                                    name="search"
-                                    label="{i18n>search}"
-                                    groupName="Group1"
-                                    visibleInFilterBar="true"
-                                >
-                                    <fb:control>
-                                        <Input
-                                            placeholder="{i18n>searchPlaceholder}"
-                                            class="searchBar"
-                                            id="search"
-                                            liveChange="onSearch"
-                                        />
-                                    </fb:control>
-                                </fb:FilterGroupItem>
+        <f:title />
 
-                                <fb:FilterGroupItem
-                                    name="Status"
-                                    label="{i18n>status}"
-                                    groupName="Group1"
-                                    visibleInFilterBar="true"
-                                >
-                                    <fb:control>
-                                        <MultiComboBox
-                                            name="{i18n>status}"
-                                            selectionChange=".onSelectionChange"
-                                            items="{tranches>/Status}"
-                                        >
-                                            <core:Item
-                                                key="{tranches>Key}"
-                                                text="{tranches>Name}"
-                                            />
-                                        </MultiComboBox>
-                                    </fb:control>
-                                </fb:FilterGroupItem>
-                                <fb:FilterGroupItem
-                                    name="Selection"
-                                    label="{i18n>trancheLocation}"
-                                    groupName="Group1"
-                                    visibleInFilterBar="true"
-                                >
-                                    <fb:control>
-                                        <MultiComboBox
-                                            name="{i18n>trancheLocation}"
-                                            selectionChange=".onSelectionChange"
-                                            items="{tranches>/Locations}"
-                                        >
-                                            <core:Item
-                                                key="{tranches>Id}"
-                                                text="{tranches>Name}"
-                                            />
-                                        </MultiComboBox>
-                                    </fb:control>
-                                </fb:FilterGroupItem>
-                                <fb:FilterGroupItem
-                                    name="fiscalYear"
-                                    label="{i18n>fiscalYear}"
-                                    groupName="Group1"
-                                    visibleInFilterBar="true"
-                                >
-                                    <fb:control>
-                                        <MultiComboBox
-                                            name="{i18n>fiscalYear}"
-                                            selectionChange=".onSelectionChange"
-                                        >
-                                            <core:Item
-                                                key="createdAt"
-                                                text="{i18n>year1}"
-                                            />
-                                            <core:Item
-                                                key="upvotes"
-                                                text="{i18n>year2}"
-                                            />
-                                        </MultiComboBox>
-                                    </fb:control>
-                                </fb:FilterGroupItem>
-                            </fb:filterGroupItems>
-                        </fb:FilterBar>
-                   
-                </f:content>
-            </f:DynamicPageHeader>
+        <f:header>
+            <core:Fragment
+                fragmentName="amalisov.cuibono.view.fragments.TrancheFilter"
+                type="XML"
+            />
         </f:header>
         <f:content>
             <Table
@@ -155,19 +63,19 @@
                 <items>
                     <ColumnListItem vAlign="Middle">
                         <Text text="{tranches>Status}" />
-                        <Text text="{tranches>TrancheName}" />
-                        <Text text="{tranches>Location}" />
+                        <Text text="{tranches>name}" />
+                        <Text text="{tranches>location}" />
                         <Text
-                            text="{formatter: 'formatter.formatDate', path:'tranches>StartDate'}"
+                            text="{formatter: 'formatter.formatDate', path:'tranches>startDate'}"
                         />
                         <Text
-                            text="{formatter: 'formatter.formatDate', path:'tranches>EndDate'}"
+                            text="{formatter: 'formatter.formatDate', path:'tranches>endDate'}"
                         />
                         <HBox class="interactionIcons">
                             <core:Icon
                                 src="sap-icon://edit"
                                 class="icon"
-                                press=".onEditPress"                          
+                                press=".onEditPress"
                             />
                             <core:Icon
                                 src="sap-icon://copy"
@@ -177,7 +85,7 @@
                             <core:Icon
                                 src="sap-icon://delete"
                                 press=".onDeleteTranche"
-                                class="icon"                            
+                                class="icon"
                             />
                         </HBox>
                     </ColumnListItem>

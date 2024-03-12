@@ -2,7 +2,7 @@ import Dialog from "sap/m/Dialog";
 import BaseController from "./BaseController";
 import Input from "sap/m/Input";
 import JSONModel from "sap/ui/model/json/JSONModel";
-import formatter from "../model/formatter";
+
 
 /**
  * @namespace amalisov.cuibono.controller
