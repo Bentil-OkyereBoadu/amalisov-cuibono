@@ -198,7 +198,7 @@
             <!--  END OF TABLE -->
 
             <core:Fragment
-                fragmentName="amalisov.cuibono.view.AddTarget"
+                fragmentName="amalisov.cuibono.view.fragments.AddTarget"
                 type="XML"
             />
         </content>

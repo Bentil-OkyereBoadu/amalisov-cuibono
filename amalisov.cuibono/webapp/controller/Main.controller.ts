@@ -96,10 +96,11 @@ export default class Main extends BaseController {
 		});
 	
 		const oContext = oItem.getBindingContext("tranches");
-		const oData = this.constructTrancheData(oContext, false); // Exclude dates
+		const oData = this.constructTrancheData(oContext, false);
 		oUpdateModel.setData(oData);
 	}
 
+	//use boolean to control when dates are added
 	private constructTrancheData(oContext: any, includeDates: boolean): Tranche {
 		const sTrancheName = oContext.getProperty("TrancheName");
 		const sLocation = oContext.getProperty("Location");
