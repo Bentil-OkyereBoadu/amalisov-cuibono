@@ -17,7 +17,6 @@ export default class App extends BaseController {
 
 	public onRouteSelection(oEvent: any): void {
 		const selectedKey: string = oEvent.getSource().getSelectedKey();
-		console.log(selectedKey);
 
 		if (selectedKey === "bonus") {
 			const oRouter = this.getOwnerComponent().getRouter();

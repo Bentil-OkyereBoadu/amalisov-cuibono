@@ -1,6 +1,6 @@
 import BaseController from "./BaseController";
 import JSONModel from "sap/ui/model/json/JSONModel";
-import Control from "sap/ui/core/Control";
+
 import MessageBox from "sap/m/MessageBox";
 import ResourceBundle from 'sap/base/i18n/ResourceBundle';
 import ODataModel from "sap/ui/model/odata/v4/ODataModel";
