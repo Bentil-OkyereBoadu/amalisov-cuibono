@@ -15,3 +15,62 @@ GET http://localhost:4004/odata/v4/employee/Employees
 # Get dummy 
 #
 POST  http://localhost:4004/odata/v4/dummy/dosomething
+Content-Type: application/json
+
+
+###
+#
+# GET BONUSTRENCH  
+#
+GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche
+
+
+###
+#
+# CREATE BONUS TRENCH   
+#
+POST http://localhost:4004/odata/v4/bonusTranche/BonusTranche
+Content-Type: application/json
+
+
+
+{
+  "name": "Example Bonus Tranche",
+  "startDate": "2024-03-11",
+  "endDate": "2024-12-31",
+  "Status": "Running",
+  "location": "Example Location",
+  "targets": [
+    {
+      "name": "Target 1",
+      "weight": 2,
+      "achievement": 23,
+      "description": "Example description for Target 1",
+      "bonusTranche_ID": "3d8f9e65-51de-4a33-97b4-17efb0f2db5a"
+    },
+    {
+      "name": "Target 2",
+      "weight": 3,
+      "achievement": 30,
+      "description": "Example description for Target 2",
+      "bonusTranche_ID": "3d8f9e65-51de-4a33-97b4-17efb0f2db5a"
+    }
+  ],
+  "trancheParticipations": []
+}
+
+###
+#
+# DELETE BONUS TRENCH   
+#
+POST   http://localhost:4004/odata/v4/bonusTranche/createBonusTranche
+Content-Type: application/json
+
+{
+  "ID":"3d8f9e65-51de-4a33-97b4-17efb0f2db5a"
+}
+
+
+
+
+
