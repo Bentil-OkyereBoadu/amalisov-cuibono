@@ -17,8 +17,6 @@ export interface TracheParticipation {
   department_ID?: string;
   bonusTranche?: amalisov.cuibono.bonusTranche.BonusTranche;
   bonusTranche_ID?: string;
-  CreatedAt: Date;
-  UpdatedAt: Date;
 }
 
 export enum Entity {

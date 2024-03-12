@@ -8,5 +8,5 @@ service BonusTranche {
     entity BonusTranche as projection on BonusTranc.BonusTranche;
     entity Target  as projection on targt.Target;
     entity trancheParticipation  as projection on trancheParti.TrancheParticipation;
-
+    action deleteBonusTranche(ID:String) returns String;
 }

@@ -47,8 +47,6 @@ export interface TrancheParticipation {
   department_ID?: string;
   bonusTranche?: BonusTranche;
   bonusTranche_ID?: string;
-  CreatedAt: Date;
-  UpdatedAt: Date;
 }
 
 export interface BonusTranche {
@@ -65,6 +63,12 @@ export interface BonusTranche {
   targets?: amalisov.cuibono.targetAmount.Target[];
   trancheParticipations?: amalisov.cuibono.trancheParticipation.TrancheParticipation[];
 }
+
+export enum ActionCreateBonusTranche {
+  name = "createBonusTranche",
+}
+
+export type ActionCreateBonusTrancheReturn = string;
 
 export enum Entity {
   BonusTranche = "amalisov.cuibono.bonusTranche.BonusTranche",
