@@ -38,7 +38,7 @@ export default {
             StartDate: "",
             EndDate: "",
 			OriginDate: "",
-            TrancheWeight: 100,
+            TrancheWeight: 0,
             Description: "",
             Status: "",
             Targets: [{

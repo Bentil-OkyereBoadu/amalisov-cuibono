@@ -38,13 +38,26 @@
     background-color: whitesmoke !important;
 }
 
-.activeButton {
-    border-bottom: 2px solid green !important; 
-    padding-bottom: 5px;
+
+
+/* icon tab header styles */
+.sapMITBFilterDefault .sapMITBFilterWrapper:hover .sapMITBText {
+    color: green;
+}
+.sapMITBTextOnly .sapMITBFilterDefault.sapMITBSelected .sapMITBText {
+    color: green;
+}
+.sapMITH .sapMITBSelected .sapMITBContentArrow::after {
+    background: green;
 }
 
 
-
+.textArea{
+    width: 80%;
+}
+.inputs{
+    width: 100%;
+}
 
 .trancheTable{
     border-radius: 20px;
@@ -63,22 +76,55 @@
 .icon{
     color: rgb(6, 161, 146);
 }
-
-@media (min-width: 600px) {
-    .formRows{
-        gap: 0px;
-        width: 50%;
-    }
-    .firstRow{
-        gap: 30px;
-    }
+.tablePanel, .form{
+    padding: 0.3rem;
 }
 
-@media (min-width: 1024px) {
+@media (max-width: 1024px) {
     .tranchItems{
         padding-left: 20px;
         max-width: 30%;
        }
+       .firstRow{
+        gap: 0px;
+    }
+    
+}
+
+@media (max-width: 1600px) {
+    .tranchItems{
+        padding-left: 20px;
+        max-width: 30%;
+       }
+       .sapMSltWithArrow > .sapMSltLabel, .sapMSltWithArrow .sapMSelectListItemBase {
+        padding: 0 7rem 0 0.625rem;
+    }
+     .textArea{
+        width: 105%;
+    }
+}
+@media (min-width: 1650px) {
+    .tranchItems{
+        padding-left: 20px;
+        max-width: 50%;
+       }
+    .firstRow{
+        gap: 150px;
+    }
+    .formRows{
+        gap: 40px;
+        width: 100%;
+    }
+    .textArea{
+        width: 62%;
+    }
+    .textInput{
+        width: 100% !important;
+        margin-right: 30px;
+    }
+    .sapMSltWithArrow > .sapMSltLabel, .sapMSltWithArrow .sapMSelectListItemBase {
+        padding: 0 7rem 0 0.625rem;
+    }
 }
 
 @media screen and (max-width: 480px) {

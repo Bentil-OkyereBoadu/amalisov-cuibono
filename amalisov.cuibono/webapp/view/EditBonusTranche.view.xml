@@ -13,8 +13,15 @@
         id="page"
         showNavButton="true"
         navButtonPress=".onNavBack"
+        title="{i18n>createTrancheTitle}"
         floatingFooter="true"
     >
+        <IconTabHeader mode="Inline">
+            <items>
+                <IconTabFilter text="{i18n>details}" />
+            </items>
+        </IconTabHeader>
+
         <content>
             <f:SimpleForm
                 class="form"
@@ -42,7 +49,7 @@
                                     required="true"
                                     value="{updateModel>/TrancheName}"
                                     type="Text"
-                                    class="sapUiSmallMarginBottom inputs"
+                                    class="sapUiSmallMarginBottom inputs textInput"
                                 />
                             </VBox>
 
@@ -69,11 +76,11 @@
                         <VBox class="tranchItems">
                             <Label text="{i18n>trancheDescription}" />
                             <TextArea
-                                width="100%"
+                                
                                 id="descriptionInput"
                                 value="{updateModel>/Description}"
                                 rows="4"
-                                class="sapUiSmallMarginBottom"
+                                class="sapUiSmallMarginBottom textArea"
                             />
                         </VBox>
 
@@ -114,7 +121,7 @@
                                     id="weightInput"
                                     type="Text"
                                     value="{updateModel>/TrancheWeight}"
-                                    class="sapUiSmallMarginBottom inputs"
+                                    class="sapUiSmallMarginBottom inputs textInput"
                                 />
                             </VBox>
 
@@ -133,7 +140,7 @@
             </f:SimpleForm>
 
             <!-- Table -->
-            <Panel>
+            <Panel class="tablePanel">
                 <Table
                     items="{updateModel>/Targets}"
                     width="45%"

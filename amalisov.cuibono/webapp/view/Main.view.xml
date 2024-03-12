@@ -13,11 +13,7 @@
 >
     <f:DynamicPage headerExpanded="{/headerExpanded}">
         <f:title>
-            <f:DynamicPageTitle>
-                <f:heading>
-                    <Text text="participant" />
-                </f:heading>
-            </f:DynamicPageTitle>
+          
         </f:title>
         <f:header>
             <f:DynamicPageHeader>
