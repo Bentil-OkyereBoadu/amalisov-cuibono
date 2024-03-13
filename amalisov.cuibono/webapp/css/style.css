@@ -79,6 +79,9 @@
 .tablePanel, .form{
     padding: 0.3rem;
 }
+.myCustomDialog .sapMDialogScrollCont {
+    margin: 15px;
+}
 
 @media (max-width: 1024px) {
     .tranchItems{

@@ -6,11 +6,16 @@ import ResourceModel from "sap/ui/model/resource/ResourceModel";
 import ResourceBundle from "sap/base/i18n/ResourceBundle";
 import Router from "sap/ui/core/routing/Router";
 import History from "sap/ui/core/routing/History";
+import Dialog from "sap/m/Dialog";
+import Event from "sap/ui/base/Event";
+import Label from "sap/m/Label";
+import TextArea from "sap/m/TextArea"
 
 /**
  * @namespace amalisov.cuibono.controller
  */
 export default abstract class BaseController extends Controller {
+	private oDialog: Dialog;
 	/**
 	 * Convenience method for accessing the component of the controller's view.
 	 * @returns The component of the controller's view
@@ -78,6 +83,75 @@ export default abstract class BaseController extends Controller {
 			window.history.go(-1);
 		} else {
 			this.getRouter().navTo("main", {}, undefined, true);
+		}
+	}
+
+	public async onDialogOpen(oEvent: Event): Promise <void> {
+		const oButton = oEvent.getSource();
+		const oView = this.getView();
+		const excludeTrancheBtn = oView.byId("excludeTrancheButton");
+		const overRuleBtn = oView.byId("overRuleButton");
+		const localId = oView.byId("localId");
+		const nameId = oView.byId("name");
+		const departmentId = oView.byId("department");
+		const trancheId = oView.byId("tranche");
+		let dialogTitle = "";
+		const resourceBundle: ResourceBundle = await this.getResourceBundle();
+
+		if (!this.oDialog) {
+			this.oDialog = sap.ui.xmlfragment("amalisov.cuibono.view.fragments.Dialog", this) as Dialog;
+			this.getView().addDependent(this.oDialog);
+		}
+		// Clear the previous content
+		this.oDialog.removeAllContent();
+
+		switch (oButton) {
+			case excludeTrancheBtn:
+				dialogTitle = "Exclude from Tranche";
+				this.oDialog.addContent(new Label({ text: resourceBundle.getText("justification")}));
+				this.oDialog.addContent(new TextArea({ width: "100%"}));
+				break;
+
+			case overRuleBtn:
+				dialogTitle = "Overrule";
+				this.oDialog.addContent(new Label({ text:resourceBundle.getText("overRule") }));
+				this.oDialog.addContent(new TextArea({ width: "100%" }));
+				break;
+				
+                        case localId:
+				dialogTitle = "Filter by Local ID";
+				this.oDialog.addContent(new Label({ text: resourceBundle.getText("localId") }));
+				this.oDialog.addContent(new TextArea({ width: "100%" }));
+				break;
+
+			case nameId:
+				dialogTitle = "Filter by Name";
+				this.oDialog.addContent(new Label({ text:resourceBundle.getText("name") }));
+				this.oDialog.addContent(new TextArea({ width: "100%" }));
+				break;
+
+			case departmentId:
+				dialogTitle = "Filter by Department";
+				this.oDialog.addContent(new Label({ text: resourceBundle.getText("department")}));
+				this.oDialog.addContent(new TextArea({ width: "100%",  }));
+				break;
+
+			case trancheId:
+				dialogTitle = "Filter by Tranche";
+				this.oDialog.addContent(new Label({ text: resourceBundle.getText("tranche") }));
+				this.oDialog.addContent(new TextArea({ width: "100%", }));
+				break;
+		}
+
+		this.oDialog.setTitle(dialogTitle);
+		this.oDialog.setContentWidth("300px");
+		this.oDialog.addStyleClass("myCustomDialog")
+		this.oDialog.open();	  
+	}
+
+	public closingDialog(): void {
+		if (this.oDialog) {
+			this.oDialog.close();
 		}
 	}
 }

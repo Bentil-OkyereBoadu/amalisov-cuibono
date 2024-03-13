@@ -22,9 +22,11 @@
                     >
                         <fb:control>
                             <Input
+                                id="localId"
                                 name="{i18n>localId}"
                                 showValueHelp="true"
                                 valueHelpIconSrc="sap-icon://value-help"
+                                valueHelpRequest=".onDialogOpen"
                             />
                         </fb:control>
                     </fb:FilterGroupItem>
@@ -36,9 +38,11 @@
                     >
                         <fb:control>
                             <Input
+                                id="name"
                                 name="{i18n>name}"
                                 showValueHelp="true"
                                 valueHelpIconSrc="sap-icon://value-help"
+                                valueHelpRequest=".onDialogOpen"
                             />
                         </fb:control>
                     </fb:FilterGroupItem>
@@ -50,9 +54,11 @@
                     >
                         <fb:control>
                             <Input
+                                id="department"
                                 name="{i18n>department}"
                                 showValueHelp="true"
                                 valueHelpIconSrc="sap-icon://value-help"
+                                valueHelpRequest=".onDialogOpen"
                             />
                         </fb:control>
                     </fb:FilterGroupItem>
@@ -97,9 +103,11 @@
                     >
                         <fb:control>
                             <Input
+                                id="tranche"
                                 name="{i18n>tranche}"
                                 showValueHelp="true"
                                 valueHelpIconSrc="sap-icon://value-help"
+                                valueHelpRequest=".onDialogOpen"
                             />
                         </fb:control>
                     </fb:FilterGroupItem>

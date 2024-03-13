@@ -31,12 +31,16 @@
                         <Title text="{i18n>participantTitle}" />
                         <ToolbarSpacer />
                         <Button
+                            id="excludeTrancheButton"
                             text="{i18n>excludeTranche}"
                             class="btn"
+                            press=".onDialogOpen"
                         />
                         <Button
+                            id="overRuleButton"
                             text="{i18n>overRule}"
                             class="btn"
+                            press=".onDialogOpen"
                         />
                         <Button
                             icon="sap-icon://sort"
