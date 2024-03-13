@@ -1,4 +1,5 @@
 import BaseController from "./BaseController";
+import ResourceBundle from "sap/base/i18n/ResourceBundle";
 
 /**
  * @namespace amalisov.cuibono.controller
@@ -15,13 +16,14 @@ export default class App extends BaseController {
 
 	
 
-	public onRouteSelection(oEvent: any): void {
+	public async onRouteSelection(oEvent: any): Promise<void> {
 		const selectedKey: string = oEvent.getSource().getSelectedKey();
+		const resourceBundle: ResourceBundle = await this.getResourceBundle();
 
-		if (selectedKey === "bonus") {
+		if (selectedKey === resourceBundle.getText("Bonus")) {
 			const oRouter = this.getOwnerComponent().getRouter();
 			oRouter.navTo("main");
-		} else if (selectedKey === "participant") {
+		} else if (selectedKey === resourceBundle.getText("Participant")) {
 			const oRouter = this.getOwnerComponent().getRouter();
 			oRouter.navTo("participants");
 		}

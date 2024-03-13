@@ -107,37 +107,37 @@ export default abstract class BaseController extends Controller {
 
 		switch (oButton) {
 			case excludeTrancheBtn:
-				dialogTitle = "Exclude from Tranche";
+				dialogTitle = resourceBundle.getText("excludeTranche")
 				this.oDialog.addContent(new Label({ text: resourceBundle.getText("justification")}));
 				this.oDialog.addContent(new TextArea({ width: "100%"}));
 				break;
 
 			case overRuleBtn:
-				dialogTitle = "Overrule";
+				dialogTitle = resourceBundle.getText("overRule")
 				this.oDialog.addContent(new Label({ text:resourceBundle.getText("overRule") }));
 				this.oDialog.addContent(new TextArea({ width: "100%" }));
 				break;
 				
-                        case localId:
-				dialogTitle = "Filter by Local ID";
+            case localId:
+				dialogTitle = resourceBundle.getText("FilterByLocalId")
 				this.oDialog.addContent(new Label({ text: resourceBundle.getText("localId") }));
 				this.oDialog.addContent(new TextArea({ width: "100%" }));
 				break;
 
 			case nameId:
-				dialogTitle = "Filter by Name";
+				dialogTitle = resourceBundle.getText("FilterByName")
 				this.oDialog.addContent(new Label({ text:resourceBundle.getText("name") }));
 				this.oDialog.addContent(new TextArea({ width: "100%" }));
 				break;
 
 			case departmentId:
-				dialogTitle = "Filter by Department";
+				dialogTitle = resourceBundle.getText("FilterByDepartment")
 				this.oDialog.addContent(new Label({ text: resourceBundle.getText("department")}));
 				this.oDialog.addContent(new TextArea({ width: "100%",  }));
 				break;
 
 			case trancheId:
-				dialogTitle = "Filter by Tranche";
+				dialogTitle = resourceBundle.getText("FilterByTranche")
 				this.oDialog.addContent(new Label({ text: resourceBundle.getText("tranche") }));
 				this.oDialog.addContent(new TextArea({ width: "100%", }));
 				break;
