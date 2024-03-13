@@ -81,14 +81,14 @@
     "name" : "Webcam"
 }],
 "ProductCategories" : [{
-    "key" : "Accessory",
-    "name" : "Accessory"
+    "key" : "Brazil",
+    "name" : "Brazil"
 }, {
-    "key" : "Graphics Card",
-    "name" : "Graphics Card"
+    "key" : "Rwanda",
+    "name" : "Rwanda"
 }, {
-    "key" : "Laptop",
-    "name" : "Laptop"
+    "key" : "Singapore",
+    "name" : "Singapore"
 }],
 "ProductSuppliers": [{
     "key" : "Titanium",

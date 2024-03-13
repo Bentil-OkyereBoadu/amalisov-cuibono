@@ -12,6 +12,7 @@
                 persistencyKey="myPersKey"
                 useToolbar="false"
                 showFilterConfiguration="false"
+                search=".onSearch" 
             >
                 <fb:filterGroupItems>
                     <fb:FilterGroupItem
@@ -71,6 +72,7 @@
                         <fb:control>
                             <MultiComboBox
                                 name="{i18n>location}"
+                                selectionChange=".onSelectionChange"
                                 items="{participant>/ProductCategories}"
                             >
                                 <core:Item
