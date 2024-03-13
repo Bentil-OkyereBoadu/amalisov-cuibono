@@ -9,6 +9,29 @@
 		"description": "{{appDescription}}",
 		"applicationVersion": {
 			"version": "${version}"
+		},
+		"dataSources": {
+			"bonusTranche": {
+				"uri": "/bonusTranche",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "4.0"
+				}
+			},
+			"participant": {
+				"uri": "/tranchParticipation",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "4.0"
+				}
+			},
+			"target": {
+				"uri": "/targetAmount",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "4.0"
+				}
+			}
 		}
 	},
 
