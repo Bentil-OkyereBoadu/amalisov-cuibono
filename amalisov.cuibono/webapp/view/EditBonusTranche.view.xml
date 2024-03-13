@@ -11,121 +11,136 @@
 >
     <Page
         id="page"
+        showNavButton="true"
+        navButtonPress=".onNavBack"
+        title="{i18n>createTrancheTitle}"
         floatingFooter="true"
     >
+        <IconTabHeader mode="Inline">
+            <items>
+                <IconTabFilter text="{i18n>details}" />
+            </items>
+        </IconTabHeader>
+
         <content>
-        
-                <f:SimpleForm
-                    class="form"
-                    editable="true"
-                    layout="ResponsiveGridLayout"
-                    labelSpanL="2"
-                    labelSpanM="2"
-                    emptySpanL="2"
-                    emptySpanM="2"
-                >
-                    <f:content>
-                        <VBox class="formBox">
+            <f:SimpleForm
+                class="form"
+                editable="true"
+                layout="ResponsiveGridLayout"
+                labelSpanL="2"
+                labelSpanM="2"
+                emptySpanL="2"
+                emptySpanM="2"
+            >
+                <f:content>
+                    <VBox class="formBox">
+                        <VBox class="tranchItems">
+                            <Label text="{i18n>status}" />
+                            <Text text="Open" />
+                        </VBox>
+                        <Hbox class="formRows firstRow">
                             <VBox class="tranchItems">
-                                <Label text="{i18n>status}" />
-                                <Text text="Open" />
-                            </VBox>
-                            <Hbox class="formRows firstRow">
-                                <VBox class="tranchItems">
-                                    <Label
-                                        text="{i18n>trancheName}"
-                                        required="true"
-                                    />
-                                    <Input
-                                        id="nameInput"
-                                        required="true"
-                                        type="Text"
-                                        class="sapUiSmallMarginBottom inputs"
-                                    />
-                                </VBox>
-
-                                <VBox class="tranchItems">
-                                    <Label
-                                        text="{i18n>trancheLocation}"
-                                        required="true"
-                                    />
-                                    <Select
-                                        items="{tranches>/Locations}"
-                                        change=".onSortSelectChange"
-                                        class="inputs"
-                                        id="locationSelect"
-                                    >
-                                        <core:ListItem
-                                            key="{tranches>Id}"
-                                            text="{tranches>Name}"
-                                        />
-                                    </Select>
-                                </VBox>
-                            </Hbox>
-
-                            <VBox class="tranchItems">
-                                <Label text="{i18n>trancheDescription}" />
-                                <TextArea
-                                    width="100%"
-                                    id="descriptionInput"
-                                    rows="4"
-                                    class="sapUiSmallMarginBottom"
+                                <Label
+                                    text="{i18n>trancheName}"
+                                    required="true"
+                                />
+                                <Input
+                                    id="nameInput"
+                                    required="true"
+                                    value="{updateModel>/TrancheName}"
+                                    type="Text"
+                                    class="sapUiSmallMarginBottom inputs textInput"
                                 />
                             </VBox>
 
-                            <Hbox class="formRows">
-                                <VBox class="tranchItems">
-                                    <Label
-                                        text="{i18n>startDate}"
-                                        required="true"
+                            <VBox class="tranchItems">
+                                <Label
+                                    text="{i18n>trancheLocation}"
+                                    required="true"
+                                />
+                                <Select
+                                    items="{tranches>/Locations}"
+                                    value="{updateModel>/Location}"
+                                    change=".onSortSelectChange"
+                                    class="inputs"
+                                    id="locationSelect"
+                                >
+                                    <core:ListItem
+                                        key="{tranches>Id}"
+                                        text="{tranches>Name}"
                                     />
-                                    <DatePicker
-                                        id="startDateInput"
-                                        placeholder="{i18n>datePlaceholder}"
-                                        required="true"
-                                        class="sapUiSmallMarginBottom inputs"
-                                    />
-                                </VBox>
+                                </Select>
+                            </VBox>
+                        </Hbox>
 
-                                <VBox class="tranchItems">
-                                    <Label
-                                        text="{i18n>endDate}"
-                                        required="true"
-                                    />
-                                    <DatePicker
-                                        id="endDateInput"
-                                        placeholder="{i18n>datePlaceholder}"
-                                        required="true"
-                                        class="sapUiSmallMarginBottom inputs"
-                                    />
-                                </VBox>
-                            </Hbox>
-
-                            <Hbox class="formRows">
-                                <VBox class="tranchItems">
-                                    <Label text="{i18n>trancheWeight}" />
-                                    <Input
-                                        id="weightInput"
-                                        type="Text"
-                                        class="sapUiSmallMarginBottom inputs"
-                                    />
-                                </VBox>
-
-                                <VBox class="tranchItems">
-                                    <Label text="{i18n>originDate}" />
-                                    <DatePicker
-                                        id="originDateInput"
-                                        placeholder="{i18n>datePlaceholder}"
-                                        class="sapUiSmallMarginBottom inputs"
-                                    />
-                                </VBox>
-                            </Hbox>
+                        <VBox class="tranchItems">
+                            <Label text="{i18n>trancheDescription}" />
+                            <TextArea
+                                
+                                id="descriptionInput"
+                                value="{updateModel>/Description}"
+                                rows="4"
+                                class="sapUiSmallMarginBottom textArea"
+                            />
                         </VBox>
-                    </f:content>
-                </f:SimpleForm>
-           
+
+                        <Hbox class="formRows">
+                            <VBox class="tranchItems">
+                                <Label
+                                    text="{i18n>startDate}"
+                                    required="true"
+                                />
+                                <DatePicker
+                                    id="startDateInput"
+                                    placeholder="{i18n>datePlaceholder}"
+                                    value="{formatter: 'formatter.formatDate', path: 'updateModel>/StartDate'}"
+                                    required="true"
+                                    class="sapUiSmallMarginBottom inputs"
+                                />
+                            </VBox>
+
+                            <VBox class="tranchItems">
+                                <Label
+                                    text="{i18n>endDate}"
+                                    required="true"
+                                />
+                                <DatePicker
+                                    id="endDateInput"
+                                    placeholder="{i18n>datePlaceholder}"
+                                    required="true"
+                                    value="{formatter: 'formatter.formatDate', path: 'updateModel>/EndDate'}"
+                                    class="sapUiSmallMarginBottom inputs"
+                                />
+                            </VBox>
+                        </Hbox>
+
+                        <Hbox class="formRows">
+                            <VBox class="tranchItems">
+                                <Label text="{i18n>trancheWeight}" />
+                                <Input
+                                    id="weightInput"
+                                    type="Text"
+                                    value="{updateModel>/TrancheWeight}"
+                                    class="sapUiSmallMarginBottom inputs textInput"
+                                />
+                            </VBox>
+
+                            <VBox class="tranchItems">
+                                <Label text="{i18n>originDate}" />
+                                <DatePicker
+                                    id="originDateInput"
+                                    placeholder="{i18n>datePlaceholder}"
+                                    value="{formatter: 'formatter.formatDate', path: 'updateModel>/OriginDate'}"
+                                    class="sapUiSmallMarginBottom inputs"
+                                />
+                            </VBox>
+                        </Hbox>
+                    </VBox>
+                </f:content>
+            </f:SimpleForm>
+
             <!-- Table -->
-            <Panel>
+            <Panel class="tablePanel">
                 <Table
                     items="{updateModel>/Targets}"
                     width="45%"
@@ -183,10 +198,9 @@
             <!--  END OF TABLE -->
 
             <core:Fragment
-                fragmentName="amalisov.cuibono.view.AddTarget"
+                fragmentName="amalisov.cuibono.view.fragments.AddTarget"
                 type="XML"
             />
-            
         </content>
         <footer>
             <OverflowToolbar>

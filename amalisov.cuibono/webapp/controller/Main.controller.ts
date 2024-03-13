@@ -1,6 +1,6 @@
 import BaseController from "./BaseController";
 import JSONModel from "sap/ui/model/json/JSONModel";
-import Control from "sap/ui/core/Control";
+
 import MessageBox from "sap/m/MessageBox";
 import ResourceBundle from 'sap/base/i18n/ResourceBundle';
 import ODataModel from "sap/ui/model/odata/v4/ODataModel";
@@ -72,71 +72,56 @@ export default class Main extends BaseController {
 
 	public onEditPress(oEvent: any): void {
 		const oItem = oEvent.getSource();
-		const oUpdateModel= this.getOwnerComponent().getModel("updateModel") as JSONModel;
+		const oUpdateModel = this.getOwnerComponent().getModel("updateModel") as JSONModel;
 		const oRouter = this.getOwnerComponent().getRouter();
 		oRouter.navTo("EditBonusTranche", {
 			ID: window.encodeURIComponent(
 				oItem.getBindingContext("tranches").getPath().substr(1)
 			),
 		});
-
+	
 		const oContext = oItem.getBindingContext("tranches");
-		const sTrancheName = oContext.getProperty("TrancheName");
-		const sStatus = oContext.getProperty("Status");
-		const sLocation = oContext.getProperty("Location");
-		const sStartDate = oContext.getProperty("StartDate");
-		const sEndDate = oContext.getProperty("EndDate");
-		const nTrancheWeight = oContext.getProperty("TrancheWeight");
-		const sDescription = oContext.getProperty("Description");
-		const sOriginDate = oContext.getProperty("OriginDate");
-		const aTargets =  oContext.getProperty("Targets");
-
-		const oData: Tranche = {
-			TrancheName: sTrancheName,
-            Location: sLocation,
-            StartDate: sStartDate,
-            EndDate: sEndDate,
-			OriginDate: sOriginDate,
-            TrancheWeight: nTrancheWeight,
-            Description: sDescription,
-            Status: sStatus,
-            Targets: aTargets
-		}
-
+		const oData = this.constructTrancheData(oContext, true);
 		oUpdateModel.setData(oData);
 	}
 
 	public onDuplicate(oEvent: any): void {
 		const oItem = oEvent.getSource();
-		const oUpdateModel= this.getOwnerComponent().getModel("updateModel") as JSONModel;
+		const oUpdateModel = this.getOwnerComponent().getModel("updateModel") as JSONModel;
 		const oRouter = this.getOwnerComponent().getRouter();
 		oRouter.navTo("EditBonusTranche", {
 			ID: window.encodeURIComponent(
 				oItem.getBindingContext("tranches").getPath().substr(1)
 			),
 		});
-		
+	
 		const oContext = oItem.getBindingContext("tranches");
+		const oData = this.constructTrancheData(oContext, false);
+		oUpdateModel.setData(oData);
+	}
+
+	//use boolean to control when dates are added
+	private constructTrancheData(oContext: any, includeDates: boolean): Tranche {
 		const sTrancheName = oContext.getProperty("TrancheName");
 		const sLocation = oContext.getProperty("Location");
 		const nTrancheWeight = oContext.getProperty("TrancheWeight");
 		const sDescription = oContext.getProperty("Description");
 		const sOriginDate = oContext.getProperty("OriginDate");
-		const aTargets =  oContext.getProperty("Targets");
-
+		const aTargets = oContext.getProperty("Targets");
+		
 		const oData: Tranche = {
 			TrancheName: sTrancheName,
-            Location: sLocation,
-            StartDate: '',
-            EndDate: '',
+			Location: sLocation,
+			StartDate: includeDates ? oContext.getProperty("StartDate") : '',
+			EndDate: includeDates ? oContext.getProperty("EndDate") : '',
 			OriginDate: sOriginDate,
-            TrancheWeight: nTrancheWeight,
-            Description: sDescription,
-            Status: "",
-            Targets: aTargets
-		}
-
-		oUpdateModel.setData(oData);
+			TrancheWeight: nTrancheWeight,
+			Description: sDescription,
+			Status: includeDates ? oContext.getProperty("Status") : '',
+			Targets: aTargets
+		};
+		
+		return oData;
 	}
 
 	public async onDeleteTranche(oEvent: any): Promise<void>{
