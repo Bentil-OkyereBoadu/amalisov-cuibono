@@ -6,8 +6,8 @@
     xmlns:core="sap.ui.core"
 >
     <core:Fragment
-        fragmentName="amalisov.cuibono.view.NavBar"
+        fragmentName="amalisov.cuibono.view.fragments.NavBar"
         type="XML"
     />
-    <App id="app" />
+    <App id="app" height="91%"/>
 </mvc:View>
