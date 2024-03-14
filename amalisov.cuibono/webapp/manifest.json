@@ -12,21 +12,21 @@
 		},
 		"dataSources": {
 			"bonusTranche": {
-				"uri": "/bonusTranche",
+				"uri": "https://d6f50eddtrial-dev-amalisov-cuibono-srv.cfapps.us10-001.hana.ondemand.com/odata/v4/bonusTranche/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "4.0"
 				}
 			},
 			"participant": {
-				"uri": "/tranchParticipation",
+				"uri": "https://d6f50eddtrial-dev-amalisov-cuibono-srv.cfapps.us10-001.hana.ondemand.com/odata/v4/tranchParticipation/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "4.0"
 				}
 			},
 			"target": {
-				"uri": "/targetAmount",
+				"uri": "https://d6f50eddtrial-dev-amalisov-cuibono-srv.cfapps.us10-001.hana.ondemand.com/odata/v4/targetAmount/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "4.0"
@@ -88,13 +88,29 @@
 			},
 
 			"tranches": {
-			  "type": "sap.ui.model.json.JSONModel",
-			  "uri": "tranches.json"
+				"type": "sap.ui.model.odata.v4.ODataModel",
+				"dataSource": "bonusTranche",
+				"preload": true,
+				"settings": {
+					"synchronizationMode": "None",
+					"groupId": "$direct",
+					"metadataUrlParams": {
+						"sap-documentation": "heading"
+					}
+				}
 			},
 
 			"participant": {
-				"type": "sap.ui.model.json.JSONModel",
-				"uri": "participant.json"
+				"type": "sap.ui.model.odata.v4.ODataModel",
+				"dataSource": "participant",
+				"preload": true,
+				"settings": {
+					"synchronizationMode": "None",
+					"groupId": "$direct",
+					"metadataUrlParams": {
+						"sap-documentation": "heading"
+					}
+				}
 			}
 		},
 
