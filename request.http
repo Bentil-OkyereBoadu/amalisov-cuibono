@@ -22,17 +22,15 @@ Content-Type: application/json
 #
 # GET BONUSTRENCH  
 #
-GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche
+GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche(81e7609f-eb48-4265-aa3d-de030c1be386)?$expand=targets
 
 
 ###
 #
 # CREATE BONUS TRENCH   
 #
-POST http://localhost:4004/odata/v4/bonusTranche/BonusTranche
+POST http://localhost:4004/odata/v4/bonusTranche/CreateTranche
 Content-Type: application/json
-
-
 
 {
   "name": "Example Bonus Tranche",
@@ -40,23 +38,7 @@ Content-Type: application/json
   "endDate": "2024-12-31",
   "Status": "Running",
   "location": "Example Location",
-  "targets": [
-    {
-      "name": "Target 1",
-      "weight": 2,
-      "achievement": 23,
-      "description": "Example description for Target 1",
-      "bonusTranche_ID": "3d8f9e65-51de-4a33-97b4-17efb0f2db5a"
-    },
-    {
-      "name": "Target 2",
-      "weight": 3,
-      "achievement": 30,
-      "description": "Example description for Target 2",
-      "bonusTranche_ID": "3d8f9e65-51de-4a33-97b4-17efb0f2db5a"
-    }
-  ],
-  "trancheParticipations": []
+  "targets":[]
 }
 
 ###
