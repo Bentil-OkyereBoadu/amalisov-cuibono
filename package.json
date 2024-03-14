@@ -6,11 +6,12 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "@cap-js/cds-typer": "^0.18.0",
     "@sap/cds": "^7",
+    "@sap/cds-dk": "^7",
     "@sap/cds-hana": "^2",
     "@sap/cds-odata-v2-adapter-proxy": "^1.9.21",
     "@sap/xssec": "^3",
-    "@sap/cds-dk": "^7",
     "@types/express": "^4.17.21",
     "@types/node": "^20.11.20",
     "cds-routing-handlers": "^3.0.7",
@@ -24,11 +25,14 @@
     "@cap-js/sqlite": "^1"
   },
   "scripts": {
-    "start":"npx cds run",
+    "start": "npx cds run",
     "watch": "npx cds-ts watch",
     "db:sqlite": "npx cds deploy -2 sqlite:./db.sqlite",
-    "generate-types": "bash ./scripts/generate-types.sh",
+    "generate-types": "npx @cap-js/cds-typer ./srv/index.cds --outputDirectory ./@cds-models",
     "start-fe": "cd ./amalisov.cuibono && npm run start"
+  },
+  "imports": {
+    "#cds-models/*": "./@cds-models/*/index.js"
   },
   "cds": {
     "requires": {
