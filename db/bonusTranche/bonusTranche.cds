@@ -20,4 +20,5 @@ entity BonusTranche : cuid,managed {
 type bonusStatus : String enum {
     Running;
     Locked;
+    Completed;
 }
