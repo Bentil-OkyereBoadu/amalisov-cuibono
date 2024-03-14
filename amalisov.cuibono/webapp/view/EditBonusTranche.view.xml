@@ -211,6 +211,7 @@
                 />
                 <Button
                     type="Default"
+                    press=".onCreateRoute"
                     text="Cancel"
                 />
             </OverflowToolbar>

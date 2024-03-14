@@ -10,6 +10,11 @@ import Dialog from "sap/m/Dialog";
 import Event from "sap/ui/base/Event";
 import Label from "sap/m/Label";
 import TextArea from "sap/m/TextArea"
+import FilterBar from "sap/ui/comp/filterbar/FilterBar";
+import Table from "sap/m/Table";
+import ListBinding from "sap/ui/model/ListBinding";
+import Filter from "sap/ui/model/Filter";
+import FilterOperator from "sap/ui/model/FilterOperator";
 
 /**
  * @namespace amalisov.cuibono.controller
@@ -84,6 +89,32 @@ export default abstract class BaseController extends Controller {
 		} else {
 			this.getRouter().navTo("main", {}, undefined, true);
 		}
+	}
+
+	public onFilter(): void {
+		const oView = this.getView()
+		const oFilterBar = oView.byId("filterbar") as FilterBar;
+		const oTable = oView.byId("Table") as Table;
+
+		const aTableFilters = oFilterBar.getFilterGroupItems().reduce(function (aResult: any, oFilterGroupItem: any) {
+				const oControl = oFilterGroupItem.getControl(),
+				aSelectedKeys = oControl.getSelectedKeys ? oControl.getSelectedKeys() : [],
+					aFilters = aSelectedKeys.map(function (sSelectedKey: any) {
+						return new Filter({
+							path: oFilterGroupItem.getName(),
+							operator: FilterOperator.Contains,
+							value1: sSelectedKey
+						});
+					});
+				if (aSelectedKeys.length > 0) {
+					aResult.push(new Filter({
+						filters: aFilters,
+						and: false
+					}));
+				}
+				return aResult;
+		}, []);
+		(oTable.getBinding("items") as ListBinding).filter(aTableFilters);
 	}
 
 	public async onDialogOpen(oEvent: Event): Promise <void> {

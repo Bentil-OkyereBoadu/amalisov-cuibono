@@ -17,7 +17,6 @@ export default class EditBonusTranche extends BaseController {
 
     public onCreateRoute(oEvent: any): void {
         const oView = this.getView();
-        
 		const oUpdateModel= this.getOwnerComponent().getModel("updateModel") as JSONModel;
 
         (oView.byId("nameInput") as Input).setValue('');
@@ -34,8 +33,21 @@ export default class EditBonusTranche extends BaseController {
         const oDialog = this.byId("editDialog") as Dialog;
         oDialog.open();
     }
+
     public closeAddTarget(): void{
         const oDialog = this.byId("editDialog") as Dialog;
         oDialog.close();
+    }
+
+    public onSaveTarget(): void{
+
+    }
+
+    public onSaveTranche(): void{
+
+    }
+    
+    public onCancel(): void{
+        
     }
 }

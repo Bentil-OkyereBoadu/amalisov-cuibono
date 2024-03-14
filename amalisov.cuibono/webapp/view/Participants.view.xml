@@ -20,7 +20,7 @@
         </f:header>
         <f:content>
             <Table
-                id="parameterTable"
+                id="Table"
                 inset="false"
                 items="{participant>/Parameters}"
                 growingScrollToLoad="true"

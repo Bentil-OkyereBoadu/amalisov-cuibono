@@ -9,10 +9,9 @@
         <f:content>
             <fb:FilterBar
                 id="filterbar"
-                persistencyKey="myPersKey"
                 useToolbar="false"
                 showFilterConfiguration="false"
-                search=".onSearch" 
+                search=".onFilter" 
             >
                 <fb:filterGroupItems>
                     <fb:FilterGroupItem

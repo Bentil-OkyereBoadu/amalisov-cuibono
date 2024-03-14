@@ -265,27 +265,27 @@
 
 	"Locations": [
 		{
-			"Id": 19,
+			"key": "Germany",
 			"Name": "Germany"
 		},
 		{
-			"Id": 8,
+			"key": "Ghana",
 			"Name": "Ghana"
 		},
 		{
-			"Id": 63,
+			"key": "Rwanda",
 			"Name": "Rwanda"
 		},
 		{
-			"Id": 26,
+			"key": "France",
 			"Name": "France"
 		},
 		{
-			"Id": 236,
+			"key": "Mozambique",
 			"Name": "Mozambique"
 		},
 		{
-			"Id": 7890,
+			"key": "South  Africa",
 			"Name": "South  Africa"
 		}
 	],

@@ -22,7 +22,7 @@
         </f:header>
         <f:content>
             <Table
-                id="trancheTable"
+                id="Table"
                 class="trancheTable"
                 width="auto"
                 items="{tranches>/Tranches}"

@@ -8,17 +8,15 @@
         <f:content>
             <fb:FilterBar
                 id="filterbar"
-                persistencyKey="myPersKey"
                 useToolbar="false"
-                search=".onSearch"
-                filterChange=".onFilterChange"
+                search=".onFilter"
                 showFilterConfiguration="false"
             >
                 <fb:filterGroupItems>
                     <fb:FilterGroupItem
                         name="search"
                         label="{i18n>search}"
-                        groupName="Group1"
+                        groupName="Group1"  
                         visibleInFilterBar="true"
                     >
                         <fb:control>
