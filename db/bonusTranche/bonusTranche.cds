@@ -9,6 +9,7 @@ entity BonusTranche : cuid,managed {
     name                  : String;
     startDate             : String;
     endDate               : String;
+    weight                : Double default 0.0;
     Status                : bonusStatus;
     location              : String;
     targets               : Association to many target.Target
@@ -20,4 +21,5 @@ entity BonusTranche : cuid,managed {
 type bonusStatus : String enum {
     Running;
     Locked;
+    Completed;
 }
