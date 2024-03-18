@@ -10,7 +10,7 @@ import { TrancheParticipation } from "../../../@cds-models/amalisov/cuibono/tran
 @Service()
 @Handler()
 export class CreateTranche{
-    @Action('CreateTranche')
+    @Action('createTranche')
     public async createTranche(@Srv() srv:any,@Req() req:Request){
         const {name,startDate,endDate,weight, Status,location,targets}:BonusTranche = req.data as BonusTranche
         const [result] = await INSERT.into(BonusTranche.name).entries({ name , startDate, endDate,Status, location});

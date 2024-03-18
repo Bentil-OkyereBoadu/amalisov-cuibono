@@ -11,7 +11,6 @@ entity BonusTranche : cuid,managed {
     endDate               : String;
     weight                : Double default 0.0;
     Status                : bonusStatus;
-    weight                : Integer default 0;
     location              : String;
     targets               : Association to many target.Target
                                 on targets.bonusTranche = $self;
