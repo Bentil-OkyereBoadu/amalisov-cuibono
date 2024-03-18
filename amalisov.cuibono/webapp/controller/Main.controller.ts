@@ -66,7 +66,7 @@ export default class Main extends BaseController {
 		const oItem = oEvent.getSource();
 		const oUpdateModel = this.getOwnerComponent().getModel(
 			"updateModel"
-		) as JSONModel;
+		) as JSONModel;	
 		const oRouter = this.getOwnerComponent().getRouter();
 		oRouter.navTo("EditBonusTranche", {
 			ID: window.encodeURIComponent(
@@ -104,6 +104,10 @@ export default class Main extends BaseController {
 		const sDescription = oContext.getProperty("Description");
 		const sOriginDate = oContext.getProperty("OriginDate");
 		const aTargets = oContext.getProperty("Targets");
+
+		const oAppModel = this.getOwnerComponent().getModel("appModel") as JSONModel;
+		const sTrancheId = oContext.getProperty("ID");
+		oAppModel.setProperty("/trancheID", sTrancheId)
 
 		const oData: Tranche = {
 			TrancheName: sTrancheName,

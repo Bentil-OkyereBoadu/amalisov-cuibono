@@ -18,14 +18,19 @@ export default class App extends BaseController {
 
 	public async onRouteSelection(oEvent: any): Promise<void> {
 		const selectedKey: string = oEvent.getSource().getSelectedKey();
+		const oRouter = this.getOwnerComponent().getRouter();
+		const currentHash = oRouter.getHashChanger().getHash();
+		const pageName= oRouter.getRouteInfoByHash(currentHash).name
 		const resourceBundle: ResourceBundle = await this.getResourceBundle();
-
 		if (selectedKey === resourceBundle.getText("Bonus")) {
 			const oRouter = this.getOwnerComponent().getRouter();
 			oRouter.navTo("main");
-		} else if (selectedKey === resourceBundle.getText("Participant")) {
+		} else if (selectedKey === resourceBundle.getText("Participant") && pageName !== resourceBundle.getText("routeCondition")) {
 			const oRouter = this.getOwnerComponent().getRouter();
 			oRouter.navTo("participants");
+		} else if(selectedKey === resourceBundle.getText("Participant") && pageName === resourceBundle.getText("routeCondition")) {
+			const oRouter = this.getOwnerComponent().getRouter();
+			oRouter.navTo("trancheParticipants");
 		}
 	}
 }

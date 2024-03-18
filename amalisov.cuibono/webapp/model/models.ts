@@ -53,5 +53,11 @@ export default {
 
         return oModel;
 		
-	}
+	},
+    createAppModel: () => {
+        const oData = {
+            trancheID: ""
+        };
+        return new JSONModel(oData);
+    }
 };

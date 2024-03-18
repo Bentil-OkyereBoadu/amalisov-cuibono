@@ -143,6 +143,11 @@
 					"pattern": "participant",
 					"name": "participants",
 					"target": "participants"
+				},
+				{
+					"pattern": "tranche-participants",
+					"name": "trancheParticipants",
+					"target": "participants"
 				}
 			],
 			"targets": {
