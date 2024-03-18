@@ -9,7 +9,7 @@ entity BonusTranche : cuid,managed {
     name                  : String;
     startDate             : String;
     endDate               : String;
-    weight                : Integer default 0;
+    weight                : Double default 0.0;
     Status                : bonusStatus;
     location              : String;
     targets               : Association to many target.Target
