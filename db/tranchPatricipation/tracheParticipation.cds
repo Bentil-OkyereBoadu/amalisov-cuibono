@@ -18,7 +18,6 @@ entity TrancheParticipation : cuid {
     excluded         : Boolean default false;
     justification   : String;
     location         : String;
-    employee          : Association to employee.Employees;
     department       : Association to department.Department;
     bonusTranche     : Association to bonusTranche.BonusTranche;
 }
