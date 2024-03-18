@@ -22,7 +22,7 @@ Content-Type: application/json
 #
 # GET BONUSTRENCH  
 #
-GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche(81e7609f-eb48-4265-aa3d-de030c1be386)?$expand=targets
+GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche(25ebf2dd-0ed2-42f5-90ea-7c550f0a04ec)?$expand=trancheParticipations
 
 
 ###
