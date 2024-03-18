@@ -1,4 +1,5 @@
 namespace amalisov.cuibono.employee;
+using amalisov.cuibono.trancheParticipation as trancheParticipation from '../tranchPatricipation/tracheParticipation';
 
 using {
     cuid
@@ -15,4 +16,6 @@ entity Employees : cuid {
     bonusPercentage : String;
     attendance      : Association to attendance.Attendance;
     department      : Association to department.Department;
+    tracheParticipations: Association to many trancheParticipation.TrancheParticipation
+                                on tracheParticipations.employee = $self;
 }

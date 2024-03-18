@@ -70,18 +70,23 @@ Content-Type: application/json
   "ID":"3d8f9e65-51de-4a33-97b4-17efb0f2db5a"
 }
 
+# ###
+# #
+# # Calculate BONUS TRENCH   
+# #
+# POST  http://localhost:4004/odata/v4/bonusTranche/calculateBonusTranche
+# Content-Type: application/json
+
+# {
+#   "employeeId":"0ad36c21-0273-46cf-bb7e-92f0decb16c8"
+# }
+
+
 ###
 #
-# Calculate BONUS TRENCH   
+# GET BONUSTRENCH  
 #
-POST  http://localhost:4004/odata/v4/bonusTranche/calculateBonusTranche
-Content-Type: application/json
-
-{
-  "employeeId":"0ad36c21-0273-46cf-bb7e-92f0decb16c8"
-}
-
-
+GET http://localhost:4004/odata/v4/bonusTranche/calculateBonusTranche()
 
 
 
