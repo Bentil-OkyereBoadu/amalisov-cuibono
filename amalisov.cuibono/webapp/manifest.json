@@ -12,21 +12,21 @@
 		},
 		"dataSources": {
 			"bonusTranche": {
-				"uri": "https://d6f50eddtrial-dev-amalisov-cuibono-srv.cfapps.us10-001.hana.ondemand.com/odata/v4/bonusTranche/",
+				"uri": "/odata/v4/bonusTranche/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "4.0"
 				}
 			},
 			"participant": {
-				"uri": "https://d6f50eddtrial-dev-amalisov-cuibono-srv.cfapps.us10-001.hana.ondemand.com/odata/v4/tranchParticipation/",
+				"uri": "/odata/v4/tranchParticipation/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "4.0"
 				}
 			},
 			"target": {
-				"uri": "https://d6f50eddtrial-dev-amalisov-cuibono-srv.cfapps.us10-001.hana.ondemand.com/odata/v4/targetAmount/",
+				"uri": "/odata/v4/targetAmount/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "4.0"
@@ -96,7 +96,8 @@
 					"groupId": "$direct",
 					"metadataUrlParams": {
 						"sap-documentation": "heading"
-					}
+					},
+					"operationMode": "Server"
 				}
 			},
 			"tranches": {

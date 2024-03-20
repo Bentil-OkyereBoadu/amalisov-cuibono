@@ -22,11 +22,11 @@ server:
       afterMiddleware: compression
     - name: ui5-middleware-livereload
       afterMiddleware: compression
-    # - name: ui5-middleware-simpleproxy
-    #   afterMiddleware: compression
-    #   configuration:
-    #     mountPath: /odata/v4/
-    #     baseUri: https://d6f50eddtrial-dev-amalisov-cuibono-srv.cfapps.us10-001.hana.ondemand.com
+    - name: ui5-middleware-simpleproxy 
+      mountPath: /odata
+      afterMiddleware: compression
+      configuration:
+        baseUri: https://d6f50eddtrial-dev-amalisov-cuibono-srv.cfapps.us10-001.hana.ondemand.com/odata
         
         
 

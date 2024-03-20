@@ -51,7 +51,7 @@ export default class Main extends BaseController {
 
 		if (sQuery) {
 			const oFilter = new Filter({
-				path: "TrancheName",
+				path: "name",
 				operator: FilterOperator.Contains,
 				value1: sQuery.toLowerCase(),
 				caseSensitive: false,
