@@ -103,7 +103,7 @@ export default abstract class BaseController extends Controller {
 		const aTableFilters = oFilterBar.getFilterGroupItems().reduce(function (aResult: any, oFilterGroupItem: any) {
 				const oControl = oFilterGroupItem.getControl(),
 				aSelectedKeys = oControl.getSelectedKeys ? oControl.getSelectedKeys() : [],
-					aFilters = aSelectedKeys.map(function (sSelectedKey: any) {
+					aFilters = aSelectedKeys.map(function (sSelectedKey: number) {
 						return new Filter({
 							path: oFilterGroupItem.getName(),
 							operator: FilterOperator.Contains,
@@ -119,7 +119,7 @@ export default abstract class BaseController extends Controller {
 				return aResult;
 		}, []);
 		if (this.inputFilter && this.inputFilter.length > 0) {
-			const filterValues = this.inputFilter.trim().split(','); 
+			const filterValues = this.inputFilter.split(','); 
 			filterValues.forEach((filterValue: string) => {
 				const trimmedValue = filterValue.trim();
 				if (trimmedValue.length > 0) {
@@ -127,7 +127,7 @@ export default abstract class BaseController extends Controller {
 					aTableFilters.push(columnFilter);
 				}
 			});
-		}	
+		}
 		(oTable.getBinding("items") as ListBinding).filter(aTableFilters);
 	}
 
@@ -169,7 +169,7 @@ export default abstract class BaseController extends Controller {
 				const textArea1 = new TextArea({ id: "localIdDialog", width: "100%" });
 				this.oDialog.addContent(textArea1);
 			    this.dialogContent = textArea1.getId();
-				this.ColumnName = "localID"
+				this.ColumnName = resourceBundle.getText("LocalID")
 				break;
 
 			case nameId:
@@ -178,7 +178,7 @@ export default abstract class BaseController extends Controller {
 				const textArea2 = new TextArea({ id: "nameDialog", width: "100%" });
 				this.oDialog.addContent(textArea2);
 			    this.dialogContent = textArea2.getId();
-				this.ColumnName = "name"
+				this.ColumnName = resourceBundle.getText("Name")
 				break;
 
 			case departmentId:
@@ -187,7 +187,7 @@ export default abstract class BaseController extends Controller {
 				const textArea3 = new TextArea({ id: "departmentDialog", width: "100%" });
 				this.oDialog.addContent(textArea3);
 			    this.dialogContent = textArea3.getId();
-				this.ColumnName= "department"
+				this.ColumnName= resourceBundle.getText("Department")
 				break;
 
 			case trancheId:
@@ -196,7 +196,7 @@ export default abstract class BaseController extends Controller {
 				const textArea4 = new TextArea({ id: "trancheDialog", width: "100%" });
 				this.oDialog.addContent(textArea4);
 			    this.dialogContent = textArea4.getId();
-				this.ColumnName = "tranche"
+				this.ColumnName = resourceBundle.getText("Tranche")
 				break;
 		}
 
@@ -209,8 +209,7 @@ export default abstract class BaseController extends Controller {
 	public onSave(): void {
 		if (this.oDialog && this.dialogContent) {
 			const textArea = Core.byId(this.dialogContent) as TextArea;
-			const dialogc = textArea.getValue();
-	        this.inputFilter = dialogc
+	        this.inputFilter = textArea.getValue();
 			this.onFilter();
 			this.oDialog.close();
 			this.oDialog.destroyContent(); 
