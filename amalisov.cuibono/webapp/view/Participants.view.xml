@@ -20,7 +20,7 @@
         </f:header>
         <f:content>
             <Table
-                id="parameterTable"
+                id="Table"
                 inset="false"
                 items="{participant>/Parameters}"
                 growingScrollToLoad="true"
@@ -44,8 +44,32 @@
                         />
                         <Button
                             icon="sap-icon://sort"
-                            id="sortThreads"
+                            id="sortParticipant"
+                            press=".onOpenSortDialog"
                         />
+                        <ViewSettingsDialog
+                            class="sapUiResponsiveMargin"
+                            id="sortDialog"
+                            confirm=".onSortChange"
+                        >
+                            <sortItems>
+                                <ViewSettingsItem
+                                    text="{i18n>name}"
+                                    key="1"
+                                    id="1"
+                                />
+                                <ViewSettingsItem
+                                    text="{i18n>department}"
+                                    key="2"
+                                    id="2"
+                                />
+                                <ViewSettingsItem
+                                    text="{i18n>status}"
+                                    key="3"
+                                    id="3"
+                                />
+                            </sortItems>
+                        </ViewSettingsDialog>
                     </Toolbar>
                 </headerToolbar>
                 <columns>
@@ -146,6 +170,7 @@
                                 path: 'participant>status', 
                                 formatter: 'formatter.statusEnabled' 
                             }"
+                              select=".onSelectChange"
                             />
                             <ObjectIdentifier title="{participant>localID}" />
                             <Text text="{participant>name}" />

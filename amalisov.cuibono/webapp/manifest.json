@@ -12,21 +12,21 @@
 		},
 		"dataSources": {
 			"bonusTranche": {
-				"uri": "/bonusTranche",
+				"uri": "/odata/v4/bonusTranche/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "4.0"
 				}
 			},
 			"participant": {
-				"uri": "/tranchParticipation",
+				"uri": "/odata/v4/tranchParticipation/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "4.0"
 				}
 			},
 			"target": {
-				"uri": "/targetAmount",
+				"uri": "/odata/v4/targetAmount/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "4.0"
@@ -87,14 +87,36 @@
 				}
 			},
 
-			"tranches": {
-			  "type": "sap.ui.model.json.JSONModel",
-			  "uri": "tranches.json"
+			"tranchesBind": {
+				"type": "sap.ui.model.odata.v4.ODataModel",
+				"dataSource": "bonusTranche",
+				"preload": true,
+				"settings": {
+					"synchronizationMode": "None",
+					"groupId": "$direct",
+					"metadataUrlParams": {
+						"sap-documentation": "heading"
+					},
+					"operationMode": "Server"
+				}
 			},
-
+			
 			"participant": {
 				"type": "sap.ui.model.json.JSONModel",
 				"uri": "participant.json"
+			},
+
+			"participantBind": {
+				"type": "sap.ui.model.odata.v4.ODataModel",
+				"dataSource": "participant",
+				"preload": true,
+				"settings": {
+					"synchronizationMode": "None",
+					"groupId": "$direct",
+					"metadataUrlParams": {
+						"sap-documentation": "heading"
+					}
+				}
 			}
 		},
 
@@ -126,6 +148,11 @@
 				{
 					"pattern": "participant",
 					"name": "participants",
+					"target": "participants"
+				},
+				{
+					"pattern": "tranche-participants",
+					"name": "trancheParticipants",
 					"target": "participants"
 				}
 			],

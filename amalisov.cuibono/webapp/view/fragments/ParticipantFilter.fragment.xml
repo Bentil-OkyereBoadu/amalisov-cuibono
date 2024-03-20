@@ -9,9 +9,11 @@
         <f:content>
             <fb:FilterBar
                 id="filterbar"
-                persistencyKey="myPersKey"
                 useToolbar="false"
                 showFilterConfiguration="false"
+                showClearOnFB="true"
+                search=".onFilter" 
+                clear=""
             >
                 <fb:filterGroupItems>
                     <fb:FilterGroupItem
@@ -71,6 +73,7 @@
                         <fb:control>
                             <MultiComboBox
                                 name="{i18n>location}"
+                                
                                 items="{participant>/ProductCategories}"
                             >
                                 <core:Item

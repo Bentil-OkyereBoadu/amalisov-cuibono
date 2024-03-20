@@ -10,7 +10,7 @@ interface Target {
 }
 
 interface Tranche {
-    ID: string;
+    trancheID: string;
     TrancheName: string;
     Location: string;
     StartDate: string;
@@ -32,7 +32,7 @@ export default {
 
 	createUpdateModel: () => {
 		const oData: Tranche = {
-			ID: "",
+			trancheID: "",
             TrancheName: "",
             Location: "",
             StartDate: "",
@@ -52,6 +52,5 @@ export default {
         oModel.setData(oData);
 
         return oModel;
-		
-	}
+	},
 };

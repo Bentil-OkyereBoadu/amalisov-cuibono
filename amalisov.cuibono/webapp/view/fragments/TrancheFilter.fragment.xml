@@ -8,17 +8,15 @@
         <f:content>
             <fb:FilterBar
                 id="filterbar"
-                persistencyKey="myPersKey"
                 useToolbar="false"
-                search=".onSearch"
-                filterChange=".onFilterChange"
+                search=".onFilter"
                 showFilterConfiguration="false"
             >
                 <fb:filterGroupItems>
                     <fb:FilterGroupItem
                         name="search"
                         label="{i18n>search}"
-                        groupName="Group1"
+                        groupName="Group1"  
                         visibleInFilterBar="true"
                     >
                         <fb:control>
@@ -40,12 +38,11 @@
                         <fb:control>
                             <MultiComboBox
                                 name="{i18n>status}"
-                                selectionChange=".onSelectionChange"
-                                items="{tranches>/Status}"
+                                items="{tranchesBind>/Status}"
                             >
                                 <core:Item
-                                    key="{tranches>Key}"
-                                    text="{tranches>Name}"
+                                    key="{tranchesBind>Key}"
+                                    text="{tranchesBind>Name}"
                                 />
                             </MultiComboBox>
                         </fb:control>
@@ -59,12 +56,11 @@
                         <fb:control>
                             <MultiComboBox
                                 name="{i18n>trancheLocation}"
-                                selectionChange=".onSelectionChange"
-                                items="{tranches>/Locations}"
+                                items="{tranchesBind>/Locations}"
                             >
                                 <core:Item
-                                    key="{tranches>Id}"
-                                    text="{tranches>Name}"
+                                    key="{tranchesBind>key}"
+                                    text="{tranchesBind>Name}"
                                 />
                             </MultiComboBox>
                         </fb:control>
@@ -78,7 +74,7 @@
                         <fb:control>
                             <MultiComboBox
                                 name="{i18n>fiscalYear}"
-                                selectionChange=".onSelectionChange"
+                              
                             >
                                 <core:Item
                                     key="createdAt"
