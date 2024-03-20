@@ -11,7 +11,9 @@
                 id="filterbar"
                 useToolbar="false"
                 showFilterConfiguration="false"
+                showClearOnFB="true"
                 search=".onFilter" 
+                clear=""
             >
                 <fb:filterGroupItems>
                     <fb:FilterGroupItem
@@ -71,7 +73,7 @@
                         <fb:control>
                             <MultiComboBox
                                 name="{i18n>location}"
-                                selectionChange=".onSelectionChange"
+                                
                                 items="{participant>/ProductCategories}"
                             >
                                 <core:Item

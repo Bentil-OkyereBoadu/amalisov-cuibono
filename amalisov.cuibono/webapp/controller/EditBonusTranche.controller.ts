@@ -8,20 +8,18 @@ import JSONModel from "sap/ui/model/json/JSONModel";
  */
 export default class EditBonusTranche extends BaseController {
 	public onInit(): void {
-		const oRouter = this.getOwnerComponent().getRouter();
+		const oRouter = this.getRouter();
 		oRouter
 			.getRoute("CreateTranche")
 			.attachPatternMatched(this.onCreateRoute, this);
-		this.getView().setModel(this.getOwnerComponent().getModel("tranches"));
+		this.getView().setModel(this.getModel("tranches"));
 
-		const oGlobalModel = this.getOwnerComponent().getModel("appModel");
-		const sTrancheID = oGlobalModel.getProperty("/trancheID");
-		console.log("the id sets", sTrancheID);
+	
 	}
 
 	public onCreateRoute(oEvent: any): void {
 		const oView = this.getView();
-		const oUpdateModel = this.getOwnerComponent().getModel(
+		const oUpdateModel = this.getModel(
 			"updateModel"
 		) as JSONModel;
 

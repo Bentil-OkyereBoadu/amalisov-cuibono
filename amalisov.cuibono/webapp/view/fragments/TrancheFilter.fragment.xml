@@ -38,7 +38,6 @@
                         <fb:control>
                             <MultiComboBox
                                 name="{i18n>status}"
-                                selectionChange=".onSelectionChange"
                                 items="{tranches>/Status}"
                             >
                                 <core:Item
@@ -57,11 +56,10 @@
                         <fb:control>
                             <MultiComboBox
                                 name="{i18n>trancheLocation}"
-                                selectionChange=".onSelectionChange"
                                 items="{tranches>/Locations}"
                             >
                                 <core:Item
-                                    key="{tranches>Id}"
+                                    key="{tranches>key}"
                                     text="{tranches>Name}"
                                 />
                             </MultiComboBox>
@@ -76,7 +74,7 @@
                         <fb:control>
                             <MultiComboBox
                                 name="{i18n>fiscalYear}"
-                                selectionChange=".onSelectionChange"
+                              
                             >
                                 <core:Item
                                     key="createdAt"

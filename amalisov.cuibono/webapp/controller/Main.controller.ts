@@ -15,7 +15,7 @@ interface Target {
 }
 
 interface Tranche {
-	ID?: string;
+	trancheID: string;
 	TrancheName: string;
 	Location: string;
 	StartDate: string;
@@ -64,10 +64,10 @@ export default class Main extends BaseController {
 
 	public onEditPress(oEvent: any): void {
 		const oItem = oEvent.getSource();
-		const oUpdateModel = this.getOwnerComponent().getModel(
+		const oUpdateModel = this.getModel(
 			"updateModel"
 		) as JSONModel;	
-		const oRouter = this.getOwnerComponent().getRouter();
+		const oRouter = this.getRouter();
 		oRouter.navTo("EditBonusTranche", {
 			ID: window.encodeURIComponent(
 				oItem.getBindingContext("tranches").getPath().substr(1)
@@ -81,10 +81,10 @@ export default class Main extends BaseController {
 
 	public onDuplicate(oEvent: any): void {
 		const oItem = oEvent.getSource();
-		const oUpdateModel = this.getOwnerComponent().getModel(
+		const oUpdateModel = this.getModel(
 			"updateModel"
 		) as JSONModel;
-		const oRouter = this.getOwnerComponent().getRouter();
+		const oRouter = this.getRouter();
 		oRouter.navTo("EditBonusTranche", {
 			ID: window.encodeURIComponent(
 				oItem.getBindingContext("tranches").getPath().substr(1)
@@ -104,12 +104,10 @@ export default class Main extends BaseController {
 		const sDescription = oContext.getProperty("Description");
 		const sOriginDate = oContext.getProperty("OriginDate");
 		const aTargets = oContext.getProperty("Targets");
-
-		const oAppModel = this.getOwnerComponent().getModel("appModel") as JSONModel;
 		const sTrancheId = oContext.getProperty("ID");
-		oAppModel.setProperty("/trancheID", sTrancheId)
 
 		const oData: Tranche = {
+			trancheID: sTrancheId,
 			TrancheName: sTrancheName,
 			Location: sLocation,
 			StartDate: includeDates ? oContext.getProperty("StartDate") : "",
