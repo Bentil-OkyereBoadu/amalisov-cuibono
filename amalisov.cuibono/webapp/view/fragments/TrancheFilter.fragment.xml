@@ -38,11 +38,11 @@
                         <fb:control>
                             <MultiComboBox
                                 name="{i18n>status}"
-                                items="{tranches>/Status}"
+                                items="{tranchesBind>/Status}"
                             >
                                 <core:Item
-                                    key="{tranches>Key}"
-                                    text="{tranches>Name}"
+                                    key="{tranchesBind>Key}"
+                                    text="{tranchesBind>Name}"
                                 />
                             </MultiComboBox>
                         </fb:control>
@@ -56,11 +56,11 @@
                         <fb:control>
                             <MultiComboBox
                                 name="{i18n>trancheLocation}"
-                                items="{tranches>/Locations}"
+                                items="{tranchesBind>/Locations}"
                             >
                                 <core:Item
-                                    key="{tranches>key}"
-                                    text="{tranches>Name}"
+                                    key="{tranchesBind>key}"
+                                    text="{tranchesBind>Name}"
                                 />
                             </MultiComboBox>
                         </fb:control>

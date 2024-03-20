@@ -84,21 +84,21 @@ export default class Participants extends BaseController {
 
 	public async onSortChange(event: any): Promise<void> {
 		const selectedKey: string = event.getSource().getSelectedSortItem();
+		const resourceBundle: ResourceBundle = await this.getResourceBundle();
 		const order: boolean=event.getSource().getSortDescending()
 		if (!selectedKey) {
-			MessageBox.information("Please select an option");
+			MessageBox.information(resourceBundle.getText("selectOption"));
 			return;
 		}
 		const selectedKeyNumber: number = parseInt(selectedKey.split('--').pop() || '');
 
 		if (isNaN(selectedKeyNumber)) {
-			MessageBox.error("Error: No key available.");
+			MessageBox.error(resourceBundle.getText("noKeyAvailable"));
 			return;
 		}
 		
 		let sSortProperty: string;
 		let sortToastKey: string;
-        const resourceBundle: ResourceBundle = await this.getResourceBundle();
 	
 		switch (selectedKeyNumber) {
 			case 1:

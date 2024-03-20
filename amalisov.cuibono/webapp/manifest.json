@@ -100,11 +100,8 @@
 					"operationMode": "Server"
 				}
 			},
-			"tranches": {
-				"type": "sap.ui.model.json.JSONModel",
-				"uri": "tranches.json"
-			  },
-			  "participant": {
+			
+			"participant": {
 				"type": "sap.ui.model.json.JSONModel",
 				"uri": "participant.json"
 			},
