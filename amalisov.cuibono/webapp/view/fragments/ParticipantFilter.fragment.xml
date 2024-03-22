@@ -13,7 +13,7 @@
                 showFilterConfiguration="false"
                 showClearOnFB="true"
                 search=".onFilter" 
-                clear=""
+                clear=".onClearFilter"
             >
                 <fb:filterGroupItems>
                     <fb:FilterGroupItem
@@ -23,11 +23,9 @@
                         visibleInFilterBar="true"
                     >
                         <fb:control>
-                            <Input
+                            <MultiInput
                                 id="localId"
                                 name="{i18n>localId}"
-                                showValueHelp="true"
-                                valueHelpIconSrc="sap-icon://value-help"
                                 valueHelpRequest=".onDialogOpen"
                             />
                         </fb:control>
@@ -39,11 +37,9 @@
                         visibleInFilterBar="true"
                     >
                         <fb:control>
-                            <Input
+                            <MultiInput
                                 id="name"
                                 name="{i18n>name}"
-                                showValueHelp="true"
-                                valueHelpIconSrc="sap-icon://value-help"
                                 valueHelpRequest=".onDialogOpen"
                             />
                         </fb:control>
@@ -55,11 +51,9 @@
                         visibleInFilterBar="true"
                     >
                         <fb:control>
-                            <Input
+                            <MultiInput
                                 id="department"
                                 name="{i18n>department}"
-                                showValueHelp="true"
-                                valueHelpIconSrc="sap-icon://value-help"
                                 valueHelpRequest=".onDialogOpen"
                             />
                         </fb:control>
@@ -105,11 +99,9 @@
                         visibleInFilterBar="true"
                     >
                         <fb:control>
-                            <Input
+                            <MultiInput
                                 id="tranche"
                                 name="{i18n>tranche}"
-                                showValueHelp="true"
-                                valueHelpIconSrc="sap-icon://value-help"
                                 valueHelpRequest=".onDialogOpen"
                             />
                         </fb:control>

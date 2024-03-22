@@ -16,6 +16,8 @@ import ListBinding from "sap/ui/model/ListBinding";
 import Filter from "sap/ui/model/Filter";
 import FilterOperator from "sap/ui/model/FilterOperator";
 import Core from "sap/ui/core/Core";
+import MultiInput from "sap/m/MultiInput";
+import Token from "sap/m/Token";
 
 /**
  * @namespace amalisov.cuibono.controller
@@ -25,6 +27,7 @@ export default abstract class BaseController extends Controller {
 	public dialogContent: string = ""
 	public inputFilter: any = [];
 	public ColumnName: string = "";
+	public MultiInputId: string = "";
 	/**
 	 * Convenience method for accessing the component of the controller's view.
 	 * @returns The component of the controller's view
@@ -170,6 +173,7 @@ export default abstract class BaseController extends Controller {
 				this.oDialog.addContent(textArea1);
 			    this.dialogContent = textArea1.getId();
 				this.ColumnName = resourceBundle.getText("LocalID")
+				this.MultiInputId = localId.getId();
 				break;
 
 			case nameId:
@@ -179,6 +183,7 @@ export default abstract class BaseController extends Controller {
 				this.oDialog.addContent(textArea2);
 			    this.dialogContent = textArea2.getId();
 				this.ColumnName = resourceBundle.getText("Name")
+				this.MultiInputId = nameId.getId();
 				break;
 
 			case departmentId:
@@ -188,6 +193,7 @@ export default abstract class BaseController extends Controller {
 				this.oDialog.addContent(textArea3);
 			    this.dialogContent = textArea3.getId();
 				this.ColumnName= resourceBundle.getText("Department")
+				this.MultiInputId = departmentId.getId();
 				break;
 
 			case trancheId:
@@ -197,6 +203,7 @@ export default abstract class BaseController extends Controller {
 				this.oDialog.addContent(textArea4);
 			    this.dialogContent = textArea4.getId();
 				this.ColumnName = resourceBundle.getText("Tranche")
+				this.MultiInputId = trancheId.getId();
 				break;
 		}
 
@@ -210,10 +217,43 @@ export default abstract class BaseController extends Controller {
 		if (this.oDialog && this.dialogContent) {
 			const textArea = Core.byId(this.dialogContent) as TextArea;
 	        this.inputFilter = textArea.getValue();
+			const holderMultiInput = this.getView().byId(this.MultiInputId) as MultiInput;
+			const aTokens = this.inputFilter.split(',').map(function (sValue:any) {
+				return new Token({
+					key: sValue,
+					text: sValue
+				});
+			});
+	
+			holderMultiInput.setTokens(aTokens);
 			this.onFilter();
 			this.oDialog.close();
 			this.oDialog.destroyContent(); 
 		}
+	}
+	
+	public onClearFilter(): void {
+		const oView = this.getView();
+		const oFilterBar = oView.byId("filterbar") as FilterBar;
+		const oTable = oView.byId("Table") as Table;
+	
+		// Clear the filter inputs in the filter bar
+		oFilterBar.getFilterGroupItems().forEach(oFilterGroupItem => {
+			const oControl = oFilterGroupItem.getControl() as any;
+			if (oControl.setSelectedKeys) {
+				oControl.setSelectedKeys([]);
+			} else if (oControl.setValue) {
+				oControl.setValue("");
+			}
+		});
+	     
+	    const holderMultiInput = oView.byId(this.MultiInputId) as MultiInput;
+		if (holderMultiInput) {
+			holderMultiInput.removeAllTokens();
+		}
+		const oBinding = oTable.getBinding("items") as ListBinding;
+		oBinding.filter([]);
+		this.inputFilter = '';
 	}
 
 	public closingDialog(): void {

@@ -38,7 +38,7 @@
                             <Label text="{i18n>status}" />
                             <Text text="Open" />
                         </VBox>
-                        <Hbox class="formRows firstRow">
+                        <HBox class="formRows firstRow">
                             <VBox class="tranchItems">
                                 <Label
                                     text="{i18n>trancheName}"
@@ -71,7 +71,7 @@
                                     />
                                 </Select>
                             </VBox>
-                        </Hbox>
+                        </HBox>
 
                         <VBox class="tranchItems">
                             <Label text="{i18n>trancheDescription}" />
@@ -84,7 +84,7 @@
                             />
                         </VBox>
 
-                        <Hbox class="formRows">
+                        <HBox class="formRows">
                             <VBox class="tranchItems">
                                 <Label
                                     text="{i18n>startDate}"
@@ -112,9 +112,9 @@
                                     class="sapUiSmallMarginBottom inputs"
                                 />
                             </VBox>
-                        </Hbox>
+                        </HBox>
 
-                        <Hbox class="formRows">
+                        <HBox class="formRows">
                             <VBox class="tranchItems">
                                 <Label text="{i18n>trancheWeight}" />
                                 <Input
@@ -134,7 +134,7 @@
                                     class="sapUiSmallMarginBottom inputs"
                                 />
                             </VBox>
-                        </Hbox>
+                        </HBox>
                     </VBox>
                 </f:content>
             </f:SimpleForm>
