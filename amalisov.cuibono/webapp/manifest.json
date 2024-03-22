@@ -87,7 +87,7 @@
 				}
 			},
 
-			"tranchesBind": {
+			"tranches": {
 				"type": "sap.ui.model.odata.v4.ODataModel",
 				"dataSource": "bonusTranche",
 				"preload": true,
