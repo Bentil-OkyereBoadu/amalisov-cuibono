@@ -98,11 +98,11 @@ export default class Main extends BaseController {
 
 	//use boolean to control when dates are added
 	private constructTrancheData(oContext: any, includeDates: boolean): Tranche {
-		const sTrancheName = oContext.getProperty("TrancheName");
-		const sLocation = oContext.getProperty("Location");
-		const nTrancheWeight = oContext.getProperty("TrancheWeight");
-		const sDescription = oContext.getProperty("Description");
-		const sOriginDate = oContext.getProperty("OriginDate");
+		const sTrancheName = oContext.getProperty("name");
+		const sLocation = oContext.getProperty("location");
+		const nTrancheWeight = oContext.getProperty("weight");
+		const sDescription = oContext.getProperty("createdBy");
+		const sOriginDate = oContext.getProperty("createdAt");
 		const aTargets = oContext.getProperty("Targets");
 		const sTrancheId = oContext.getProperty("ID");
 
@@ -110,8 +110,8 @@ export default class Main extends BaseController {
 			trancheID: sTrancheId,
 			TrancheName: sTrancheName,
 			Location: sLocation,
-			StartDate: includeDates ? oContext.getProperty("StartDate") : "",
-			EndDate: includeDates ? oContext.getProperty("EndDate") : "",
+			StartDate: includeDates ? oContext.getProperty("startDate") : "",
+			EndDate: includeDates ? oContext.getProperty("endDate") : "",
 			OriginDate: sOriginDate,
 			TrancheWeight: nTrancheWeight,
 			Description: sDescription,

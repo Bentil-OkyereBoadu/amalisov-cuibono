@@ -25,7 +25,7 @@
                 id="Table"
                 class="trancheTable"
                 width="auto"
-                items="{tranchesBind>/BonusTranche}"
+                items="{tranches>/BonusTranche}"
             >
                 <headerToolbar>
                     <Toolbar class="sapUiSmallMarginBottom">
@@ -62,14 +62,14 @@
 
                 <items>
                     <ColumnListItem vAlign="Middle">
-                        <Text text="{tranchesBind>Status}" />
-                        <Text text="{tranchesBind>name}" />
-                        <Text text="{tranchesBind>location}" />
+                        <Text text="{tranches>Status}" />
+                        <Text text="{tranches>name}" />
+                        <Text text="{tranches>location}" />
                         <Text
-                            text="{tranchesBind>startDate}"
+                            text="{tranches>startDate}"
                         />
                         <Text
-                            text="{tranchesBind>endDate}"
+                            text="{tranches>endDate}"
                         />
                         <HBox class="interactionIcons">
                             <core:Icon

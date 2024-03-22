@@ -93,7 +93,7 @@
                                 <DatePicker
                                     id="startDateInput"
                                     placeholder="{i18n>datePlaceholder}"
-                                    value="{formatter: 'formatter.formatDate', path: 'updateModel>/StartDate'}"
+                                    value="{updateModel>/StartDate}"
                                     required="true"
                                     class="sapUiSmallMarginBottom inputs"
                                 />
@@ -108,7 +108,7 @@
                                     id="endDateInput"
                                     placeholder="{i18n>datePlaceholder}"
                                     required="true"
-                                    value="{formatter: 'formatter.formatDate', path: 'updateModel>/EndDate'}"
+                                    value="{updateModel>/EndDate}"
                                     class="sapUiSmallMarginBottom inputs"
                                 />
                             </VBox>
