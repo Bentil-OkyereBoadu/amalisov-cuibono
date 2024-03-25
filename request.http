@@ -24,6 +24,11 @@ Content-Type: application/json
 #
 GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche(83ba4c62-53b1-4cfc-9d4a-c83be269c28a)?$expand=trancheParticipations,targets
 
+###
+#
+# GET BONUSTRENCH  
+#
+GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche(25d7fc18-00a6-42b6-b7c1-f90dc4cb6f69)
 
 ###
 #
@@ -43,9 +48,22 @@ Content-Type: application/json
 
 ###
 #
+# UPDATE BONUS TRENCH   
+#
+POST   http://localhost:4004/odata/v4/bonusTranche/updateBonusTranche
+Content-Type: application/json
+
+{
+  "ID":"25d7fc18-00a6-42b6-b7c1-f90dc4cb6f69",
+  "weight":30
+}
+
+
+###
+#
 # DELETE BONUS TRENCH   
 #
-POST   http://localhost:4004/odata/v4/bonusTranche/createBonusTranche
+POST   http://localhost:4004/odata/v4/bonusTranche/deleteBonusTranche
 Content-Type: application/json
 
 {
