@@ -1,11 +1,11 @@
 {
     "compilerOptions": {
-       "target": "es6",
-       "module": "commonjs",
-       "outDir": "./gen/srv/srv",
+       "target": "es2021",
+       "module": "NodeNext",
+       "outDir": "./gen/srv",
        "rootDir": "./",
        "baseUrl": "./",
-       "moduleResolution": "node",
+       "moduleResolution": "NodeNext",
        "skipLibCheck": true,
        "preserveConstEnums": true,
        "sourceMap": false,
@@ -14,11 +14,17 @@
        "strictNullChecks": false,
        "strictPropertyInitialization": false,
        "esModuleInterop": true,
+       "resolveJsonModule": true,
        "emitDecoratorMetadata": true,
-       "experimentalDecorators": true
+       "experimentalDecorators": true,
+       "paths": {
+         "#cds-models/*": ["./@cds-models/*/index.ts"]
+       },
      
     },
     "include": [
-       "./srv/**/*" 
-    ]
+      "srv/**/*.ts",
+      "src/**/**/*.ts",
+    ],
+    "exclude": ["app/**/*","scripts/**/*.ts"]
 }

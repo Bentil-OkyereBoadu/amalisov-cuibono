@@ -6,7 +6,6 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@cap-js/cds-typer": "^0.18.0",
     "@sap/cds": "^7",
     "@sap/cds-dk": "^7",
     "@sap/cds-hana": "^2",
@@ -17,18 +16,26 @@
     "cds-routing-handlers": "^3.0.7",
     "express": "^4.18.2",
     "passport": "^0",
+    "rimraf": "^5.0.5",
     "ts-node": "^10.9.2",
     "typedi": "^0.10.0",
     "typescript": "^5.3.3"
   },
   "devDependencies": {
+    "@cap-js/cds-typer": "^0.10.0",
     "@cap-js/sqlite": "^1"
   },
   "scripts": {
-    "start": "npx cds run",
+    "start": "npx -p @sap/cds-dk cds-serve --profile production",
     "watch": "npx cds-ts watch",
     "db:sqlite": "npx cds deploy -2 sqlite:./db.sqlite",
     "generate-types": "npx @cap-js/cds-typer ./srv/index.cds --outputDirectory ./@cds-models",
+    "build-mta": "mbt build -t gen --mtar mta.tar",
+    "build:cf": "npm run build:cds && npm run cleanup:ts && npm run build:ts",
+    "build:ts": "npx tsc",
+    "build:cds": "cds build --production",
+    "cleanup:ts": "npx rimraf -v -g gen/srv/srv/**/*.ts",
+    "deploy": "npm i && npm run build-mta && cf deploy gen/mta.tar --delete-services --abort-on-error && npm i",
     "start-fe": "cd ./amalisov.cuibono && npm run start"
   },
   "imports": {
