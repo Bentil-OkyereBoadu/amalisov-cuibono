@@ -148,7 +148,7 @@
                         <cells>
                             <CheckBox
                                 enabled="{ 
-                                path: 'participant>status', 
+                                path: 'participant>Status', 
                                 formatter: 'formatter.statusEnabled' 
                             }"
                                 select=".onSelectChange"

@@ -127,15 +127,21 @@ export default class Main extends BaseController {
 		const oModel = oView.getModel("tranches") as ODataModel;
 		const oSource = oEvent.getSource().getBindingContext("tranches");
 		const resourceBundle: ResourceBundle = await this.getResourceBundle();
-		const oObjectContext: any = oSource.getObject();
-		const ID: string = oObjectContext.ID;
-		const sPath = "/Tranches(" + ID + ")";
-		try {
-			await oModel.delete(sPath);
-			oModel.refresh();
-			MessageBox.success(resourceBundle.getText("deleteTranche"));
-		} catch (error) {
-			MessageBox.error(resourceBundle.getText("errorDeleteTranche"));
+
+		const oObjectContext = oSource.getObject();
+		const bonusID: string = oObjectContext.ID;
+
+		if (bonusID) {
+			try {
+				await oModel.bindContext('/deleteBonusTranche(...)') 
+				    .setParameter('ID', bonusID)
+					.execute();
+				MessageBox.success(resourceBundle.getText("deleteTranche"));
+				oModel.refresh();
+			} catch (error) {
+				MessageBox.error(resourceBundle.getText("errorDeleteTranche"));
+			}
 		}
+
 	}
 }
