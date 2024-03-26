@@ -47,7 +47,7 @@
                                 <Input
                                     id="nameInput"
                                     required="true"
-                                    value="{updateModel>/TrancheName}"
+                                    value="{updateModel>/name}"
                                     type="Text"
                                     class="sapUiSmallMarginBottom inputs textInput"
                                 />
@@ -59,8 +59,8 @@
                                     required="true"
                                 />
                                 <Select
-                                    items="{tranches>/Locations}"
-                                    value="{updateModel>/Location}"
+                                    items="{tranches>/locations}"
+                                    value="{updateModel>/location}"
                                     change=".onSortSelectChange"
                                     class="inputs"
                                     id="locationSelect"
@@ -78,7 +78,7 @@
                             <TextArea
                                 
                                 id="descriptionInput"
-                                value="{updateModel>/Description}"
+                                value="{updateModel>/description}"
                                 rows="4"
                                 class="sapUiSmallMarginBottom textArea"
                             />
@@ -93,7 +93,7 @@
                                 <DatePicker
                                     id="startDateInput"
                                     placeholder="{i18n>datePlaceholder}"
-                                    value="{updateModel>/StartDate}"
+                                    value="{updateModel>/startDate}"
                                     required="true"
                                     class="sapUiSmallMarginBottom inputs"
                                 />
@@ -108,7 +108,7 @@
                                     id="endDateInput"
                                     placeholder="{i18n>datePlaceholder}"
                                     required="true"
-                                    value="{updateModel>/EndDate}"
+                                    value="{updateModel>/endDate}"
                                     class="sapUiSmallMarginBottom inputs"
                                 />
                             </VBox>
@@ -120,7 +120,7 @@
                                 <Input
                                     id="weightInput"
                                     type="Text"
-                                    value="{updateModel>/TrancheWeight}"
+                                    value="{updateModel>/weight}"
                                     class="sapUiSmallMarginBottom inputs textInput"
                                 />
                             </VBox>
@@ -130,7 +130,7 @@
                                 <DatePicker
                                     id="originDateInput"
                                     placeholder="{i18n>datePlaceholder}"
-                                    value="{formatter: 'formatter.formatDate', path: 'updateModel>/OriginDate'}"
+                                    value="{formatter: 'formatter.formatDate', path: 'updateModel>/originDate'}"
                                     class="sapUiSmallMarginBottom inputs"
                                 />
                             </VBox>
@@ -142,7 +142,7 @@
             <!-- Table -->
             <Panel class="tablePanel">
                 <Table
-                    items="{updateModel>/Targets}"
+                    items="{updateModel>/targets}"
                     width="45%"
                 >
                     <headerToolbar>
@@ -208,6 +208,7 @@
                 <Button
                     type="Accept"
                     text="Save"
+                    press=".onSaveTranche"
                 />
                 <Button
                     type="Default"

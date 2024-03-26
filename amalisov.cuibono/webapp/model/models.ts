@@ -10,16 +10,16 @@ interface Target {
 }
 
 interface Tranche {
-    trancheID: string;
-    TrancheName: string;
-    Location: string;
-    StartDate: string;
-    EndDate: string;
-	OriginDate: string;
-    TrancheWeight: number;
-    Description: string;
+    ID: string;
+    name: string;
+    location: string;
+    startDate: string;
+    endDate: string;
+	originDate: string;
+    weight: number;
+    description: string;
     Status: string;
-    Targets: Target[];
+    targets: Target[];
 }
 
 
@@ -32,16 +32,16 @@ export default {
 
 	createUpdateModel: () => {
 		const oData: Tranche = {
-			trancheID: "",
-            TrancheName: "",
-            Location: "",
-            StartDate: "",
-            EndDate: "",
-			OriginDate: "",
-            TrancheWeight: 0,
-            Description: "",
+			ID: "",
+            name: "",
+            location: "",
+            startDate: "",
+            endDate: "",
+			originDate: "",
+            weight: 0,
+            description: "",
             Status: "",
-            Targets: [{
+            targets: [{
 				TargetName:"", 
 				TargetWeight: 0, 
 				Achieved: ""

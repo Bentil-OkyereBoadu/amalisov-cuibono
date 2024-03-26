@@ -47,29 +47,10 @@
                             id="sortParticipant"
                             press=".onOpenSortDialog"
                         />
-                        <ViewSettingsDialog
-                            class="sapUiResponsiveMargin"
-                            id="sortDialog"
-                            confirm=".onSortChange"
-                        >
-                            <sortItems>
-                                <ViewSettingsItem
-                                    text="{i18n>name}"
-                                    key="1"
-                                    id="1"
-                                />
-                                <ViewSettingsItem
-                                    text="{i18n>department}"
-                                    key="2"
-                                    id="2"
-                                />
-                                <ViewSettingsItem
-                                    text="{i18n>status}"
-                                    key="3"
-                                    id="3"
-                                />
-                            </sortItems>
-                        </ViewSettingsDialog>
+                        <core:Fragment
+                            fragmentName="amalisov.cuibono.view.fragments.SortDialog"
+                            type="XML"
+                        />
                     </Toolbar>
                 </headerToolbar>
                 <columns>

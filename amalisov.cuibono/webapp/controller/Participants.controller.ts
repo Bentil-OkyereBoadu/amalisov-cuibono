@@ -45,7 +45,7 @@ export default class Participants extends BaseController {
 
 	private onRouteMatched(): void {
 		const oGlobalModel = this.getModel("updateModel");
-		const sTrancheID = oGlobalModel.getProperty("/trancheID");
+		const sTrancheID = oGlobalModel.getProperty("/ID");
 
 		this.applyFilter(sTrancheID);
 	}

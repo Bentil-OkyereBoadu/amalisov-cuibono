@@ -25,7 +25,13 @@
                 id="Table"
                 class="trancheTable"
                 width="auto"
-                items="{tranches>/BonusTranche}"
+                items="{
+                        path: 'tranches>/BonusTranche',
+                        sorter: {
+                            path: 'createdAt',
+                            descending: true
+                        }
+                    }"
             >
                 <headerToolbar>
                     <Toolbar class="sapUiSmallMarginBottom">

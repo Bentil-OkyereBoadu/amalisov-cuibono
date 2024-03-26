@@ -15,16 +15,16 @@ interface Target {
 }
 
 interface Tranche {
-	trancheID: string;
-	TrancheName: string;
-	Location: string;
-	StartDate: string;
-	EndDate: string;
-	OriginDate: string;
-	TrancheWeight: number;
-	Description: string;
-	Status?: string;
-	Targets: Target[];
+	ID: string;
+    name: string;
+    location: string;
+    startDate: string;
+    endDate: string;
+	originDate: string;
+    weight: number;
+    description: string;
+    Status: string;
+    targets: Target[];
 }
 
 /**
@@ -103,20 +103,20 @@ export default class Main extends BaseController {
 		const nTrancheWeight = oContext.getProperty("weight");
 		const sDescription = oContext.getProperty("createdBy");
 		const sOriginDate = oContext.getProperty("createdAt");
-		const aTargets = oContext.getProperty("Targets");
+		const aTargets = oContext.getProperty("targets");
 		const sTrancheId = oContext.getProperty("ID");
 
 		const oData: Tranche = {
-			trancheID: sTrancheId,
-			TrancheName: sTrancheName,
-			Location: sLocation,
-			StartDate: includeDates ? oContext.getProperty("startDate") : "",
-			EndDate: includeDates ? oContext.getProperty("endDate") : "",
-			OriginDate: sOriginDate,
-			TrancheWeight: nTrancheWeight,
-			Description: sDescription,
+			ID: sTrancheId,
+			name: sTrancheName,
+			location: sLocation,
+			startDate: includeDates ? oContext.getProperty("startDate") : "",
+			endDate: includeDates ? oContext.getProperty("endDate") : "",
+			originDate: sOriginDate,
+			weight: nTrancheWeight,
+			description: sDescription,
 			Status: includeDates ? oContext.getProperty("Status") : "",
-			Targets: aTargets,
+			targets: aTargets,
 		};
 
 		return oData;
