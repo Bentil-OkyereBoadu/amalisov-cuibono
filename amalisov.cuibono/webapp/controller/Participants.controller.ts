@@ -12,6 +12,7 @@ import Sorter from "sap/ui/model/Sorter";
 import ODataListBinding from "sap/ui/model/odata/v4/ODataListBinding";
 import MessageToast from "sap/m/MessageToast";
 import ResourceBundle from 'sap/base/i18n/ResourceBundle';
+import CheckBox from "sap/m/CheckBox";
 
 /**
  * @namespace amalisov.cuibono.controller
@@ -80,6 +81,19 @@ export default class Participants extends BaseController {
 		  }) 
 		}
 		console.log(this.selectedItems);
+	}
+
+	public onSelectAll(oEvent: any):void{
+		const oTable= this.getView().byId('Table') as Table;
+		const bCheckboxState = oEvent.getParameter('selected')
+
+		oTable.getItems().forEach(function(item: any) {
+			const oCheckBoxCell= item.getCells()[0] as CheckBox;
+			const sCellStatus= item.getCells()[5].getText();
+			if(sCellStatus !== "Completed"){
+				oCheckBoxCell.setSelected(bCheckboxState)
+			}
+		})
 	}
 
 	public async onSortChange(event: any): Promise<void> {

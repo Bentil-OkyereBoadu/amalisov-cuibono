@@ -78,7 +78,7 @@
                         minScreenWidth="Tablet"
                         demandPopin="true"
                     >
-                        <CheckBox />
+                        <CheckBox select=".onSelectAll" />
                     </Column>
                     <Column
                         minScreenWidth="Tablet"
@@ -170,7 +170,7 @@
                                 path: 'participant>status', 
                                 formatter: 'formatter.statusEnabled' 
                             }"
-                              select=".onSelectChange"
+                                select=".onSelectChange"
                             />
                             <ObjectIdentifier title="{participant>localID}" />
                             <Text text="{participant>name}" />
