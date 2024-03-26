@@ -12,7 +12,8 @@
                 useToolbar="false"
                 showFilterConfiguration="false"
                 showClearOnFB="true"
-                search=".onFilter" 
+                showGoOnFB="false"
+                search=".onFilter"
                 clear=".onClearFilter"
             >
                 <fb:filterGroupItems>
@@ -26,6 +27,7 @@
                             <MultiInput
                                 id="localId"
                                 name="{i18n>localId}"
+                                liveChange=".onDialogOpen"
                                 valueHelpRequest=".onDialogOpen"
                             />
                         </fb:control>
@@ -67,7 +69,7 @@
                         <fb:control>
                             <MultiComboBox
                                 name="{i18n>location}"
-                                
+                                selectionChange=".onFilter"
                                 items="{participant>/ProductCategories}"
                             >
                                 <core:Item
@@ -84,7 +86,10 @@
                         visibleInFilterBar="true"
                     >
                         <fb:control>
-                            <MultiComboBox name="{i18n>fiscalYear}">
+                            <MultiComboBox
+                                name="{i18n>fiscalYear}"
+                                selectionChange=".onFilter"
+                            >
                                 <core:Item
                                     key="key"
                                     text="name"
@@ -108,12 +113,15 @@
                     </fb:FilterGroupItem>
                     <fb:FilterGroupItem
                         name="status"
-                        label="{i18n>status}"
+                        label="{i18n>Status}"
                         groupName="Group1"
                         visibleInFilterBar="true"
                     >
                         <fb:control>
-                            <MultiComboBox name="{i18n>status}">
+                            <MultiComboBox
+                                name="{i18n>Status}"
+                                selectionChange=".onFilter"
+                            >
                                 <core:Item
                                     key="key"
                                     text="name"
@@ -128,7 +136,10 @@
                         visibleInFilterBar="true"
                     >
                         <fb:control>
-                            <MultiComboBox name="{i18n>excluded}">
+                            <MultiComboBox
+                                name="{i18n>excluded}"
+                                selectionChange=".onFilter"
+                            >
                                 <core:Item
                                     key="key"
                                     text="name"

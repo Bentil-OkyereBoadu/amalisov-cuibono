@@ -10,13 +10,14 @@
                 id="filterbar"
                 useToolbar="false"
                 search=".onFilter"
+                showGoOnFB="false"
                 showFilterConfiguration="false"
             >
                 <fb:filterGroupItems>
                     <fb:FilterGroupItem
                         name="search"
                         label="{i18n>search}"
-                        groupName="Group1"  
+                        groupName="Group1"
                         visibleInFilterBar="true"
                     >
                         <fb:control>
@@ -31,18 +32,26 @@
 
                     <fb:FilterGroupItem
                         name="Status"
-                        label="{i18n>status}"
+                        label="{i18n>Status}"
                         groupName="Group1"
                         visibleInFilterBar="true"
                     >
                         <fb:control>
                             <MultiComboBox
-                                name="{i18n>status}"
-                                items="{tranchesBind>/Status}"
+                                name="{i18n>Status}"
+                                selectionChange=".onFilter"
                             >
                                 <core:Item
-                                    key="{tranchesBind>Key}"
-                                    text="{tranchesBind>Name}"
+                                    key="{i18n>runningStatus}"
+                                    text="{i18n>runningStatus}"
+                                />
+                                <core:Item
+                                    key="{i18n>lockedStatus}"
+                                    text="{i18n>lockedStatus}"
+                                />
+                                <core:Item
+                                    key="{i18n>completedStatus}"
+                                    text="{i18n>completedStatus}"
                                 />
                             </MultiComboBox>
                         </fb:control>
@@ -56,11 +65,19 @@
                         <fb:control>
                             <MultiComboBox
                                 name="{i18n>trancheLocation}"
-                                items="{tranchesBind>/Locations}"
+                                selectionChange=".onFilter"
                             >
                                 <core:Item
-                                    key="{tranchesBind>key}"
-                                    text="{tranchesBind>Name}"
+                                    key="{i18n>location1}"
+                                    text="{i18n>location1}"
+                                />
+                                <core:Item
+                                    key="{i18n>location2}"
+                                    text="{i18n>location2}"
+                                />
+                                <core:Item
+                                    key="{i18n>location3}"
+                                    text="{i18n>location3}"
                                 />
                             </MultiComboBox>
                         </fb:control>
@@ -74,7 +91,7 @@
                         <fb:control>
                             <MultiComboBox
                                 name="{i18n>fiscalYear}"
-                              
+                                selectionChange=".onFilter"
                             >
                                 <core:Item
                                     key="createdAt"

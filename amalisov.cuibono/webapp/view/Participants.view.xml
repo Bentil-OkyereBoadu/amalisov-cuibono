@@ -47,29 +47,10 @@
                             id="sortParticipant"
                             press=".onOpenSortDialog"
                         />
-                        <ViewSettingsDialog
-                            class="sapUiResponsiveMargin"
-                            id="sortDialog"
-                            confirm=".onSortChange"
-                        >
-                            <sortItems>
-                                <ViewSettingsItem
-                                    text="{i18n>name}"
-                                    key="1"
-                                    id="1"
-                                />
-                                <ViewSettingsItem
-                                    text="{i18n>department}"
-                                    key="2"
-                                    id="2"
-                                />
-                                <ViewSettingsItem
-                                    text="{i18n>status}"
-                                    key="3"
-                                    id="3"
-                                />
-                            </sortItems>
-                        </ViewSettingsDialog>
+                        <core:Fragment
+                            fragmentName="amalisov.cuibono.view.fragments.SortDialog"
+                            type="XML"
+                        />
                     </Toolbar>
                 </headerToolbar>
                 <columns>
@@ -78,7 +59,7 @@
                         minScreenWidth="Tablet"
                         demandPopin="true"
                     >
-                        <CheckBox />
+                        <CheckBox select=".onSelectAll" />
                     </Column>
                     <Column
                         minScreenWidth="Tablet"
@@ -108,7 +89,7 @@
                         minScreenWidth="Tablet"
                         demandPopin="true"
                     >
-                        <Label text="{i18n>status}" />
+                        <Label text="{i18n>Status}" />
                     </Column>
                     <Column
                         minScreenWidth="Tablet"
@@ -167,16 +148,16 @@
                         <cells>
                             <CheckBox
                                 enabled="{ 
-                                path: 'participant>status', 
+                                path: 'participant>Status', 
                                 formatter: 'formatter.statusEnabled' 
                             }"
-                              select=".onSelectChange"
+                                select=".onSelectChange"
                             />
                             <ObjectIdentifier title="{participant>localID}" />
                             <Text text="{participant>name}" />
                             <Text text="{participant>department}" />
                             <Text text="{participant>tranche}" />
-                            <Text text="{participant>status}" />
+                            <Text text="{participant>Status}" />
                             <Text text="{participant>location}" />
                             <Text text="{participant>startDate}" />
                             <Text text="{participant>endDate}" />

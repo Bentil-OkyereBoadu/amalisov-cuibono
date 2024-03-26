@@ -70,9 +70,6 @@
     gap: 20px;
     width: 50%;
 }
-.interactionIcons{
-    gap: 10px;
-}
 .icon{
     color: green;
 }
@@ -82,6 +79,17 @@
 .myCustomDialog .sapMDialogScrollCont {
     margin: 15px;
 }
+
+.sapMBtnInner{
+    border: none;
+}
+.mainIcon .sapMBtnIcon{
+    color: green !important; 
+    padding: 0 !important;
+    margin: 0  !important;
+    height: 20px !important;
+}
+
 
 @media (max-width: 1024px) {
     .tranchItems{
