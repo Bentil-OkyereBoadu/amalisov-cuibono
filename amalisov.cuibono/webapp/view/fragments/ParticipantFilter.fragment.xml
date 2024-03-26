@@ -113,13 +113,13 @@
                     </fb:FilterGroupItem>
                     <fb:FilterGroupItem
                         name="status"
-                        label="{i18n>status}"
+                        label="{i18n>Status}"
                         groupName="Group1"
                         visibleInFilterBar="true"
                     >
                         <fb:control>
                             <MultiComboBox
-                                name="{i18n>status}"
+                                name="{i18n>Status}"
                                 selectionChange=".onFilter"
                             >
                                 <core:Item

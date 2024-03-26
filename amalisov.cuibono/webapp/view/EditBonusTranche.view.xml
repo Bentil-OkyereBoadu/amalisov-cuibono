@@ -35,7 +35,7 @@
                 <f:content>
                     <VBox class="formBox">
                         <VBox class="tranchItems">
-                            <Label text="{i18n>status}" />
+                            <Label text="{i18n>Status}" />
                             <Text text="Open" />
                         </VBox>
                         <HBox class="formRows firstRow">
@@ -181,14 +181,12 @@
                                     src="sap-icon://edit"
                                     class="icon"
                                     press=".onOpenEditDialog"
-                                    visible="{path: 'thread>IsDeleted', formatter: '.formatter.isVisible'}"
                                 />
 
                                 <core:Icon
                                     src="sap-icon://delete"
                                     press=".onDeleteAnswer"
                                     class="icon"
-                                    visible="{path: 'thread>IsDeleted', formatter: '.formatter.isVisible'}"
                                 />
                             </HBox>
                         </ColumnListItem>

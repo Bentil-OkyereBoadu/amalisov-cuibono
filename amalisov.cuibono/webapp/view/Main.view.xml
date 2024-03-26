@@ -44,12 +44,21 @@
                             class="btn"
                             press=".onCreateNewTranche"
                         />
+                        <Button
+                            icon="sap-icon://sort"
+                            id="sortParticipant"
+                            press=".onOpenSortDialog"
+                        />
+                        <core:Fragment
+                            fragmentName="amalisov.cuibono.view.fragments.SortDialog"
+                            type="XML"
+                        />
                     </Toolbar>
                 </headerToolbar>
 
                 <columns>
                     <Column width="12%">
-                        <Label text="{i18n>status}" />
+                        <Label text="{i18n>Status}" />
                     </Column>
                     <Column>
                         <Label text="{i18n>trancheName}" />

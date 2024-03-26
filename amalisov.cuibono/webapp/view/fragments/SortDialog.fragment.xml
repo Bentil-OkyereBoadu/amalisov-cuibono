@@ -19,7 +19,7 @@
                 id="2"
             />
             <ViewSettingsItem
-                text="{i18n>status}"
+                text="{i18n>Status}"
                 key="3"
                 id="3"
             />

@@ -89,7 +89,7 @@
                         minScreenWidth="Tablet"
                         demandPopin="true"
                     >
-                        <Label text="{i18n>status}" />
+                        <Label text="{i18n>Status}" />
                     </Column>
                     <Column
                         minScreenWidth="Tablet"
@@ -157,7 +157,7 @@
                             <Text text="{participant>name}" />
                             <Text text="{participant>department}" />
                             <Text text="{participant>tranche}" />
-                            <Text text="{participant>status}" />
+                            <Text text="{participant>Status}" />
                             <Text text="{participant>location}" />
                             <Text text="{participant>startDate}" />
                             <Text text="{participant>endDate}" />
