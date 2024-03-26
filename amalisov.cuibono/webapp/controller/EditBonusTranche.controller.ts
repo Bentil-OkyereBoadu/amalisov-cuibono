@@ -72,7 +72,7 @@ export default class EditBonusTranche extends BaseController {
 		let sToastMessage = "";
 		if (sTrancheID === "") {
 			sPath = "/createTranche";
-			oData = { ...this.constructTrancheData(), targets: [] };
+			oData = { ...this.constructTrancheData(), targets: [], Status: "Open" };
 			sToastMessage = "createdTranche";
 		} else if (sTrancheID !== "") {
 			sPath = "/updateBonusTranche";
@@ -111,7 +111,7 @@ export default class EditBonusTranche extends BaseController {
 		const oData: TrancheData = {
 			// ID: sTrancheId,
 			name: sTrancheName,
-			location: sLocation,
+			location: "Ghana", //sLocation,
 			startDate: sStartDate,
 			endDate: sEndDate,
 			// weight: nTrancheWeight,
