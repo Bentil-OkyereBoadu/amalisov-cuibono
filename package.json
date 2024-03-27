@@ -28,6 +28,8 @@
   "scripts": {
     "start": "npx -p @sap/cds-dk cds-serve --profile production",
     "watch": "npx cds-ts watch",
+    "bind": "cds add hana --for hybrid && cds deploy --to hana --profile hybrid",
+    "hybrid": "npx cds-ts watch --profile hybrid",
     "db:sqlite": "npx cds deploy -2 sqlite:./db.sqlite",
     "generate-types": "npx @cap-js/cds-typer ./srv/index.cds --outputDirectory ./@cds-models",
     "build-mta": "mbt build -t gen --mtar mta.tar",
@@ -62,6 +64,9 @@
             }
           }
         }
+      },
+      "[hybrid]": {
+        "db": "hana"
       }
     }
   }
