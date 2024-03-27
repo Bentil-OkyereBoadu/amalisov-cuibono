@@ -6,7 +6,7 @@ export default {
 	},
 	formatDate: (sDate: string): string => {
         if (sDate) {
-            const oDateFormat = DateFormat.getDateInstance({ pattern: "MM.dd.yyyy" });
+            const oDateFormat = DateFormat.getDateInstance({ pattern: "MM/dd/yyyy" });
             return oDateFormat.format(new Date(sDate));
         }
         return sDate;
