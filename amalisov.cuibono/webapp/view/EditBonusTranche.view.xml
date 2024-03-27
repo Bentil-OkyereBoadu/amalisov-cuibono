@@ -66,8 +66,16 @@
                                     id="locationSelect"
                                 >
                                     <core:ListItem
-                                        key="{tranches>Id}"
-                                        text="{tranches>Name}"
+                                        key="{i18n>location1}"
+                                        text="{i18n>location1}"
+                                    />
+                                    <core:ListItem
+                                        key="{i18n>location2}"
+                                        text="{i18n>location2}"
+                                    />
+                                    <core:ListItem
+                                        key="{i18n>location3}"
+                                        text="{i18n>location3}"
                                     />
                                 </Select>
                             </VBox>

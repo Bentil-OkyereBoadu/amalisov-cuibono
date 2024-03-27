@@ -13,7 +13,7 @@ import MessageBox from "sap/m/MessageBox";
 interface Target {
     name: string;
     weight: number;
-    achieved: number;
+    achievement: number;
     description: string;
 }
 interface TrancheData {
@@ -93,7 +93,7 @@ export default class EditBonusTranche extends BaseController {
 			targets:[{
 				name: (oView.byId("targetName") as Input).getValue(),
 				weight: weightNumber,
-				achieved: achievedNumber,
+				achievement: achievedNumber,
 			    description: (oView.byId("trancheDescription") as TextArea).getValue(),
 			}]
 			};

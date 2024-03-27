@@ -6,7 +6,7 @@ import Device from "sap/ui/Device";
 interface Target {
     name: string;
     weight: number;
-    achieved: number;
+    achievement: number;
     description: string;
 }
 
@@ -45,7 +45,7 @@ export default {
             targets: [{
 				name:"", 
 				weight: 0, 
-				achieved: 0,
+				achievement: 0,
                 description:"",
 			}
 			]
