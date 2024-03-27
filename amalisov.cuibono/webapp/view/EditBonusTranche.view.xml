@@ -36,7 +36,7 @@
                     <VBox class="formBox">
                         <VBox class="tranchItems">
                             <Label text="{i18n>Status}" />
-                            <Text text="Open" />
+                            <Text text="{updateModel>/Status}" />
                         </VBox>
                         <HBox class="formRows firstRow">
                             <VBox class="tranchItems">
@@ -205,8 +205,27 @@
                 <ToolbarSpacer />
                 <Button
                     type="Accept"
-                    text="Save"
+                    text="{i18n>save}"
                     press=".onSaveTranche"
+                    visible="{path: 'updateModel>/Status', formatter: 'formatter.showSave', targetType:'any'}"
+                />
+                <Button
+                    type="Accept"
+                    text="{i18n>lock}"
+                    press=".onSaveTranche"
+                    visible="{path: 'updateModel>/Status', formatter: 'formatter.showSave', targetType:'any'}"
+                />
+                <Button
+                    type="Accept"
+                    text="{i18n>completedStatus}"
+                    press=".onSaveTranche"
+                    visible="{path: 'updateModel>/Status', formatter: 'formatter.showComplete', targetType:'any'}"
+                />
+                <Button
+                    type="Accept"
+                    text="{i18n>reopen}"
+                    press=".onSaveTranche"
+                    visible="{path: 'updateModel>/Status', formatter: 'formatter.showComplete', targetType:'any'}"
                 />
                 <Button
                     type="Default"
