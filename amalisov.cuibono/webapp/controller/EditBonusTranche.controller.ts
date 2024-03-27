@@ -10,10 +10,15 @@ import MessageBox from "sap/m/MessageBox";
 /**
  * @namespace amalisov.cuibono.controller
  */
-
+interface Target {
+    name: string;
+    weight: number;
+    achieved: number;
+    description: string;
+}
 interface TrancheData {
 	ID?: string;
-	name: string;
+	name?: string;
 	description?: string;
 	location?: string;
 	startDate?: string;
@@ -21,7 +26,7 @@ interface TrancheData {
 	originDate?: string;
 	weight?: string;
 	Status?: string;
-	targets?: [];
+	targets?: Target[];
 }
 export default class EditBonusTranche extends BaseController {
 	public onInit(): void {
@@ -75,7 +80,27 @@ export default class EditBonusTranche extends BaseController {
 		oDialog.close();
 	}
 
-	public onSaveTarget(): void {}
+	public onSaveTarget(): void {
+		const oView = this.getView();
+		const oUpdateModel = this.getModel(
+			"updateModel"
+		) as JSONModel;	
+		const targetWeight= (oView.byId("targetWeight") as Input).getValue()
+		const weightNumber = parseInt(targetWeight.split('--').pop() || '');
+		const targetAchieved= (oView.byId("targetAchievement") as Input).getValue()
+		const achievedNumber = parseInt(targetAchieved.split('--').pop() || '');
+		const oData:TrancheData = {
+			targets:[{
+				name: (oView.byId("targetName") as Input).getValue(),
+				weight: weightNumber,
+				achieved: achievedNumber,
+			    description: (oView.byId("trancheDescription") as TextArea).getValue(),
+			}]
+			};
+		oUpdateModel.setData(oData);
+		this.closeAddTarget();
+		console.log(oData, "model", oUpdateModel)
+	}
 
 	public async onSaveTranche(): Promise<void> {
 		const oView = this.getView();
@@ -83,15 +108,16 @@ export default class EditBonusTranche extends BaseController {
 		const resourceBundle: ResourceBundle = await this.getResourceBundle();
 		const oUpdateModel = this.getModel("updateModel");
 		const sTrancheID = oUpdateModel.getProperty("/ID");
+		console.log(sTrancheID)
 
 		let sPath = "";
 		let oData: TrancheData = {
 			name: "",
 		};
 		let sToastMessage = "";
-		if (sTrancheID === "") {
+		if (!sTrancheID) {
 			sPath = "/createTranche";
-			oData = { ...this.constructTrancheData(), targets: [], Status: "Open" };
+			oData = { ...this.constructTrancheData(), Status: "Open" };
 			sToastMessage = "createdTranche";
 		} else if (sTrancheID !== "") {
 			sPath = "/updateBonusTranche";
@@ -136,7 +162,7 @@ export default class EditBonusTranche extends BaseController {
 			// weight: nTrancheWeight,
 			// description: sDescription,
 			// Status: includeID ? oUpdateModel.getProperty("Status") : "",
-			// targets: [],
+			targets: aTargets,
 		};
 
 		return oData;

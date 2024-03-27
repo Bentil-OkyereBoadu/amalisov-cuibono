@@ -11,7 +11,7 @@
         <content>
             <Label text="{i18n>trancheName}" />
             <Input
-                id="s"
+                id="targetName"
                 required="true"
                 type="Text"
                 class="sapUiSmallMarginBottom"
@@ -19,23 +19,23 @@
 
             <Label text="{i18n>targetWeight}" />
             <Input
-                id="ss"
+                id="targetWeight"
                 required="true"
-                type="Text"
+                type="Number"
                 class="sapUiSmallMarginBottom"
             />
 
             <Label text="{i18n>targetAchievement}" />
             <Input
-                id="sss"
+                id="targetAchievement"
                 required="true"
-                type="Text"
+                type="Number"
                 class="sapUiSmallMarginBottom"
             />
 
             <Label text="{i18n>trancheDescription}" />
             <TextArea
-                id="editArea"
+                id="trancheDescription"
                 rows="3"
                 width="100%"
             />
@@ -43,7 +43,7 @@
         <buttons>
             <Button
                 text="{i18n>save}"
-                press=".onSaveEdit"
+                press=".onSaveTarget"
             />
             <Button
                 text="{i18n>cancel}"

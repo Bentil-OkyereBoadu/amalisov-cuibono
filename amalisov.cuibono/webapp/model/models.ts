@@ -4,9 +4,10 @@ import BindingMode from "sap/ui/model/BindingMode";
 import Device from "sap/ui/Device";
 
 interface Target {
-    TargetName: string;
-    TargetWeight: number;
-    Achieved: string;
+    name: string;
+    weight: number;
+    achieved: number;
+    description: string;
 }
 
 interface Tranche {
@@ -42,9 +43,10 @@ export default {
             description: "",
             Status: "",
             targets: [{
-				TargetName:"", 
-				TargetWeight: 0, 
-				Achieved: ""
+				name:"", 
+				weight: 0, 
+				achieved: 0,
+                description:"",
 			}
 			]
 		};
