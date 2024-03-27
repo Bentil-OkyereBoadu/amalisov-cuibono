@@ -172,9 +172,9 @@
 
                     <items>
                         <ColumnListItem>
-                            <Text text="{updateModel>TargetName}" />
-                            <Text text="{updateModel>TargetWeight}" />
-                            <Text text="{updateModel>Achieved}" />
+                            <Text text="{updateModel>name}" />
+                            <Text text="{updateModel>weight}" />
+                            <Text text="{updateModel>achieved}" />
 
                             <HBox class="interactionIcons">
                                 <core:Icon
