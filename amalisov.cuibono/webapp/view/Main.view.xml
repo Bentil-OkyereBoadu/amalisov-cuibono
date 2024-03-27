@@ -82,10 +82,10 @@
                         <Text text="{tranches>name}" />
                         <Text text="{tranches>location}" />
                         <Text
-                            text="{tranches>startDate}"
+                            text="{formatter: 'formatter.formatDate', path: 'tranches>startDate'}"
                         />
                         <Text
-                            text="{tranches>endDate}"
+                            text="{formatter: 'formatter.formatDate', path: 'tranches>endDate'}"
                         />
                         <HBox>
                             <Button
