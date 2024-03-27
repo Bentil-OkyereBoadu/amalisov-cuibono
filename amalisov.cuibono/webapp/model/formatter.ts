@@ -12,10 +12,20 @@ export default {
         return sDate;
     
 	},
+
 	statusEnabled(status: string): boolean {
         return status !== "Completed";
     },
+
     statusLocked(Status: string): boolean {
-        return Status !== "Locked";
-    }
+        return Status !== "Locked" && Status !== "Completed";
+    },
+
+    showSave(Status: string): boolean {
+        return Status === "Open";
+    },
+    
+    showComplete(Status: string): boolean {
+        return Status === "Locked";
+    },
 };

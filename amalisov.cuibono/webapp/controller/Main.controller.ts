@@ -105,6 +105,7 @@ export default class Main extends BaseController {
 		const sOriginDate = oContext.getProperty("createdAt");
 		const aTargets = oContext.getProperty("targets");
 		const sTrancheId = oContext.getProperty("ID");
+		const sStatus = oContext.getProperty("Status");
 
 		const oData: Tranche = {
 			ID: sTrancheId,
@@ -115,7 +116,7 @@ export default class Main extends BaseController {
 			originDate: sOriginDate,
 			weight: nTrancheWeight,
 			description: sDescription,
-			Status: includeDates ? oContext.getProperty("Status") : "",
+			Status: sStatus,
 			targets: aTargets,
 		};
 

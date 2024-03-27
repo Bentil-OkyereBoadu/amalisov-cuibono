@@ -41,7 +41,7 @@ export default {
 			originDate: "",
             weight: 0,
             description: "",
-            Status: "",
+            Status: "Open",
             targets: [{
 				name:"", 
 				weight: 0, 
