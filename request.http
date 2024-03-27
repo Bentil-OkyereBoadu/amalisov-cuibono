@@ -28,7 +28,7 @@ GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche(8793d488-e07e-421b
 #
 # GET BONUSTRENCH  
 #
-GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche(25d7fc18-00a6-42b6-b7c1-f90dc4cb6f69)
+GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche(4b1da993-1197-487e-9338-92214980d38b)
 
 ###
 #
@@ -43,8 +43,16 @@ Content-Type: application/json
   "endDate": "2024-12-31",
   "Status": "Running",
   "location": "Example Location",
-  "targets":[]
+  "targets": [
+    {
+      "name": "Target 1",
+      "weight": 10,
+      "achievement": 0,
+      "description": "Description of Target 1"
+    }
+  ]
 }
+
 
 ###
 #

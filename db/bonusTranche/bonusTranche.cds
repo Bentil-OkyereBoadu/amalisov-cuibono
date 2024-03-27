@@ -7,8 +7,10 @@ using amalisov.cuibono.trancheParticipation as trancheParticipation from '../tra
 
 entity BonusTranche : cuid,managed {
     name                  : String;
+    description           : String;
     startDate             : String;
     endDate               : String;
+    orignDate             : String;
     weight                : Double default 0.0;
     Status                : bonusStatus;
     location              : String;
@@ -19,7 +21,7 @@ entity BonusTranche : cuid,managed {
 }
 
 type bonusStatus : String enum {
-    Running;
+    Open;
     Locked;
     Completed;
 }
