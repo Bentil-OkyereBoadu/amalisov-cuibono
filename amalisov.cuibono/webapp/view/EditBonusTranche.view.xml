@@ -60,8 +60,6 @@
                                 />
                                 <Select
                                     selectedKey="{updateModel>/location}"
-                                  
-                                    change=".onSortSelectChange"
                                     class="inputs"
                                     id="locationSelect"
                                 >
