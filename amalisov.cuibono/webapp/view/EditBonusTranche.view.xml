@@ -59,7 +59,7 @@
                                     required="true"
                                 />
                                 <Select
-                                    value="{updateModel>/location}"
+                                    selectedKey="{updateModel>/location}"
                                     class="inputs"
                                     id="locationSelect"
                                 >
@@ -180,7 +180,7 @@
                         <ColumnListItem>
                             <Text text="{updateModel>name}" />
                             <Text text="{updateModel>weight}" />
-                            <Text text="{updateModel>achieved}" />
+                            <Text text="{updateModel>achievement}" />
 
                             <HBox class="interactionIcons">
                                 <core:Icon

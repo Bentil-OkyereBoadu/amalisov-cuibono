@@ -26,6 +26,6 @@ export default {
     },
     
     showComplete(Status: string): boolean {
-        return Status === "Locked";
+        return Status === "Locked" || Status === "Completed";
     },
 };

@@ -98,7 +98,7 @@ export default class EditBonusTranche extends BaseController {
 		let sToastMessage = "";
 		if (!sTrancheID) {
 			sPath = "/createTranche";
-			oData = { ...this.constructTrancheData(), Status: "Open" };
+			oData = this.constructTrancheData();
 			sToastMessage = "createdTranche";
 		} else if (sTrancheID !== "") {
 			sPath = "/updateBonusTranche";
@@ -133,16 +133,16 @@ export default class EditBonusTranche extends BaseController {
 		const sStartDate = oUpdateModel.getProperty("/startDate");
 		const sEndDate = oUpdateModel.getProperty("/endDate");
 		const sTrancheId = oUpdateModel.getProperty("/ID");
-
+		const sStatus = oUpdateModel.getProperty("/Status")
 		const oData: TrancheData = {
 			// ID: sTrancheId,
 			name: sTrancheName,
-			location: "Ghana", //sLocation,
+			location: sLocation,
 			startDate: sStartDate,
 			endDate: sEndDate,
-			// weight: nTrancheWeight,
+			weight: nTrancheWeight,
 			// description: sDescription,
-			// Status: includeID ? oUpdateModel.getProperty("Status") : "",
+			Status: sStatus,
 			targets: aTargets,
 		};
 
