@@ -6,15 +6,16 @@ import TextArea from "sap/m/Input";
 import ODataModel from "sap/ui/model/odata/v4/ODataModel";
 import ResourceBundle from "sap/base/i18n/ResourceBundle";
 import MessageBox from "sap/m/MessageBox";
+import DatePicker from "sap/m/DatePicker";
 
 /**
  * @namespace amalisov.cuibono.controller
  */
 interface Target {
-    name: string;
-    weight: number;
-    achievement: number;
-    description: string;
+	name: string;
+	weight: number;
+	achievement: number;
+	description: string;
 }
 interface TrancheData {
 	ID?: string;
@@ -63,25 +64,84 @@ export default class EditBonusTranche extends BaseController {
 
 	public onSaveTarget(): void {
 		const oView = this.getView();
-		const oUpdateModel = this.getModel(
-			"updateModel"
-		) as JSONModel;	
-		const targetWeight= (oView.byId("targetWeight") as Input).getValue()
-		const weightNumber = parseInt(targetWeight.split('--').pop() || '');
-		const targetAchieved= (oView.byId("targetAchievement") as Input).getValue()
-		const achievedNumber = parseInt(targetAchieved.split('--').pop() || '');
-		const oData:TrancheData = {
-			targets:[{
-				name: (oView.byId("targetName") as Input).getValue(),
-				weight: weightNumber,
-				achievement: achievedNumber,
-			    description: (oView.byId("trancheDescription") as TextArea).getValue(),
-			}]
-			};
+		const oUpdateModel = this.getModel("updateModel") as JSONModel;
+		const targetWeight = (oView.byId("targetWeight") as Input).getValue();
+		const weightNumber = parseInt(targetWeight.split("--").pop() || "");
+		const targetAchieved = (
+			oView.byId("targetAchievement") as Input
+		).getValue();
+		const achievedNumber = parseInt(targetAchieved.split("--").pop() || "");
+		const oData: TrancheData = {
+			targets: [
+				{
+					name: (oView.byId("targetName") as Input).getValue(),
+					weight: weightNumber,
+					achievement: achievedNumber,
+					description: (
+						oView.byId("trancheDescription") as TextArea
+					).getValue(),
+				},
+			],
+		};
 		oUpdateModel.setData(oData);
 		this.closeAddTarget();
-		console.log(oData, "model", oUpdateModel)
 	}
+
+	public onDeleteTarget(): void {
+		//delete target from array and send to backend
+	}
+
+	public limitDates(oEvent: any): void {
+		const sStartDate = this.getView().byId("startDateInput") as DatePicker;
+		const oEndDatePicker = this.getView().byId("endDateInput") as DatePicker;
+		const oOriginDatePicker = this.getView().byId(
+			"originDateInput"
+		) as DatePicker;
+
+		const sDatePicked = oEvent.getSource().getDateValue();
+
+		const sStartDatePicked = sStartDate.getDateValue();
+		const sStartDateValue = sStartDate.getValue();
+
+		const sEndDate = oEndDatePicker.getDateValue();
+		const sEndDateValue = oEndDatePicker.getValue();
+
+		//limit date range
+		if (sDatePicked !== "") {
+			oEndDatePicker.setMinDate(new Date(sStartDatePicked));
+			sStartDate.setMaxDate(new Date(sEndDate));
+			oOriginDatePicker.setMinDate(new Date(sEndDate));
+		} else {
+			oEndDatePicker.setMinDate(new Date(sStartDateValue));
+			sStartDate.setMaxDate(new Date(sEndDateValue));
+			oOriginDatePicker.setMinDate(new Date(sEndDateValue));
+		}
+
+		//handle input validation
+		if (sEndDateValue && sStartDateValue) {
+			const startDate = new Date(sStartDateValue);
+			const endDate = new Date(sEndDateValue);
+			console.log(startDate, endDate);
+
+			if (startDate > endDate) {
+				sStartDate.setValueState("Error");
+				oEndDatePicker.setValueState("Error");
+			} else {
+				sStartDate.setValueState("None");
+				oEndDatePicker.setValueState("None");
+			}
+		}
+	}
+
+	// public limitEndDate(oEvent: any): void{
+	// 	const sDatePicked = oEvent.getSource().getDateValue();
+	// 	(this.getView().byId("endDateInput") as DatePicker).setMinDate(new Date(sDatePicked));
+	// }
+
+	// public limitStartDate(oEvent: any): void{
+	// 	const sDatePicked = oEvent.getSource().getDateValue();
+	// 	(this.getView().byId("startDateInput") as DatePicker).setMaxDate(new Date(sDatePicked));
+	// }
 
 	public async onSaveTranche(): Promise<void> {
 		const oView = this.getView();
@@ -89,7 +149,6 @@ export default class EditBonusTranche extends BaseController {
 		const resourceBundle: ResourceBundle = await this.getResourceBundle();
 		const oUpdateModel = this.getModel("updateModel");
 		const sTrancheID = oUpdateModel.getProperty("/ID");
-		console.log(sTrancheID)
 
 		let sPath = "";
 		let oData: TrancheData = {
@@ -108,7 +167,6 @@ export default class EditBonusTranche extends BaseController {
 		}
 
 		const oContext = oModel.bindList(sPath);
-
 		try {
 			oContext.create(oData);
 			MessageBox.success(resourceBundle.getText(sToastMessage), {
@@ -133,14 +191,14 @@ export default class EditBonusTranche extends BaseController {
 		const sStartDate = oUpdateModel.getProperty("/startDate");
 		const sEndDate = oUpdateModel.getProperty("/endDate");
 		const sTrancheId = oUpdateModel.getProperty("/ID");
-		const sStatus = oUpdateModel.getProperty("/Status")
+		const sStatus = oUpdateModel.getProperty("/Status");
 		const oData: TrancheData = {
 			// ID: sTrancheId,
 			name: sTrancheName,
 			location: sLocation,
 			startDate: sStartDate,
 			endDate: sEndDate,
-			weight: nTrancheWeight,
+			// weight: nTrancheWeight,
 			// description: sDescription,
 			Status: sStatus,
 			targets: aTargets,
