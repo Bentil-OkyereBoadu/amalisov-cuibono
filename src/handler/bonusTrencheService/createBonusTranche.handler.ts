@@ -18,7 +18,8 @@ export class CreateTrancheHandler{
     @Action('createTranche')
     public async newTranche(@Srv() srv:any,@Req() req:Request){
         const {name,startDate,endDate,weight, Status,location,targets} = req.data
-        const [result] = await INSERT.into(BonusTranche.name).entries({ name , startDate, endDate,Status, location});
+        const result:any= INSERT.into(BonusTranche.name).entries({ name , startDate, endDate,Status, location});
+        console.log('data',result)
         if(targets.length > 0){
           targets.forEach(async(d: { name: any; weight: any; achievement: any; description: any; }) => {
             const {name,weight,achievement,description} = d
@@ -37,7 +38,7 @@ export class CreateTrancheHandler{
         data.forEach(async(d: { firstName: any; lastName: any; department_ID: any; }) => {
             const {firstName, lastName, department_ID} = d
             const [query] = await INSERT.into(TrancheParticipation.name).entries({
-                name: {firstName,lastName},
+                name: `${firstName} ${lastName}`,
                 Status,
                 startDate,
                 endDate,

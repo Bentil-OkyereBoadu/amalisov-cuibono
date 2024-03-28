@@ -38,7 +38,9 @@
     "build:cds": "cds build --production",
     "cleanup:ts": "npx rimraf -v -g gen/srv/srv/**/*.ts",
     "deploy": "npm i && npm run build-mta && cf deploy gen/mta.tar --delete-services --abort-on-error && npm i",
-    "start-fe": "cd ./amalisov.cuibono && npm run start"
+    "start-fe": "cd ./amalisov.cuibono && npm run start",
+    "hybrid": "npx cds-ts watch --profile hybrid",
+    "bind": "cds add hana --for hybrid && cds deploy --to hana --profile hybrid"
   },
   "imports": {
     "#cds-models/*": "./@cds-models/*/index.js"
