@@ -121,7 +121,7 @@ export default class EditBonusTranche extends BaseController {
 		if (sEndDateValue && sStartDateValue) {
 			const startDate = new Date(sStartDateValue);
 			const endDate = new Date(sEndDateValue);
-			console.log(startDate, endDate);
+		
 
 			if (startDate > endDate) {
 				sStartDate.setValueState("Error");
@@ -132,16 +132,6 @@ export default class EditBonusTranche extends BaseController {
 			}
 		}
 	}
-
-	// public limitEndDate(oEvent: any): void{
-	// 	const sDatePicked = oEvent.getSource().getDateValue();
-	// 	(this.getView().byId("endDateInput") as DatePicker).setMinDate(new Date(sDatePicked));
-	// }
-
-	// public limitStartDate(oEvent: any): void{
-	// 	const sDatePicked = oEvent.getSource().getDateValue();
-	// 	(this.getView().byId("startDateInput") as DatePicker).setMaxDate(new Date(sDatePicked));
-	// }
 
 	public async onSaveTranche(): Promise<void> {
 		const oView = this.getView();
