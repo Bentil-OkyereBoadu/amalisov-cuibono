@@ -103,6 +103,8 @@
                                     id="startDateInput"
                                     placeholder="{i18n>datePlaceholder}"
                                     value="{updateModel>/startDate}"
+                                    liveChange=".limitEndDate"
+                                    change=".limitDates"
                                     required="true"
                                     class="sapUiSmallMarginBottom inputs"
                                 />
@@ -119,6 +121,8 @@
                                     required="true"
                                     value="{updateModel>/endDate}"
                                     class="sapUiSmallMarginBottom inputs"
+                                    change=".limitDates"
+                                    valueState=""
                                 />
                             </VBox>
                         </HBox>
@@ -139,6 +143,7 @@
                                 <DatePicker
                                     id="originDateInput"
                                     placeholder="{i18n>datePlaceholder}"
+                                    change=".limitDates"
                                     value="{formatter: 'formatter.formatDate', path: 'updateModel>/originDate'}"
                                     class="sapUiSmallMarginBottom inputs"
                                 />

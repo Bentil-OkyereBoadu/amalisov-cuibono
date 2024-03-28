@@ -79,17 +79,28 @@ export default class Participants extends BaseController {
 		console.log(this.selectedItems);
 	}
 
-	public onSelectAll(oEvent: any):void{
-		const oTable= this.getView().byId('Table') as Table;
-		const bCheckboxState = oEvent.getParameter('selected')
-
-		oTable.getItems().forEach(function(item: any) {
-			const oCheckBoxCell= item.getCells()[0] as CheckBox;
-			const sCellStatus= item.getCells()[5].getText();
-			if(sCellStatus !== "Completed"){
-				oCheckBoxCell.setSelected(bCheckboxState)
+	public onSelectAll(oEvent: any): void {
+		const oTable = this.getView().byId('Table') as Table;
+		const bCheckboxState = oEvent.getParameter('selected');
+	
+		oTable.getItems().forEach((item: any) => {
+			const oCheckBoxCell = item.getCells()[0] as CheckBox;
+			const sCellStatus = item.getCells()[5].getText();
+			const oSelectedData = item.getBindingContext("participant").getObject();
+	
+			if (sCellStatus !== "Completed") {
+				oCheckBoxCell.setSelected(bCheckboxState);
+	
+				if (bCheckboxState) {
+					this.selectedItems.push(oSelectedData);
+				} else {
+					this.selectedItems = this.selectedItems.filter(function (item: any) {
+						return item.localID !== oSelectedData.localID;
+					});
+				}
 			}
-		})
+		});
+		console.log(this.selectedItems);
 	}
 
 	
