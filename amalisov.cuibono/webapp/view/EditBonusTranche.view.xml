@@ -59,6 +59,7 @@
                                     required="true"
                                 />
                                 <Select
+                                    selectedKey="{updateModel>/location}"
                                     items="{tranches>/locations}"
                                   
                                     change=".onSortSelectChange"
@@ -182,7 +183,7 @@
                         <ColumnListItem>
                             <Text text="{updateModel>name}" />
                             <Text text="{updateModel>weight}" />
-                            <Text text="{updateModel>achieved}" />
+                            <Text text="{updateModel>achievement}" />
 
                             <HBox class="interactionIcons">
                                 <core:Icon
