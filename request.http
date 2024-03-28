@@ -28,7 +28,7 @@ GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche(8793d488-e07e-421b
 #
 # GET BONUSTRENCH  
 #
-GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche(4b1da993-1197-487e-9338-92214980d38b)
+GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche
 
 ###
 #
