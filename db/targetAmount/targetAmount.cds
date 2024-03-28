@@ -11,6 +11,5 @@ entity Target : cuid {
     weight       : Integer;
     achievement  : Integer;
     description  : String;
-    isDelete     : Boolean default false;
     bonusTranche : Association to bonusTranche.BonusTranche;
 }

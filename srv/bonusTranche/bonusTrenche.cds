@@ -14,6 +14,6 @@ service BonusTranche {
     action deleteBonusTranche(ID:String) returns String;
 
     function calculateBonusTranche() returns String;
-    action createTranche(name: String, startDate: String, endDate: String, Status: String, location: String, targets: many Target) returns String;
-    action updateBonusTranche(ID:String,name:String,weight:Integer,startDate:String,endDate:String,location:String, targets:many Target, isDelete:Boolean) returns String;
+    action createTranche(name: String, startDate: String, endDate: String, Status: String, location: String, description:String, orignDate:String, weight:Integer, targets:many Target) returns String;
+    action updateBonusTranche(ID:String,name:String,weight:Integer,startDate:String,endDate:String,location:String, targets:many Target) returns String;
 }

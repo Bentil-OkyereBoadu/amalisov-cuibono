@@ -22,13 +22,13 @@ Content-Type: application/json
 #
 # GET BONUSTRENCH  
 #
-GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche(9555966b-d727-45b7-b5c7-09cece0e8857)?$expand=trancheParticipations,targets
+GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche(ab525bcc-4253-4620-b3cf-9fbe30ca1aff)?$expand=trancheParticipations,targets
 
 ###
 #
 # GET BONUSTRENCH  
 #
-GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche(4b1da993-1197-487e-9338-92214980d38b)
+GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche
 
 ###
 #
@@ -38,19 +38,22 @@ POST http://localhost:4004/odata/v4/bonusTranche/createTranche
 Content-Type: application/json
 
 {
-  "name": "Example Bonus Tranche",
-  "startDate": "2024-03-11",
-  "endDate": "2024-12-31",
-  "Status": "Running",
-  "location": "Example Location",
-  "targets": [
-    {
-      "name": "Target 1",
-      "weight": 10,
-      "achievement": 0,
-      "description": "Description of Target 1"
-    }
-  ]
+     "name": "TYO Q1 2023",
+      "description": "recent",
+      "startDate": "22.03.23",
+      "endDate": "10.04.23",
+      "orignDate": "11.04.23",
+      "weight": 0,
+      "Status": "Running",
+      "location": "Tokyo",
+      "targets":[
+        {
+          "name":"test target",
+          "weight":25,
+          "achievement":100,
+          "description":"doo"
+        }
+      ]
 }
 
 
@@ -62,12 +65,9 @@ POST   http://localhost:4004/odata/v4/bonusTranche/updateBonusTranche
 Content-Type: application/json
 
 {
-  "ID":"9555966b-d727-45b7-b5c7-09cece0e8857",
+  "ID":"ab525bcc-4253-4620-b3cf-9fbe30ca1aff",
+   "weight": 30,
   "targets":[
-    {
-      "ID": "d4ccaa74-2003-48a9-93f4-14b818dec898",
-      "isDelete":true
-    }
   ]
 }
 
