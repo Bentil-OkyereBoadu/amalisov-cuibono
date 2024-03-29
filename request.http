@@ -44,7 +44,7 @@ Content-Type: application/json
       "endDate": "10.04.23",
       "orignDate": "11.04.23",
       "weight": 0,
-      "Status": "Running",
+      "Status": "Open",
       "location": "Tokyo",
       "targets":[
         {
@@ -65,7 +65,7 @@ POST   http://localhost:4004/odata/v4/bonusTranche/updateBonusTranche
 Content-Type: application/json
 
 {
-  "ID":"ab525bcc-4253-4620-b3cf-9fbe30ca1aff",
+  "ID":"714fa1e0-153f-4217-8795-9652f94b7700",
    "weight": 30,
   "targets":[
   ]
