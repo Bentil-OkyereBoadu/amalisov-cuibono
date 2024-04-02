@@ -102,11 +102,6 @@
 			},
 			
 			"participant": {
-				"type": "sap.ui.model.json.JSONModel",
-				"uri": "participant.json"
-			},
-
-			"participantBind": {
 				"type": "sap.ui.model.odata.v4.ODataModel",
 				"dataSource": "participant",
 				"preload": true,
@@ -115,7 +110,8 @@
 					"groupId": "$direct",
 					"metadataUrlParams": {
 						"sap-documentation": "heading"
-					}
+					},
+					"operationMode": "Server"
 				}
 			}
 		},
