@@ -27,7 +27,7 @@ export class UpdateBonusTrancheHandler {
         endDate: endDate ? endDate : bonusTranche.endDate,
         location: location ? location : bonusTranche.location
       };
-     if(targets.length > 0){
+     if(targets.length >= 0){
       await DELETE.from(Target.name).where({bonusTranche_ID:ID})
       await Promise.all(targets.map(async(target:any) => {
         const {name,weight,achievement,description} = target

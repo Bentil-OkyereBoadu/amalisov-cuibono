@@ -28,7 +28,13 @@ GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche(ab525bcc-4253-4620
 #
 # GET BONUSTRENCH  
 #
-GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche?$expand=trancheParticipations
+GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche(d1bdaa3e-4ec0-4e13-9745-276a7cfb1905)?$expand=trancheParticipations($expand=bonusTranche,department)
+
+###
+#
+# GET BONUSTRENCH  
+#
+GET  http://localhost:4004/odata/v4/tranchParticipation/TracheParticipation?$expand=bonusTranche,department
 
 ###
 #
@@ -43,7 +49,7 @@ Content-Type: application/json
       "startDate": "22.03.23",
       "endDate": "10.04.23",
       "orignDate": "11.04.23",
-      "weight": 0,
+      "weight": 10,
       "Status": "Open",
       "location": "Tokyo",
       "targets":[
