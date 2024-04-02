@@ -22,6 +22,7 @@
             <Table
                 id="Table"
                 inset="false"
+                class="participantTable"
                 items="{participant>/Parameters}"
                 growingScrollToLoad="true"
                 busyIndicatorDelay="{config>delay}"
