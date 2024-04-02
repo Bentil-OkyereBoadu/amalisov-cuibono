@@ -191,12 +191,12 @@
                                 <core:Icon
                                     src="sap-icon://edit"
                                     class="icon"
-                                    press=".onOpenEditDialog"
+                                    press=".onOpenEditTarget"
                                 />
 
                                 <core:Icon
                                     src="sap-icon://delete"
-                                    press=".onDeleteAnswer"
+                                    press=".onDeleteTarget"
                                     class="icon"
                                 />
                             </HBox>

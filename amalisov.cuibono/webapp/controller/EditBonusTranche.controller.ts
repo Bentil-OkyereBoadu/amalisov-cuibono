@@ -87,6 +87,8 @@ export default class EditBonusTranche extends BaseController {
 		this.closeAddTarget();
 	}
 
+	public onOpenEditTarget(): void {}
+
 	public onDeleteTarget(): void {
 		//delete target from array and send to backend
 	}
@@ -139,7 +141,6 @@ export default class EditBonusTranche extends BaseController {
             const startDate = new Date(oData.startDate);
             const endDate = new Date(oData.endDate);
 		    const resourceBundle: ResourceBundle = await this.getResourceBundle();
-			console.log("check dates ==", startDate, endDate)
 
             if (startDate >= endDate) {
                 reject(new Error(resourceBundle.getText("startDateError")));
