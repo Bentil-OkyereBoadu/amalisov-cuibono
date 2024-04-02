@@ -70,7 +70,6 @@
                             <MultiComboBox
                                 name="{i18n>location}"
                                 selectionChange=".onFilter"
-                                items="{participant>/ProductCategories}"
                             >
                                 <core:Item
                                     key="{participant>key}"
@@ -112,7 +111,7 @@
                         </fb:control>
                     </fb:FilterGroupItem>
                     <fb:FilterGroupItem
-                        name="status"
+                        name="Status"
                         label="{i18n>Status}"
                         groupName="Group1"
                         visibleInFilterBar="true"

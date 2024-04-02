@@ -66,14 +66,14 @@ export default class Participants extends BaseController {
 
 	public onSelectChange(oEvent: any): void{
 		const oCheckBox = oEvent.getSource();
-			const oSource = oCheckBox.getBindingContext("participant");
+		const oSource = oCheckBox.getBindingContext("participant");
 		const oSelectedData = oSource.getObject();
 	
 		if(oCheckBox.getSelected()){
 		  this.selectedItems.push(oSelectedData)
 		} else{
 		  this.selectedItems = this.selectedItems.filter(function(item:any){
-			return item.localID !== oSelectedData.localID;
+			return item.ID !== oSelectedData.ID;
 		  }) 
 		}
 		console.log(this.selectedItems);
