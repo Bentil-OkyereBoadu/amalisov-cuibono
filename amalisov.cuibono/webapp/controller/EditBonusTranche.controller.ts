@@ -133,6 +133,22 @@ export default class EditBonusTranche extends BaseController {
 		}
 	}
 
+
+	public checkDate(oData: TrancheData): Promise<void> {
+        return new Promise(async (resolve, reject) => {
+            const startDate = new Date(oData.startDate);
+            const endDate = new Date(oData.endDate);
+		    const resourceBundle: ResourceBundle = await this.getResourceBundle();
+			console.log("check dates ==", startDate, endDate)
+
+            if (startDate >= endDate) {
+                reject(new Error(resourceBundle.getText("startDateError")));
+            } else {
+                resolve();
+            }
+        });
+    }
+
 	public async onSaveTranche(): Promise<void> {
 		const oView = this.getView();
 		const oModel = oView.getModel("tranches") as ODataModel;
@@ -156,6 +172,15 @@ export default class EditBonusTranche extends BaseController {
 			sToastMessage = "updatedTranche";
 		}
 
+		try {
+            await this.checkDate(oData);
+        } catch (error) {
+            if (error instanceof Error) {
+                MessageBox.error(error.message);
+            }
+            return;
+        }
+
 		const oContext = oModel.bindList(sPath);
 		try {
 			oContext.create(oData);
@@ -166,7 +191,7 @@ export default class EditBonusTranche extends BaseController {
 			});
 			oModel.refresh();
 		} catch (error) {
-			MessageBox.error(resourceBundle.getText("errorCreateTranche"));
+			MessageBox.error(resourceBundle.getText("errorCreateTranche"), error);
 		}
 	}
 
