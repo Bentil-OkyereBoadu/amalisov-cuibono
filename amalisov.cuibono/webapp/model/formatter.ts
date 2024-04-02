@@ -22,7 +22,7 @@ export default {
     },
 
     showSave(Status: string): boolean {
-        return Status === "Open";
+        return Status === "Open" || Status === "Running";
     },
     
     showComplete(Status: string): boolean {
