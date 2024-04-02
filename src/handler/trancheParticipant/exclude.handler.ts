@@ -12,9 +12,8 @@ export class ExcludeParticipant{
          const {ID,justification} = <TrancheParticipation>req.data
          try {
             const particapants:TrancheParticipation = await SELECT.one.from(TrancheParticipation.name).where({ID})
-            console.log(particapants)
             if(!particapants)req.reject(404,"Participant not found")
-            await UPDATE(TrancheParticipation.name)
+            await UPDATE(TrancheParticipation.name).where({ID})
         .set({
         excluded:true,
        justification
@@ -24,8 +23,9 @@ export class ExcludeParticipant{
         message:`${particapants.name} is exclude from  the tranche`,
         status:"Success"
     }
-         } catch (error) {
+         } catch (error:any) {
             console.log(error)
+            throw Error(error)
          } 
     }
 }

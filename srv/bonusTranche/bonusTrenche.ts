@@ -6,6 +6,7 @@ import {CalculateBonusTrancheHandler} from '../../src/handler/bonusTrencheServic
 import {CreateTrancheHandler} from '../../src/handler/bonusTrencheService/createBonusTranche.handler';
 import {UpdateBonusTrancheHandler} from '../../src/handler/bonusTrencheService/updateBonusTrench.handler';
 import { ExcludeParticipant } from "../../src/handler/trancheParticipant/exclude.handler";
+import { OverRuleAmount } from "../../src/handler/trancheParticipant/overruleAmount.handler";
 
 module.exports = (srv: Service) => {
   const combinedHandler = createCombinedHandler({
@@ -14,7 +15,8 @@ module.exports = (srv: Service) => {
       UpdateBonusTrancheHandler,
       CalculateBonusTrancheHandler,
       CreateTrancheHandler,
-      ExcludeParticipant
+      ExcludeParticipant,
+      OverRuleAmount
     ],
     middlewares: [],
   });
