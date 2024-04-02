@@ -5,6 +5,7 @@ import { DeleteBonusTrancheHandler }  from '../../src/handler/bonusTrencheServic
 import {CalculateBonusTrancheHandler} from '../../src/handler/bonusTrencheService/calculateBonusTrenchService.handler'
 import {CreateTrancheHandler} from '../../src/handler/bonusTrencheService/createBonusTranche.handler';
 import {UpdateBonusTrancheHandler} from '../../src/handler/bonusTrencheService/updateBonusTrench.handler';
+import { ExcludeParticipant } from "../../src/handler/trancheParticipant/exclude.handler";
 
 module.exports = (srv: Service) => {
   const combinedHandler = createCombinedHandler({
@@ -12,7 +13,8 @@ module.exports = (srv: Service) => {
       DeleteBonusTrancheHandler,
       UpdateBonusTrancheHandler,
       CalculateBonusTrancheHandler,
-      CreateTrancheHandler
+      CreateTrancheHandler,
+      ExcludeParticipant
     ],
     middlewares: [],
   });

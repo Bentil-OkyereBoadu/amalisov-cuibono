@@ -28,7 +28,7 @@ GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche(ab525bcc-4253-4620
 #
 # GET BONUSTRENCH  
 #
-GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche
+GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche?$expand=trancheParticipations
 
 ###
 #
@@ -103,7 +103,17 @@ GET http://localhost:4004/odata/v4/bonusTranche/calculateBonusTranche()
 
 
 
+###
+#
+# Exclude Participant
+#
+POST  http://localhost:4004/odata/v4/bonusTranche/excludeParticipant
+Content-Type: application/json
 
+{
+  "ID":"702abb52-6cab-4fa3-825c-cc536257536d",
+  "justification":"Excluded"
+}
 
 
 
