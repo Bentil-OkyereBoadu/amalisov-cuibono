@@ -132,7 +132,6 @@ export default class EditBonusTranche extends BaseController {
 			achievement: targetAchieved,
 			description: oNewTarget.getProperty("/description"),
 		};
-
 		aTargets.push(oData);
 		oUpdateModel.setProperty("/targets", aTargets);
 		oNewTarget.setData({});
