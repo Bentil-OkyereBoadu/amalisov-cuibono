@@ -28,7 +28,7 @@ GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche(ab525bcc-4253-4620
 #
 # GET BONUSTRENCH  
 #
-GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche(d1bdaa3e-4ec0-4e13-9745-276a7cfb1905)?$expand=trancheParticipations($expand=bonusTranche,department)
+GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche?$expand=trancheParticipations($expand=bonusTranche,department)
 
 ###
 #
@@ -117,8 +117,9 @@ POST  http://localhost:4004/odata/v4/bonusTranche/excludeParticipant
 Content-Type: application/json
 
 {
-  "ID":"702abb52-6cab-4fa3-825c-cc536257536d",
-  "justification":"Excluded from tranche"
+  "ID":["9d73f7bf-b414-493a-8073-44fc8636765e","f1107972-e281-4489-a6c1-ea3f2d5ee379"],
+  "excluded":true,
+  "justification":"Excludeddd from tranche"
 }
 
 ###
@@ -129,7 +130,7 @@ POST  http://localhost:4004/odata/v4/bonusTranche/overRuleAmount
 Content-Type: application/json
 
 {
-  "ID":"f1107972-e281-4489-a6c1-ea3f2d5ee379",
+  "ID":["f1107972-e281-4489-a6c1-ea3f2d5ee379"],
   "finalAmount":200,
-  "justification":"Excluded from tranche"
+  "justification":"Amount overruled from tranche"
 }
