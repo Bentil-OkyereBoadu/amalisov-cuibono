@@ -14,7 +14,7 @@ export class OverRuleAmount{
       const data =  await Promise.all(ID.map(async(id:String) => {
           const participant = await SELECT.one.from(TrancheParticipation.name).where({ID:id})
           const bonusTranche = await SELECT.one.from(BonusTranche.name).where({ID:participant.bonusTranche_ID})
-          if(!bonusTranche && bonusTranche.status === "Completed") req.reject(400,"Bonus tranche is completed")
+          if(!bonusTranche || bonusTranche.Status === "Completed") req.reject(400,"Bonus tranche is completed")
           if(!participant) req.reject(404,"Participant not found") 
           await  UPDATE(TrancheParticipation.name)
       .where({ID:id})

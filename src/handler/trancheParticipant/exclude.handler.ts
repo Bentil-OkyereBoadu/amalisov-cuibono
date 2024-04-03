@@ -17,7 +17,8 @@ export class ExcludeParticipant{
                     const particapants:TrancheParticipation = await SELECT.one.from(TrancheParticipation.name).where({ID:id})
                     if(!particapants)req.reject(404,"Participant not found")
                     const bonusTranche = await SELECT.one.from(BonusTranche.name).where({ID:particapants.bonusTranche_ID})
-                   if(!bonusTranche && bonusTranche.status === "Completed") req.reject(400,"Bonus tranche is completed")
+                console.log(bonusTranche)
+                   if(!bonusTranche || bonusTranche.Status === "Completed") req.reject(400,"Bonus tranche is completed")
                     await UPDATE(TrancheParticipation.name).where({ID:id})
                 .set({
                 excluded,

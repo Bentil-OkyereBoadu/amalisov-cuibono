@@ -71,7 +71,7 @@ POST   http://localhost:4004/odata/v4/bonusTranche/updateBonusTranche
 Content-Type: application/json
 
 {
-  "ID":"6ab02b14-cb55-426d-8170-4ca1265667ed",
+  "ID":"4d02d643-6097-4b57-8d4b-a76127025e88",
    "Status":"Completed",
    "targets":[]
 }
@@ -116,9 +116,9 @@ POST  http://localhost:4004/odata/v4/bonusTranche/excludeParticipant
 Content-Type: application/json
 
 {
-  "ID":["9d73f7bf-b414-493a-8073-44fc8636765e"],
+  "ID":["9d73f7bf-b414-493a-8073-44fc8636765e","fc973237-62c9-4841-86a4-23a5e2abdd8a"],
   "excluded":true,
-  "justification":"Excludeddd from tranche"
+  "justification":"tranche"
 }
 
 ###
