@@ -2,6 +2,7 @@ import { Handler,Srv,Req, Action } from "cds-routing-handlers";
 import { Service } from "typedi";
 import { TrancheParticipation } from "#cds-models/amalisov/cuibono/trancheParticipation";
 import { Request } from "@sap/cds";
+import { BonusTranche } from "#cds-models/amalisov/cuibono/bonusTranche";
 
 
 @Handler()
@@ -15,6 +16,8 @@ export class ExcludeParticipant{
                 ID.map(async(id:String) => {
                     const particapants:TrancheParticipation = await SELECT.one.from(TrancheParticipation.name).where({ID:id})
                     if(!particapants)req.reject(404,"Participant not found")
+                    const bonusTranche = await SELECT.one.from(BonusTranche.name).where({ID:particapants.bonusTranche_ID})
+                   if(!bonusTranche && bonusTranche.status === "Completed") req.reject(400,"Bonus tranche is completed")
                     await UPDATE(TrancheParticipation.name).where({ID:id})
                 .set({
                 excluded,
