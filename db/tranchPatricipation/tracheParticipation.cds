@@ -7,7 +7,7 @@ using amalisov.cuibono.employee as employee from '../employee/employees';
 
 
 entity TrancheParticipation : cuid {
-    localId          : Integer;
+    localId          : String;
     name             : String;
     Status           : bonusTranche.bonusStatus;
     startDate        : String;

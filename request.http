@@ -28,7 +28,13 @@ GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche(ab525bcc-4253-4620
 #
 # GET BONUSTRENCH  
 #
-GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche
+GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche?$expand=trancheParticipations($expand=bonusTranche,department)
+
+###
+#
+# GET BONUSTRENCH  
+#
+GET  http://localhost:4004/odata/v4/tranchParticipation/TracheParticipation?$expand=bonusTranche,department
 
 ###
 #
@@ -43,7 +49,7 @@ Content-Type: application/json
       "startDate": "22.03.23",
       "endDate": "10.04.23",
       "orignDate": "11.04.23",
-      "weight": 0,
+      "weight": 10,
       "Status": "Open",
       "location": "Tokyo",
       "targets":[
@@ -65,10 +71,9 @@ POST   http://localhost:4004/odata/v4/bonusTranche/updateBonusTranche
 Content-Type: application/json
 
 {
-  "ID":"714fa1e0-153f-4217-8795-9652f94b7700",
-   "weight": 30,
-  "targets":[
-  ]
+  "ID":"4d02d643-6097-4b57-8d4b-a76127025e88",
+   "Status":"Completed",
+   "targets":[]
 }
 
 
@@ -103,7 +108,28 @@ GET http://localhost:4004/odata/v4/bonusTranche/calculateBonusTranche()
 
 
 
+###
+#
+# Exclude Participant
+#
+POST  http://localhost:4004/odata/v4/bonusTranche/excludeParticipant
+Content-Type: application/json
 
+{
+  "ID":["9d73f7bf-b414-493a-8073-44fc8636765e","fc973237-62c9-4841-86a4-23a5e2abdd8a"],
+  "excluded":true,
+  "justification":"tranche"
+}
 
+###
+#
+# OverRule amount Participant
+#
+POST  http://localhost:4004/odata/v4/bonusTranche/overRuleAmount
+Content-Type: application/json
 
-
+{
+  "ID":["f1107972-e281-4489-a6c1-ea3f2d5ee379"],
+  "finalAmount":200,
+  "justification":"Amount overruled from tranche"
+}
