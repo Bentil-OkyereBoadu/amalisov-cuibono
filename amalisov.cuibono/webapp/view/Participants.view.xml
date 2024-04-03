@@ -23,8 +23,10 @@
                 id="Table"
                 inset="false"
                 class="participantTable"
-                items="{participant>/TracheParticipation}"
+                items="{path:'participant>/trancheParticipation',parameters : {$expand:'bonusTranche,department'}}"
+                growing="true"
                 growingScrollToLoad="true"
+                growingThreshold="50"
                 busyIndicatorDelay="{config>delay}"
             >
                 <headerToolbar>
@@ -157,7 +159,7 @@
                             />
                             <Text text="{participant>localId}" />
                             <Text text="{participant>name}" />
-                            <Text text="{participant>department_ID}" />
+                            <Text text="{participant>department/name}" />
                             <Text text="{participant>bonusTranche_ID}" />
                             <Text text="{participant>Status}" />
                             <Text text="{participant>location}" />

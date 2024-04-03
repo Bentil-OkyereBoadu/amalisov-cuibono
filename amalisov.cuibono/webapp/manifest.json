@@ -19,7 +19,7 @@
 				}
 			},
 			"participant": {
-				"uri": "/odata/v4/tranchParticipation/",
+				"uri": "/odata/v4/bonusTranche/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "4.0"
