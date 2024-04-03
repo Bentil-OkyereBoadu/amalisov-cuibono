@@ -30,6 +30,8 @@ interface TrancheData {
 	targets?: Target[];
 }
 export default class EditBonusTranche extends BaseController {
+	public targetArray: any = [];
+
 	public onInit(): void {
 		const oRouter = this.getRouter();
 		oRouter
@@ -41,6 +43,19 @@ export default class EditBonusTranche extends BaseController {
 			.attachPatternMatched(this.onObjectMatched, this);
 	}
 
+	// public onObjectMatched(oEvent: any): void {
+    //     const oView = this.getView();
+    //     const sTrancheId = window.decodeURIComponent(oEvent.getParameter("arguments").ID);
+	// 	console.log(sTrancheId, "run")
+    //     const sPath = `/${sTrancheId}`;
+    //     oView.bindElement({
+    //         path: sPath,
+    //         model: "tranches",
+    //         parameters: {
+    //             "$expand": "answers",
+    //         }
+    //     });
+    // }
 	public onCreateRoute(oEvent: any): void {
 		const oView = this.getView();
 		const oUpdateModel = this.getModel("updateModel") as JSONModel;
@@ -72,7 +87,9 @@ export default class EditBonusTranche extends BaseController {
 		console.log("pathhh",sPath,"iddddd", sTrancheId);
     }
 	public onAddTarget(): void {
+		const oView = this.getView();
 		const oDialog = this.byId("editDialog") as Dialog;
+		oView.addDependent(oDialog);
 		oDialog.open();
 	}
 
@@ -84,25 +101,27 @@ export default class EditBonusTranche extends BaseController {
 	public onSaveTarget(): void {
 		const oView = this.getView();
 		const oUpdateModel = this.getModel("updateModel") as JSONModel;
-		const targetWeight = (oView.byId("targetWeight") as Input).getValue();
+		const oNewTarget =this.getModel("newTargets") as JSONModel;
+        const aTargets = oUpdateModel.getProperty("/targets") || [];
+
+		const targetWeight = oNewTarget.getProperty("/weight");
 		const weightNumber = parseInt(targetWeight.split("--").pop() || "");
-		const targetAchieved = (
-			oView.byId("targetAchievement") as Input
-		).getValue();
+		const targetAchieved = oNewTarget.getProperty("/achievement");
 		const achievedNumber = parseInt(targetAchieved.split("--").pop() || "");
-		const oData: TrancheData = {
-			targets: [
-				{
-					name: (oView.byId("targetName") as Input).getValue(),
+		const oData = {
+					name: oNewTarget.getProperty("/name"),
 					weight: weightNumber,
 					achievement: achievedNumber,
-					description: (
-						oView.byId("trancheDescription") as TextArea
-					).getValue(),
-				},
-			],
+					description: oNewTarget.getProperty("/description"),
 		};
-		oUpdateModel.setData(oData);
+		// this.targetArray.push(oData)
+		// console.log(this.targetArray)
+		// oUpdateModel.setData(oData);
+
+		aTargets.push(oData);
+        oUpdateModel.setProperty("/targets", aTargets);
+
+        oNewTarget.setData({}); 
 		this.closeAddTarget();
 	}
 
