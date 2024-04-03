@@ -186,9 +186,9 @@
 
                     <items>
                         <ColumnListItem>
-                            <Text text="{updateModel>name}" />
-                            <Text text="{updateModel>weight}" />
-                            <Text text="{updateModel>achievement}" />
+                            <Text text="{tranches>name}" />
+                            <Text text="{tranches>weight}" />
+                            <Text text="{tranches>achievement}" />
 
                             <HBox class="interactionIcons">
                                 <core:Icon
