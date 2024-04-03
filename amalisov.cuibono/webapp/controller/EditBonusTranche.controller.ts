@@ -43,6 +43,19 @@ export default class EditBonusTranche extends BaseController {
 			.attachPatternMatched(this.onObjectMatched, this);
 	}
 
+	// public onObjectMatched(oEvent: any): void {
+    //     const oView = this.getView();
+    //     const sTrancheId = window.decodeURIComponent(oEvent.getParameter("arguments").ID);
+	// 	console.log(sTrancheId, "run")
+    //     const sPath = `/${sTrancheId}`;
+    //     oView.bindElement({
+    //         path: sPath,
+    //         model: "tranches",
+    //         parameters: {
+    //             "$expand": "answers",
+    //         }
+    //     });
+    // }
 	public onCreateRoute(oEvent: any): void {
 		const oView = this.getView();
 		const oUpdateModel = this.getModel("updateModel") as JSONModel;
