@@ -102,7 +102,6 @@ export default class Main extends BaseController {
 		const sLocation = oContext.getProperty("location");
 		const nTrancheWeight = oContext.getProperty("weight");
 		const sDescription = oContext.getProperty("createdBy");
-		// const sOriginDate = oContext.getProperty("createdAt");
 		const aTargets = oContext.getProperty("targets");
 		const sTrancheId = oContext.getProperty("ID");
 		const sStatus = oContext.getProperty("Status");
@@ -117,9 +116,8 @@ export default class Main extends BaseController {
 			weight: nTrancheWeight,
 			description: sDescription,
 			Status: sStatus,
-			targets: aTargets,
+			targets: [],
 		};
-
 		return oData;
 	}
 

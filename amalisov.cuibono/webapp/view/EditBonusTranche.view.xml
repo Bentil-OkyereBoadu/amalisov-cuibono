@@ -150,9 +150,11 @@
             </f:SimpleForm>
 
             <!-- Table -->
+            <!-- items="{updateModel>/targets}" -->
             <Panel class="tablePanel">
                 <Table
-                    items="{updateModel>/targets}"
+                    
+                    items="{tranches>/Target}"
                     width="45%"
                 >
                     <headerToolbar>
@@ -182,9 +184,9 @@
 
                     <items>
                         <ColumnListItem>
-                            <Text text="{updateModel>name}" />
-                            <Text text="{updateModel>weight}" />
-                            <Text text="{updateModel>achievement}" />
+                            <Text text="{tranches>name}" />
+                            <Text text="{tranches>weight}" />
+                            <Text text="{tranches>achievement}" />
 
                             <HBox class="interactionIcons">
                                 <core:Icon
@@ -217,28 +219,32 @@
                     type="Accept"
                     text="{i18n>save}"
                     press=".onSaveTranche"
+                    icon="sap-icon://save"
                     visible="{path: 'updateModel>/Status', formatter: 'formatter.showSave', targetType:'any'}"
                 />
                 <Button
-                    type="Accept"
+                    type="Ghost"
                     text="{i18n>lock}"
+                    icon="sap-icon://locked"
                     press=".onSaveTranche"
                     visible="{path: 'updateModel>/Status', formatter: 'formatter.showSave', targetType:'any'}"
                 />
                 <Button
                     type="Accept"
                     text="{i18n>completedStatus}"
+                    icon="sap-icon://complete"
                     press=".onSaveTranche"
                     visible="{path: 'updateModel>/Status', formatter: 'formatter.showComplete', targetType:'any'}"
                 />
                 <Button
-                    type="Accept"
+                    type="Ghost"
                     text="{i18n>reopen}"
+                    icon="sap-icon://unlocked"
                     press=".onSaveTranche"
                     visible="{path: 'updateModel>/Status', formatter: 'formatter.showComplete', targetType:'any'}"
                 />
                 <Button
-                    type="Default"
+                    type="Reject"
                     press=".onCreateRoute"
                     text="Cancel"
                 />
