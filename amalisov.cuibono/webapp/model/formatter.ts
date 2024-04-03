@@ -18,7 +18,7 @@ export default {
     },
 
     statusLocked(Status: string): boolean {
-        return Status !== "Locked" && Status !== "Completed";
+        return Status !== "Locked" && Status !== "completed";
     },
 
     showSave(Status: string): boolean {
@@ -26,6 +26,6 @@ export default {
     },
     
     showComplete(Status: string): boolean {
-        return Status === "Locked" || Status === "Completed";
+        return Status === "Locked" || Status === "completed";
     },
 };

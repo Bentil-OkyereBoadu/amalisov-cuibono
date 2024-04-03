@@ -222,12 +222,24 @@ export default class EditBonusTranche extends BaseController {
 			MessageBox.success(resourceBundle.getText(sToastMessage), {
 				onClose: () => {
 					this.getRouter().navTo("main");
+					oModel.refresh();
 				},
 			});
-			oModel.refresh();
 		} catch (error) {
 			MessageBox.error(resourceBundle.getText("errorCreateTranche"), error);
 		}
+	}
+
+	private formatDate(date: string): string {
+		const d = new Date(date);
+		let day = d.getDate().toString();
+		let month = (d.getMonth() + 1).toString();
+		const year = d.getFullYear().toString();
+
+		day = day.length < 2 ? '0' + day :day;
+		month = month.length < 2 ? '0' + month :month;
+
+		return  `${day}.${month}.${year}`
 	}
 
 	private constructTrancheData(): TrancheData {
@@ -242,12 +254,16 @@ export default class EditBonusTranche extends BaseController {
 		const sEndDate = oUpdateModel.getProperty("/endDate");
 		const sTrancheId = oUpdateModel.getProperty("/ID");
 		const sStatus = oUpdateModel.getProperty("/Status");
+
+		const formattedStartDate = this.formatDate(sStartDate)
+		const formattedEndDate = this.formatDate(sEndDate)
+
 		const oData: TrancheData = {
 			// ID: sTrancheId,
 			name: sTrancheName,
 			location: sLocation,
-			startDate: sStartDate,
-			endDate: sEndDate,
+			startDate: formattedStartDate,
+			endDate: formattedEndDate,
 			// weight: nTrancheWeight,
 			// description: sDescription,
 			Status: sStatus,
