@@ -30,7 +30,6 @@ interface TrancheData {
 	targets?: Target[];
 }
 export default class EditBonusTranche extends BaseController {
-	public targetArray: any = [];
 
 	public onInit(): void {
 		const oRouter = this.getRouter();
@@ -114,10 +113,7 @@ export default class EditBonusTranche extends BaseController {
 					achievement: achievedNumber,
 					description: oNewTarget.getProperty("/description"),
 		};
-		// this.targetArray.push(oData)
-		// console.log(this.targetArray)
-		// oUpdateModel.setData(oData);
-
+		
 		aTargets.push(oData);
         oUpdateModel.setProperty("/targets", aTargets);
 
