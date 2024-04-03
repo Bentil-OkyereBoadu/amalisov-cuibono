@@ -57,7 +57,7 @@
                         </fb:control>
                     </fb:FilterGroupItem>
                     <fb:FilterGroupItem
-                        name="Selection"
+                        name="location"
                         label="{i18n>trancheLocation}"
                         groupName="Group1"
                         visibleInFilterBar="true"

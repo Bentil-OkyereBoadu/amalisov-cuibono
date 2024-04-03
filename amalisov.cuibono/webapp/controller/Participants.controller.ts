@@ -51,7 +51,7 @@ export default class Participants extends BaseController {
 
 		if (sTrancheID) {
 			// Apply filter for SupplierID
-			const oFilter = new Filter("trancheId", FilterOperator.EQ, sTrancheID);
+			const oFilter = new Filter("bonusTranche_ID", FilterOperator.EQ, sTrancheID);
 			oBinding.filter([oFilter]);
 		} else {
 			// No SupplierID specified, show all products

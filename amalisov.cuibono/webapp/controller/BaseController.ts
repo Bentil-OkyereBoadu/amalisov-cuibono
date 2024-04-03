@@ -131,7 +131,12 @@ export default abstract class BaseController extends Controller {
 			filterValues.forEach((filterValue: string) => {
 				const trimmedValue = filterValue.trim();
 				if (trimmedValue.length > 0) {
-					const columnFilter = new Filter(this.ColumnName, FilterOperator.Contains, trimmedValue);
+					const columnFilter = new Filter({
+                        path:this.ColumnName,
+                        operator:FilterOperator.Contains,
+                        value1:trimmedValue,
+                        caseSensitive: false
+                    });
 					aTableFilters.push(columnFilter);
 				}
 			});

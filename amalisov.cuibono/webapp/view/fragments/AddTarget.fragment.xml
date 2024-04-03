@@ -15,6 +15,7 @@
                 required="true"
                 type="Text"
                 class="sapUiSmallMarginBottom"
+                value="{newTargets>/name}"
             />
 
             <Label text="{i18n>targetWeight}" />
@@ -23,6 +24,7 @@
                 required="true"
                 type="Number"
                 class="sapUiSmallMarginBottom"
+                value="{newTargets>/weight}"
             />
 
             <Label text="{i18n>targetAchievement}" />
@@ -31,6 +33,7 @@
                 required="true"
                 type="Number"
                 class="sapUiSmallMarginBottom"
+                value="{newTargets>/achievement}"
             />
 
             <Label text="{i18n>trancheDescription}" />
@@ -38,6 +41,7 @@
                 id="trancheDescription"
                 rows="3"
                 width="100%"
+                value="{newTargets>/description}"
             />
         </content>
         <buttons>

@@ -119,7 +119,6 @@
                                     value="{updateModel>/endDate}"
                                     class="sapUiSmallMarginBottom inputs"
                                     change=".limitDates"
-                                    valueState=""
                                 />
                             </VBox>
                         </HBox>

@@ -21,6 +21,7 @@ interface Tranche {
     description: string;
     Status: string;
     targets: Target[];
+    // newTargets: Target[];
 }
 
 
@@ -47,8 +48,26 @@ export default {
 				weight: 0, 
 				achievement: 0,
                 description:"",
-			}
-			]
+			}],
+            // newTargets: [{
+			// 	name:"", 
+			// 	weight: 0, 
+			// 	achievement: 0,
+            //     description:"",
+			// }]
+		};
+		const oModel = new JSONModel();
+        oModel.setData(oData);
+
+        return oModel;
+	},
+
+    createNewTargets: () => {
+		const oData: Target = {
+				name:"", 
+				weight: 0, 
+				achievement: 0,
+                description:"",
 		};
 		const oModel = new JSONModel();
         oModel.setData(oData);
