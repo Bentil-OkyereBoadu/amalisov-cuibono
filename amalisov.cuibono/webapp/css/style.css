@@ -27,7 +27,7 @@
     justify-content: start;
     width: 100%;
     padding-left: 1.9rem;
-    gap: 20px  !important;
+    gap: 1.25rem  !important;
 }
 
 .textLikeButton .sapMBtnInner  {
@@ -60,14 +60,14 @@
 }
 
 .trancheTable, .participantTable{
-    border-radius: 20px;
-    box-shadow: 0px 1px 15px 7px rgba(0, 0, 0, 0.1);
+    border-radius: 1.25rem;
+    box-shadow: 0rem 0.063rem 0.938rem 0.438rem rgba(0, 0, 0, 0.1);
 }
 .tranchItems{
     max-width: 55%;
 }
 .formRows{
-    gap: 20px;
+    gap: 1.25rem;
     width: 50%;
 }
 .icon{
@@ -77,7 +77,7 @@
     padding: 0.3rem;
 }
 .myCustomDialog .sapMDialogScrollCont {
-    margin: 15px;
+    margin: 0.938rem;
 }
 
 .sapMBtnInner{
@@ -87,13 +87,13 @@
     color: green !important; 
     padding: 0 !important;
     margin: 0  !important;
-    height: 20px !important;
+    height: 1.25rem !important;
 }
 
 
 @media (max-width: 1024px) {
     .tranchItems{
-        padding-left: 20px;
+        padding-left: 1.25rem;
         max-width: 30%;
        }
        .firstRow{
@@ -104,11 +104,11 @@
 
 @media (max-width: 1600px) {
     .tranchItems{
-        padding-left: 20px;
+        padding-left: 1.25rem;
         max-width: 30%;
        }
        .sapMSltWithArrow > .sapMSltLabel, .sapMSltWithArrow .sapMSelectListItemBase {
-        width: 200px;
+        width: 12.5rem;
         padding: 0 5rem 0 0.625rem;
     }
      .textArea{
@@ -117,14 +117,14 @@
 }
 @media (min-width: 1600px) {
     .tranchItems{
-        padding-left: 20px;
+        padding-left: 1.25rem;
         max-width: 50%;
        }
     .firstRow{
-        gap: 40px !important;
+        gap: 2.5rem !important;
     }
     .formRows{
-        gap: 40px;
+        gap: 2.5rem;
         width: 100%;
     }
     .textArea{
@@ -132,11 +132,11 @@
     }
     .textInput{
         width: 100% !important;
-        margin-right: 30px !important;
+        margin-right: 1.875rem !important;
     }
     .sapMSltWithArrow > .sapMSltLabel, .sapMSltWithArrow .sapMSelectListItemBase {
         padding: 0 0rem 0 0.625rem;
-        width: 200px;
+        width: 12.5rem;
     }
 }
 

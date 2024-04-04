@@ -153,7 +153,7 @@
             </f:SimpleForm>
 
             <!-- Table -->
-            <!-- items="{updateModel>/targets}" -->
+            
             <Panel class="tablePanel">
                 <Table
                     items="{path: 'tranches>/BonusTranche', parameters : {$expand:'targets'}}"
