@@ -27,6 +27,7 @@
                 width="auto"
                 items="{
                         path: 'tranches>/BonusTranche',
+                        parameters : {$expand:'targets'},
                         sorter: {
                             path: 'createdAt',
                             descending: true

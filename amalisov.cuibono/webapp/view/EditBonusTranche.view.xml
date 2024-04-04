@@ -47,7 +47,7 @@
                                 <Input
                                     id="nameInput"
                                     required="true"
-                                    value="{name}"
+                                    value="{updateModel>/name}"
                                     type="Text"
                                     class="sapUiSmallMarginBottom inputs textInput"
                                 />
