@@ -60,7 +60,6 @@
                                 />
                                 <Select
                                     selectedKey="{updateModel>/location}"
-                                    items="{tranches>/locations}"
                                   
                                     change=".onSortSelectChange"
                                     class="inputs"
@@ -156,7 +155,8 @@
             
             <Panel class="tablePanel">
                 <Table
-                    items="{path: 'tranches>/BonusTranche', parameters : {$expand:'targets'}}"
+                    items="{tranches>targets}"
+                    id="trancheTable"
                     width="45%"
                 >
                     <headerToolbar>

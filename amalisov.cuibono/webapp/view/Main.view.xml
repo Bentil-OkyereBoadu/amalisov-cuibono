@@ -27,11 +27,11 @@
                 width="auto"
                 items="{
                         path: 'tranches>/BonusTranche',
-                        parameters : {$expand:'targets'},
                         sorter: {
                             path: 'createdAt',
                             descending: true
-                        }
+                        },
+                        parameters : {$expand:'targets'}
                     }"
             >
                 <headerToolbar>
@@ -82,10 +82,10 @@
                         <Text text="{tranches>name}" />
                         <Text text="{tranches>location}" />
                         <Text
-                            text="{formatter: 'formatter.formatDate', path: 'tranches>startDate'}"
+                            text="{tranches>startDate}"
                         />
                         <Text
-                            text="{formatter: 'formatter.formatDate', path: 'tranches>endDate'}"
+                            text="{tranches>endDate}"
                         />
                         <HBox>
                             <Button

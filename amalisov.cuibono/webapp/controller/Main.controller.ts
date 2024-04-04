@@ -9,9 +9,10 @@ import Filter from "sap/ui/model/Filter";
 import FilterOperator from "sap/ui/model/FilterOperator";
 import ODataListBinding from "sap/ui/model/odata/v4/ODataListBinding";
 interface Target {
-	TargetName: string;
-	TargetWeight: number;
-	Achieved: string;
+	name: string;
+	weight: number;
+	achievement: number;
+	description: string;
 }
 
 interface Tranche {
@@ -74,6 +75,7 @@ export default class Main extends BaseController {
 			),
 		});
 		const oContext = oItem.getBindingContext("tranches");
+		console.log(oItem)
 		const oData = this.constructTrancheData(oContext, true);
 		oUpdateModel.setData(oData);
 	}
@@ -101,10 +103,10 @@ export default class Main extends BaseController {
 		const sLocation = oContext.getProperty("location");
 		const nTrancheWeight = oContext.getProperty("weight");
 		const sDescription = oContext.getProperty("createdBy");
-		const aTargets = oContext.getProperty("targets");
+		// const aTargets = oContext.getProperty("targets");
 		const sTrancheId = oContext.getProperty("ID");
 		const sStatus = oContext.getProperty("Status");
-		console.log("expanded",aTargets);
+		// console.log("expanded",aTargets);
 
 		const oData: Tranche = {
 			ID: sTrancheId,
