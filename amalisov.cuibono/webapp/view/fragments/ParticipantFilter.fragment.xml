@@ -70,11 +70,18 @@
                             <MultiComboBox
                                 name="{i18n>location}"
                                 selectionChange=".onFilter"
-                                items="{participant>/ProductCategories}"
                             >
                                 <core:Item
-                                    key="{participant>key}"
-                                    text="{participant>name}"
+                                    key="{i18n>location1}"
+                                    text="{i18n>location1}"
+                                />
+                                <core:Item
+                                    key="{i18n>location2}"
+                                    text="{i18n>location2}"
+                                />
+                                <core:Item
+                                    key="{i18n>location3}"
+                                    text="{i18n>location3}"
                                 />
                             </MultiComboBox>
                         </fb:control>
@@ -112,7 +119,7 @@
                         </fb:control>
                     </fb:FilterGroupItem>
                     <fb:FilterGroupItem
-                        name="status"
+                        name="Status"
                         label="{i18n>Status}"
                         groupName="Group1"
                         visibleInFilterBar="true"
@@ -123,8 +130,16 @@
                                 selectionChange=".onFilter"
                             >
                                 <core:Item
-                                    key="key"
-                                    text="name"
+                                    key="{i18n>runningStatus}"
+                                    text="{i18n>runningStatus}"
+                                />
+                                <core:Item
+                                    key="{i18n>lockedStatus}"
+                                    text="{i18n>lockedStatus}"
+                                />
+                                <core:Item
+                                    key="{i18n>completedStatus}"
+                                    text="{i18n>completedStatus}"
                                 />
                             </MultiComboBox>
                         </fb:control>
@@ -141,8 +156,12 @@
                                 selectionChange=".onFilter"
                             >
                                 <core:Item
-                                    key="key"
-                                    text="name"
+                                    key="{i18n>false}"
+                                    text="{i18n>false}"
+                                />
+                                <core:Item
+                                    key="{i18n>true}"
+                                    text="{i18n>true}"
                                 />
                             </MultiComboBox>
                         </fb:control>

@@ -4,9 +4,10 @@ import BindingMode from "sap/ui/model/BindingMode";
 import Device from "sap/ui/Device";
 
 interface Target {
-    TargetName: string;
-    TargetWeight: number;
-    Achieved: string;
+    name: string;
+    weight: number;
+    achievement: number;
+    description: string;
 }
 
 interface Tranche {
@@ -40,13 +41,21 @@ export default {
 			originDate: "",
             weight: 0,
             description: "",
-            Status: "",
-            targets: [{
-				TargetName:"", 
-				TargetWeight: 0, 
-				Achieved: ""
-			}
-			]
+            Status: "Open",
+            targets: [],
+		};
+		const oModel = new JSONModel();
+        oModel.setData(oData);
+
+        return oModel;
+	},
+
+    createNewTargets: () => {
+		const oData: Target = {
+				name:"", 
+				weight: null, 
+				achievement: null,
+                description:"",
 		};
 		const oModel = new JSONModel();
         oModel.setData(oData);

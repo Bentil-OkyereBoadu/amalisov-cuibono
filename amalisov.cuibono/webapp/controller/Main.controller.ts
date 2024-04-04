@@ -102,9 +102,9 @@ export default class Main extends BaseController {
 		const sLocation = oContext.getProperty("location");
 		const nTrancheWeight = oContext.getProperty("weight");
 		const sDescription = oContext.getProperty("createdBy");
-		const sOriginDate = oContext.getProperty("createdAt");
 		const aTargets = oContext.getProperty("targets");
 		const sTrancheId = oContext.getProperty("ID");
+		const sStatus = oContext.getProperty("Status");
 
 		const oData: Tranche = {
 			ID: sTrancheId,
@@ -112,13 +112,12 @@ export default class Main extends BaseController {
 			location: sLocation,
 			startDate: includeDates ? oContext.getProperty("startDate") : "",
 			endDate: includeDates ? oContext.getProperty("endDate") : "",
-			originDate: sOriginDate,
+			originDate: includeDates ? oContext.getProperty("createdAt") : "",
 			weight: nTrancheWeight,
 			description: sDescription,
-			Status: includeDates ? oContext.getProperty("Status") : "",
-			targets: aTargets,
+			Status: sStatus,
+			targets: [],
 		};
-
 		return oData;
 	}
 
@@ -127,21 +126,27 @@ export default class Main extends BaseController {
 		const oModel = oView.getModel("tranches") as ODataModel;
 		const oSource = oEvent.getSource().getBindingContext("tranches");
 		const resourceBundle: ResourceBundle = await this.getResourceBundle();
-
+	
 		const oObjectContext = oSource.getObject();
 		const bonusID: string = oObjectContext.ID;
-
+	
 		if (bonusID) {
-			try {
-				await oModel.bindContext('/deleteBonusTranche(...)') 
-				    .setParameter('ID', bonusID)
-					.execute();
-				MessageBox.success(resourceBundle.getText("deleteTranche"));
-				oModel.refresh();
-			} catch (error) {
-				MessageBox.error(resourceBundle.getText("errorDeleteTranche"));
-			}
+			MessageBox.confirm(resourceBundle.getText("confirmDeleteTranche"), {
+				actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+				onClose: async (sAction: string) => {
+					if (sAction === MessageBox.Action.YES) {
+						try {
+							await oModel.bindContext('/deleteBonusTranche(...)') 
+								.setParameter('ID', bonusID)
+								.execute();
+							MessageBox.success(resourceBundle.getText("deleteTranche"));
+							oModel.refresh();
+						} catch (error) {
+							MessageBox.error(resourceBundle.getText("errorDeleteTranche"));
+						}
+					}
+				}
+			});
 		}
-
 	}
 }

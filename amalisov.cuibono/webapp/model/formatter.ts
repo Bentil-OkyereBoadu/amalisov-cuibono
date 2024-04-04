@@ -6,16 +6,26 @@ export default {
 	},
 	formatDate: (sDate: string): string => {
         if (sDate) {
-            const oDateFormat = DateFormat.getDateInstance({ pattern: "MM.dd.yyyy" });
+            const oDateFormat = DateFormat.getDateInstance({ pattern: "dd.MM.yyyy" });
             return oDateFormat.format(new Date(sDate));
         }
         return sDate;
     
 	},
-	statusEnabled(status: string): boolean {
-        return status !== "Completed";
+
+    statusEnabled(Status: string): boolean {
+        return Status !== "Locked" && Status !== "completed"
     },
+
     statusLocked(Status: string): boolean {
-        return Status !== "Locked";
-    }
+        return Status !== "Locked" && Status !== "completed";
+    },
+
+    showSave(Status: string): boolean {
+        return Status === "Open" || Status === "Running";
+    },
+    
+    showComplete(Status: string): boolean {
+        return Status === "Locked" || Status === "completed";
+    },
 };

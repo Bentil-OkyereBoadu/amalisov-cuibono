@@ -111,13 +111,25 @@ export default abstract class BaseController extends Controller {
 		const aTableFilters = oFilterBar.getFilterGroupItems().reduce(function (aResult: any, oFilterGroupItem: any) {
 				const oControl = oFilterGroupItem.getControl(),
 				aSelectedKeys = oControl.getSelectedKeys ? oControl.getSelectedKeys() : [],
-					aFilters = aSelectedKeys.map(function (sSelectedKey: number) {
-						return new Filter({
-							path: oFilterGroupItem.getName(),
-							operator: FilterOperator.Contains,
-							value1: sSelectedKey
-						});
+				aFilters = aSelectedKeys.map(function (sSelectedKey: string) {
+					// Determine if the key is a boolean or string
+					let value1;
+					let operator;
+		
+					if (sSelectedKey === "true" || sSelectedKey === "false") {
+						value1 = sSelectedKey === "true";
+						operator = FilterOperator.EQ; 
+					} else {
+						value1 = sSelectedKey;
+						operator = FilterOperator.Contains;
+					}
+		
+					return new Filter({
+						path: oFilterGroupItem.getName(),
+						operator: operator,
+						value1: value1
 					});
+				});		
 				if (aSelectedKeys.length > 0) {
 					aResult.push(new Filter({
 						filters: aFilters,
@@ -131,7 +143,12 @@ export default abstract class BaseController extends Controller {
 			filterValues.forEach((filterValue: string) => {
 				const trimmedValue = filterValue.trim();
 				if (trimmedValue.length > 0) {
-					const columnFilter = new Filter(this.ColumnName, FilterOperator.Contains, trimmedValue);
+					const columnFilter = new Filter({
+                        path:this.ColumnName,
+                        operator:FilterOperator.Contains,
+                        value1:trimmedValue,
+                        caseSensitive: false
+                    });
 					aTableFilters.push(columnFilter);
 				}
 			});
@@ -169,6 +186,8 @@ export default abstract class BaseController extends Controller {
 				dialogTitle = resourceBundle.getText("overRule")
 				this.oDialog.addContent(new Label({ text:resourceBundle.getText("overRule") }));
 				this.oDialog.addContent(new TextArea({ width: "100%" }));
+				this.oDialog.addContent(new Label({ text: resourceBundle.getText("justification")}));
+				this.oDialog.addContent(new TextArea({ width: "100%"}));
 				break;
 				
             case localId:

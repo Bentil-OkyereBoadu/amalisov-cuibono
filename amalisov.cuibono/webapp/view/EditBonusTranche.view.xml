@@ -36,7 +36,7 @@
                     <VBox class="formBox">
                         <VBox class="tranchItems">
                             <Label text="{i18n>Status}" />
-                            <Text text="Open" />
+                            <Text text="{updateModel>/Status}" />
                         </VBox>
                         <HBox class="formRows firstRow">
                             <VBox class="tranchItems">
@@ -59,15 +59,21 @@
                                     required="true"
                                 />
                                 <Select
-                                    items="{tranches>/locations}"
-                                    value="{updateModel>/location}"
-                                    change=".onSortSelectChange"
+                                    selectedKey="{updateModel>/location}"
                                     class="inputs"
                                     id="locationSelect"
                                 >
                                     <core:ListItem
-                                        key="{tranches>Id}"
-                                        text="{tranches>Name}"
+                                        key="{i18n>location1}"
+                                        text="{i18n>location1}"
+                                    />
+                                    <core:ListItem
+                                        key="{i18n>location2}"
+                                        text="{i18n>location2}"
+                                    />
+                                    <core:ListItem
+                                        key="{i18n>location3}"
+                                        text="{i18n>location3}"
                                     />
                                 </Select>
                             </VBox>
@@ -94,6 +100,8 @@
                                     id="startDateInput"
                                     placeholder="{i18n>datePlaceholder}"
                                     value="{updateModel>/startDate}"
+                                    liveChange=".limitEndDate"
+                                    change=".limitDates"
                                     required="true"
                                     class="sapUiSmallMarginBottom inputs"
                                 />
@@ -110,6 +118,7 @@
                                     required="true"
                                     value="{updateModel>/endDate}"
                                     class="sapUiSmallMarginBottom inputs"
+                                    change=".limitDates"
                                 />
                             </VBox>
                         </HBox>
@@ -130,6 +139,7 @@
                                 <DatePicker
                                     id="originDateInput"
                                     placeholder="{i18n>datePlaceholder}"
+                                    change=".limitDates"
                                     value="{formatter: 'formatter.formatDate', path: 'updateModel>/originDate'}"
                                     class="sapUiSmallMarginBottom inputs"
                                 />
@@ -140,9 +150,11 @@
             </f:SimpleForm>
 
             <!-- Table -->
+            
             <Panel class="tablePanel">
                 <Table
-                    items="{updateModel>/targets}"
+                    
+                    items="{tranches>/Target}"
                     width="45%"
                 >
                     <headerToolbar>
@@ -172,20 +184,20 @@
 
                     <items>
                         <ColumnListItem>
-                            <Text text="{updateModel>TargetName}" />
-                            <Text text="{updateModel>TargetWeight}" />
-                            <Text text="{updateModel>Achieved}" />
+                            <Text text="{tranches>name}" />
+                            <Text text="{tranches>weight}" />
+                            <Text text="{tranches>achievement}" />
 
                             <HBox class="interactionIcons">
                                 <core:Icon
                                     src="sap-icon://edit"
                                     class="icon"
-                                    press=".onOpenEditDialog"
+                                    press=".onOpenEditTarget"
                                 />
 
                                 <core:Icon
                                     src="sap-icon://delete"
-                                    press=".onDeleteAnswer"
+                                    press=".onDeleteTarget"
                                     class="icon"
                                 />
                             </HBox>
@@ -205,11 +217,34 @@
                 <ToolbarSpacer />
                 <Button
                     type="Accept"
-                    text="Save"
+                    text="{i18n>save}"
                     press=".onSaveTranche"
+                    icon="sap-icon://save"
+                    visible="{path: 'updateModel>/Status', formatter: 'formatter.showSave', targetType:'any'}"
                 />
                 <Button
-                    type="Default"
+                    type="Ghost"
+                    text="{i18n>lock}"
+                    icon="sap-icon://locked"
+                    press=".onSaveTranche"
+                    visible="{path: 'updateModel>/Status', formatter: 'formatter.showSave', targetType:'any'}"
+                />
+                <Button
+                    type="Accept"
+                    text="{i18n>completedStatus}"
+                    icon="sap-icon://complete"
+                    press=".onSaveTranche"
+                    visible="{path: 'updateModel>/Status', formatter: 'formatter.showComplete', targetType:'any'}"
+                />
+                <Button
+                    type="Ghost"
+                    text="{i18n>reopen}"
+                    icon="sap-icon://unlocked"
+                    press=".onSaveTranche"
+                    visible="{path: 'updateModel>/Status', formatter: 'formatter.showComplete', targetType:'any'}"
+                />
+                <Button
+                    type="Reject"
                     press=".onCreateRoute"
                     text="Cancel"
                 />
