@@ -156,7 +156,7 @@
             
             <Panel class="tablePanel">
                 <Table
-                    items="{path: 'tranches>/BonusTranche', parameters : {$expand:'targets'}}"
+                    items="{updateModel>/targets}"
                     width="45%"
                 >
                     <headerToolbar>
