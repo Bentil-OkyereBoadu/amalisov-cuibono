@@ -85,19 +85,15 @@ export default class EditBonusTranche extends BaseController {
 	}
 
 	public onSaveTarget(): void {
-		const oView = this.getView();
 		const oUpdateModel = this.getModel("updateModel") as JSONModel;
 		const oNewTarget =this.getModel("newTargets") as JSONModel;
         const aTargets = oUpdateModel.getProperty("/targets") || [];
-
-		const targetWeight = oNewTarget.getProperty("/weight");
-		const weightNumber = parseInt(targetWeight.split("--").pop() || "");
-		const targetAchieved = oNewTarget.getProperty("/achievement");
-		const achievedNumber = parseInt(targetAchieved.split("--").pop() || "");
+		const targetWeight = Number (oNewTarget.getProperty("/weight"));
+		const targetAchieved = Number (oNewTarget.getProperty("/achievement"));
 		const oData = {
 					name: oNewTarget.getProperty("/name"),
-					weight: weightNumber,
-					achievement: achievedNumber,
+					weight: targetWeight,
+					achievement: targetAchieved,
 					description: oNewTarget.getProperty("/description"),
 		};
 		
