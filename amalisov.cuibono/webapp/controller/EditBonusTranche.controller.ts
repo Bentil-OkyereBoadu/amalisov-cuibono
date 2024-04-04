@@ -37,10 +37,7 @@ export default class EditBonusTranche extends BaseController {
 		oRouter
 			.getRoute("CreateTranche")
 			.attachPatternMatched(this.onCreateRoute, this);
-		// this.getView().setModel(this.getModel("tranches"));
-		oRouter
-			.getRoute("EditBonusTranche")
-			.attachPatternMatched(this.onRouteMatched, this);
+		this.getView().setModel(this.getModel("tranches"));
 	}
 
 	public onCreateRoute(oEvent: any): void {
@@ -57,60 +54,6 @@ export default class EditBonusTranche extends BaseController {
 		oUpdateModel.setProperty("/Targets", []);
 	}
 
-
-	private onRouteMatched(oEvent: any): void {
-		const oArgs = oEvent.getParameter("arguments");
-		const oView = this.getView();
-		const oTable = oView.byId("TargetsTable") as  Table;
-
-		oView.bindElement({
-			path : "/BonusTranche(" + oArgs.ID + ")",
-			parameters: {
-				"$expand": "targets",
-			},
-			events : {
-				dataRequested: function () {
-					oView.setBusy(true);
-				},
-				dataReceived: function () {
-					oView.setBusy(false);
-					oTable.bindItems( { path: "targets"} );
-				}.bind(this)
-			}
-		});
-	}
-	
-	// private bindListData(): void {
-	// 	const oView = this.getView();
-	// 	const oTable = oView.byId("TargetsTable") as  Table;
-		
-	// 	oTable.bindItems({
-	// 		path: 'Products',
-	// 		// template: new sap.m.ObjectListItem({
-	// 		// 	title: '{ProductName}',
-	// 		// 	number: '{UnitPrice}',
-	// 		// 	intro: '{QuantityPerUnit}',
-	// 		// 	numberUnit: '{config>/currency}'
-	// 		// })
-	// 	});
-	// }
-
-	public onObjectMatched(oEvent: any): void {
-        const oView = this.getView();
-		const oUpdateModel = this.getModel("updateModel");
-
-		const sTrancheId = oUpdateModel.getProperty("/ID");
-        // const sTrancheId = window.decodeURIComponent(oEvent.getParameter("arguments").ID);
-        const sPath = `/BonusTranche({sTrancheId})`;
-        oView.bindElement({
-            path: sPath,
-            model: "tranche",
-            parameters: {
-                "$expand": "targets",
-            }
-        });
-		console.log("pathhh",sPath,"iddddd", sTrancheId);
-    }
 	public onAddTarget(): void {
 		const oView = this.getView();
 		const oDialog = this.byId("editDialog") as Dialog;

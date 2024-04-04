@@ -73,7 +73,6 @@ export default class Main extends BaseController {
 				oItem.getBindingContext("tranches").getPath().substr(1)
 			),
 		});
-
 		const oContext = oItem.getBindingContext("tranches");
 		const oData = this.constructTrancheData(oContext, true);
 		oUpdateModel.setData(oData);
@@ -105,6 +104,7 @@ export default class Main extends BaseController {
 		const aTargets = oContext.getProperty("targets");
 		const sTrancheId = oContext.getProperty("ID");
 		const sStatus = oContext.getProperty("Status");
+		console.log("expanded",aTargets);
 
 		const oData: Tranche = {
 			ID: sTrancheId,

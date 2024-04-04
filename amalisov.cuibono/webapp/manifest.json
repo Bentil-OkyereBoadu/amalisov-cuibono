@@ -150,6 +150,10 @@
 					"pattern": "tranche-participants",
 					"name": "trancheParticipants",
 					"target": "participants"
+				},{
+					"pattern": "calculated-bonus",
+					"name": "CalculatedBonus",
+					"target": "CalculatedBonus"
 				}
 			],
 			"targets": {
@@ -172,7 +176,13 @@
 					"viewId": "participants",
 					"viewName": "Participants",
 				
-					"viewLevel": 0
+					"viewLevel": 3
+				},
+				"CalculatedBonus": {
+					"viewId": "CalculatedBonus",
+					"viewName": "CalculatedBonus",
+				
+					"viewLevel": 4
 				}
 			}
 		}
