@@ -100,7 +100,6 @@ export default class Participants extends BaseController {
 				}
 			}
 		});
-		console.log(this.selectedItems);
 	}
 
 	

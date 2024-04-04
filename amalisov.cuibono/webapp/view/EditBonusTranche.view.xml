@@ -150,7 +150,7 @@
             </f:SimpleForm>
 
             <!-- Table -->
-            <!-- items="{updateModel>/targets}" -->
+            
             <Panel class="tablePanel">
                 <Table
                     
