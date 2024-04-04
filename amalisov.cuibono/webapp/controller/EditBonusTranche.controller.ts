@@ -30,6 +30,9 @@ export default class EditBonusTranche extends BaseController {
 			.getRoute("CreateTranche")
 			.attachPatternMatched(this.onCreateRoute, this);
 		this.getView().setModel(this.getModel("tranches"));
+		oRouter
+			.getRoute("EditBonusTranche")
+			.attachPatternMatched(this.onObjectMatched, this);
 	}
 
 	public onCreateRoute(oEvent: any): void {
@@ -46,6 +49,22 @@ export default class EditBonusTranche extends BaseController {
 		oUpdateModel.setProperty("/Targets", []);
 	}
 
+	public onObjectMatched(oEvent: any): void {
+        const oView = this.getView();
+		const oUpdateModel = this.getModel("updateModel");
+
+		const sTrancheId = oUpdateModel.getProperty("/ID");
+        // const sTrancheId = window.decodeURIComponent(oEvent.getParameter("arguments").ID);
+        const sPath = `/${sTrancheId}`;
+        oView.bindElement({
+            path: sPath,
+            model: "thread",
+            parameters: {
+                "$expand": "targets",
+            }
+        });
+		console.log("pathhh",sPath,"iddddd", sTrancheId);
+    }
 	public onAddTarget(): void {
 		const oDialog = this.byId("editDialog") as Dialog;
 		oDialog.open();

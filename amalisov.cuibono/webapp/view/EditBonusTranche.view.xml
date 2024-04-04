@@ -60,7 +60,7 @@
                                 />
                                 <Select
                                     items="{tranches>/locations}"
-                                    value="{updateModel>/location}"
+                                  
                                     change=".onSortSelectChange"
                                     class="inputs"
                                     id="locationSelect"
@@ -142,7 +142,7 @@
             <!-- Table -->
             <Panel class="tablePanel">
                 <Table
-                    items="{updateModel>/targets}"
+                    items="{path: 'tranches>/BonusTranche', parameters : {$expand:'targets'}}"
                     width="45%"
                 >
                     <headerToolbar>
