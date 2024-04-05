@@ -47,7 +47,7 @@
                                 <Input
                                     id="nameInput"
                                     required="true"
-                                    value="{updateModel>/name}"
+                                    value="{tranches>name}"
                                     type="Text"
                                     class="sapUiSmallMarginBottom inputs textInput"
                                 />
@@ -84,7 +84,7 @@
                             <TextArea
                                 
                                 id="descriptionInput"
-                                value="{updateModel>/description}"
+                                value="{tranches>description}"
                                 rows="4"
                                 class="sapUiSmallMarginBottom textArea"
                             />
@@ -99,7 +99,7 @@
                                 <DatePicker
                                     id="startDateInput"
                                     placeholder="{i18n>datePlaceholder}"
-                                    value="{updateModel>/startDate}"
+                                    value="{tranches>startDate}"
                                     liveChange=".limitEndDate"
                                     change=".limitDates"
                                     required="true"
@@ -116,7 +116,7 @@
                                     id="endDateInput"
                                     placeholder="{i18n>datePlaceholder}"
                                     required="true"
-                                    value="{updateModel>/endDate}"
+                                    value="{tranches>endDate}"
                                     class="sapUiSmallMarginBottom inputs"
                                     change=".limitDates"
                                 />
@@ -129,7 +129,7 @@
                                 <Input
                                     id="weightInput"
                                     type="Text"
-                                    value="{updateModel>/weight}"
+                                    value="{tranches>weight}"
                                     class="sapUiSmallMarginBottom inputs textInput"
                                 />
                             </VBox>
@@ -140,7 +140,7 @@
                                     id="originDateInput"
                                     placeholder="{i18n>datePlaceholder}"
                                     change=".limitDates"
-                                    value="{formatter: 'formatter.formatDate', path: 'updateModel>/originDate'}"
+                                    value="{formatter: 'formatter.formatDate', path: 'tranches>originDate'}"
                                     class="sapUiSmallMarginBottom inputs"
                                 />
                             </VBox>

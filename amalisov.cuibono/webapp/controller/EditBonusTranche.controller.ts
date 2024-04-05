@@ -86,9 +86,10 @@ export default class EditBonusTranche extends BaseController {
 	}
 
 	public onObjectMatched(oEvent: any): void {
-        const oView = this.getView()//.byId("trancheTable");
+        const oView = this.getView();
 		const oUpdateModel = this.getModel("updateModel") as JSONModel;
         const trancheId = oUpdateModel.getProperty("/ID");
+		// const trancheId = window.decodeURIComponent(oEvent.getParameter("arguments").ID);
         const sPath = `/BonusTranche(${trancheId})`;
         oView.bindElement({
             path: sPath,
