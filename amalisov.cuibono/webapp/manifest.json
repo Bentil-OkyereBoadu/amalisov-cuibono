@@ -18,6 +18,13 @@
 					"odataVersion": "4.0"
 				}
 			},
+			"bonusTrancheV2": {
+				"uri": "/v2/odata/v4/bonusTranche/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			},
 			"participant": {
 				"uri": "/odata/v4/bonusTranche/",
 				"type": "OData",
@@ -94,6 +101,19 @@
 				"settings": {
 					"synchronizationMode": "None",
 					"groupId": "$direct",
+					"metadataUrlParams": {
+						"sap-documentation": "heading"
+					},
+					"operationMode": "Server"
+				}
+			},
+
+			"bonusTrancheV2": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"dataSource": "bonusTrancheV2",
+				"preload": true,
+				"settings": {
+					"synchronizationMode": "None",
 					"metadataUrlParams": {
 						"sap-documentation": "heading"
 					},

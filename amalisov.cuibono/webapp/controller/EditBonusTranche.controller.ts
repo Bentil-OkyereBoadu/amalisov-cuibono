@@ -44,9 +44,10 @@ export default class EditBonusTranche extends BaseController {
 	}
 
 	public onObjectMatched(oEvent: any): void {
-        const oView = this.getView()//.byId("trancheTable");
+        const oView = this.getView();
 		const oUpdateModel = this.getModel("updateModel") as JSONModel;
         const trancheId = oUpdateModel.getProperty("/ID");
+		// const trancheId = window.decodeURIComponent(oEvent.getParameter("arguments").ID);
         const sPath = `/BonusTranche(${trancheId})`;
         oView.bindElement({
             path: sPath,
@@ -55,10 +56,7 @@ export default class EditBonusTranche extends BaseController {
                 "$expand": "targets",
             }
         });
-		console.log("matched",trancheId, sPath, oView)
-
-		const oModel = oView.getModel("tranches");
-		console.log("testetstststs",oModel)
+		
     }
 
 	public onCreateRoute(oEvent: any): void {
@@ -238,20 +236,20 @@ export default class EditBonusTranche extends BaseController {
 		const aTargets = oUpdateModel.getProperty("/targets");
 		const sStartDate = oUpdateModel.getProperty("/startDate");
 		const sEndDate = oUpdateModel.getProperty("/endDate");
-		const sTrancheId = oUpdateModel.getProperty("/ID");
+		const sOriginDate = oUpdateModel.getProperty("/endDate");
 		const sStatus = oUpdateModel.getProperty("/Status");
-
 		const formattedStartDate = this.formatDate(sStartDate)
 		const formattedEndDate = this.formatDate(sEndDate)
+		const formattedOriginDate = this.formatDate(sOriginDate)
 
 		const oData: TrancheData = {
-			// ID: sTrancheId,
 			name: sTrancheName,
 			location: sLocation,
 			startDate: formattedStartDate,
 			endDate: formattedEndDate,
-			// weight: nTrancheWeight,
-			// description: sDescription,
+			originDate: formattedOriginDate,
+			weight: nTrancheWeight,
+			description: sDescription,
 			Status: sStatus,
 			targets: aTargets,
 		};
