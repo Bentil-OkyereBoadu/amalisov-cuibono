@@ -56,6 +56,9 @@ export default class EditBonusTranche extends BaseController {
             }
         });
 		console.log("matched",trancheId, sPath, oView)
+
+		const oModel = oView.getModel("tranches");
+		console.log("testetstststs",oModel)
     }
 
 	public onCreateRoute(oEvent: any): void {
