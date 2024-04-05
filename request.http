@@ -28,7 +28,7 @@ GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche(ab525bcc-4253-4620
 #
 # GET BONUSTRENCH  
 #
-GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche?$expand=trancheParticipations($expand=bonusTranche,department)
+GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche(b11d2146-09e4-48ff-9ae0-b866c34b74a4)?$expand=trancheParticipations($expand=bonusTranche,department),targets
 
 ###
 #
@@ -52,14 +52,7 @@ Content-Type: application/json
       "weight": 10,
       "Status": "Open",
       "location": "Tokyo",
-      "targets":[
-        {
-          "name":"test target",
-          "weight":25,
-          "achievement":100,
-          "description":"doo"
-        }
-      ]
+      "targets":[]
 }
 
 
@@ -71,10 +64,26 @@ POST   http://localhost:4004/odata/v4/bonusTranche/updateBonusTranche
 Content-Type: application/json
 
 {
-  "ID":"4d02d643-6097-4b57-8d4b-a76127025e88",
-   "Status":"Completed",
-   "targets":[]
+  "ID":"dd30e88f-18ec-43f6-a4b8-96e7bccbc154",
+  "Status":"Locked",
+  "name":"Testing1",
+   "targets": [
+     {
+      "name": "Target 2",
+      "weight": 5,
+      "achievement": 4,
+      "description": "Description of Target 1"
+    }
+  ]
 }
+
+
+###
+#
+# GET BONUSTRENCH  
+#
+GET  http://localhost:4004/odata/v4/bonusTranche/BonusTranche(b11d2146-09e4-48ff-9ae0-b866c34b74a4)?$expand=trancheParticipations
+
 
 
 ###
@@ -129,7 +138,7 @@ POST  http://localhost:4004/odata/v4/bonusTranche/overRuleAmount
 Content-Type: application/json
 
 {
-  "ID":["f1107972-e281-4489-a6c1-ea3f2d5ee379"],
+  "ID":["4fe94df4-a9ba-465e-b541-0f51de2892b2"],
   "finalAmount":200,
   "justification":"Amount overruled from tranche"
 }
