@@ -3,12 +3,14 @@ import BaseController from "./BaseController";
 import Input from "sap/m/Input";
 import JSONModel from "sap/ui/model/json/JSONModel";
 import TextArea from "sap/m/Input";
-import ODataModel from "sap/ui/model/odata/v4/ODataModel";
+// import ODataModel from "sap/ui/model/odata/v4/ODataModel";
+import ODataModel from "sap/ui/model/odata/v2/ODataModel";
 import ResourceBundle from "sap/base/i18n/ResourceBundle";
 import MessageBox from "sap/m/MessageBox";
 import DatePicker from "sap/m/DatePicker";
 import Table from "sap/m/Table";
-
+import Select from "sap/m/Select";
+import Text from "sap/m/Text";
 /**
  * @namespace amalisov.cuibono.controller
  */
@@ -26,7 +28,7 @@ interface TrancheData {
 	startDate?: string;
 	endDate?: string;
 	originDate?: string;
-	weight?: string;
+	weight?: number;
 	Status?: string;
 	targets?: Target[];
 }
@@ -45,10 +47,10 @@ export default class EditBonusTranche extends BaseController {
 
 	public onObjectMatched(oEvent: any): void {
         const oView = this.getView();
-		const oUpdateModel = this.getModel("updateModel") as JSONModel;
-        const trancheId = oUpdateModel.getProperty("/ID");
-		// const trancheId = window.decodeURIComponent(oEvent.getParameter("arguments").ID);
-        const sPath = `/BonusTranche(${trancheId})`;
+		// const oUpdateModel = this.getModel("updateModel") as JSONModel;
+        // const trancheId = oUpdateModel.getProperty("/ID");
+		const trancheId = window.decodeURIComponent(oEvent.getParameter("arguments").ID);
+        const sPath = `/${trancheId}`;
         oView.bindElement({
             path: sPath,
             model: "tranches",
@@ -56,8 +58,26 @@ export default class EditBonusTranche extends BaseController {
                 "$expand": "targets",
             }
         });
+		// this.readArray()
 		
     }
+	// public readArray(): void{
+	// 	const oUpdateModel = this.getModel("updateModel") as JSONModel;
+    //     const trancheId = oUpdateModel.getProperty("/ID");
+	// 	const oGeneralModel =  this.getModel("bonusTrancheV2") as ODataModel;
+	// 	console.log("v2 model", oGeneralModel)
+		
+	// 	const sPath = `/BonusTranche`;
+	// 	oGeneralModel.read(sPath, { 
+	// 		success : function(oData: any, response: any){
+	// 			console.log("kkkkk",oData, response)
+	// 		   },
+		   
+	// 		error: function(oError: any ){
+	// 		  console.log("first")
+	// 		}
+	// 	   });
+	// }
 
 	public onCreateRoute(oEvent: any): void {
 		const oView = this.getView();
@@ -71,6 +91,8 @@ export default class EditBonusTranche extends BaseController {
 		(oView.byId("descriptionInput") as TextArea).setValue("");
 		(oView.byId("originDateInput") as Input).setValue("");
 		oUpdateModel.setProperty("/Targets", []);
+		
+		window.location.reload()
 	}
 
 	public onAddTarget(): void {
@@ -168,27 +190,35 @@ export default class EditBonusTranche extends BaseController {
         });
     }
 
-	public async onSaveTranche(): Promise<void> {
+	public async onSaveTranche(oEvent: any): Promise<void> {
 		const oView = this.getView();
 		const oModel = oView.getModel("tranches") as ODataModel;
 		const resourceBundle: ResourceBundle = await this.getResourceBundle();
-		const oUpdateModel = this.getModel("updateModel");
-		const sTrancheID = oUpdateModel.getProperty("/ID");
+		// const oUpdateModel = this.getModel("updateModel");
+		// const sTrancheID = window.decodeURIComponent(oEvent.getParameter("arguments").ID);
+		// const sTrancheID = oUpdateModel.getProperty("/ID");
+
+		const oRouter = this.getRouter();
+		const currentHash = oRouter.getHashChanger().getHash();
+		const sPageName= oRouter.getRouteInfoByHash(currentHash).name
 
 		let sPath = "";
 		let oData: TrancheData = {
 			name: "",
 		};
 		let sToastMessage = "";
-		if (!sTrancheID) {
+		if (sPageName !== resourceBundle.getText("routeCondition")) {
 			sPath = "/createTranche";
 			oData = this.constructTrancheData();
 			sToastMessage = "createdTranche";
-		} else if (sTrancheID !== "") {
+			
+		} else if (sPageName === resourceBundle.getText("routeCondition")) {
 			sPath = "/updateBonusTranche";
-			const ID = sTrancheID;
-			oData = { ...this.constructTrancheData(), ID: ID };
+			// const ID = sTrancheID;
+			// oData = { ...this.constructTrancheData(), ID: ID };
 			sToastMessage = "updatedTranche";
+			
+
 		}
 
 		try {
@@ -228,26 +258,28 @@ export default class EditBonusTranche extends BaseController {
 
 	private constructTrancheData(): TrancheData {
 		const oUpdateModel = this.getModel("updateModel");
+		const oView = this.getView();
 
-		const sTrancheName = oUpdateModel.getProperty("/name");
-		const sLocation = oUpdateModel.getProperty("/location");
-		const nTrancheWeight = oUpdateModel.getProperty("/weight");
-		const sDescription = oUpdateModel.getProperty("/description");
+		const sTrancheName = (oView.byId("nameInput") as Input).getValue();
+		const sLocation = (oView.byId("locationSelect") as Select).getSelectedKey();
+		const nTrancheWeight =  Number((oView.byId("weightInput") as Input).getValue());
+		const sDescription = (oView.byId("descriptionInput") as Input).getValue();
 		const aTargets = oUpdateModel.getProperty("/targets");
-		const sStartDate = oUpdateModel.getProperty("/startDate");
-		const sEndDate = oUpdateModel.getProperty("/endDate");
-		const sOriginDate = oUpdateModel.getProperty("/endDate");
-		const sStatus = oUpdateModel.getProperty("/Status");
+		const sStartDate = (oView.byId("startDateInput") as Input).getValue();
+		const sEndDate = (oView.byId("endDateInput") as Input).getValue();
+		//const sOriginDate = (oView.byId("originDateInput") as Input).getValue();
+		const sStatus = (oView.byId("statusValue") as Text).getText() || "Open";
+		console.log(sStatus, sLocation)
 		const formattedStartDate = this.formatDate(sStartDate)
 		const formattedEndDate = this.formatDate(sEndDate)
-		const formattedOriginDate = this.formatDate(sOriginDate)
+		//const formattedOriginDate = this.formatDate(sOriginDate)
 
 		const oData: TrancheData = {
 			name: sTrancheName,
 			location: sLocation,
 			startDate: formattedStartDate,
 			endDate: formattedEndDate,
-			originDate: formattedOriginDate,
+			//originDate: formattedOriginDate,
 			weight: nTrancheWeight,
 			description: sDescription,
 			Status: sStatus,

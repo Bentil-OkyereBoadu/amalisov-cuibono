@@ -111,13 +111,12 @@
 			"bonusTrancheV2": {
 				"type": "sap.ui.model.odata.v2.ODataModel",
 				"dataSource": "bonusTrancheV2",
-				"preload": true,
+				"preload": false,
 				"settings": {
-					"synchronizationMode": "None",
+					"useBatch": false,
 					"metadataUrlParams": {
 						"sap-documentation": "heading"
-					},
-					"operationMode": "Server"
+					}
 				}
 			},
 			
@@ -156,7 +155,7 @@
 					"name": "CreateTranche",
 					"target": "CreateTranche"
 				},{
-					"pattern": "edit-tranche",
+					"pattern": "edit-tranche/{ID}",
 					"name": "EditBonusTranche",
 					"target": "EditBonusTranche"
 

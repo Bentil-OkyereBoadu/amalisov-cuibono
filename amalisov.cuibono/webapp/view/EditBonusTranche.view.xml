@@ -36,7 +36,7 @@
                     <VBox class="formBox">
                         <VBox class="tranchItems">
                             <Label text="{i18n>Status}" />
-                            <Text text="{tranches>Status}" />
+                            <Text text="{tranches>Status}"  id="statusValue"/>
                         </VBox>
                         <HBox class="formRows firstRow">
                             <VBox class="tranchItems">
