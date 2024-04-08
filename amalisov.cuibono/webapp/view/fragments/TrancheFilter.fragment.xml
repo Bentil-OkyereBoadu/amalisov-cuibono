@@ -83,7 +83,7 @@
                         </fb:control>
                     </fb:FilterGroupItem>
                     <fb:FilterGroupItem
-                        name="fiscalYear"
+                        name="startDate"
                         label="{i18n>fiscalYear}"
                         groupName="Group1"
                         visibleInFilterBar="true"
@@ -94,12 +94,16 @@
                                 selectionChange=".onFilter"
                             >
                                 <core:Item
-                                    key="createdAt"
+                                    key="{i18n>year1}"
                                     text="{i18n>year1}"
                                 />
                                 <core:Item
-                                    key="upvotes"
+                                    key="{i18n>year2}"
                                     text="{i18n>year2}"
+                                />
+                                <core:Item
+                                    key="{i18n>year3}"
+                                    text="{i18n>year3}"
                                 />
                             </MultiComboBox>
                         </fb:control>

@@ -106,7 +106,7 @@
                         </fb:control>
                     </fb:FilterGroupItem>
                     <fb:FilterGroupItem
-                        name="fiscalYear"
+                        name="startDate"
                         label="{i18n>fiscalYear}"
                         groupName="Group1"
                         visibleInFilterBar="true"
