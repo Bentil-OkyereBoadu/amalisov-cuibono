@@ -134,7 +134,7 @@ export default abstract class BaseController extends Controller {
 					let value1 
 					let operator
 					if (sSelectedKey === "true" || sSelectedKey === "false") {
-						value1 = sSelectedKey === "true";
+						value1 = sSelectedKey
 						operator = FilterOperator.EQ; 
 					} else {
 						value1 = sSelectedKey;
