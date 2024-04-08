@@ -22,6 +22,8 @@ import MessageBox from "sap/m/MessageBox";
 import Sorter from "sap/ui/model/Sorter";
 import ODataListBinding from "sap/ui/model/odata/v4/ODataListBinding";
 import MessageToast from "sap/m/MessageToast";
+import CheckBox from "sap/m/CheckBox";
+import ODataModel from "sap/ui/model/odata/v4/ODataModel";
 
 
 /**
@@ -30,9 +32,13 @@ import MessageToast from "sap/m/MessageToast";
 export default abstract class BaseController extends Controller {
 	public oDialog: Dialog;
 	public dialogContent: string = ""
+	public dialogContent2: string = ""
 	public inputFilter: any = [];
 	public ColumnName: string = "";
 	public MultiInputId: string = "";
+	public currentAction : string = ""
+	public selectedItems: any = [];
+	public updateExclude:boolean
 	/**
 	 * Convenience method for accessing the component of the controller's view.
 	 * @returns The component of the controller's view
@@ -104,20 +110,31 @@ export default abstract class BaseController extends Controller {
 	}
 
 	public onFilter(): void {
-		const oView = this.getView()
+		const oView = this.getView();
 		const oFilterBar = oView.byId("filterbar") as FilterBar;
 		const oTable = oView.byId("Table") as Table;
-
+	
 		const aTableFilters = oFilterBar.getFilterGroupItems().reduce(function (aResult: any, oFilterGroupItem: any) {
-				const oControl = oFilterGroupItem.getControl(),
-				aSelectedKeys = oControl.getSelectedKeys ? oControl.getSelectedKeys() : [],
-				aFilters = aSelectedKeys.map(function (sSelectedKey: string) {
-					// Determine if the key is a boolean or string
-					let value1;
-					let operator;
-		
+			const oControl = oFilterGroupItem.getControl(),
+			aSelectedKeys = oControl.getSelectedKeys ? oControl.getSelectedKeys() : [],
+			aFilters = aSelectedKeys.map(function (sSelectedKey: string) {
+	
+				const year = parseInt(sSelectedKey, 10);  // selected year to filter
+				if (year) { 
+					const startDate = new Date(`${year - 1}-10-01`); //fiscal start at 1st October of the previous year
+					const endDate = new Date(`${year}-09-30`); // fiscal year end at 30th September of the selected year
+	
+					return new Filter({
+						path: "startDate",
+						operator: FilterOperator.BT,
+						value1: startDate.toISOString(),
+						value2: endDate.toISOString(),
+					});
+				} else {
+					let value1 
+					let operator
 					if (sSelectedKey === "true" || sSelectedKey === "false") {
-						value1 = sSelectedKey === "true";
+						value1 = sSelectedKey
 						operator = FilterOperator.EQ; 
 					} else {
 						value1 = sSelectedKey;
@@ -129,14 +146,16 @@ export default abstract class BaseController extends Controller {
 						operator: operator,
 						value1: value1
 					});
-				});		
-				if (aSelectedKeys.length > 0) {
-					aResult.push(new Filter({
-						filters: aFilters,
-						and: false
-					}));
 				}
-				return aResult;
+			});
+	
+			if (aFilters.length > 0) {
+				aResult.push(new Filter({
+					filters: aFilters,
+					and: false
+				}));
+			}
+			return aResult;
 		}, []);
 		if (this.inputFilter && this.inputFilter.length > 0) {
 			const filterValues = this.inputFilter.split(','); 
@@ -144,11 +163,11 @@ export default abstract class BaseController extends Controller {
 				const trimmedValue = filterValue.trim();
 				if (trimmedValue.length > 0) {
 					const columnFilter = new Filter({
-                        path:this.ColumnName,
-                        operator:FilterOperator.Contains,
-                        value1:trimmedValue,
-                        caseSensitive: false
-                    });
+						path: this.ColumnName,
+						operator: FilterOperator.Contains,
+						value1: trimmedValue,
+						caseSensitive: false
+					});
 					aTableFilters.push(columnFilter);
 				}
 			});
@@ -172,6 +191,15 @@ export default abstract class BaseController extends Controller {
 			this.oDialog = sap.ui.xmlfragment("amalisov.cuibono.view.fragments.Dialog", this) as Dialog;
 			this.getView().addDependent(this.oDialog);
 		}
+
+		if (oButton === excludeTrancheBtn) {
+			this.currentAction = 'exclude';
+		} else if (oButton === overRuleBtn) {
+			this.currentAction = 'overrule';
+		} else {
+			this.currentAction = 'save';
+		}
+
 		// Clear the previous content
 		this.oDialog.removeAllContent();
 
@@ -179,15 +207,22 @@ export default abstract class BaseController extends Controller {
 			case excludeTrancheBtn:
 				dialogTitle = resourceBundle.getText("excludeTranche")
 				this.oDialog.addContent(new Label({ text: resourceBundle.getText("justification")}));
-				this.oDialog.addContent(new TextArea({ width: "100%"}));
+				const textAreaExclude = new TextArea({ id: "excludeId", width: "100%" });
+				this.oDialog.addContent(textAreaExclude);
+				this.dialogContent = textAreaExclude.getId();
 				break;
 
 			case overRuleBtn:
 				dialogTitle = resourceBundle.getText("overRule")
 				this.oDialog.addContent(new Label({ text:resourceBundle.getText("overRule") }));
-				this.oDialog.addContent(new TextArea({ width: "100%" }));
+				const textAreaAmount = new TextArea({ id: "overRuleAmoundId", width: "100%" });
+				this.oDialog.addContent(textAreaAmount);
+				this.dialogContent = textAreaAmount.getId();
+
 				this.oDialog.addContent(new Label({ text: resourceBundle.getText("justification")}));
-				this.oDialog.addContent(new TextArea({ width: "100%"}));
+				const textAreaJustification = new TextArea({ id: "overRuleJustificationId", width: "100%" });
+				this.oDialog.addContent(textAreaJustification);
+				this.dialogContent2 = textAreaJustification.getId();
 				break;
 				
             case localId:
@@ -226,7 +261,7 @@ export default abstract class BaseController extends Controller {
 				const textArea4 = new TextArea({ id: "trancheDialog", width: "100%" });
 				this.oDialog.addContent(textArea4);
 			    this.dialogContent = textArea4.getId();
-				this.ColumnName = resourceBundle.getText("Tranche")
+				this.ColumnName = resourceBundle.getText("tranche2")
 				this.MultiInputId = trancheId.getId();
 				break;
 		}
@@ -237,7 +272,7 @@ export default abstract class BaseController extends Controller {
 		this.oDialog.open();	  
 	}
 
-	public onSave(): void {
+	public onSaveAction(): void {
 		if (this.oDialog && this.dialogContent) {
 			const textArea = Core.byId(this.dialogContent) as TextArea;
 	        this.inputFilter = textArea.getValue();
@@ -254,6 +289,135 @@ export default abstract class BaseController extends Controller {
 			this.oDialog.close();
 			this.oDialog.destroyContent(); 
 		}
+	}
+	
+	public async onExclude(): Promise<void> {
+		const resourceBundle: ResourceBundle = await this.getResourceBundle();
+	
+		// Extract ID values from selectedItems
+		const ids = this.selectedItems.map((item: { ID: any; }) => item.ID);
+	
+		// Check if all selected items have the same excluded status
+		const allExcluded = this.selectedItems.map((item: { excluded: boolean; }) => item.excluded);
+		const allTrue = allExcluded.every((e: boolean) => e === true);
+		const allFalse = allExcluded.every((e: boolean) => e === false);
+	
+		if (!allTrue && !allFalse) {
+			MessageBox.error(resourceBundle.getText("excludeIncludeError"));
+			this.oDialog.close();
+			this.oDialog.destroyContent();
+			return;
+		}
+	
+		// Set updateExclude based on the excluded status
+		if (allTrue) {
+			this.updateExclude = false; // Since all are already excluded, we want to include them
+		} else if (allFalse) {
+			this.updateExclude = true; // Since all are currently not excluded, we want to exclude them
+		}
+	
+		try {
+			const oModel = this.getView().getModel("participant") as ODataModel;
+			const textArea = Core.byId(this.dialogContent) as TextArea;
+	
+			await oModel.bindContext("/excludeParticipant(...)")
+				.setParameter("ID", ids)
+				.setParameter("excluded", this.updateExclude)
+				.setParameter("justification", textArea.getValue())
+				.execute();
+				
+			MessageBox.success(resourceBundle.getText("UpdatedExcludeStatus"), {
+				onClose: () => {
+					oModel.refresh();
+				}
+			});
+		} catch (error) {
+			MessageBox.error(resourceBundle.getText("failedExclude"));
+		}
+		
+		this.oDialog.close();
+		this.oDialog.destroyContent();
+	}
+	
+	
+	public async onOverrule(): Promise<void> {
+		const resourceBundle: ResourceBundle = await this.getResourceBundle();
+	
+		// Extract ID values from selectedItems
+		const ids = this.selectedItems.map((item: { ID: number; }) => item.ID);
+	
+		try {
+			const oModel = this.getView().getModel("participant") as ODataModel;
+			const textArea = Core.byId(this.dialogContent) as TextArea;
+			const textArea2 = Core.byId(this.dialogContent2) as TextArea;
+	
+			await oModel.bindContext("/overRuleAmount(...)")
+				.setParameter("ID", ids)
+				.setParameter("finalAmount", textArea.getValue())
+				.setParameter("justification", textArea2.getValue())
+				.execute();
+	
+			MessageBox.success(resourceBundle.getText("successOverRule"), {
+				onClose: () => {
+					oModel.refresh();
+				}
+			});
+		} catch (error) {
+			MessageBox.error(resourceBundle.getText("failedOverRule"));
+		}
+	
+		this.oDialog.close();
+		this.oDialog.destroyContent();
+	}	
+
+	public onSave(): void {
+		switch (this.currentAction) {
+			case 'exclude':
+				this.onExclude();
+				break;
+			case 'overrule':
+				this.onOverrule();
+				break;
+			default:
+				this.onSaveAction(); 
+				break;
+		}
+	}
+
+	public onSelectChange(oEvent: any): void {
+		const oCheckBox = oEvent.getSource();
+		const oSelectedData = oCheckBox.getBindingContext("participant").getObject();
+	
+		if (oCheckBox.getSelected()) {
+			this.selectedItems.push({ ID: oSelectedData.ID, excluded: oSelectedData.excluded });
+		} else {
+			this.selectedItems = this.selectedItems.filter(function(item: any) {
+				return item.ID !== oSelectedData.ID;
+			});
+		}
+	}
+	
+	public onSelectAll(oEvent: any): void {
+		const oTable = this.getView().byId('Table') as Table;
+		const bCheckboxState = oEvent.getParameter('selected');
+	
+		oTable.getItems().forEach((item: any) => {
+			const oCheckBoxCell = item.getCells()[0] as CheckBox;
+			const sCellStatus = item.getCells()[5].getText();
+			const oSelectedData = item.getBindingContext("participant").getObject();
+	
+			if (sCellStatus !== "Completed") {
+				oCheckBoxCell.setSelected(bCheckboxState);
+	
+				if (bCheckboxState) {
+					this.selectedItems.push({ ID: oSelectedData.ID, excluded: oSelectedData.excluded });
+				} else {
+					this.selectedItems = this.selectedItems.filter(function(item: any) {
+						return item.ID !== oSelectedData.ID;
+					});
+				}
+			}
+		});
 	}
 	
 	public onClearFilter(): void {
