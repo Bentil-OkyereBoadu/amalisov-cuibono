@@ -46,8 +46,8 @@ Content-Type: application/json
 {
      "name": "TYO Q1 2023",
       "description": "recent",
-      "startDate": "22.03.23",
-      "endDate": "10.04.23",
+      "startDate":"2022-11-15",
+      "endDate":"2023-09-25",
       "orignDate": "11.04.23",
       "weight": 10,
       "Status": "Open",
@@ -64,13 +64,16 @@ POST   http://localhost:4004/odata/v4/bonusTranche/updateBonusTranche
 Content-Type: application/json
 
 {
-  "ID":"dd30e88f-18ec-43f6-a4b8-96e7bccbc154",
+  "ID":"36cdbc54-0cf1-409c-8e48-d711029de05d",
   "Status":"Locked",
   "name":"Testing1",
+  "startDate":"2022-11-15",
+  "endDate":"2023-09-25",
+  "weight" : 50,
    "targets": [
      {
       "name": "Target 2",
-      "weight": 5,
+      "weight": 100,
       "achievement": 4,
       "description": "Description of Target 1"
     }
