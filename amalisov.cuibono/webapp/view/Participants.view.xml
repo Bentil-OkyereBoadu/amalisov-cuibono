@@ -160,7 +160,7 @@
                             <Text text="{participant>localId}" />
                             <Text text="{participant>name}" />
                             <Text text="{participant>department/name}" />
-                            <Text text="{participant>bonusTranche_ID}" />
+                            <Text text="{participant>bonusTranche/name}" />
                             <Text text="{participant>Status}" />
                             <Text text="{participant>location}" />
                             <Text text="{participant>startDate}" />
