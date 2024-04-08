@@ -39,6 +39,7 @@ export class CreateTrancheHandler {
             const employees = await SELECT.from(Employees.name);
             await Promise.all(employees.map(async (employee: any) => {
                 const { ID,firstName, lastName, department_ID } = employee;
+                
                 await INSERT.into(TrancheParticipation.name).entries({
                     name: `${firstName} ${lastName}`,
                     localId: ID,

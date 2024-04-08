@@ -5,7 +5,7 @@ using amalisov.cuibono.bonusTranche as bonusTranche from '../bonusTranche/bonusT
 using amalisov.cuibono.department as department from '../department/department';
 using amalisov.cuibono.employee as employee from '../employee/employees';
 
-
+    
 entity TrancheParticipation : cuid {
     localId          : String;
     name             : String;
