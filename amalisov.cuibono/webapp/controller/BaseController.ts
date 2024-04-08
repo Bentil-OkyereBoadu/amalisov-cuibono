@@ -38,6 +38,7 @@ export default abstract class BaseController extends Controller {
 	public MultiInputId: string = "";
 	public currentAction : string = ""
 	public selectedItems: any = [];
+	public updateExclude:boolean
 	/**
 	 * Convenience method for accessing the component of the controller's view.
 	 * @returns The component of the controller's view
@@ -206,7 +207,9 @@ export default abstract class BaseController extends Controller {
 			case excludeTrancheBtn:
 				dialogTitle = resourceBundle.getText("excludeTranche")
 				this.oDialog.addContent(new Label({ text: resourceBundle.getText("justification")}));
-				this.oDialog.addContent(new TextArea({ width: "100%"}));
+				const textAreaExclude = new TextArea({ id: "excludeId", width: "100%" });
+				this.oDialog.addContent(textAreaExclude);
+				this.dialogContent = textAreaExclude.getId();
 				break;
 
 			case overRuleBtn:
@@ -288,38 +291,84 @@ export default abstract class BaseController extends Controller {
 		}
 	}
 	
-	public onExclude(): void {
+	public async onExclude(): Promise<void> {
+		const resourceBundle: ResourceBundle = await this.getResourceBundle();
+	
+		// Extract ID values from selectedItems
+		const ids = this.selectedItems.map((item: { ID: any; }) => item.ID);
+	
+		// Check if all selected items have the same excluded status
+		const allExcluded = this.selectedItems.map((item: { excluded: boolean; }) => item.excluded);
+		const allTrue = allExcluded.every((e: boolean) => e === true);
+		const allFalse = allExcluded.every((e: boolean) => e === false);
+	
+		if (!allTrue && !allFalse) {
+			MessageBox.error(resourceBundle.getText("excludeIncludeError"));
+			this.oDialog.close();
+			this.oDialog.destroyContent();
+			return;
+		}
+	
+		// Set updateExclude based on the excluded status
+		if (allTrue) {
+			this.updateExclude = false; // Since all are already excluded, we want to include them
+		} else if (allFalse) {
+			this.updateExclude = true; // Since all are currently not excluded, we want to exclude them
+		}
+	
+		try {
+			const oModel = this.getView().getModel("participant") as ODataModel;
+			const textArea = Core.byId(this.dialogContent) as TextArea;
+	
+			await oModel.bindContext("/excludeParticipant(...)")
+				.setParameter("ID", ids)
+				.setParameter("excluded", this.updateExclude)
+				.setParameter("justification", textArea.getValue())
+				.execute();
+				
+			MessageBox.success(resourceBundle.getText("UpdatedExcludeStatus"), {
+				onClose: () => {
+					oModel.refresh();
+				}
+			});
+		} catch (error) {
+			MessageBox.error(resourceBundle.getText("failedExclude"));
+		}
 		
 		this.oDialog.close();
-		this.oDialog.destroyContent(); 
+		this.oDialog.destroyContent();
 	}
 	
-	public async onOverrule(): Promise <void> {
-		const oView = this.getView();
-		const oModel = oView.getModel("participant") as ODataModel; 
+	
+	public async onOverrule(): Promise<void> {
 		const resourceBundle: ResourceBundle = await this.getResourceBundle();
-
-		const textArea = Core.byId(this.dialogContent) as TextArea;
-		const textArea2 = Core.byId(this.dialogContent2) as TextArea
-        
+	
+		// Extract ID values from selectedItems
+		const ids = this.selectedItems.map((item: { ID: number; }) => item.ID);
+	
 		try {
-            await oModel.bindContext("/overRuleAmount(...)")
-                .setParameter("ID", this.selectedItems)
-                .setParameter("finalAmount", textArea.getValue())
+			const oModel = this.getView().getModel("participant") as ODataModel;
+			const textArea = Core.byId(this.dialogContent) as TextArea;
+			const textArea2 = Core.byId(this.dialogContent2) as TextArea;
+	
+			await oModel.bindContext("/overRuleAmount(...)")
+				.setParameter("ID", ids)
+				.setParameter("finalAmount", textArea.getValue())
 				.setParameter("justification", textArea2.getValue())
-                .execute();
-            MessageBox.success(resourceBundle.getText("successOverRule"), {
-                onClose: () => {
-                    oModel.refresh();
-                }
-            });
-        } catch (error) {
-            MessageBox.error(resourceBundle.getText("failedOverRule"),);
-        }
-
+				.execute();
+	
+			MessageBox.success(resourceBundle.getText("successOverRule"), {
+				onClose: () => {
+					oModel.refresh();
+				}
+			});
+		} catch (error) {
+			MessageBox.error(resourceBundle.getText("failedOverRule"));
+		}
+	
 		this.oDialog.close();
-		this.oDialog.destroyContent(); 
-	}
+		this.oDialog.destroyContent();
+	}	
 
 	public onSave(): void {
 		switch (this.currentAction) {
@@ -337,14 +386,13 @@ export default abstract class BaseController extends Controller {
 
 	public onSelectChange(oEvent: any): void {
 		const oCheckBox = oEvent.getSource();
-		const oSource = oCheckBox.getBindingContext("participant");
-		const oSelectedData = oSource.getObject();
+		const oSelectedData = oCheckBox.getBindingContext("participant").getObject();
 	
 		if (oCheckBox.getSelected()) {
-			this.selectedItems.push(oSelectedData.ID);
+			this.selectedItems.push({ ID: oSelectedData.ID, excluded: oSelectedData.excluded });
 		} else {
 			this.selectedItems = this.selectedItems.filter(function(item: any) {
-				return item !== oSelectedData.ID;
+				return item.ID !== oSelectedData.ID;
 			});
 		}
 	}
@@ -362,10 +410,10 @@ export default abstract class BaseController extends Controller {
 				oCheckBoxCell.setSelected(bCheckboxState);
 	
 				if (bCheckboxState) {
-					this.selectedItems.push(oSelectedData.ID);
+					this.selectedItems.push({ ID: oSelectedData.ID, excluded: oSelectedData.excluded });
 				} else {
 					this.selectedItems = this.selectedItems.filter(function(item: any) {
-						return item !== oSelectedData.ID;
+						return item.ID !== oSelectedData.ID;
 					});
 				}
 			}
