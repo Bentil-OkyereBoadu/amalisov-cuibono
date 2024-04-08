@@ -37,7 +37,6 @@ export class CreateTrancheHandler {
 
             // Insert TrancheParticipation sequentially
             const employees = await SELECT.from(Employees.name);
-            console.log(employees)
             await Promise.all(employees.map(async (employee: any) => {
                 const { ID,firstName, lastName, department_ID } = employee;
                 
