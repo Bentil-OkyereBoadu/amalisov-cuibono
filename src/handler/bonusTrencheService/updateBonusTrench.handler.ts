@@ -19,47 +19,50 @@ export class UpdateBonusTrancheHandler {
     const { ID, name, weight, startDate, endDate, location,targets,Status } = req.data;
     const bonusTranche = await SELECT.one.from(BonusTranche.name).where({ ID });
     if (!bonusTranche) return req.reject(404, "Tranche not found");
+
     if (Status === "Locked") {
-    if (targets.length === 0) {
-            return req.reject(403, "You cannot lock a bonus without a target");
-        }
-        const targetSum = targets.reduce((acc:number, target:Target) => acc + target.weight, 0);
-        if (targetSum !== 100) {
-            return req.reject(400, "You cannot lock a Tranche whose sum is not equal to 100");
-        }
-        const participants = await SELECT.from(TrancheParticipation.name).where({bonusTranche_ID: ID});
-        // Tranch duration 
-        const tranchDuration = calculateDays(bonusTranche.startDate,bonusTranche.endDate) 
-        participants.map(async(participant: TrancheParticipation) => {
-          const employeeId  = participant.localId;
+
+      if (targets.length === 0) {
+        return req.reject(403, "You cannot lock a bonus without a target");
+    }
+    const targetSum = targets.reduce((acc: number, target: Target) => acc + target.weight, 0);
+    if (targetSum !== 100) {
+        return req.reject(400, "You cannot lock a Tranche whose sum is not equal to 100");
+    }
+      const participants = await SELECT.from(TrancheParticipation.name).where({ bonusTranche_ID: ID });
+      // Tranch duration 
+      const tranchDuration = calculateDays(bonusTranche.startDate, bonusTranche.endDate);
+      // Use Promise.all() to await all the asynchronous operations
+      await Promise.all(participants.map(async (participant: TrancheParticipation) => {
+          const employeeId = participant.localId;
+          // console.log(employeeId)
           const departementID = participant.department_ID;
           const department = await SELECT.one.from(Department).where({ ID: departementID });
           // Department bonus 
           const departmentBonus = department.bonus;
           // participant attendance 
-          const attendance =  await SELECT.one.from(Attendance).where({ ID: employeeId });
-          const participantAttendance = calculateDays(attendance.startDate,attendance.endDate); // small issue to be fixed
+          const attendance = await SELECT.one.from(Attendance).where({ employee_ID: employeeId });
+          const participantAttendance = calculateDays(attendance.startDate, attendance.endDate); // small issue to be fixed
           // trenach bonus payout  
           const trenchPayoutBonus = departmentBonus * (weight / 100);
           // Period Ratio
-          const periondRatio =  participantAttendance/tranchDuration
+          const periondRatio = participantAttendance / tranchDuration
           //  targetPayout for each targets 
-          const targetsAmount = targets.map((target:Target) => {
-            const targetPayout = trenchPayoutBonus * periondRatio * target.achievement * target.weight;
-            return targetPayout;
-        });
-        // Calculated Amount 
-          const calculatedAmount = targetsAmount.reduce((curr:number,acc:number)=>curr + acc);
-          console.log(calculatedAmount)
+          const targetsAmount = targets.map((target: Target) => {
+              const targetPayout = trenchPayoutBonus * periondRatio * target.achievement * target.weight;
+              return targetPayout;
+          });
+
+          // Calculated Amount 
+          const calculatedAmount = targetsAmount.reduce((curr: number, acc: number) => curr + acc);
           await UPDATE(TrancheParticipation.name)
               .where({ ID: participant.ID })
               .set({
-                calculatedAmount
+                  calculatedAmount
               });
-        });
-    }  
-
-
+      }));
+  }
+  
     if (Status === "Completed"){
       const participants = await SELECT.from(TrancheParticipation.name).where({bonusTranche_ID: ID});
       participants.map(async(participant: TrancheParticipation) => {
@@ -99,6 +102,7 @@ export class UpdateBonusTrancheHandler {
     
         await UPDATE(BonusTranche, ID).with({ ...data });
     } 
+    
      await UPDATE(BonusTranche.name).where({ ID }).set({ Status });
       const participants = await SELECT.from(TrancheParticipation.name).where({bonusTranche_ID: ID});
       await Promise.all(
