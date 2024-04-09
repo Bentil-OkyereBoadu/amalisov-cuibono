@@ -3,8 +3,8 @@ import BaseController from "./BaseController";
 import Input from "sap/m/Input";
 import JSONModel from "sap/ui/model/json/JSONModel";
 import TextArea from "sap/m/Input";
-// import ODataModel from "sap/ui/model/odata/v4/ODataModel";
-import ODataModel from "sap/ui/model/odata/v2/ODataModel";
+import ODataModel from "sap/ui/model/odata/v4/ODataModel";
+// import ODataModel from "sap/ui/model/odata/v2/ODataModel";
 import ResourceBundle from "sap/base/i18n/ResourceBundle";
 import MessageBox from "sap/m/MessageBox";
 import DatePicker from "sap/m/DatePicker";
@@ -58,26 +58,36 @@ export default class EditBonusTranche extends BaseController {
                 "$expand": "targets",
             }
         });
-		// this.readArray()
+		this.readArray(oEvent)
 		
     }
-	// public readArray(): void{
-	// 	const oUpdateModel = this.getModel("updateModel") as JSONModel;
-    //     const trancheId = oUpdateModel.getProperty("/ID");
-	// 	const oGeneralModel =  this.getModel("bonusTrancheV2") as ODataModel;
-	// 	console.log("v2 model", oGeneralModel)
+
+	public async readArray(oEvent: any): Promise<any>{
+		// read data from model and place in an array.
+		const oUpdateModel = this.getModel("updateModel") as JSONModel;
+		const trancheId = window.decodeURIComponent(oEvent.getParameter("arguments").ID);
+		const oGeneralModel =  this.getModel("tranches") as ODataModel;
 		
-	// 	const sPath = `/BonusTranche`;
-	// 	oGeneralModel.read(sPath, { 
-	// 		success : function(oData: any, response: any){
-	// 			console.log("kkkkk",oData, response)
-	// 		   },
+		const sPath = `/BonusTranche`;
+		const mParameters =  {
+			"$expand": `targets`
+		};
+		const data = oGeneralModel.bindList(sPath, null, null, null, mParameters);
+        const contextObjects = await data.requestContexts();
+		let dataArray = []
+
+		dataArray = contextObjects.map( item => item.getObject())
+		console.log(dataArray, "jk", trancheId)
+		// oGeneralModel.read(sPath, { 
+		// 	success : function(oData: any, response: any){
+		// 		console.log("kkkkk",oData, response)
+		// 	   },
 		   
-	// 		error: function(oError: any ){
-	// 		  console.log("first")
-	// 		}
-	// 	   });
-	// }
+		// 	error: function(oError: any ){
+		// 	  console.log("first")
+		// 	}
+		//    });
+	}
 
 	public onCreateRoute(oEvent: any): void {
 		const oView = this.getView();
@@ -91,8 +101,6 @@ export default class EditBonusTranche extends BaseController {
 		(oView.byId("descriptionInput") as TextArea).setValue("");
 		(oView.byId("originDateInput") as Input).setValue("");
 		oUpdateModel.setProperty("/Targets", []);
-		
-		window.location.reload()
 	}
 
 	public onAddTarget(): void {
@@ -260,21 +268,34 @@ export default class EditBonusTranche extends BaseController {
 		const oUpdateModel = this.getModel("updateModel");
 		const oView = this.getView();
 
-		const sTrancheName = (oView.byId("nameInput") as Input).getValue();
-		const sLocation = (oView.byId("locationSelect") as Select).getSelectedKey();
-		const nTrancheWeight =  Number((oView.byId("weightInput") as Input).getValue());
-		const sDescription = (oView.byId("descriptionInput") as Input).getValue();
+		const sTrancheName = oUpdateModel.getProperty("/name");
+		const sLocation = oUpdateModel.getProperty("/location");
+		const nTrancheWeight = oUpdateModel.getProperty("/weight");
+		const sDescription = oUpdateModel.getProperty("/description");
 		const aTargets = oUpdateModel.getProperty("/targets");
-		const sStartDate = (oView.byId("startDateInput") as Input).getValue();
-		const sEndDate = (oView.byId("endDateInput") as Input).getValue();
-		//const sOriginDate = (oView.byId("originDateInput") as Input).getValue();
-		const sStatus = (oView.byId("statusValue") as Text).getText() || "Open";
-		console.log(sStatus, sLocation)
+		const sStartDate = oUpdateModel.getProperty("/startDate");
+		const sEndDate = oUpdateModel.getProperty("/endDate");
+		const sOriginDate = oUpdateModel.getProperty("/originDate") || "";
+		const sTrancheId = oUpdateModel.getProperty("/ID");
+		const sStatus = oUpdateModel.getProperty("/Status");
+
+		// const sTrancheName = (oView.byId("nameInput") as Input).getValue();
+		// const sLocation = (oView.byId("locationSelect") as Select).getSelectedKey();
+		// const nTrancheWeight =  Number((oView.byId("weightInput") as Input).getValue());
+		// const sDescription = (oView.byId("descriptionInput") as Input).getValue();
+		// const aTargets = oUpdateModel.getProperty("/targets");
+		// const sStartDate = (oView.byId("startDateInput") as Input).getValue();
+		// const sEndDate = (oView.byId("endDateInput") as Input).getValue();
+		// //const sOriginDate = (oView.byId("originDateInput") as Input).getValue();
+		// const sStatus = (oView.byId("statusValue") as Text).getText() || "Open";
+		// console.log(sStatus, sLocation)
+
 		const formattedStartDate = this.formatDate(sStartDate)
 		const formattedEndDate = this.formatDate(sEndDate)
-		//const formattedOriginDate = this.formatDate(sOriginDate)
+		const formattedOriginDate = this.formatDate(sOriginDate)
 
 		const oData: TrancheData = {
+			ID: sTrancheId,
 			name: sTrancheName,
 			location: sLocation,
 			startDate: formattedStartDate,

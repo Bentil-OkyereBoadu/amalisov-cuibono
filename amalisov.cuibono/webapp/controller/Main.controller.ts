@@ -102,11 +102,11 @@ export default class Main extends BaseController {
 		const sTrancheName = oContext.getProperty("name");
 		const sLocation = oContext.getProperty("location");
 		const nTrancheWeight = oContext.getProperty("weight");
-		const sDescription = oContext.getProperty("createdBy");
-		// const aTargets = oContext.getProperty("targets");
+		const sDescription = oContext.getProperty("description");
 		const sTrancheId = oContext.getProperty("ID");
 		const sStatus = oContext.getProperty("Status");
 		// console.log("expanded",aTargets);
+		// const aTargets = oContext.getProperty("targets");
 
 		const oData: Tranche = {
 			ID: sTrancheId,
@@ -114,7 +114,7 @@ export default class Main extends BaseController {
 			location: sLocation,
 			startDate: includeDates ? oContext.getProperty("startDate") : "",
 			endDate: includeDates ? oContext.getProperty("endDate") : "",
-			originDate: includeDates ? oContext.getProperty("createdAt") : "",
+			originDate: includeDates ? oContext.getProperty("orignDate") : "",
 			weight: nTrancheWeight,
 			description: sDescription,
 			Status: sStatus,
