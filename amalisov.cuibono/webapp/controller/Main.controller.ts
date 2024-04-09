@@ -106,6 +106,7 @@ export default class Main extends BaseController {
 		const sTrancheId = oContext.getProperty("ID");
 		const sStatus = oContext.getProperty("Status");
 		// console.log("expanded",aTargets);
+		// const aTargets = oContext.getProperty("targets");
 
 		const oData: Tranche = {
 			ID: sTrancheId,
