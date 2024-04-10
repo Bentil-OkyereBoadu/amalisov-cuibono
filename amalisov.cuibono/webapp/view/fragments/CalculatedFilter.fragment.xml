@@ -65,7 +65,7 @@
                         visibleInFilterBar="true"
                     >
                         <fb:control>
-                           	<RangeSlider showAdvancedTooltip="true" range="[0, 1000]" min="0" max="1000" />
+                           	<RangeSlider showAdvancedTooltip="true" min="0" max="7000" liveChange=".onSliderChange"/>
                         </fb:control>
                     </fb:FilterGroupItem>
                 </fb:filterGroupItems>

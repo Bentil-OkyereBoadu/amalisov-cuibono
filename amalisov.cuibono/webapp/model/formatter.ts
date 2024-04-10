@@ -28,4 +28,9 @@ export default {
     showComplete(Status: string): boolean {
         return Status === "Locked" || Status === "Completed";
     },
+
+    limitText(sVal: string): string {
+		return sVal && sVal.length > 10 ? sVal.substring(0, 10) + '.....' : sVal;
+	}
+
 };

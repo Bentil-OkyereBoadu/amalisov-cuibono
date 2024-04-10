@@ -83,7 +83,7 @@
                 <items>
                     <ColumnListItem vAlign="Middle">
                         <cells>
-                            <ObjectIdentifier title="{payable>localID}" />
+                            <Text text="{path:'payable>localID', formatter:'formatter.limitText'}" />
                             <Text text="{payable>name}" />
                             <Text text="{payable>startDate}" />
                             <Text text="{payable>finalAmount}" />
