@@ -53,11 +53,30 @@
                         visibleInFilterBar="true"
                     >
                         <fb:control>
-                            <MultiInput
-                                id="department"
+                           
+                             <MultiComboBox
+                                  id="department"
                                 name="{i18n>department}"
-                                valueHelpRequest=".onDialogOpen"
-                            />
+                                selectionChange=".onFilter"
+                        
+                            >
+                                <core:Item
+                                    key="{i18n>department1}"
+                                    text="{i18n>department1}"
+                                />
+                                <core:Item
+                                    key="{i18n>department2}"
+                                    text="{i18n>department2}"
+                                />
+                                <core:Item
+                                    key="{i18n>department3}"
+                                    text="{i18n>department3}"
+                                />
+                                <core:Item
+                                    key="{i18n>department4}"
+                                    text="{i18n>department4}"
+                                />
+                            </MultiComboBox>
                         </fb:control>
                     </fb:FilterGroupItem>
                     <fb:FilterGroupItem
@@ -97,7 +116,7 @@
                                 name="{i18n>fiscalYear}"
                                 selectionChange=".onFilter"
                             >
-                                <core:Item
+                                 <core:Item
                                     key="{i18n>year1}"
                                     text="{i18n>year1}"
                                 />
@@ -106,6 +125,16 @@
                                     text="{i18n>year2}"
                                 />
                                 <core:Item
+
+                                    key="{i18n>year1}"
+                                    text="{i18n>year1}"
+                                />
+                                <core:Item
+                                    key="{i18n>year2}"
+                                    text="{i18n>year2}"
+                                />
+                                <core:Item
+
                                     key="{i18n>year3}"
                                     text="{i18n>year3}"
                                 />

@@ -30,7 +30,8 @@
                         sorter: {
                             path: 'createdAt',
                             descending: true
-                        }
+                        },
+                        parameters : {$expand:'targets'}
                     }"
             >
                 <headerToolbar>

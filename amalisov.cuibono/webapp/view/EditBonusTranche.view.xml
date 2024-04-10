@@ -36,7 +36,7 @@
                     <VBox class="formBox">
                         <VBox class="tranchItems">
                             <Label text="{i18n>Status}" />
-                            <Text text="{updateModel>/Status}" />
+                            <Text text="{updateModel>/Status}"  id="statusValue"/>
                         </VBox>
                         <HBox class="formRows firstRow">
                             <VBox class="tranchItems">
@@ -153,8 +153,8 @@
             
             <Panel class="tablePanel">
                 <Table
-                    
-                    items="{tranches>/Target}"
+                    items="{updateModel>/targets}"
+                    id="trancheTable"
                     width="45%"
                 >
                     <headerToolbar>
@@ -184,10 +184,9 @@
 
                     <items>
                         <ColumnListItem>
-                            <Text text="{tranches>name}" />
-                            <Text text="{tranches>weight}" />
-                            <Text text="{tranches>achievement}" />
-
+                            <Text text="{updateModel>name}" />
+                            <Text text="{updateModel>weight}" />
+                            <Text text="{updateModel>achievement}" />
                             <HBox class="interactionIcons">
                                 <core:Icon
                                     src="sap-icon://edit"

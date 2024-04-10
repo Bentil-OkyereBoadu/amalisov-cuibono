@@ -25,6 +25,8 @@ export default class App extends BaseController {
 		if (selectedKey === resourceBundle.getText("Bonus")) {
 			
 			oRouter.navTo("main");
+		} else if (selectedKey === resourceBundle.getText("calculatedHeader")){
+			oRouter.navTo("CalculatedBonus");
 		} else if (selectedKey === resourceBundle.getText("Participant") && sPageName !== resourceBundle.getText("routeCondition")) {
 			
 			oRouter.navTo("participants");

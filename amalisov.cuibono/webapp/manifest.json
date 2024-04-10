@@ -18,6 +18,13 @@
 					"odataVersion": "4.0"
 				}
 			},
+			"bonusTrancheV2": {
+				"uri": "/v2/odata/v4/bonusTranche/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			},
 			"participant": {
 				"uri": "/odata/v4/bonusTranche/",
 				"type": "OData",
@@ -100,6 +107,18 @@
 					"operationMode": "Server"
 				}
 			},
+
+			"bonusTrancheV2": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"dataSource": "bonusTrancheV2",
+				"preload": false,
+				"settings": {
+					"useBatch": false,
+					"metadataUrlParams": {
+						"sap-documentation": "heading"
+					}
+				}
+			},
 			
 			"participant": {
 				"type": "sap.ui.model.odata.v4.ODataModel",
@@ -136,7 +155,7 @@
 					"name": "CreateTranche",
 					"target": "CreateTranche"
 				},{
-					"pattern": "edit-tranche",
+					"pattern": "edit-tranche/{ID}",
 					"name": "EditBonusTranche",
 					"target": "EditBonusTranche"
 
@@ -150,6 +169,10 @@
 					"pattern": "tranche-participants",
 					"name": "trancheParticipants",
 					"target": "participants"
+				},{
+					"pattern": "calculated-bonus",
+					"name": "CalculatedBonus",
+					"target": "CalculatedBonus"
 				}
 			],
 			"targets": {
@@ -172,7 +195,13 @@
 					"viewId": "participants",
 					"viewName": "Participants",
 				
-					"viewLevel": 0
+					"viewLevel": 3
+				},
+				"CalculatedBonus": {
+					"viewId": "CalculatedBonus",
+					"viewName": "CalculatedBonus",
+				
+					"viewLevel": 4
 				}
 			}
 		}

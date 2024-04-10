@@ -6,6 +6,7 @@
 		<items>
 			<IconTabFilter id="bonusNav" key="bonus" text="{i18n>trancheTableHeader}" />
 			<IconTabFilter id="participantNav" key="participant" text="{i18n>participantTitle}"/>
+			<IconTabFilter id="calculatedNav" key="Bonus Payable" text="{i18n>calculatedHeader}"/>
 		</items>
 	</IconTabHeader>
 </core:FragmentDefinition>

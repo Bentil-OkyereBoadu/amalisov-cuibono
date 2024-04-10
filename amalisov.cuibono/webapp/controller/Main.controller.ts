@@ -9,9 +9,10 @@ import Filter from "sap/ui/model/Filter";
 import FilterOperator from "sap/ui/model/FilterOperator";
 import ODataListBinding from "sap/ui/model/odata/v4/ODataListBinding";
 interface Target {
-	TargetName: string;
-	TargetWeight: number;
-	Achieved: string;
+	name: string;
+	weight: number;
+	achievement: number;
+	description: string;
 }
 
 interface Tranche {
@@ -73,7 +74,6 @@ export default class Main extends BaseController {
 				oItem.getBindingContext("tranches").getPath().substr(1)
 			),
 		});
-
 		const oContext = oItem.getBindingContext("tranches");
 		const oData = this.constructTrancheData(oContext, true);
 		oUpdateModel.setData(oData);
@@ -101,8 +101,7 @@ export default class Main extends BaseController {
 		const sTrancheName = oContext.getProperty("name");
 		const sLocation = oContext.getProperty("location");
 		const nTrancheWeight = oContext.getProperty("weight");
-		const sDescription = oContext.getProperty("createdBy");
-		const aTargets = oContext.getProperty("targets");
+		const sDescription = oContext.getProperty("description");
 		const sTrancheId = oContext.getProperty("ID");
 		const sStatus = oContext.getProperty("Status");
 
@@ -112,7 +111,7 @@ export default class Main extends BaseController {
 			location: sLocation,
 			startDate: includeDates ? oContext.getProperty("startDate") : "",
 			endDate: includeDates ? oContext.getProperty("endDate") : "",
-			originDate: includeDates ? oContext.getProperty("createdAt") : "",
+			originDate: includeDates ? oContext.getProperty("orignDate") : "",
 			weight: nTrancheWeight,
 			description: sDescription,
 			Status: sStatus,
