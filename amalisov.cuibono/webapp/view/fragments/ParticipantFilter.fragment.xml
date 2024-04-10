@@ -53,30 +53,11 @@
                         visibleInFilterBar="true"
                     >
                         <fb:control>
-                           
-                             <MultiComboBox
-                                  id="department"
+                            <MultiInput
+                                id="department"
                                 name="{i18n>department}"
-                                selectionChange=".onFilter"
-                        
-                            >
-                                <core:Item
-                                    key="{i18n>department1}"
-                                    text="{i18n>department1}"
-                                />
-                                <core:Item
-                                    key="{i18n>department2}"
-                                    text="{i18n>department2}"
-                                />
-                                <core:Item
-                                    key="{i18n>department3}"
-                                    text="{i18n>department3}"
-                                />
-                                <core:Item
-                                    key="{i18n>department4}"
-                                    text="{i18n>department4}"
-                                />
-                            </MultiComboBox>
+                                valueHelpRequest=".onDialogOpen"
+                            />
                         </fb:control>
                     </fb:FilterGroupItem>
                     <fb:FilterGroupItem
