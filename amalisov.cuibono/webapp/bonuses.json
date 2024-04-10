@@ -1,0 +1,28 @@
+{
+	"Payable": [
+		{
+			"localID": "100000000",
+			"name": "John Doe",
+			"startDate": "01.07.22",
+			"finalAmount": "1000.00 USD"
+		},
+		{
+			"localID": "100000001",
+			"name": "Jane Doe",
+			"startDate": "01.07.23",
+			"finalAmount": "0.00 USD"
+		},
+		{
+			"localID": "100000002",
+			"name": "Mike Smith",
+			"startDate": "01.07.24",
+			"finalAmount": "3000.00 USD"
+		},
+		{
+			"localID": "100000003",
+			"name": "Alice Lee",
+			"startDate": "01.01.24",
+			"finalAmount": "4000.00 USD"
+		}
+	]
+}

@@ -132,6 +132,10 @@
 					},
 					"operationMode": "Server"
 				}
+			},
+			"payable": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "bonuses.json"
 			}
 		},
 

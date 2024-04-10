@@ -13,15 +13,17 @@
 >
     <f:DynamicPage>
         <f:header>
-            <!-- <core:Fragment
-                fragmentName="amalisov.cuibono.view.fragments.ParticipantFilter"
+            <core:Fragment
+                fragmentName="amalisov.cuibono.view.fragments.CalculatedFilter"
                 type="XML"
-            /> -->
+            />
         </f:header>
         <f:content>
             <Table
                 id="Table"
                 inset="false" 
+                items="{payable>/Payable}"
+                class="participantTable"
                 growingScrollToLoad="true"
                 busyIndicatorDelay="{config>delay}"
             >
@@ -69,22 +71,22 @@
                         minScreenWidth="Tablet"
                         demandPopin="true"
                     >
-                        <Label text="{i18n>department}" />
+                        <Label text="{i18n>fiscalYear}" />
                     </Column>
                     <Column
                         minScreenWidth="Tablet"
                         demandPopin="true"
                     >
-                        <Label text="{i18n>tranche}" />
+                        <Label text="{i18n>calculatedAmount}" />
                     </Column>
                 </columns>
                 <items>
                     <ColumnListItem vAlign="Middle">
                         <cells>
-                            <ObjectIdentifier title="{participant>localID}" />
-                            <Text text="{participant>name}" />
-                            <Text text="{participant>department}" />
-                            <Text text="{participant>tranche}" />
+                            <ObjectIdentifier title="{payable>localID}" />
+                            <Text text="{payable>name}" />
+                            <Text text="{payable>startDate}" />
+                            <Text text="{payable>finalAmount}" />
                         </cells>
                     </ColumnListItem>
                 </items>

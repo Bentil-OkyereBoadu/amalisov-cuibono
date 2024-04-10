@@ -1,0 +1,75 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+>
+    <f:DynamicPageHeader>
+        <f:content>
+            <fb:FilterBar
+                id="filterbar"
+                useToolbar="false"
+                search=".onFilter"
+                showGoOnFB="false"
+                showFilterConfiguration="false"
+            >
+                <fb:filterGroupItems>
+                    <fb:FilterGroupItem
+                        name="search"
+                        label="{i18n>search}"
+                        groupName="Group1"
+                        visibleInFilterBar="true"
+                    >
+                        <fb:control>
+                            <Input
+                                placeholder="{i18n>searchPlaceholder}"
+                                class="searchBar"
+                                id="search"
+                                liveChange="onSearch"
+                            />
+                        </fb:control>
+                    </fb:FilterGroupItem>
+
+                    <fb:FilterGroupItem
+                        name="startDate"
+                        label="{i18n>fiscalYear}"
+                        groupName="Group1"
+                        visibleInFilterBar="true"
+                    >
+                        <fb:control>
+                            <MultiComboBox
+                                name="{i18n>fiscalYear}"
+                                selectionChange=".onFilter"
+                            >
+                                <core:Item
+
+                                    key="{i18n>year1}"
+                                    text="{i18n>year1}"
+                                />
+                                <core:Item
+                                    key="{i18n>year2}"
+                                    text="{i18n>year2}"
+                                />
+                                <core:Item
+
+                                    key="{i18n>year3}"
+                                    text="{i18n>year3}"
+                                />
+                            </MultiComboBox>
+                        </fb:control>
+                    </fb:FilterGroupItem>
+                    <fb:FilterGroupItem
+                        name="location"
+                        label="{i18n>trancheLocation}"
+                        groupName="Group1"
+                        visibleInFilterBar="true"
+                    >
+                        <fb:control>
+                           	<RangeSlider showAdvancedTooltip="true" range="{/RS1}" min="0" max="100" />
+                        </fb:control>
+                    </fb:FilterGroupItem>
+                </fb:filterGroupItems>
+            </fb:FilterBar>
+        </f:content>
+    </f:DynamicPageHeader>
+</core:FragmentDefinition>
