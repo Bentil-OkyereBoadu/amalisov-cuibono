@@ -60,12 +60,12 @@
                     </fb:FilterGroupItem>
                     <fb:FilterGroupItem
                         name="location"
-                        label="{i18n>trancheLocation}"
+                        label="{i18n>calculatedHeader}"
                         groupName="Group1"
                         visibleInFilterBar="true"
                     >
                         <fb:control>
-                           	<RangeSlider showAdvancedTooltip="true" range="{/RS1}" min="0" max="100" />
+                           	<RangeSlider showAdvancedTooltip="true" range="[0, 1000]" min="0" max="1000" />
                         </fb:control>
                     </fb:FilterGroupItem>
                 </fb:filterGroupItems>
