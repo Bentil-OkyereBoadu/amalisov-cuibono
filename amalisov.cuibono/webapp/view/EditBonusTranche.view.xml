@@ -187,7 +187,6 @@
                             <Text text="{updateModel>name}" />
                             <Text text="{updateModel>weight}" />
                             <Text text="{updateModel>achievement}" />
-
                             <HBox class="interactionIcons">
                                 <core:Icon
                                     src="sap-icon://edit"

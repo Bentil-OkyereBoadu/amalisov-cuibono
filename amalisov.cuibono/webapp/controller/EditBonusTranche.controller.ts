@@ -8,6 +8,7 @@ import MessageBox from "sap/m/MessageBox";
 import DatePicker from "sap/m/DatePicker";
 import FilterOperator from "sap/ui/model/FilterOperator";
 import Filter from "sap/ui/model/Filter";
+
 /**
  * @namespace amalisov.cuibono.controller
  */
@@ -30,6 +31,7 @@ interface TrancheData {
 	targets?: Target[];
 }
 export default class EditBonusTranche extends BaseController {
+
 	public currentAction: string = "";
 	public targetId: string = "";
 
@@ -162,6 +164,7 @@ export default class EditBonusTranche extends BaseController {
 		(oView.byId("targetDescription") as Input).setValue(sDescription);
 		(oView.byId("targetAchievement") as Input).setValue(nTargetAchievement);
 	}
+
 
 	public onSaveEditedTarget(): void {
 		const oView = this.getView();
@@ -317,6 +320,7 @@ export default class EditBonusTranche extends BaseController {
 			return;
 		}
 
+
 		const oContext = oModel.bindList(sPath);
 		try {
 			oContext.create(oData);
@@ -341,6 +345,7 @@ export default class EditBonusTranche extends BaseController {
 		month = month.length < 2 ? "0" + month : month;
 
 		return `${year}-${month}-${day}`
+
 	}
 
 	private constructTrancheData(): TrancheData {
@@ -356,9 +361,11 @@ export default class EditBonusTranche extends BaseController {
 		const sTrancheId = oUpdateModel.getProperty("/ID");
 		const sStatus = oUpdateModel.getProperty("/Status");
 
+
 		const formattedStartDate = this.formatDate(sStartDate);
 		const formattedEndDate = this.formatDate(sEndDate);
 		const formattedOriginDate = this.formatDate(sOriginDate);
+
 
 		const oData: TrancheData = {
 			ID: sTrancheId,
