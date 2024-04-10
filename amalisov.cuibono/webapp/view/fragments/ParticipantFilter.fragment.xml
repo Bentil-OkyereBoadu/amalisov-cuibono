@@ -116,13 +116,17 @@
                                 name="{i18n>fiscalYear}"
                                 selectionChange=".onFilter"
                             >
-                                <core:Item
-                                    key="createdAt"
+                                 <core:Item
+                                    key="{i18n>year1}"
                                     text="{i18n>year1}"
                                 />
                                 <core:Item
-                                    key="upvotes"
+                                    key="{i18n>year2}"
                                     text="{i18n>year2}"
+                                />
+                                <core:Item
+                                    key="{i18n>year3}"
+                                    text="{i18n>year3}"
                                 />
                             </MultiComboBox>
                         </fb:control>
