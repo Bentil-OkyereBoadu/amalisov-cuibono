@@ -86,7 +86,7 @@ export default class EditBonusTranche extends BaseController {
 		oUpdateModel.setData(oData);
 	}
 
-	public onObjectMatched(oEvent: any): void {
+	public onObjectMatched(): void {
         const oView = this.getView();
 		const oUpdateModel = this.getModel("updateModel") as JSONModel;
         const trancheId = oUpdateModel.getProperty("/ID");
@@ -100,8 +100,7 @@ export default class EditBonusTranche extends BaseController {
         });
     }
 
-	public onCreateRoute(oEvent: any): void {
-		const oView = this.getView();
+	public onCreateRoute(): void {
 		const oUpdateModel = this.getModel("updateModel") as JSONModel;
 		oUpdateModel.setData({});
 		oUpdateModel.setProperty("/Status", "Open");
@@ -277,7 +276,7 @@ export default class EditBonusTranche extends BaseController {
 		});
 	}
 
-	public async onSaveTranche(oEvent: any): Promise<void> {
+	public async onSaveTranche(): Promise<void> {
 		const oView = this.getView();
 		const oModel = oView.getModel("tranches") as ODataModel;
 		const resourceBundle: ResourceBundle = await this.getResourceBundle();
@@ -369,9 +368,9 @@ export default class EditBonusTranche extends BaseController {
 			location: sLocation,
 			startDate: formattedStartDate,
 			endDate: formattedEndDate,
-			//originDate: formattedOriginDate,
+			originDate: formattedOriginDate,
 			weight: nTrancheWeight,
-			//description: sDescription,
+			description: sDescription,
 			Status: sStatus,
 			targets: aTargets,
 		};

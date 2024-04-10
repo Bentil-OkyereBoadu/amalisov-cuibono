@@ -83,6 +83,14 @@
                                     key="{i18n>location3}"
                                     text="{i18n>location3}"
                                 />
+                                <core:Item
+                                    key="{i18n>location4}"
+                                    text="{i18n>location4}"
+                                />
+                                <core:Item
+                                    key="{i18n>location5}"
+                                    text="{i18n>location5}"
+                                />
                             </MultiComboBox>
                         </fb:control>
                     </fb:FilterGroupItem>
@@ -98,7 +106,6 @@
                                 selectionChange=".onFilter"
                             >
                                 <core:Item
-
                                     key="{i18n>year1}"
                                     text="{i18n>year1}"
                                 />
@@ -107,7 +114,6 @@
                                     text="{i18n>year2}"
                                 />
                                 <core:Item
-
                                     key="{i18n>year3}"
                                     text="{i18n>year3}"
                                 />

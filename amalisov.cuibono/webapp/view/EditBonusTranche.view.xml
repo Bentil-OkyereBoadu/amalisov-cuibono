@@ -36,7 +36,10 @@
                     <VBox class="formBox">
                         <VBox class="tranchItems">
                             <Label text="{i18n>Status}" />
-                            <Text text="{updateModel>/Status}"  id="statusValue"/>
+                            <Text
+                                text="{updateModel>/Status}"
+                                id="statusValue"
+                            />
                         </VBox>
                         <HBox class="formRows firstRow">
                             <VBox class="tranchItems">
@@ -75,6 +78,14 @@
                                         key="{i18n>location3}"
                                         text="{i18n>location3}"
                                     />
+                                    <core:Item
+                                        key="{i18n>location4}"
+                                        text="{i18n>location4}"
+                                    />
+                                    <core:Item
+                                        key="{i18n>location5}"
+                                        text="{i18n>location5}"
+                                    />
                                 </Select>
                             </VBox>
                         </HBox>
@@ -82,7 +93,6 @@
                         <VBox class="tranchItems">
                             <Label text="{i18n>trancheDescription}" />
                             <TextArea
-                                
                                 id="descriptionInput"
                                 value="{updateModel>/description}"
                                 rows="4"
@@ -150,7 +160,7 @@
             </f:SimpleForm>
 
             <!-- Table -->
-            
+
             <Panel class="tablePanel">
                 <Table
                     items="{updateModel>/targets}"
@@ -203,6 +213,10 @@
                         </ColumnListItem>
                     </items>
                 </Table>
+                <HBox>
+                        <Text text="123"></Text>
+                        <Text text="123"></Text>
+                    </HBox>
             </Panel>
             <!--  END OF TABLE -->
 
