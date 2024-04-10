@@ -40,7 +40,6 @@ export default class EditBonusTranche extends BaseController {
 		oRouter
 			.getRoute("CreateTranche")
 			.attachPatternMatched(this.onCreateRoute, this);
-		// this.getView().setModel(this.getModel("tranches"));
 		oRouter
 			.getRoute("EditBonusTranche")
 			.attachPatternMatched(this.onEditRouteMatched, this);
@@ -91,7 +90,6 @@ export default class EditBonusTranche extends BaseController {
         const oView = this.getView();
 		const oUpdateModel = this.getModel("updateModel") as JSONModel;
         const trancheId = oUpdateModel.getProperty("/ID");
-		// const trancheId = window.decodeURIComponent(oEvent.getParameter("arguments").ID);
         const sPath = `/BonusTranche(${trancheId})`;
         oView.bindElement({
             path: sPath,
@@ -100,7 +98,6 @@ export default class EditBonusTranche extends BaseController {
                 "$expand": "targets",
             }
         });
-		console.log("matched",trancheId, sPath, oView)
     }
 
 	public onCreateRoute(oEvent: any): void {
@@ -219,7 +216,6 @@ export default class EditBonusTranche extends BaseController {
 		const oItem = oEvent.getSource();
 		const oContext = oItem.getBindingContext("updateModel");
 		const sTargetId = oContext.getProperty("ID");
-
 		const oUpdateModel = this.getModel("updateModel") as JSONModel;
 		const aTargets = oUpdateModel.getProperty("/targets");
 		aTargets.splice(sTargetId, 1);
