@@ -16,7 +16,7 @@ export class UpdateBonusTrancheHandler {
   public async updateBonusTranche( @Srv() srv: any, @Req() req: Request, @Next() next: any
   ): Promise<any> {
     logger.info("Read Handler of BonusTrench");
-    const { ID, name, weight, startDate, endDate, location,targets,Status } = req.data;
+    const { ID, name,description, weight,orignDate, startDate, endDate, location,targets,Status } = req.data;
     const bonusTranche = await SELECT.one.from(BonusTranche.name).where({ ID });
     if (!bonusTranche) return req.reject(404, "Tranche not found");
 
@@ -83,7 +83,9 @@ export class UpdateBonusTrancheHandler {
     if (Status === "Open") {
         const data = {
             name: name ? name : bonusTranche.name,
+            description: description ? description : bonusTranche.description,
             weight: weight ? weight : bonusTranche.weight,
+            orignDate:orignDate ? orignDate : bonusTranche.orignDate,
             startDate: startDate ? startDate : bonusTranche.startDate,
             endDate: endDate ? endDate : bonusTranche.endDate,
             location: location ? location : bonusTranche.location
