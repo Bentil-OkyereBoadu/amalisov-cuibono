@@ -93,6 +93,16 @@
 .interactionIcons{
     gap: 10px;
 }
+.total{
+    gap: 9.7rem
+}
+.boldText {
+    font-weight: bold;
+}
+.totalWeight{
+    padding-left: 10px;
+    padding-top: 8px;
+}
 
 
 @media (max-width: 1024px) {

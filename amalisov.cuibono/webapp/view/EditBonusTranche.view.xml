@@ -213,10 +213,28 @@
                         </ColumnListItem>
                     </items>
                 </Table>
-                <HBox>
-                        <Text text="123"></Text>
-                        <Text text="123"></Text>
-                    </HBox>
+                <Table width="45%">
+                    <columns>
+                        <Column>
+                  
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <HBox class="total">
+                               <Label text="{i18n>total}" class="boldText"/>
+                               <HBox>
+                                    <Button
+                                        type="Reject"
+                                        icon=" sap-icon://alert"
+                                        visible="{path: 'totalWeightModel>/totalWeight', formatter: 'formatter.totalWeight', targetType:'any'}"
+                                    />
+                                  <Text text="{totalWeightModel>/totalWeight}" class="totalWeight"/> 
+                               </HBox>
+                            </HBox>
+                        </ColumnListItem>
+                    </items>
+                </Table>
             </Panel>
             <!--  END OF TABLE -->
 
@@ -233,14 +251,14 @@
                     text="{i18n>save}"
                     press=".onSaveTranche"
                     icon="sap-icon://save"
-                    visible="{path: 'updateModel>/Status', formatter: 'formatter.showSave', targetType:'any'}"
+                    visible="{parts: [{path: 'updateModel>/Status'}, {path: 'totalWeightModel>/totalWeight'}], formatter: 'formatter.saveVisibility'}"
                 />
                 <Button
                     type="Ghost"
                     text="{i18n>lock}"
                     icon="sap-icon://locked"
-                    press=".onSaveTranche"
-                    visible="{path: 'updateModel>/Status', formatter: 'formatter.showSave', targetType:'any'}"
+                    press=".onLockTranche"
+                    visible="{parts: [{path: 'updateModel>/Status'}, {path: 'totalWeightModel>/totalWeight'}], formatter: 'formatter.lockVisibility'}"
                 />
                 <Button
                     type="Accept"

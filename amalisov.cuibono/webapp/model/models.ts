@@ -62,4 +62,14 @@ export default {
 
         return oModel;
 	},
+
+    calculateTotalWeight: () => {
+        const oData ={
+            totalWeight: 0
+        }
+        const oModel = new JSONModel();
+        oModel.setData(oData);
+
+        return oModel;
+    }
 };

@@ -20,6 +20,7 @@ export default class Component extends UIComponent {
 		this.setModel(models.createDeviceModel(), "device");
 		this.setModel(models.createUpdateModel(), "updateModel");
 		this.setModel(models.createNewTargets(), "newTargets");
+		this.setModel(models.calculateTotalWeight(), "totalWeightModel");
 
 		// create the views based on the url/hash
 		this.getRouter().initialize();
