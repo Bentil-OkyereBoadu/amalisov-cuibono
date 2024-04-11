@@ -145,3 +145,9 @@ Content-Type: application/json
   "finalAmount":200,
   "justification":"Amount overruled from tranche"
 }
+
+###
+#
+# Get Participants Data 
+#
+GET http://localhost:4004/odata/v4/bonusTranche/participantData()

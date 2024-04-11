@@ -6,7 +6,7 @@ import { BonusTranche } from '#cds-models/amalisov/cuibono/bonusTranche';
 import { Target } from '#cds-models/amalisov/cuibono/targetAmount';
 import { Employees } from '#cds-models/amalisov/cuibono/employee';
 import { TrancheParticipation } from '#cds-models/amalisov/cuibono/trancheParticipation';
-import { calculateDays } from "src/utils/calculateDays";
+import { calculateDays } from "../../../src/utils/calculateDays";
 
 @Service()
 @Handler()
