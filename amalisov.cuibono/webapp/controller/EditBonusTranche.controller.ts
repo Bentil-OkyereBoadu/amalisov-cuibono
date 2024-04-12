@@ -89,7 +89,7 @@ export default class EditBonusTranche extends BaseController {
 			originDate: !isDuplicate ? dataArray[0].originDate : "",
 			weight: dataArray[0].weight,
 			description: dataArray[0].description,
-			Status: dataArray[0].Status,
+			Status: isDuplicate ? "Open" : dataArray[0].Status,
 			targets: dataArray[0].targets,
 		};
 		oUpdateModel.setData(oData);
