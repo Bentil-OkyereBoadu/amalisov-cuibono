@@ -1,15 +1,14 @@
 import { Handler, Next, Req, Srv, Func } from "cds-routing-handlers";
 import { Department } from "#cds-models/amalisov/cuibono/department";
 import { TrancheParticipation } from '../../../@cds-models/amalisov/cuibono/trancheParticipation';
-import { calculateFiscalYear } from "../../../src/utils/fiscalYear";
 import { Service } from "typedi";
-import cds, { Request } from "@sap/cds";
+
 
 @Service()
 @Handler()
 export class ParticipantDataHandler {
     @Func('participantData')
-    public async createBonusTranche(@Srv() srv: any, @Req() req: Request, @Next() next: any): Promise<any> {
+    public async ParticipantData(@Srv() srv: any, @Req() req: Request, @Next() next: any): Promise<any> {
         const participants = await SELECT.from(TrancheParticipation.name);
         const dataMap = new Map()
         const data: any[] = [];
@@ -25,15 +24,13 @@ export class ParticipantDataHandler {
          }
         })
     );
-      
-        await Promise.all(participants.map(async (participant: TrancheParticipation) => {
-         const name = participant.name;
-         const department = await SELECT.one.from(Department).where({ ID: participant.department_ID})
-         const departmentName = department.name;
-         const {localId,startDate} = participant;
-         const fiscalYear = calculateFiscalYear(startDate)
-         const amounts = dataMap.get(localId)
-         const netAmount = amounts.reduce((acc: number, curr: number | null | string) => {
+
+        for (let [key,value] of dataMap){
+            const participant = await SELECT.one.from(TrancheParticipation.name).where({localId:key});
+            const department = await SELECT.one.from(Department).where({ ID: participant.department_ID})
+            const departmentName = department.name;
+            const {startDate} = participant;
+            const netAmount = value.reduce((acc: number, curr: number | null | string) => {
                 if (typeof curr === 'number') {
                     return acc + curr;
                 } else if (typeof curr === 'string' && !isNaN(Number(curr))) {
@@ -41,8 +38,8 @@ export class ParticipantDataHandler {
                 }
                 return acc;
             }, 0);
-           data.push({name,localId,departmentName,fiscalYear,netAmount})
-           }));
+            data.push({localId:key,departmentName,netAmount,startDate})
+        }
         return {
             code:200,
             message:"participants retrieved successfully",

@@ -7,7 +7,7 @@ import { Target } from '#cds-models/amalisov/cuibono/targetAmount';
 import { Employees } from '#cds-models/amalisov/cuibono/employee';
 import { TrancheParticipation } from '#cds-models/amalisov/cuibono/trancheParticipation';
 import { calculateDays } from "../../../src/utils/calculateDays";
-
+import {calculateAmountOnLocked} from '../../../src/utils/calculateAmount.locked';
 @Service()
 @Handler()
 export class CreateTrancheHandler {
@@ -53,6 +53,10 @@ export class CreateTrancheHandler {
                     bonusTranche_ID: result.ID
                 });
             }));
+
+            if (Status === "Locked") {
+                calculateAmountOnLocked(targets,result.ID)
+            }
 
             return {
                 code:"200",
