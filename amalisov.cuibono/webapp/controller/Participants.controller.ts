@@ -6,6 +6,9 @@ import FilterBar from "sap/ui/comp/filterbar/FilterBar";
 import Filter from "sap/ui/model/Filter";
 import FilterOperator from "sap/ui/model/FilterOperator";
 import ListBinding from "sap/ui/model/ListBinding";
+import MultiInput from "sap/m/MultiInput";
+import Token from "sap/m/Token";
+
 
 /**
  * @namespace amalisov.cuibono.controller
@@ -38,16 +41,23 @@ export default class Participants extends BaseController {
 	private onRouteMatched(): void {
 		const oUpdateModel = this.getModel("updateModel");
 		const sTrancheID = oUpdateModel.getProperty("/ID");
-		this.applyFilter(sTrancheID);
+		const sTrancheName = oUpdateModel.getProperty("/name");
+		this.applyFilter(sTrancheID, sTrancheName);
 	}
-	private applyFilter(sTrancheID: string): void {
+	private applyFilter(sTrancheID: string, sTrancheName: string): void {
 		const oTable = this.getView().byId("Table");
 		const oBinding = oTable.getBinding("items") as ListBinding;
+		const oInputField = this.getView().byId("tranche") as MultiInput
+		const aTokens =  new Token({
+				key: sTrancheName,
+				text: sTrancheName
+			});
 
 		if (sTrancheID) {
 			// Apply filter for SupplierID
 			const oFilter = new Filter("bonusTranche_ID", FilterOperator.EQ, sTrancheID);
 			oBinding.filter([oFilter]);
+			oInputField.setTokens([aTokens]);
 		} else {
 			// No SupplierID specified, show all products
 			oBinding.filter([]);
