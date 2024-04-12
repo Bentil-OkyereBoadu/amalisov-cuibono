@@ -175,7 +175,7 @@
 					"name": "CreateTranche",
 					"target": "CreateTranche"
 				},{
-					"pattern": "edit-tranche/{ID}",
+					"pattern": "edit-tranche/{ID}/{Duplicate}",
 					"name": "EditBonusTranche",
 					"target": "EditBonusTranche"
 

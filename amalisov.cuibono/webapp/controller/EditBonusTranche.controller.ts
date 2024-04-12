@@ -52,7 +52,16 @@ export default class EditBonusTranche extends BaseController {
 			oEvent.getParameter("arguments").ID
 		);
 		const sTrancheId = trancheIdUri.match(/\(([^)]+)\)/)[1];
+		const sDuplicate = window.decodeURIComponent(
+			oEvent.getParameter("arguments").Duplicate
+		)
+		let isDuplicate = true
 
+		if (sDuplicate === "true") {
+			isDuplicate = true;
+		} else if (sDuplicate === "false") {
+			isDuplicate = false;
+		}
 		const oGeneralModel = this.getModel("tranches") as ODataModel;
 		const sPath = `/BonusTranche`;
 		const mParameters = {
@@ -75,9 +84,9 @@ export default class EditBonusTranche extends BaseController {
 			ID: sTrancheId,
 			name: dataArray[0].name,
 			location: dataArray[0].location,
-			startDate: dataArray[0].startDate,
-			endDate: dataArray[0].endDate,
-			originDate: dataArray[0].originDate,
+			startDate: !isDuplicate ? dataArray[0].startDate : "",
+			endDate: !isDuplicate ? dataArray[0].endDate : "",
+			originDate: !isDuplicate ? dataArray[0].originDate : "",
 			weight: dataArray[0].weight,
 			description: dataArray[0].description,
 			Status: dataArray[0].Status,
