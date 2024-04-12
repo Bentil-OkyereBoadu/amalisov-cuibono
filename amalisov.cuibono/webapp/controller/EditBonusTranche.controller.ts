@@ -81,7 +81,7 @@ export default class EditBonusTranche extends BaseController {
 		dataArray = contextObjects.map((item) => item.getObject());
 
 		const oData: TrancheData = {
-			ID: sTrancheId,
+			ID: isDuplicate ? "" : sTrancheId,
 			name: dataArray[0].name,
 			location: dataArray[0].location,
 			startDate: !isDuplicate ? dataArray[0].startDate : "",
