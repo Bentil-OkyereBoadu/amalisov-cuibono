@@ -22,27 +22,17 @@
             <Table
                 id="Table"
                 inset="false" 
-                items="{payable>/Payable}"
+                items="{payable>/participantData()}"
                 class="participantTable"
+                growing="true"
                 growingScrollToLoad="true"
+                growingThreshold="50"
                 busyIndicatorDelay="{config>delay}"
             >
                 <headerToolbar>
                     <Toolbar class="sapUiSmallMarginBottom">
                         <Title text="{i18n>calculatedHeader}" />
                         <ToolbarSpacer />
-                        <!-- <Button
-                            id="excludeTrancheButton"
-                            text="{i18n>excludeTranche}"
-                            class="btn"
-                            press=".onDialogOpen"
-                        />
-                        <Button
-                            id="overRuleButton"
-                            text="{i18n>overRule}"
-                            class="btn"
-                            press=".onDialogOpen"
-                        /> -->
                         <Button
                             icon="sap-icon://sort"
                             id="sortParticipant"
@@ -83,10 +73,10 @@
                 <items>
                     <ColumnListItem vAlign="Middle">
                         <cells>
-                            <Text text="{path:'payable>localID', formatter:'formatter.limitText'}" />
+                            <Text text="{path:'payable>localId', formatter:'formatter.limitText'}" />
                             <Text text="{payable>name}" />
-                            <Text text="{payable>startDate}" />
-                            <Text text="{payable>finalAmount}" />
+                            <Text text="{payable>fiscalYear}" />
+                            <Text text="{payable>netAmount}" />
                         </cells>
                     </ColumnListItem>
                 </items>

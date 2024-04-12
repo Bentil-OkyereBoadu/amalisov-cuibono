@@ -276,7 +276,7 @@
                 />
                 <Button
                     type="Reject"
-                    press=".onCreateRoute"
+                    press=".onNavBack"
                     text="Cancel"
                 />
             </OverflowToolbar>

@@ -32,6 +32,13 @@
 					"odataVersion": "4.0"
 				}
 			},
+			"BonusCalculation": {
+				"uri": "/odata/v4/bonusTranche/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "4.0"
+				}
+			},
 			"target": {
 				"uri": "/odata/v4/targetAmount/",
 				"type": "OData",
@@ -134,8 +141,17 @@
 				}
 			},
 			"payable": {
-				"type": "sap.ui.model.json.JSONModel",
-				"uri": "bonuses.json"
+				"type": "sap.ui.model.odata.v4.ODataModel",
+				"dataSource": "BonusCalculation",
+				"preload": true,
+				"settings": {
+					"synchronizationMode": "None",
+					"groupId": "$direct",
+					"metadataUrlParams": {
+						"sap-documentation": "heading"
+					},
+					"operationMode": "Server"
+				}
 			}
 		},
 
