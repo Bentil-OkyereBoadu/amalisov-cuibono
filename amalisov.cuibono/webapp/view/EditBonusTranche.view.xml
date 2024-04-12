@@ -264,14 +264,14 @@
                     type="Accept"
                     text="{i18n>completedStatus}"
                     icon="sap-icon://complete"
-                    press=".onSaveTranche"
+                    press=".onCompleteTranche"
                     visible="{path: 'updateModel>/Status', formatter: 'formatter.showComplete', targetType:'any'}"
                 />
                 <Button
                     type="Ghost"
                     text="{i18n>reopen}"
                     icon="sap-icon://unlocked"
-                    press=".onSaveTranche"
+                    press=".onReOpenTranche"
                     visible="{path: 'updateModel>/Status', formatter: 'formatter.showComplete', targetType:'any'}"
                 />
                 <Button

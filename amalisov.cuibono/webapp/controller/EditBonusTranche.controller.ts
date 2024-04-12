@@ -420,6 +420,60 @@ export default class EditBonusTranche extends BaseController {
 		}
 	};
 
+	public async onCompleteTranche() : Promise <void>{
+		const oView = this.getView();
+		const oUpdateModel = this.getModel("updateModel");
+		const sTrancheID = oUpdateModel.getProperty("/ID");
+		const oModel = oView.getModel("tranches") as ODataModel;
+		const resourceBundle: ResourceBundle = await this.getResourceBundle();
+
+		let oData: TrancheData = {};
+
+		const sPath = "/updateBonusTranche";
+		const ID = sTrancheID;
+		oData = { ...this.constructTrancheData(), ID: ID, Status:"completed" };
+
+		const oContext = oModel.bindList(sPath);
+		try {
+			oContext.create(oData);
+			MessageBox.success(resourceBundle.getText("updatedTranche"), {
+				onClose: () => {
+					this.getRouter().navTo("main");
+					oModel.refresh();
+				},
+			});
+		} catch (error) {
+			MessageBox.error(resourceBundle.getText("errorCreateTranche"), error);
+		}
+	};
+
+	public async onReOpenTranche() : Promise <void>{
+		const oView = this.getView();
+		const oUpdateModel = this.getModel("updateModel");
+		const sTrancheID = oUpdateModel.getProperty("/ID");
+		const oModel = oView.getModel("tranches") as ODataModel;
+		const resourceBundle: ResourceBundle = await this.getResourceBundle();
+
+		let oData: TrancheData = {};
+
+		const sPath = "/updateBonusTranche";
+		const ID = sTrancheID;
+		oData = { ...this.constructTrancheData(), ID: ID, Status:"Open" };
+
+		const oContext = oModel.bindList(sPath);
+		try {
+			oContext.create(oData);
+			MessageBox.success(resourceBundle.getText("updatedTranche"), {
+				onClose: () => {
+					this.getRouter().navTo("main");
+					oModel.refresh();
+				},
+			});
+		} catch (error) {
+			MessageBox.error(resourceBundle.getText("errorCreateTranche"), error);
+		}
+	};
+
 	public calculateTotalWeight(): void {
 		const oUpdateModel = this.getModel("updateModel") as JSONModel;
 		const oModel =  this.getModel("totalWeightModel") as JSONModel

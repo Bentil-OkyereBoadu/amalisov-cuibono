@@ -109,8 +109,8 @@
     .tranchItems{
         padding-left: 1.25rem;
         max-width: 30%;
-       }
-       .firstRow{
+    }
+    .firstRow{
         gap: 0px;
     }
     
@@ -128,7 +128,11 @@
      .textArea{
         width: 105%;
     }
+    .total{
+        gap: 22%
+    }
 }
+
 @media (min-width: 1600px) {
     .tranchItems{
         padding-left: 1.25rem;
@@ -151,6 +155,9 @@
     .sapMSltWithArrow > .sapMSltLabel, .sapMSltWithArrow .sapMSelectListItemBase {
         padding: 0 0rem 0 0.625rem;
         width: 12.5rem;
+    }
+    .total{
+        gap: 24.7%
     }
 }
 
