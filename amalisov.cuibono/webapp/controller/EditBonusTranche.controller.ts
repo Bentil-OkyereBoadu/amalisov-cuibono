@@ -8,6 +8,7 @@ import MessageBox from "sap/m/MessageBox";
 import DatePicker from "sap/m/DatePicker";
 import FilterOperator from "sap/ui/model/FilterOperator";
 import Filter from "sap/ui/model/Filter";
+import Page from "sap/m/Page";
 
 /**
  * @namespace amalisov.cuibono.controller
@@ -94,6 +95,7 @@ export default class EditBonusTranche extends BaseController {
 		};
 		oUpdateModel.setData(oData);
 		this.calculateTotalWeight();
+		this.changeTitle()
 	}
 
 	public onObjectMatched(): void {
@@ -116,6 +118,7 @@ export default class EditBonusTranche extends BaseController {
 		oUpdateModel.setData({});
 		oUpdateModel.setProperty("/Status", "Open");
 		oModel.setData({totalWeight:0});
+		this.changeTitle()
 	}
 
 	public onAddTarget(): void {
@@ -487,19 +490,20 @@ export default class EditBonusTranche extends BaseController {
 	
 	public onCancel(): void {}
 
-	public async changeTitle(): Promise <string> {
+	public async changeTitle(): Promise<void> {
+		const oView = this.getView()
+		const oPage = oView.byId("editPage") as Page;
 		const oRouter = this.getRouter();
 		const currentHash = oRouter.getHashChanger().getHash();
 		const sPageName= oRouter.getRouteInfoByHash(currentHash).name
 		const resourceBundle: ResourceBundle = await this.getResourceBundle();
 		const title1 = resourceBundle.getText("createTrancheTitle");
 		const title2 = resourceBundle.getText("updateTrancheTitle");
-		console.log(sPageName)
 
 		if (sPageName === "CreateTranche") {
-			return title1
+			oPage.setTitle(title1);
 		} else {
-			return  title2
+			oPage.setTitle(title2);
 		}
 	}
 }

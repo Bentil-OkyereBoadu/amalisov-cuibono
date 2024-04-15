@@ -10,10 +10,10 @@
     xmlns:f="sap.ui.layout.form"
 >
     <Page
-        id="page"
+        id="editPage"
         showNavButton="true"
         navButtonPress=".onNavBack"
-        title="{formatter:'.changeTitle'}" 
+        title="" 
         floatingFooter="true"
     >
         <IconTabHeader mode="Inline">
