@@ -474,12 +474,14 @@ export default abstract class BaseController extends Controller {
 		});
 	     
 	    const holderMultiInput = oView.byId(this.MultiInputId) as MultiInput;
+		const oInputField = this.getView().byId("tranche") as MultiInput
 		if (holderMultiInput) {
 			holderMultiInput.removeAllTokens();
 		}
 		const oBinding = oTable.getBinding("items") as ListBinding;
 		oBinding.filter([]);
 		this.inputFilter = '';
+		oInputField.setTokens([]);
 	}
 
 	public closingDialog(): void {
