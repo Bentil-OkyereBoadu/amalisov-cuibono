@@ -5,6 +5,7 @@ import { TrancheParticipation } from "#cds-models/amalisov/cuibono/tranchePartic
 import { Department } from "#cds-models/amalisov/cuibono/department";
 import { Attendance } from "#cds-models/amalisov/cuibono/attendance";
 import { calculateAttendance, calculateDays } from "../../src/utils/calculateDays";
+import { Employee } from "#cds-models/amalisov/cuibono/employee";
 
 
 
@@ -27,6 +28,8 @@ export async function calculateAmountOnLocked(targets: Target[],ID: string): Pro
         const departmentID = participant.department_ID;
         const department = await SELECT.one.from(Department).where({ ID: departmentID });
         const departmentBonus = department.bonus;
+        const employee = await SELECT.one.from(Employee.name).where({ID:employeeId});
+        const bonusPercentage = employee.bonusPercentage
 
         const attendance = await SELECT.one.from(Attendance).where({ employee_ID: employeeId });
            // participant attendance 
@@ -37,7 +40,7 @@ export async function calculateAmountOnLocked(targets: Target[],ID: string): Pro
         const periondRatio = participantAttendance / tranchDuration;
           //  targetPayout for each targets 
         const targetsAmount = targets.map((target: Target) => {
-            const targetPayout = trenchPayoutBonus * periondRatio * (target.achievement / 100) * (target.weight / 100);
+            const targetPayout = trenchPayoutBonus * periondRatio * (target.achievement / 100) * (target.weight / 100)*(bonusPercentage/100);
             return targetPayout;
         });
 

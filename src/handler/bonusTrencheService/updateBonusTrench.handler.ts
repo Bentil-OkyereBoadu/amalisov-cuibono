@@ -2,9 +2,9 @@ import { Handler, Next, Req, Srv, Action, Func } from "cds-routing-handlers";
 import { BonusTranche } from "../../../@cds-models/amalisov/cuibono/bonusTranche";
 import { Service } from "typedi";
 import cds, { Request } from "@sap/cds";
-import { Target} from "#cds-models/amalisov/cuibono/targetAmount";
 import { TrancheParticipation } from "#cds-models/amalisov/cuibono/trancheParticipation";
 import {calculateAmountOnLocked} from '../../../src/utils/calculateAmount.locked';
+import { updateTranche } from "../../../src/utils/updateTranchFlieds";
 
 const logger = cds.log("Bonus Tranch handler logger ");
 @Service()
@@ -19,36 +19,8 @@ export class UpdateBonusTrancheHandler {
     if (!bonusTranche) return req.reject(404, "Tranche not found");
 
     if (Status === "Locked") {
-      const data = {
-        name: name ? name : bonusTranche.name,
-        description: description ? description : bonusTranche.description,
-        weight: weight ? weight : bonusTranche.weight,
-        orignDate:orignDate ? orignDate : bonusTranche.orignDate,
-        startDate: startDate ? startDate : bonusTranche.startDate,
-        endDate: endDate ? endDate : bonusTranche.endDate,
-        location: location ? location : bonusTranche.location
-    };
-    if(weight){
-      const particapant = await SELECT.from(TrancheParticipation.name).where({bonusTranche_ID:ID})
-      particapant.map(async()=>{
-         await UPDATE(TrancheParticipation.name,{bonusTranche_ID:ID})
-         .set({weight})
-      })
-      }
-    await DELETE.from(Target.name).where({ bonusTranche_ID: ID });
-    await Promise.all(targets.map(async (target: any) => {
-        const { name, weight, achievement, description } = target;
-        await INSERT.into(Target.name).entries({
-            name,
-            weight,
-            achievement,
-            description,
-            bonusTranche_ID: ID
-        });
-    }));
-
-    await UPDATE(BonusTranche, ID).with({ ...data });
-    calculateAmountOnLocked(targets,ID)
+    await updateTranche(ID, name, description, weight, orignDate, startDate, endDate, location, targets, bonusTranche);
+    await calculateAmountOnLocked(targets,ID)
   }
   
     if (Status === "Completed"){
@@ -69,35 +41,7 @@ export class UpdateBonusTrancheHandler {
     }
 
     if (Status === "Open") {
-        const data = {
-            name: name ? name : bonusTranche.name,
-            description: description ? description : bonusTranche.description,
-            weight: weight ? weight : bonusTranche.weight,
-            orignDate:orignDate ? orignDate : bonusTranche.orignDate,
-            startDate: startDate ? startDate : bonusTranche.startDate,
-            endDate: endDate ? endDate : bonusTranche.endDate,
-            location: location ? location : bonusTranche.location
-        };
-        if(weight){
-          const particapant = await SELECT.from(TrancheParticipation.name).where({bonusTranche_ID:ID})
-          particapant.map(async()=>{
-             await UPDATE(TrancheParticipation.name,{bonusTranche_ID:ID})
-             .set({weight})
-          })
-          }
-        await DELETE.from(Target.name).where({ bonusTranche_ID: ID });
-        await Promise.all(targets.map(async (target: any) => {
-            const { name, weight, achievement, description } = target;
-            await INSERT.into(Target.name).entries({
-                name,
-                weight,
-                achievement,
-                description,
-                bonusTranche_ID: ID
-            });
-        }));
-    
-        await UPDATE(BonusTranche, ID).with({ ...data });
+        await updateTranche(ID, name, description, weight, orignDate, startDate, endDate, location, targets, bonusTranche);
     } 
     
      await UPDATE(BonusTranche.name).where({ ID }).set({ Status });

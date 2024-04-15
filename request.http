@@ -79,7 +79,7 @@ Content-Type: application/json
 {
   "ID":"36cdbc54-0cf1-409c-8e48-d711029de05d",
   "Status":"Locked",
-  "name":"New_update",
+  "name":"NewOne",
   "startDate":"2022-11-15",
   "endDate":"2023-09-25",
   "weight" : 40,
