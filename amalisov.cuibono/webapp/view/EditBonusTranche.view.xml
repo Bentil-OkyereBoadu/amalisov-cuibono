@@ -227,9 +227,9 @@
                                     <Button
                                         type="Reject"
                                         icon=" sap-icon://alert"
-                                        visible="{path: 'totalWeightModel>/totalWeight', formatter: 'formatter.totalWeight', targetType:'any'}"
+                                        visible="{path: 'updateModel>/totalWeight', formatter: 'formatter.totalWeight', targetType:'any'}"
                                     />
-                                  <Text text="{totalWeightModel>/totalWeight}" class="totalWeight"/> 
+                                  <Text text="{updateModel>/totalWeight}" class="totalWeight"/> 
                                </HBox>
                             </HBox>
                         </ColumnListItem>

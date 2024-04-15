@@ -309,7 +309,7 @@ export default class EditBonusTranche extends BaseController {
 		let oData: TrancheData = {
 		};
 		let sToastMessage = "";
-		if (!sTrancheID || sTrancheID === "") {
+		if (!sTrancheID) {
 			sPath = "/createTranche";
 			oData = this.constructTrancheData();
 			sToastMessage = "createdTranche";
@@ -494,14 +494,16 @@ export default class EditBonusTranche extends BaseController {
 
 	public calculateTotalWeight(): void {
 		const oUpdateModel = this.getModel("updateModel") as JSONModel;
-		const oModel =  this.getModel("totalWeightModel") as JSONModel
+		const oModel =  oUpdateModel.getProperty("/totalWeight");
 		const aTargets = oUpdateModel.getProperty("/targets");
 	
 		// Calculate the total weight of all targets
 		let totalWeight = aTargets.reduce((acc:any, target:any) => acc + target.weight, 0);
 	
 		// Assign value an existing model to set the total weight
-		oModel.setData({totalWeight:totalWeight});
+		// oModel.setData({totalWeight:totalWeight});
+		oUpdateModel.setProperty("/totalWeight", totalWeight)
+		console.log(oUpdateModel.getProperty("/totalWeight"))
 	};
 	
 	public onCancel(): void {}

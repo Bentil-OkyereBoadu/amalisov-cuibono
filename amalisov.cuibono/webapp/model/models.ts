@@ -21,6 +21,7 @@ interface Tranche {
     description: string;
     Status: string;
     targets: Target[];
+    totalWeight: number
 }
 
 
@@ -43,6 +44,7 @@ export default {
             description: "",
             Status: "Open",
             targets: [],
+            totalWeight: 0
 		};
 		const oModel = new JSONModel();
         oModel.setData(oData);
@@ -62,14 +64,4 @@ export default {
 
         return oModel;
 	},
-
-    calculateTotalWeight: () => {
-        const oData ={
-            totalWeight: 0
-        }
-        const oModel = new JSONModel();
-        oModel.setData(oData);
-
-        return oModel;
-    }
 };
