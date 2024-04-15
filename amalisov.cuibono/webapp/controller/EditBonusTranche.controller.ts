@@ -486,4 +486,20 @@ export default class EditBonusTranche extends BaseController {
 	};
 	
 	public onCancel(): void {}
+
+	public async changeTitle(): Promise <string> {
+		const oRouter = this.getRouter();
+		const currentHash = oRouter.getHashChanger().getHash();
+		const sPageName= oRouter.getRouteInfoByHash(currentHash).name
+		const resourceBundle: ResourceBundle = await this.getResourceBundle();
+		const title1 = resourceBundle.getText("createTrancheTitle");
+		const title2 = resourceBundle.getText("updateTrancheTitle");
+		console.log(sPageName)
+
+		if (sPageName === "CreateTranche") {
+			return title1
+		} else {
+			return  title2
+		}
+	}
 }

@@ -13,7 +13,7 @@
         id="page"
         showNavButton="true"
         navButtonPress=".onNavBack"
-        title="{i18n>createTrancheTitle}"
+        title="{formatter:'.changeTitle'}" 
         floatingFooter="true"
     >
         <IconTabHeader mode="Inline">
