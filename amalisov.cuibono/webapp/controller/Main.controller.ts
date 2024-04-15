@@ -39,8 +39,6 @@ export default class Main extends BaseController {
 		this.getRouter().navTo("CreateTranche");
 	}
 
-	
-
 	public onEditPress(oEvent: any): void {
 		const oItem = oEvent.getSource();
 		const oUpdateModel = this.getModel(
