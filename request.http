@@ -48,11 +48,24 @@ Content-Type: application/json
       "description": "recent",
       "startDate":"2022-11-15",
       "endDate":"2023-09-25",
-      "orignDate": "11.04.23",
+      "orignDate": "2022-06-15",
       "weight": 10,
-      "Status": "Open",
+      "Status": "Locked",
       "location": "Tokyo",
-      "targets":[]
+       "targets": [
+     {
+      "name": "Target 1",
+      "weight": 50,
+      "achievement": 4,
+      "description": "Description of Target 1"
+    },
+    {
+      "name": "Target 2",
+      "weight": 50,
+      "achievement": 4,
+      "description": "Description of Target 1"
+    }
+  ]
 }
 
 
@@ -66,14 +79,20 @@ Content-Type: application/json
 {
   "ID":"36cdbc54-0cf1-409c-8e48-d711029de05d",
   "Status":"Locked",
-  "name":"Testing2",
+  "name":"New_update",
   "startDate":"2022-11-15",
   "endDate":"2023-09-25",
-  "weight" : 50,
+  "weight" : 40,
    "targets": [
      {
+      "name": "Target 1",
+      "weight": 50,
+      "achievement": 4,
+      "description": "Description of Target 1"
+    },
+    {
       "name": "Target 2",
-      "weight": 100,
+      "weight": 50,
       "achievement": 4,
       "description": "Description of Target 1"
     }

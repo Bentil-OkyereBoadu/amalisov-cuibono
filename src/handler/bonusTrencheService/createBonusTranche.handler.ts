@@ -55,7 +55,7 @@ export class CreateTrancheHandler {
             }));
 
             if (Status === "Locked") {
-                calculateAmountOnLocked(targets,result.ID)
+                await calculateAmountOnLocked(targets,result.ID)
             }
 
             return {
