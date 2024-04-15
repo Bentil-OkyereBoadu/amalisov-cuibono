@@ -307,7 +307,6 @@ export default class EditBonusTranche extends BaseController {
 
 		let sPath = "";
 		let oData: TrancheData = {
-			name: "",
 		};
 		let sToastMessage = "";
 		if (!sTrancheID || sTrancheID === "") {
@@ -402,16 +401,33 @@ export default class EditBonusTranche extends BaseController {
 		const oModel = oView.getModel("tranches") as ODataModel;
 		const resourceBundle: ResourceBundle = await this.getResourceBundle();
 
-		let oData: TrancheData = {};
+		const oRouter = this.getRouter();
+		const currentHash = oRouter.getHashChanger().getHash();
+		const sPageName = oRouter.getRouteInfoByHash(currentHash).name;
 
-		const sPath = "/updateBonusTranche";
-		const ID = sTrancheID;
-		oData = { ...this.constructTrancheData(), ID: ID, Status:"Locked" };
+		let sPath = "";
+		let oData: TrancheData = {
+		};
+		let sToastMessage = "";
+
+		if (!sTrancheID || sTrancheID === "") {
+			sPath = "/createTranche";
+			oData = { ...this.constructTrancheData(), Status:"Locked" };
+			sToastMessage = "createdTranche";
+		} else if (
+			sTrancheID !== "" &&
+			sPageName === resourceBundle.getText("routeCondition")
+		) {
+			sPath = "/updateBonusTranche";
+			const ID = sTrancheID;
+			oData = { ...this.constructTrancheData(), ID: ID, Status:"Locked" };
+			sToastMessage = "updatedTranche";
+		}
 
 		const oContext = oModel.bindList(sPath);
 		try {
 			oContext.create(oData);
-			MessageBox.success(resourceBundle.getText("updatedTranche"), {
+			MessageBox.success(resourceBundle.getText(sToastMessage), {
 				onClose: () => {
 					this.getRouter().navTo("main");
 					oModel.refresh();
