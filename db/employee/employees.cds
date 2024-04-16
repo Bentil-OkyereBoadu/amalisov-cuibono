@@ -12,7 +12,7 @@ entity Employees : cuid {
     firstName       : String;
     lastName        : String;
     email           : String;
-    bonusPercentage : String;
+    bonusPercentage : Double;
     attendance      : Association to attendance.Attendance;
     department      : Association to department.Department;
 }

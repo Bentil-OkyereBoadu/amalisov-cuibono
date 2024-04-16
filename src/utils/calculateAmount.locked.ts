@@ -40,16 +40,17 @@ export async function calculateAmountOnLocked(targets: Target[],ID: string): Pro
         const periondRatio = participantAttendance / tranchDuration;
           //  targetPayout for each targets 
         const targetsAmount = targets.map((target: Target) => {
-            const targetPayout = trenchPayoutBonus * periondRatio * (target.achievement / 100) * (target.weight / 100)*(bonusPercentage/100);
-            return targetPayout;
+            const targetPayout = trenchPayoutBonus * periondRatio * (target.achievement / 100) * (target.weight / 100);
+            return targetPayout ;
         });
-
+        
          // Calculated Amoun
         const calculatedAmount = targetsAmount.reduce((curr: number, acc: number) => curr + acc);
+        const totalAmount = (calculatedAmount * (bonusPercentage/100)).toFixed(2)
         await UPDATE(TrancheParticipation.name)
             .where({ ID: participant.ID })
             .set({
-                calculatedAmount
+                calculatedAmount:totalAmount
             });
     }));
 }
