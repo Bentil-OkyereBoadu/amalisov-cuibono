@@ -84,7 +84,7 @@ export default class EditBonusTranche extends BaseController {
 					};
 			oUpdateModel.setData(oTrancheData);
 			this.calculateTotalWeight();
-			this.changeTitle();
+			this.changeTitle(sTrancheId);
 		}).catch((oError: any) => {
 			MessageBox.error(oError.message);
 		});
@@ -94,7 +94,7 @@ export default class EditBonusTranche extends BaseController {
 		const oUpdateModel = this.getModel("updateModel") as JSONModel;
 		oUpdateModel.setData({});
 		oUpdateModel.setProperty("/Status", "Open");
-		this.changeTitle()
+		this.changeTitle('')
 	}
 
 	public onAddTarget(): void {
@@ -203,16 +203,33 @@ export default class EditBonusTranche extends BaseController {
 		}
 	}
 
-	public onDeleteTarget(oEvent: any): void {
+	public async onDeleteTarget(oEvent: any): Promise<void> {
 		//delete target from array and send to backend
 		const oItem = oEvent.getSource();
 		const oContext = oItem.getBindingContext("updateModel");
 		const sTargetId = oContext.getProperty("ID");
 		const oUpdateModel = this.getModel("updateModel") as JSONModel;
 		const aTargets = oUpdateModel.getProperty("/targets");
-		aTargets.splice(sTargetId, 1);
-		oUpdateModel.setProperty("/targets", aTargets);
-		this.calculateTotalWeight();
+		const resourceBundle: ResourceBundle = await this.getResourceBundle();
+
+		if (sTargetId) {
+			MessageBox.confirm(resourceBundle.getText("confirmDeleteTranche"), {
+				actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+				onClose: async (sAction: string) => {
+					if (sAction === MessageBox.Action.YES) {
+						try {
+							aTargets.splice(sTargetId, 1);
+							oUpdateModel.setProperty("/targets", aTargets);
+							this.calculateTotalWeight();
+							MessageBox.success(resourceBundle.getText("deleteTarget"));
+							oUpdateModel.refresh();
+						} catch (error) {
+							MessageBox.error(resourceBundle.getText("errorDeleteTarget"));
+						}
+					}
+				}
+			});
+		}
 	}
 
 	public limitDates(oEvent: any): void {
@@ -483,19 +500,16 @@ export default class EditBonusTranche extends BaseController {
 	
 	public onCancel(): void {}
 
-	public async changeTitle(): Promise<void> {
+	public async changeTitle(sTrancheId: string): Promise<void> {
 		const oView = this.getView()
 		const oPage = oView.byId("editPage") as Page;
-		const oRouter = this.getRouter();
-		const currentHash = oRouter.getHashChanger().getHash();
-		const sPageName= oRouter.getRouteInfoByHash(currentHash).name
 		const resourceBundle: ResourceBundle = await this.getResourceBundle();
 		const title1 = resourceBundle.getText("createTrancheTitle");
 		const title2 = resourceBundle.getText("updateTrancheTitle");
 
-		if (sPageName === "CreateTranche") {
+		if (!sTrancheId) {
 			oPage.setTitle(title1);
-		} else {
+		} else if (sTrancheId) {
 			oPage.setTitle(title2);
 		}
 	}
