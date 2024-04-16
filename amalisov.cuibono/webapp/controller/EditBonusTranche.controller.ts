@@ -46,58 +46,6 @@ export default class EditBonusTranche extends BaseController {
 			.attachPatternMatched(this.onObjectMatched, this);
 	}
 
-	// public async onEditRouteMatched(oEvent: any): Promise<any> {
-	// 	// read data from model and place in an array.
-	// 	const oUpdateModel = this.getModel("updateModel") as JSONModel;
-	// 	const trancheIdUri = window.decodeURIComponent(
-	// 		oEvent.getParameter("arguments").ID
-	// 	);
-	// 	const sTrancheId = trancheIdUri.match(/\(([^)]+)\)/)[1];
-	// 	const sDuplicate = window.decodeURIComponent(
-	// 		oEvent.getParameter("arguments").Duplicate
-	// 	)
-	// 	let isDuplicate = true
-
-	// 	if (sDuplicate === "true") {
-	// 		isDuplicate = true;
-	// 	} else if (sDuplicate === "false") {
-	// 		isDuplicate = false;
-	// 	}
-	// 	const oGeneralModel = this.getModel("tranches") as ODataModel;
-	// 	const sPath = `/BonusTranche`;
-	// 	const mParameters = {
-	// 		$expand: `targets`,
-	// 	};
-	// 	const oFilter = new Filter("ID", FilterOperator.EQ, sTrancheId);
-
-	// 	const data = oGeneralModel.bindList(
-	// 		sPath,
-	// 		null,
-	// 		null,
-	// 		[oFilter],
-	// 		mParameters
-	// 	);
-	// 	const contextObjects = await data.requestContexts();
-	// 	let dataArray = [];
-	// 	dataArray = contextObjects.map((item) => item.getObject());
-
-	// 	const oData: TrancheData = {
-	// 		ID: isDuplicate ? "" : sTrancheId,
-	// 		name: dataArray[0].name,
-	// 		location: dataArray[0].location,
-	// 		startDate: !isDuplicate ? dataArray[0].startDate : "",
-	// 		endDate: !isDuplicate ? dataArray[0].endDate : "",
-	// 		originDate: !isDuplicate ? dataArray[0].originDate : "",
-	// 		weight: dataArray[0].weight,
-	// 		description: dataArray[0].description,
-	// 		Status: isDuplicate ? "Open" : dataArray[0].Status,
-	// 		targets: dataArray[0].targets,
-	// 	};
-	// 	oUpdateModel.setData(oData);
-	// 	this.calculateTotalWeight();
-	// 	this.changeTitle()
-	// }
-
 	public onObjectMatched(oEvent: any): void {
 		const oUpdateModel = this.getModel("updateModel") as JSONModel;
 		const trancheIdUri = window.decodeURIComponent(
@@ -120,14 +68,25 @@ export default class EditBonusTranche extends BaseController {
 		const mParameters = {
 			$expand: `targets`,
 		};
-		const oBinding = oGeneralModel.bindContext(sPath, null, mParameters);
-
+		const oBinding = oGeneralModel.bindContext(sPath, null, mParameters);	
 		oBinding.requestObject().then((oData: any) => {
-			oUpdateModel.setData(oData);
+			const oTrancheData: TrancheData = {
+						ID: isDuplicate ? "" : sTrancheId,
+						name: oData.name,
+						location: oData.location,
+						startDate: !isDuplicate ? oData.startDate : "",
+						endDate: !isDuplicate ? oData.endDate : "",
+						originDate: !isDuplicate ? oData.originDate : "",
+						weight: oData.weight,
+						description: oData.description,
+						Status: isDuplicate ? "Open" : oData.Status,
+						targets: oData.targets,
+					};
+			oUpdateModel.setData(oTrancheData);
 			this.calculateTotalWeight();
 			this.changeTitle();
 		}).catch((oError: any) => {
-			console.error("Error fetching data:", oError);
+			MessageBox.error(oError.message);
 		});
 	}
 
@@ -520,7 +479,6 @@ export default class EditBonusTranche extends BaseController {
 		// Assign value an existing model to set the total weight
 		// oModel.setData({totalWeight:totalWeight});
 		oUpdateModel.setProperty("/totalWeight", totalWeight)
-		console.log(oUpdateModel.getProperty("/totalWeight"))
 	};
 	
 	public onCancel(): void {}
