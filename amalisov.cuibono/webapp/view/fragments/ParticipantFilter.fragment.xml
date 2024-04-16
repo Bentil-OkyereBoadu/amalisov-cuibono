@@ -53,30 +53,11 @@
                         visibleInFilterBar="true"
                     >
                         <fb:control>
-                           
-                             <MultiComboBox
-                                  id="department"
+                            <MultiInput
+                                id="department"
                                 name="{i18n>department}"
-                                selectionChange=".onFilter"
-                        
-                            >
-                                <core:Item
-                                    key="{i18n>department1}"
-                                    text="{i18n>department1}"
-                                />
-                                <core:Item
-                                    key="{i18n>department2}"
-                                    text="{i18n>department2}"
-                                />
-                                <core:Item
-                                    key="{i18n>department3}"
-                                    text="{i18n>department3}"
-                                />
-                                <core:Item
-                                    key="{i18n>department4}"
-                                    text="{i18n>department4}"
-                                />
-                            </MultiComboBox>
+                                valueHelpRequest=".onDialogOpen"
+                            />
                         </fb:control>
                     </fb:FilterGroupItem>
                     <fb:FilterGroupItem
@@ -102,6 +83,14 @@
                                     key="{i18n>location3}"
                                     text="{i18n>location3}"
                                 />
+                                <core:Item
+                                    key="{i18n>location4}"
+                                    text="{i18n>location4}"
+                                />
+                                <core:Item
+                                    key="{i18n>location5}"
+                                    text="{i18n>location5}"
+                                />
                             </MultiComboBox>
                         </fb:control>
                     </fb:FilterGroupItem>
@@ -116,7 +105,7 @@
                                 name="{i18n>fiscalYear}"
                                 selectionChange=".onFilter"
                             >
-                                 <core:Item
+                                <core:Item
                                     key="{i18n>year1}"
                                     text="{i18n>year1}"
                                 />
@@ -125,16 +114,6 @@
                                     text="{i18n>year2}"
                                 />
                                 <core:Item
-
-                                    key="{i18n>year1}"
-                                    text="{i18n>year1}"
-                                />
-                                <core:Item
-                                    key="{i18n>year2}"
-                                    text="{i18n>year2}"
-                                />
-                                <core:Item
-
                                     key="{i18n>year3}"
                                     text="{i18n>year3}"
                                 />

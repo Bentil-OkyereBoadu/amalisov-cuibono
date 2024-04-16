@@ -32,6 +32,13 @@
 					"odataVersion": "4.0"
 				}
 			},
+			"BonusCalculation": {
+				"uri": "/odata/v4/bonusTranche/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "4.0"
+				}
+			},
 			"target": {
 				"uri": "/odata/v4/targetAmount/",
 				"type": "OData",
@@ -132,6 +139,19 @@
 					},
 					"operationMode": "Server"
 				}
+			},
+			"payable": {
+				"type": "sap.ui.model.odata.v4.ODataModel",
+				"dataSource": "BonusCalculation",
+				"preload": true,
+				"settings": {
+					"synchronizationMode": "None",
+					"groupId": "$direct",
+					"metadataUrlParams": {
+						"sap-documentation": "heading"
+					},
+					"operationMode": "Server"
+				}
 			}
 		},
 
@@ -155,7 +175,7 @@
 					"name": "CreateTranche",
 					"target": "CreateTranche"
 				},{
-					"pattern": "edit-tranche/{ID}",
+					"pattern": "edit-tranche/{ID}/{Duplicate}",
 					"name": "EditBonusTranche",
 					"target": "EditBonusTranche"
 

@@ -4,10 +4,10 @@ import Button from "sap/m/Button";
 import MessageBox from "sap/m/MessageBox";
 import ResourceBundle from "sap/base/i18n/ResourceBundle";
 import ODataModel from "sap/ui/model/odata/v4/ODataModel";
-import Input from "sap/m/Input";
+import ODataListBinding from "sap/ui/model/odata/v4/ODataListBinding";
 import Filter from "sap/ui/model/Filter";
 import FilterOperator from "sap/ui/model/FilterOperator";
-import ODataListBinding from "sap/ui/model/odata/v4/ODataListBinding";
+import Input from "sap/m/Input";
 interface Target {
 	name: string;
 	weight: number;
@@ -73,6 +73,7 @@ export default class Main extends BaseController {
 			ID: window.encodeURIComponent(
 				oItem.getBindingContext("tranches").getPath().substr(1)
 			),
+			Duplicate: window.encodeURIComponent(false),
 		});
 		const oContext = oItem.getBindingContext("tranches");
 		const oData = this.constructTrancheData(oContext, true);
@@ -89,6 +90,7 @@ export default class Main extends BaseController {
 			ID: window.encodeURIComponent(
 				oItem.getBindingContext("tranches").getPath().substr(1)
 			),
+			Duplicate: window.encodeURIComponent(true),
 		});
 
 		const oContext = oItem.getBindingContext("tranches");

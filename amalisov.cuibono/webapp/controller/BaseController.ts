@@ -24,6 +24,7 @@ import ODataListBinding from "sap/ui/model/odata/v4/ODataListBinding";
 import MessageToast from "sap/m/MessageToast";
 import CheckBox from "sap/m/CheckBox";
 import ODataModel from "sap/ui/model/odata/v4/ODataModel";
+import Input from "sap/m/Input";
 
 
 /**
@@ -175,6 +176,7 @@ export default abstract class BaseController extends Controller {
 		(oTable.getBinding("items") as ListBinding).filter(aTableFilters);
 	}
 
+
 	public async onDialogOpen(oEvent: Event): Promise <void> {
 		const oButton = oEvent.getSource();
 		const oView = this.getView();
@@ -251,7 +253,7 @@ export default abstract class BaseController extends Controller {
 				const textArea3 = new TextArea({ id: "departmentDialog", width: "100%" });
 				this.oDialog.addContent(textArea3);
 			    this.dialogContent = textArea3.getId();
-				this.ColumnName= resourceBundle.getText("Department")
+				this.ColumnName= resourceBundle.getText("Department2")
 				this.MultiInputId = departmentId.getId();
 				break;
 
@@ -304,6 +306,8 @@ export default abstract class BaseController extends Controller {
 	
 		if (!allTrue && !allFalse) {
 			MessageBox.error(resourceBundle.getText("excludeIncludeError"));
+			this.resetCheckBoxes();
+			this.selectedItems = [];
 			this.oDialog.close();
 			this.oDialog.destroyContent();
 			return;
@@ -329,10 +333,14 @@ export default abstract class BaseController extends Controller {
 			MessageBox.success(resourceBundle.getText("UpdatedExcludeStatus"), {
 				onClose: () => {
 					oModel.refresh();
+					this.resetCheckBoxes();
+					this.selectedItems = [];
 				}
 			});
 		} catch (error) {
 			MessageBox.error(resourceBundle.getText("failedExclude"));
+			this.resetCheckBoxes();
+			this.selectedItems = [];
 		}
 		
 		this.oDialog.close();
@@ -360,10 +368,14 @@ export default abstract class BaseController extends Controller {
 			MessageBox.success(resourceBundle.getText("successOverRule"), {
 				onClose: () => {
 					oModel.refresh();
+					this.resetCheckBoxes();
+					this.selectedItems = [];
 				}
 			});
 		} catch (error) {
 			MessageBox.error(resourceBundle.getText("failedOverRule"));
+			this.resetCheckBoxes();
+			this.selectedItems = [];
 		}
 	
 		this.oDialog.close();
@@ -419,6 +431,14 @@ export default abstract class BaseController extends Controller {
 			}
 		});
 	}
+
+	public resetCheckBoxes(): void{
+		const oTable = this.getView().byId('Table') as Table;
+		oTable.getItems().forEach((item: any) => {
+			const oCheckBoxCell = item.getCells()[0] as CheckBox;
+			oCheckBoxCell.setSelected(false)
+		});
+	}
 	
 	public onClearFilter(): void {
 		const oView = this.getView();
@@ -436,12 +456,14 @@ export default abstract class BaseController extends Controller {
 		});
 	     
 	    const holderMultiInput = oView.byId(this.MultiInputId) as MultiInput;
+		const oInputField = this.getView().byId("tranche") as MultiInput
 		if (holderMultiInput) {
 			holderMultiInput.removeAllTokens();
 		}
 		const oBinding = oTable.getBinding("items") as ListBinding;
 		oBinding.filter([]);
 		this.inputFilter = '';
+		oInputField.setTokens([]);
 	}
 
 	public closingDialog(): void {

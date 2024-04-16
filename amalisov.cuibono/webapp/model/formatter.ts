@@ -18,14 +18,27 @@ export default {
     },
 
     statusLocked(Status: string): boolean {
-        return Status !== "Locked" && Status !== "completed";
-    },
-
-    showSave(Status: string): boolean {
-        return Status === "Open" || Status === "Running";
+        return Status !== "completed";
     },
     
     showComplete(Status: string): boolean {
         return Status === "Locked" || Status === "Completed";
     },
+
+    limitText(sVal: string): string {
+		return sVal && sVal.length > 10 ? sVal.substring(0, 10) + '...' : sVal;
+	},
+
+    totalWeight(totalWeight: number): boolean {
+      return totalWeight > 100
+    },
+
+    saveVisibility(Status: string, totalWeight:number): boolean {
+        return (Status === "Open" || Status === "Running") && totalWeight <=100;
+    },
+
+    lockVisibility(Status: string, totalWeight:number): boolean {
+        return (Status === "Open" || Status === "Running") && totalWeight === 100;
+    }
+
 };

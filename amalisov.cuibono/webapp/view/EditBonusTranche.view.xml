@@ -10,10 +10,10 @@
     xmlns:f="sap.ui.layout.form"
 >
     <Page
-        id="page"
+        id="editPage"
         showNavButton="true"
         navButtonPress=".onNavBack"
-        title="{i18n>createTrancheTitle}"
+        title="" 
         floatingFooter="true"
     >
         <IconTabHeader mode="Inline">
@@ -36,7 +36,10 @@
                     <VBox class="formBox">
                         <VBox class="tranchItems">
                             <Label text="{i18n>Status}" />
-                            <Text text="{updateModel>/Status}"  id="statusValue"/>
+                            <Text
+                                text="{updateModel>/Status}"
+                                id="statusValue"
+                            />
                         </VBox>
                         <HBox class="formRows firstRow">
                             <VBox class="tranchItems">
@@ -75,6 +78,14 @@
                                         key="{i18n>location3}"
                                         text="{i18n>location3}"
                                     />
+                                    <core:Item
+                                        key="{i18n>location4}"
+                                        text="{i18n>location4}"
+                                    />
+                                    <core:Item
+                                        key="{i18n>location5}"
+                                        text="{i18n>location5}"
+                                    />
                                 </Select>
                             </VBox>
                         </HBox>
@@ -82,7 +93,6 @@
                         <VBox class="tranchItems">
                             <Label text="{i18n>trancheDescription}" />
                             <TextArea
-                                
                                 id="descriptionInput"
                                 value="{updateModel>/description}"
                                 rows="4"
@@ -150,7 +160,7 @@
             </f:SimpleForm>
 
             <!-- Table -->
-            
+
             <Panel class="tablePanel">
                 <Table
                     items="{updateModel>/targets}"
@@ -203,6 +213,28 @@
                         </ColumnListItem>
                     </items>
                 </Table>
+                <Table width="45%">
+                    <columns>
+                        <Column>
+                  
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <HBox class="total">
+                               <Label text="{i18n>total}" class="boldText"/>
+                               <HBox>
+                                    <Button
+                                        type="Reject"
+                                        icon=" sap-icon://alert"
+                                        visible="{path: 'updateModel>/totalWeight', formatter: 'formatter.totalWeight', targetType:'any'}"
+                                    />
+                                  <Text text="{updateModel>/totalWeight}" class="totalWeight"/> 
+                               </HBox>
+                            </HBox>
+                        </ColumnListItem>
+                    </items>
+                </Table>
             </Panel>
             <!--  END OF TABLE -->
 
@@ -219,32 +251,32 @@
                     text="{i18n>save}"
                     press=".onSaveTranche"
                     icon="sap-icon://save"
-                    visible="{path: 'updateModel>/Status', formatter: 'formatter.showSave', targetType:'any'}"
+                    visible="{parts: [{path: 'updateModel>/Status'}, {path: 'updateModel>/totalWeight'}], formatter: 'formatter.saveVisibility'}"
                 />
                 <Button
                     type="Ghost"
                     text="{i18n>lock}"
                     icon="sap-icon://locked"
-                    press=".onSaveTranche"
-                    visible="{path: 'updateModel>/Status', formatter: 'formatter.showSave', targetType:'any'}"
+                    press=".onLockTranche"
+                    visible="{parts: [{path: 'updateModel>/Status'}, {path: 'updateModel>/totalWeight'}], formatter: 'formatter.lockVisibility'}"
                 />
                 <Button
                     type="Accept"
                     text="{i18n>completedStatus}"
                     icon="sap-icon://complete"
-                    press=".onSaveTranche"
+                    press=".onCompleteTranche"
                     visible="{path: 'updateModel>/Status', formatter: 'formatter.showComplete', targetType:'any'}"
                 />
                 <Button
                     type="Ghost"
                     text="{i18n>reopen}"
                     icon="sap-icon://unlocked"
-                    press=".onSaveTranche"
+                    press=".onReOpenTranche"
                     visible="{path: 'updateModel>/Status', formatter: 'formatter.showComplete', targetType:'any'}"
                 />
                 <Button
                     type="Reject"
-                    press=".onCreateRoute"
+                    press=".onNavBack"
                     text="Cancel"
                 />
             </OverflowToolbar>

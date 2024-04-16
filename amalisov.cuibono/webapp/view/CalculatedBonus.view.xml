@@ -13,34 +13,26 @@
 >
     <f:DynamicPage>
         <f:header>
-            <!-- <core:Fragment
-                fragmentName="amalisov.cuibono.view.fragments.ParticipantFilter"
+            <core:Fragment
+                fragmentName="amalisov.cuibono.view.fragments.CalculatedFilter"
                 type="XML"
-            /> -->
+            />
         </f:header>
         <f:content>
             <Table
                 id="Table"
                 inset="false" 
+                items="{payable>/participantData()}"
+                class="participantTable"
+                growing="true"
                 growingScrollToLoad="true"
+                growingThreshold="50"
                 busyIndicatorDelay="{config>delay}"
             >
                 <headerToolbar>
                     <Toolbar class="sapUiSmallMarginBottom">
                         <Title text="{i18n>calculatedHeader}" />
                         <ToolbarSpacer />
-                        <!-- <Button
-                            id="excludeTrancheButton"
-                            text="{i18n>excludeTranche}"
-                            class="btn"
-                            press=".onDialogOpen"
-                        />
-                        <Button
-                            id="overRuleButton"
-                            text="{i18n>overRule}"
-                            class="btn"
-                            press=".onDialogOpen"
-                        /> -->
                         <Button
                             icon="sap-icon://sort"
                             id="sortParticipant"
@@ -69,22 +61,22 @@
                         minScreenWidth="Tablet"
                         demandPopin="true"
                     >
-                        <Label text="{i18n>department}" />
+                        <Label text="{i18n>fiscalYear}" />
                     </Column>
                     <Column
                         minScreenWidth="Tablet"
                         demandPopin="true"
                     >
-                        <Label text="{i18n>tranche}" />
+                        <Label text="{i18n>calculatedAmount}" />
                     </Column>
                 </columns>
                 <items>
                     <ColumnListItem vAlign="Middle">
                         <cells>
-                            <ObjectIdentifier title="{participant>localID}" />
-                            <Text text="{participant>name}" />
-                            <Text text="{participant>department}" />
-                            <Text text="{participant>tranche}" />
+                            <Text text="{path:'payable>localId', formatter:'formatter.limitText'}" />
+                            <Text text="{payable>name}" />
+                            <Text text="{payable>fiscalYear}" />
+                            <Text text="{payable>netAmount}" />
                         </cells>
                     </ColumnListItem>
                 </items>

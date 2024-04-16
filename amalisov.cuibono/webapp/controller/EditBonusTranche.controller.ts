@@ -8,6 +8,7 @@ import MessageBox from "sap/m/MessageBox";
 import DatePicker from "sap/m/DatePicker";
 import FilterOperator from "sap/ui/model/FilterOperator";
 import Filter from "sap/ui/model/Filter";
+import Page from "sap/m/Page";
 
 /**
  * @namespace amalisov.cuibono.controller
@@ -42,69 +43,58 @@ export default class EditBonusTranche extends BaseController {
 			.attachPatternMatched(this.onCreateRoute, this);
 		oRouter
 			.getRoute("EditBonusTranche")
-			.attachPatternMatched(this.onEditRouteMatched, this);
+			.attachPatternMatched(this.onObjectMatched, this);
 	}
 
-	public async onEditRouteMatched(oEvent: any): Promise<any> {
-		// read data from model and place in an array.
+	public onObjectMatched(oEvent: any): void {
 		const oUpdateModel = this.getModel("updateModel") as JSONModel;
 		const trancheIdUri = window.decodeURIComponent(
 			oEvent.getParameter("arguments").ID
 		);
 		const sTrancheId = trancheIdUri.match(/\(([^)]+)\)/)[1];
+		const sDuplicate = window.decodeURIComponent(
+			oEvent.getParameter("arguments").Duplicate
+		)
+		let isDuplicate = true
 
+		if (sDuplicate === "true") {
+			isDuplicate = true;
+		} else if (sDuplicate === "false") {
+			isDuplicate = false;
+		}
+		const sPath = `/BonusTranche(${sTrancheId})`;
+	
 		const oGeneralModel = this.getModel("tranches") as ODataModel;
-		const sPath = `/BonusTranche`;
 		const mParameters = {
 			$expand: `targets`,
 		};
-		const oFilter = new Filter("ID", FilterOperator.EQ, sTrancheId);
-
-		const data = oGeneralModel.bindList(
-			sPath,
-			null,
-			null,
-			[oFilter],
-			mParameters
-		);
-		const contextObjects = await data.requestContexts();
-		let dataArray = [];
-		dataArray = contextObjects.map((item) => item.getObject());
-
-		const oData: TrancheData = {
-			ID: sTrancheId,
-			name: dataArray[0].name,
-			location: dataArray[0].location,
-			startDate: dataArray[0].startDate,
-			endDate: dataArray[0].endDate,
-			originDate: dataArray[0].originDate,
-			weight: dataArray[0].weight,
-			description: dataArray[0].description,
-			Status: dataArray[0].Status,
-			targets: dataArray[0].targets,
-		};
-		oUpdateModel.setData(oData);
+		const oBinding = oGeneralModel.bindContext(sPath, null, mParameters);	
+		oBinding.requestObject().then((oData: any) => {
+			const oTrancheData: TrancheData = {
+						ID: isDuplicate ? "" : sTrancheId,
+						name: oData.name,
+						location: oData.location,
+						startDate: !isDuplicate ? oData.startDate : "",
+						endDate: !isDuplicate ? oData.endDate : "",
+						originDate: !isDuplicate ? oData.originDate : "",
+						weight: oData.weight,
+						description: oData.description,
+						Status: isDuplicate ? "Open" : oData.Status,
+						targets: oData.targets,
+					};
+			oUpdateModel.setData(oTrancheData);
+			this.calculateTotalWeight();
+			this.changeTitle(sTrancheId);
+		}).catch((oError: any) => {
+			MessageBox.error(oError.message);
+		});
 	}
 
-	public onObjectMatched(oEvent: any): void {
-        const oView = this.getView();
-		const oUpdateModel = this.getModel("updateModel") as JSONModel;
-        const trancheId = oUpdateModel.getProperty("/ID");
-        const sPath = `/BonusTranche(${trancheId})`;
-        oView.bindElement({
-            path: sPath,
-            model: "tranches",
-            parameters: {
-                "$expand": "targets",
-            }
-        });
-    }
-
-	public onCreateRoute(oEvent: any): void {
-		const oView = this.getView();
+	public onCreateRoute(): void {
 		const oUpdateModel = this.getModel("updateModel") as JSONModel;
 		oUpdateModel.setData({});
 		oUpdateModel.setProperty("/Status", "Open");
+		this.changeTitle('')
 	}
 
 	public onAddTarget(): void {
@@ -138,6 +128,7 @@ export default class EditBonusTranche extends BaseController {
 		oUpdateModel.setProperty("/targets", aTargets);
 		oNewTarget.setData({});
 		this.closeAddTarget();
+		this.calculateTotalWeight();
 	}
 
 	public onOpenEditTarget(oEvent: any): void {
@@ -195,6 +186,7 @@ export default class EditBonusTranche extends BaseController {
 			oModel.setProperty("/targets", aTargets);
 		}
 		this.closeAddTarget();
+		this.calculateTotalWeight();
 	}
 
 	public onSave(): void {
@@ -211,15 +203,33 @@ export default class EditBonusTranche extends BaseController {
 		}
 	}
 
-	public onDeleteTarget(oEvent: any): void {
+	public async onDeleteTarget(oEvent: any): Promise<void> {
 		//delete target from array and send to backend
 		const oItem = oEvent.getSource();
 		const oContext = oItem.getBindingContext("updateModel");
 		const sTargetId = oContext.getProperty("ID");
 		const oUpdateModel = this.getModel("updateModel") as JSONModel;
 		const aTargets = oUpdateModel.getProperty("/targets");
-		aTargets.splice(sTargetId, 1);
-		oUpdateModel.setProperty("/targets", aTargets);
+		const resourceBundle: ResourceBundle = await this.getResourceBundle();
+
+		if (sTargetId) {
+			MessageBox.confirm(resourceBundle.getText("confirmDeleteTranche"), {
+				actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+				onClose: async (sAction: string) => {
+					if (sAction === MessageBox.Action.YES) {
+						try {
+							aTargets.splice(sTargetId, 1);
+							oUpdateModel.setProperty("/targets", aTargets);
+							this.calculateTotalWeight();
+							MessageBox.success(resourceBundle.getText("deleteTarget"));
+							oUpdateModel.refresh();
+						} catch (error) {
+							MessageBox.error(resourceBundle.getText("errorDeleteTarget"));
+						}
+					}
+				}
+			});
+		}
 	}
 
 	public limitDates(oEvent: any): void {
@@ -277,7 +287,7 @@ export default class EditBonusTranche extends BaseController {
 		});
 	}
 
-	public async onSaveTranche(oEvent: any): Promise<void> {
+	public async onSaveTranche(): Promise<void> {
 		const oView = this.getView();
 		const oModel = oView.getModel("tranches") as ODataModel;
 		const resourceBundle: ResourceBundle = await this.getResourceBundle();
@@ -290,7 +300,6 @@ export default class EditBonusTranche extends BaseController {
 
 		let sPath = "";
 		let oData: TrancheData = {
-			name: "",
 		};
 		let sToastMessage = "";
 		if (!sTrancheID) {
@@ -364,14 +373,13 @@ export default class EditBonusTranche extends BaseController {
 
 
 		const oData: TrancheData = {
-			ID: sTrancheId,
 			name: sTrancheName,
 			location: sLocation,
 			startDate: formattedStartDate,
 			endDate: formattedEndDate,
-			//originDate: formattedOriginDate,
+			// originDate: formattedOriginDate,
 			weight: nTrancheWeight,
-			//description: sDescription,
+			description: sDescription,
 			Status: sStatus,
 			targets: aTargets,
 		};
@@ -379,5 +387,130 @@ export default class EditBonusTranche extends BaseController {
 		return oData;
 	}
 
+	public async onLockTranche() : Promise <void>{
+		const oView = this.getView();
+		const oUpdateModel = this.getModel("updateModel");
+		const sTrancheID = oUpdateModel.getProperty("/ID");
+		const oModel = oView.getModel("tranches") as ODataModel;
+		const resourceBundle: ResourceBundle = await this.getResourceBundle();
+
+		const oRouter = this.getRouter();
+		const currentHash = oRouter.getHashChanger().getHash();
+		const sPageName = oRouter.getRouteInfoByHash(currentHash).name;
+
+		let sPath = "";
+		let oData: TrancheData = {
+		};
+		let sToastMessage = "";
+
+		if (!sTrancheID || sTrancheID === "") {
+			sPath = "/createTranche";
+			oData = { ...this.constructTrancheData(), Status:"Locked" };
+			sToastMessage = "createdTranche";
+		} else if (
+			sTrancheID !== "" &&
+			sPageName === resourceBundle.getText("routeCondition")
+		) {
+			sPath = "/updateBonusTranche";
+			const ID = sTrancheID;
+			oData = { ...this.constructTrancheData(), ID: ID, Status:"Locked" };
+			sToastMessage = "updatedTranche";
+		}
+
+		const oContext = oModel.bindList(sPath);
+		try {
+			oContext.create(oData);
+			MessageBox.success(resourceBundle.getText(sToastMessage), {
+				onClose: () => {
+					this.getRouter().navTo("main");
+					oModel.refresh();
+				},
+			});
+		} catch (error) {
+			MessageBox.error(resourceBundle.getText("errorCreateTranche"), error);
+		}
+	};
+
+	public async onCompleteTranche() : Promise <void>{
+		const oView = this.getView();
+		const oUpdateModel = this.getModel("updateModel");
+		const sTrancheID = oUpdateModel.getProperty("/ID");
+		const oModel = oView.getModel("tranches") as ODataModel;
+		const resourceBundle: ResourceBundle = await this.getResourceBundle();
+
+		let oData: TrancheData = {};
+
+		const sPath = "/updateBonusTranche";
+		const ID = sTrancheID;
+		oData = { ...this.constructTrancheData(), ID: ID, Status:"completed" };
+
+		const oContext = oModel.bindList(sPath);
+		try {
+			oContext.create(oData);
+			MessageBox.success(resourceBundle.getText("updatedTranche"), {
+				onClose: () => {
+					this.getRouter().navTo("main");
+					oModel.refresh();
+				},
+			});
+		} catch (error) {
+			MessageBox.error(resourceBundle.getText("errorCreateTranche"), error);
+		}
+	};
+
+	public async onReOpenTranche() : Promise <void>{
+		const oView = this.getView();
+		const oUpdateModel = this.getModel("updateModel");
+		const sTrancheID = oUpdateModel.getProperty("/ID");
+		const oModel = oView.getModel("tranches") as ODataModel;
+		const resourceBundle: ResourceBundle = await this.getResourceBundle();
+
+		let oData: TrancheData = {};
+
+		const sPath = "/updateBonusTranche";
+		const ID = sTrancheID;
+		oData = { ...this.constructTrancheData(), ID: ID, Status:"Open" };
+
+		const oContext = oModel.bindList(sPath);
+		try {
+			oContext.create(oData);
+			MessageBox.success(resourceBundle.getText("updatedTranche"), {
+				onClose: () => {
+					this.getRouter().navTo("main");
+					oModel.refresh();
+				},
+			});
+		} catch (error) {
+			MessageBox.error(resourceBundle.getText("errorCreateTranche"), error);
+		}
+	};
+
+	public calculateTotalWeight(): void {
+		const oUpdateModel = this.getModel("updateModel") as JSONModel;
+		const oModel =  oUpdateModel.getProperty("/totalWeight");
+		const aTargets = oUpdateModel.getProperty("/targets");
+	
+		// Calculate the total weight of all targets
+		let totalWeight = aTargets.reduce((acc:any, target:any) => acc + target.weight, 0);
+	
+		// Assign value an existing model to set the total weight
+		// oModel.setData({totalWeight:totalWeight});
+		oUpdateModel.setProperty("/totalWeight", totalWeight)
+	};
+	
 	public onCancel(): void {}
+
+	public async changeTitle(sTrancheId: string): Promise<void> {
+		const oView = this.getView()
+		const oPage = oView.byId("editPage") as Page;
+		const resourceBundle: ResourceBundle = await this.getResourceBundle();
+		const title1 = resourceBundle.getText("createTrancheTitle");
+		const title2 = resourceBundle.getText("updateTrancheTitle");
+
+		if (!sTrancheId) {
+			oPage.setTitle(title1);
+		} else if (sTrancheId) {
+			oPage.setTitle(title2);
+		}
+	}
 }
