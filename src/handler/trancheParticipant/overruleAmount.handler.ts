@@ -19,6 +19,7 @@ export class OverRuleAmount{
           await  UPDATE(TrancheParticipation.name)
       .where({ID:id})
       .set({
+          overRuled:true,
           finalAmount,
           justification
          })
