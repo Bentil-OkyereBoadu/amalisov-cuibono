@@ -251,14 +251,14 @@
                     text="{i18n>save}"
                     press=".onSaveTranche"
                     icon="sap-icon://save"
-                    visible="{parts: [{path: 'updateModel>/Status'}, {path: 'totalWeightModel>/totalWeight'}], formatter: 'formatter.saveVisibility'}"
+                    visible="{parts: [{path: 'updateModel>/Status'}, {path: 'updateModel>/totalWeight'}], formatter: 'formatter.saveVisibility'}"
                 />
                 <Button
                     type="Ghost"
                     text="{i18n>lock}"
                     icon="sap-icon://locked"
                     press=".onLockTranche"
-                    visible="{parts: [{path: 'updateModel>/Status'}, {path: 'totalWeightModel>/totalWeight'}], formatter: 'formatter.lockVisibility'}"
+                    visible="{parts: [{path: 'updateModel>/Status'}, {path: 'updateModel>/totalWeight'}], formatter: 'formatter.lockVisibility'}"
                 />
                 <Button
                     type="Accept"

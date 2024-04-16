@@ -114,10 +114,8 @@ export default class EditBonusTranche extends BaseController {
 
 	public onCreateRoute(): void {
 		const oUpdateModel = this.getModel("updateModel") as JSONModel;
-		const oModel = this.getModel("totalWeightModel") as JSONModel;
 		oUpdateModel.setData({});
 		oUpdateModel.setProperty("/Status", "Open");
-		oModel.setData({totalWeight:0});
 		this.changeTitle()
 	}
 
