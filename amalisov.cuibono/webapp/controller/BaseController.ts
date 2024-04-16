@@ -175,25 +175,7 @@ export default abstract class BaseController extends Controller {
 		}
 		(oTable.getBinding("items") as ListBinding).filter(aTableFilters);
 	}
-	public onSearch(): void {
-		let sQuery = (this.getView().byId("search") as Input).getValue();
 
-		const oBinding = this.getView()
-			.byId("Table")
-			.getBinding("items") as ODataListBinding;
-
-		if (sQuery) {
-			const oFilter = new Filter({
-				path: "name",
-				operator: FilterOperator.Contains,
-				value1: sQuery.toLowerCase(),
-				caseSensitive: false,
-			});
-			oBinding.filter([oFilter]);
-		} else {
-			oBinding.filter([]);
-		}
-	}
 
 	public async onDialogOpen(oEvent: Event): Promise <void> {
 		const oButton = oEvent.getSource();

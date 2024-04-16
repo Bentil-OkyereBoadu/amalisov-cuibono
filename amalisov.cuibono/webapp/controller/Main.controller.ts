@@ -4,6 +4,10 @@ import Button from "sap/m/Button";
 import MessageBox from "sap/m/MessageBox";
 import ResourceBundle from "sap/base/i18n/ResourceBundle";
 import ODataModel from "sap/ui/model/odata/v4/ODataModel";
+import ODataListBinding from "sap/ui/model/odata/v4/ODataListBinding";
+import Filter from "sap/ui/model/Filter";
+import FilterOperator from "sap/ui/model/FilterOperator";
+import Input from "sap/m/Input";
 interface Target {
 	name: string;
 	weight: number;
@@ -37,6 +41,26 @@ export default class Main extends BaseController {
 
 	public onCreateNewTranche(): void {
 		this.getRouter().navTo("CreateTranche");
+	}
+
+	public onSearch(): void {
+		let sQuery = (this.getView().byId("search") as Input).getValue();
+
+		const oBinding = this.getView()
+			.byId("Table")
+			.getBinding("items") as ODataListBinding;
+
+		if (sQuery) {
+			const oFilter = new Filter({
+				path: "name",
+				operator: FilterOperator.Contains,
+				value1: sQuery.toLowerCase(),
+				caseSensitive: false,
+			});
+			oBinding.filter([oFilter]);
+		} else {
+			oBinding.filter([]);
+		}
 	}
 
 	public onEditPress(oEvent: any): void {

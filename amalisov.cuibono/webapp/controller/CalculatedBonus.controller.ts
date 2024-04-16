@@ -5,6 +5,7 @@ import Filter from "sap/ui/model/Filter";
 import FilterOperator from "sap/ui/model/FilterOperator";
 import ListBinding from "sap/ui/model/ListBinding";
 import ODataListBinding from "sap/ui/model/odata/v4/ODataListBinding";
+import Input from "sap/m/Input";
 
 /**
  * @namespace amalisov.cuibono.controller
@@ -30,5 +31,24 @@ export default class CalculatedBonus extends BaseController {
 		);
 		oFilters.push(oPriceFilter);
 		oBinding.filter([oPriceFilter]);
+	}
+	public onSearch(): void {
+		let sQuery = (this.getView().byId("search") as Input).getValue();
+
+		const oBinding = this.getView()
+			.byId("Table")
+			.getBinding("items") as ODataListBinding;
+
+		if (sQuery) {
+			const oFilter = new Filter({
+				path: "name",
+				operator: FilterOperator.Contains,
+				value1: sQuery.toLowerCase(),
+				caseSensitive: false,
+			});
+			oBinding.filter([oFilter]);
+		} else {
+			oBinding.filter([]);
+		}
 	}
 }
