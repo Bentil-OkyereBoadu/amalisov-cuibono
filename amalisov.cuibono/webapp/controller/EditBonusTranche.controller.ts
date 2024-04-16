@@ -43,11 +43,62 @@ export default class EditBonusTranche extends BaseController {
 			.attachPatternMatched(this.onCreateRoute, this);
 		oRouter
 			.getRoute("EditBonusTranche")
-			.attachPatternMatched(this.onEditRouteMatched, this);
+			.attachPatternMatched(this.onObjectMatched, this);
 	}
 
-	public async onEditRouteMatched(oEvent: any): Promise<any> {
-		// read data from model and place in an array.
+	// public async onEditRouteMatched(oEvent: any): Promise<any> {
+	// 	// read data from model and place in an array.
+	// 	const oUpdateModel = this.getModel("updateModel") as JSONModel;
+	// 	const trancheIdUri = window.decodeURIComponent(
+	// 		oEvent.getParameter("arguments").ID
+	// 	);
+	// 	const sTrancheId = trancheIdUri.match(/\(([^)]+)\)/)[1];
+	// 	const sDuplicate = window.decodeURIComponent(
+	// 		oEvent.getParameter("arguments").Duplicate
+	// 	)
+	// 	let isDuplicate = true
+
+	// 	if (sDuplicate === "true") {
+	// 		isDuplicate = true;
+	// 	} else if (sDuplicate === "false") {
+	// 		isDuplicate = false;
+	// 	}
+	// 	const oGeneralModel = this.getModel("tranches") as ODataModel;
+	// 	const sPath = `/BonusTranche`;
+	// 	const mParameters = {
+	// 		$expand: `targets`,
+	// 	};
+	// 	const oFilter = new Filter("ID", FilterOperator.EQ, sTrancheId);
+
+	// 	const data = oGeneralModel.bindList(
+	// 		sPath,
+	// 		null,
+	// 		null,
+	// 		[oFilter],
+	// 		mParameters
+	// 	);
+	// 	const contextObjects = await data.requestContexts();
+	// 	let dataArray = [];
+	// 	dataArray = contextObjects.map((item) => item.getObject());
+
+	// 	const oData: TrancheData = {
+	// 		ID: isDuplicate ? "" : sTrancheId,
+	// 		name: dataArray[0].name,
+	// 		location: dataArray[0].location,
+	// 		startDate: !isDuplicate ? dataArray[0].startDate : "",
+	// 		endDate: !isDuplicate ? dataArray[0].endDate : "",
+	// 		originDate: !isDuplicate ? dataArray[0].originDate : "",
+	// 		weight: dataArray[0].weight,
+	// 		description: dataArray[0].description,
+	// 		Status: isDuplicate ? "Open" : dataArray[0].Status,
+	// 		targets: dataArray[0].targets,
+	// 	};
+	// 	oUpdateModel.setData(oData);
+	// 	this.calculateTotalWeight();
+	// 	this.changeTitle()
+	// }
+
+	public onObjectMatched(oEvent: any): void {
 		const oUpdateModel = this.getModel("updateModel") as JSONModel;
 		const trancheIdUri = window.decodeURIComponent(
 			oEvent.getParameter("arguments").ID
@@ -63,54 +114,22 @@ export default class EditBonusTranche extends BaseController {
 		} else if (sDuplicate === "false") {
 			isDuplicate = false;
 		}
+		const sPath = `/BonusTranche(${sTrancheId})`;
+	
 		const oGeneralModel = this.getModel("tranches") as ODataModel;
-		const sPath = `/BonusTranche`;
 		const mParameters = {
 			$expand: `targets`,
 		};
-		const oFilter = new Filter("ID", FilterOperator.EQ, sTrancheId);
+		const oBinding = oGeneralModel.bindContext(sPath, null, mParameters);
 
-		const data = oGeneralModel.bindList(
-			sPath,
-			null,
-			null,
-			[oFilter],
-			mParameters
-		);
-		const contextObjects = await data.requestContexts();
-		let dataArray = [];
-		dataArray = contextObjects.map((item) => item.getObject());
-
-		const oData: TrancheData = {
-			ID: isDuplicate ? "" : sTrancheId,
-			name: dataArray[0].name,
-			location: dataArray[0].location,
-			startDate: !isDuplicate ? dataArray[0].startDate : "",
-			endDate: !isDuplicate ? dataArray[0].endDate : "",
-			originDate: !isDuplicate ? dataArray[0].originDate : "",
-			weight: dataArray[0].weight,
-			description: dataArray[0].description,
-			Status: isDuplicate ? "Open" : dataArray[0].Status,
-			targets: dataArray[0].targets,
-		};
-		oUpdateModel.setData(oData);
-		this.calculateTotalWeight();
-		this.changeTitle()
+		oBinding.requestObject().then((oData: any) => {
+			oUpdateModel.setData(oData);
+			this.calculateTotalWeight();
+			this.changeTitle();
+		}).catch((oError: any) => {
+			console.error("Error fetching data:", oError);
+		});
 	}
-
-	public onObjectMatched(): void {
-        const oView = this.getView();
-		const oUpdateModel = this.getModel("updateModel") as JSONModel;
-        const trancheId = oUpdateModel.getProperty("/ID");
-        const sPath = `/BonusTranche(${trancheId})`;
-        oView.bindElement({
-            path: sPath,
-            model: "tranches",
-            parameters: {
-                "$expand": "targets",
-            }
-        });
-    }
 
 	public onCreateRoute(): void {
 		const oUpdateModel = this.getModel("updateModel") as JSONModel;
