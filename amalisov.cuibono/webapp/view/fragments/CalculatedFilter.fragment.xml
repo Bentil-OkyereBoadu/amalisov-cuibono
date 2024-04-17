@@ -31,7 +31,7 @@
                     </fb:FilterGroupItem>
 
                     <fb:FilterGroupItem
-                        name="startDate"
+                        name="fiscalYear"
                         label="{i18n>fiscalYear}"
                         groupName="Group1"
                         visibleInFilterBar="true"

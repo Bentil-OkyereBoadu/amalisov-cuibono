@@ -22,7 +22,7 @@
             <Table
                 id="Table"
                 inset="false" 
-                items="{payable>/participantData()}"
+                items="{payable>/ParticipantData}"
                 class="participantTable"
                 growing="true"
                 growingScrollToLoad="true"
@@ -76,7 +76,7 @@
                             <Text text="{path:'payable>localId', formatter:'formatter.limitText'}" />
                             <Text text="{payable>name}" />
                             <Text text="{payable>fiscalYear}" />
-                            <Text text="{payable>netAmount}" />
+                            <Text text="{path:'payable>netAmount', formatter:'formatter.formatAmount'}" />
                         </cells>
                     </ColumnListItem>
                 </items>

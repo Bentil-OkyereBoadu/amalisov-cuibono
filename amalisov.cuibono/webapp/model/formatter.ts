@@ -14,11 +14,11 @@ export default {
 	},
 
     statusEnabled(Status: string): boolean {
-        return Status !== "Locked" && Status !== "completed"
+        return Status !== "Locked" && Status !== "Completed"
     },
 
     statusLocked(Status: string): boolean {
-        return Status !== "completed";
+        return Status !== "Completed";
     },
     
     showComplete(Status: string): boolean {
@@ -39,6 +39,14 @@ export default {
 
     lockVisibility(Status: string, totalWeight:number): boolean {
         return (Status === "Open" || Status === "Running") && totalWeight === 100;
+    },
+    formatAmount(amount:number) {
+        if (amount === null || amount === undefined) {
+            return 0;
+        }
+        // Remove commas and any unwanted characters before conversion
+        const cleanedAmount = amount.toString().replace(/,/g, '');
+        const num = parseFloat(cleanedAmount);
+        return Math.round(num * 100) / 100;
     }
-
 };

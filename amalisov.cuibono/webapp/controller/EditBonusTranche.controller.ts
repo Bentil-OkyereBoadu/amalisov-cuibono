@@ -442,7 +442,7 @@ export default class EditBonusTranche extends BaseController {
 
 		const sPath = "/updateBonusTranche";
 		const ID = sTrancheID;
-		oData = { ...this.constructTrancheData(), ID: ID, Status:"completed" };
+		oData = { ...this.constructTrancheData(), ID: ID, Status:"Completed" };
 
 		const oContext = oModel.bindList(sPath);
 		try {
