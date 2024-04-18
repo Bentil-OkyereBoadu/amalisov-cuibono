@@ -150,7 +150,7 @@
                                     id="originDateInput"
                                     placeholder="{i18n>datePlaceholder}"
                                     change=".limitDates"
-                                    value="{formatter: 'formatter.formatDate', path: 'updateModel>/originDate'}"
+                                    value="{updateModel>/originDate}"
                                     class="sapUiSmallMarginBottom inputs"
                                 />
                             </VBox>

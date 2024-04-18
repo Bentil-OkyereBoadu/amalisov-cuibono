@@ -26,7 +26,7 @@ export default {
     },
 
     limitText(sVal: string): string {
-		return sVal && sVal.length > 10 ? sVal.substring(0, 10) + '...' : sVal;
+		return sVal && sVal.length > 7 ? sVal.substring(0, 7) + '...' : sVal;
 	},
 
     totalWeight(totalWeight: number): boolean {

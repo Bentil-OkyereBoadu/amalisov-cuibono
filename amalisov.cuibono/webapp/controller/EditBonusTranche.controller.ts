@@ -9,6 +9,7 @@ import DatePicker from "sap/m/DatePicker";
 import FilterOperator from "sap/ui/model/FilterOperator";
 import Filter from "sap/ui/model/Filter";
 import Page from "sap/m/Page";
+import Select from "sap/m/Select";
 
 /**
  * @namespace amalisov.cuibono.controller
@@ -246,13 +247,15 @@ export default class EditBonusTranche extends BaseController {
 
 		const resourceBundle: ResourceBundle = await this.getResourceBundle();
 		
-		if(!sName){
+		if(!sName || sName.length < 4){
 			oNameInput.setValueState("Error")
 			reject(new Error(resourceBundle.getText("nameError")));
 		} else if (!sStartDateValue) {
+			oNameInput.setValueState("None")
 			oStartDatePicker.setValueState("Error")
 			reject(new Error(resourceBundle.getText("dateError")));
 		} else if (!sEndDateValue) {
+			oStartDatePicker.setValueState("None")
 			oEndDatePicker.setValueState("Error")
 			reject(new Error(resourceBundle.getText("dateError")));
 		} else if (startDate >= endDate) {
@@ -275,7 +278,7 @@ export default class EditBonusTranche extends BaseController {
 			"originDateInput"
 		) as DatePicker;
 
-		const sDatePicked = oEvent.getSource().getValue();
+		const sDatePicked = oEvent.getSource().getDateValue();
 		const sStartDatePicked = sStartDate.getDateValue();
 		const sStartDateValue = sStartDate.getValue();
 
@@ -304,7 +307,6 @@ export default class EditBonusTranche extends BaseController {
 				sStartDate.setValueState("Error");
 				oEndDatePicker.setValueState("Error");
 			} else if (endDate > originDate) {
-				oEndDatePicker.setValueState("Error");
 				oOriginDatePicker.setValueState("Error");
 			}else {
 				sStartDate.setValueState("None");
@@ -383,7 +385,7 @@ export default class EditBonusTranche extends BaseController {
 	private constructTrancheData(): TrancheData {
 		const oUpdateModel = this.getModel("updateModel");
 		const sTrancheName = oUpdateModel.getProperty("/name");
-		const sLocation = oUpdateModel.getProperty("/location");
+		const sLocation = (this.getView().byId("locationSelect") as Select).getSelectedKey() || oUpdateModel.getProperty("/location");
 		const nTrancheWeight = Number(oUpdateModel.getProperty("/weight"));
 		const sDescription = oUpdateModel.getProperty("/description");
 		const aTargets = oUpdateModel.getProperty("/targets");
@@ -404,7 +406,7 @@ export default class EditBonusTranche extends BaseController {
 			location: sLocation,
 			startDate: formattedStartDate,
 			endDate: formattedEndDate,
-			// originDate: formattedOriginDate,
+			originDate: formattedOriginDate,
 			weight: nTrancheWeight,
 			description: sDescription,
 			Status: sStatus,

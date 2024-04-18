@@ -157,7 +157,7 @@
                             }"
                                 select=".onSelectChange"
                             />
-                            <Text text="{path:'participant>localId', formatter:'formatter.limitText'}" />
+                            <Text text="{path:'participant>localId', formatter:'formatter.limitText'}" tooltip="{participant>localId}"/>
                             <Text text="{participant>name}" />
                             <Text text="{participant>department/name}" />
                             <Text text="{participant>bonusTranche/name}" />
