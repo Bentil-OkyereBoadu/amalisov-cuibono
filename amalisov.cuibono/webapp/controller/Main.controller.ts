@@ -125,6 +125,7 @@ export default class Main extends BaseController {
 	public async onDeleteTranche(oEvent: any): Promise<void> {
 		const oView = this.getView();
 		const oModel = oView.getModel("tranches") as ODataModel;
+		const oParticipantModel = oView.getModel("participant") as ODataModel;
 		const oSource = oEvent.getSource().getBindingContext("tranches");
 		const resourceBundle: ResourceBundle = await this.getResourceBundle();
 	
@@ -142,6 +143,7 @@ export default class Main extends BaseController {
 								.execute();
 							MessageBox.success(resourceBundle.getText("deleteTranche"));
 							oModel.refresh();
+							oParticipantModel.refresh();
 						} catch (error) {
 							MessageBox.error(resourceBundle.getText("errorDeleteTranche"));
 						}

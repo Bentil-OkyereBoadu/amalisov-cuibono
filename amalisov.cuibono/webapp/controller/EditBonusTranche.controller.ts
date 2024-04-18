@@ -375,6 +375,7 @@ export default class EditBonusTranche extends BaseController {
 	public async onSaveTranche(): Promise<void> {
 		const oView = this.getView();
 		const oModel = oView.getModel("tranches") as ODataModel;
+		const oParticipantModel = oView.getModel("participant") as ODataModel;
 		const resourceBundle: ResourceBundle = await this.getResourceBundle();
 		const oUpdateModel = this.getModel("updateModel");
 		const sTrancheID = oUpdateModel.getProperty("/ID");
@@ -418,6 +419,7 @@ export default class EditBonusTranche extends BaseController {
 				onClose: () => {
 					this.getRouter().navTo("main");
 					oModel.refresh();
+					oParticipantModel.refresh();
 				},
 			});
 		} catch (error) {
