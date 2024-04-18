@@ -13,6 +13,10 @@ export default {
     
 	},
 
+    statusEnabled(Status: string): boolean {
+        return Status !== "Locked" && Status !== "Completed"
+    },
+
     statusLocked(Status: string): boolean {
         return Status !== "Completed";
     },
@@ -29,7 +33,7 @@ export default {
       return totalWeight > 100
     },
 
-    saveVisibility(Status: string, totalWeight:number): boolean {
+    saveVisibility(Status: string): boolean {
         return (Status === "Open" || Status === "Running");
     },
 

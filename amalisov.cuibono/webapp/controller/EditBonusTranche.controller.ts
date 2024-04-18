@@ -10,6 +10,7 @@ import FilterOperator from "sap/ui/model/FilterOperator";
 import Filter from "sap/ui/model/Filter";
 import Page from "sap/m/Page";
 import Select from "sap/m/Select";
+import TextArea from "sap/m/TextArea";
 
 /**
  * @namespace amalisov.cuibono.controller
@@ -113,6 +114,44 @@ export default class EditBonusTranche extends BaseController {
 		oNewTarget.setData({});
 		oDialog.close();
 	}
+	
+	public validateTargetInputs(): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+		const oNameInput = this.getView().byId("targetName") as Input
+		const sName: string = oNameInput.getValue();
+		const oWeightInput = this.getView().byId("targetWeight") as Input;
+		const sWeightValue = Number(oWeightInput.getValue());
+		const oAchievementInput = this.getView().byId("targetAchievement") as Input;
+		const sAchievementValue = oAchievementInput.getValue();
+		const oDescriptionInput = this.getView().byId("targetDescription") as TextArea;
+		const sDescriptionValue = oDescriptionInput.getValue();
+
+		const resourceBundle: ResourceBundle = await this.getResourceBundle();
+		
+		if(!sName || sName.length < 4){
+			oNameInput.setValueState("Error")
+			reject(new Error(resourceBundle.getText("targetNameError")));
+		} else if (!sWeightValue || sWeightValue > 100) {
+			oNameInput.setValueState("None")
+			oWeightInput.setValueState("Error")
+			reject(new Error(resourceBundle.getText("weightError")));
+		} else if (!sAchievementValue) {
+			oWeightInput.setValueState("None")
+			oAchievementInput.setValueState("Error")
+			reject(new Error(resourceBundle.getText("achievementError")));
+		} else if (!sDescriptionValue) {
+			oAchievementInput.setValueState("None")
+			oDescriptionInput.setValueState("Error")
+			reject(new Error(resourceBundle.getText("descriptionError")));
+		} else {
+			oNameInput.setValueState("None")
+			oWeightInput.setValueState("None")
+			oAchievementInput.setValueState("None")
+			oDescriptionInput.setValueState("None")
+			resolve();
+		}
+	});
+	}
 
 	public onSaveTarget(): void {
 		const oUpdateModel = this.getModel("updateModel") as JSONModel;
@@ -191,7 +230,15 @@ export default class EditBonusTranche extends BaseController {
 		this.calculateTotalWeight();
 	}
 
-	public onSave(): void {
+	public async onSave(): Promise<void> {
+		try {
+			await this.validateTargetInputs();
+		} catch (error) {
+			if (error instanceof Error) {
+				MessageBox.error(error.message);
+			}
+			return;
+		}
 		switch (this.currentAction) {
 			case "save":
 				this.onSaveTarget();
