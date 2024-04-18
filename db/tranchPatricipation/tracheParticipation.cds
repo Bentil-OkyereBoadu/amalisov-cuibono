@@ -13,9 +13,10 @@ entity TrancheParticipation : cuid {
     startDate        : String;
     endDate          : String;
     weight           : Integer;
-    calculatedAmount : Decimal;
-    finalAmount      : Decimal;
+    calculatedAmount : Double;
+    finalAmount      : Double;
     excluded         : Boolean default false;
+    overRuled        : Boolean default false;
     justification   : String;
     location         : String;
     department       : Association to department.Department;
