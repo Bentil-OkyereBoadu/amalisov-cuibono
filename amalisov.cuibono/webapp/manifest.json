@@ -33,7 +33,7 @@
 				}
 			},
 			"BonusCalculation": {
-				"uri": "/odata/v4/bonusTranche/",
+				"uri": "/odata/v4/participantData/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "4.0"

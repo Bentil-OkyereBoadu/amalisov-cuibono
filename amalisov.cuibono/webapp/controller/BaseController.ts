@@ -121,16 +121,21 @@ export default abstract class BaseController extends Controller {
 			aFilters = aSelectedKeys.map(function (sSelectedKey: string) {
 	
 				const year = parseInt(sSelectedKey, 10);  // selected year to filter
-				if (year) { 
-					const startDate = new Date(`${year - 1}-10-01`); //fiscal start at 1st October of the previous year
-					const endDate = new Date(`${year}-09-30`); // fiscal year end at 30th September of the selected year
-	
+				if (oFilterGroupItem.getName() === "fiscalYear" && year) {
+					return new Filter({
+						path: "fiscalYear",
+						operator: FilterOperator.Contains,
+						value1: sSelectedKey  
+					});
+				} else if (year) {
+					const startDate = new Date(`${year - 1}-10-01`);
+					const endDate = new Date(`${year}-09-30`);
 					return new Filter({
 						path: "startDate",
 						operator: FilterOperator.BT,
 						value1: startDate.toISOString(),
 						value2: endDate.toISOString(),
-					});
+					})
 				} else {
 					let value1 
 					let operator

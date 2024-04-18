@@ -11,27 +11,36 @@ import Input from "sap/m/Input";
  * @namespace amalisov.cuibono.controller
  */
 export default class CalculatedBonus extends BaseController {
+	public debounceTimeout:any;
 	public onInit(): void {}
 
 	public onSliderChange(oEvent: any): void {
-		const oBinding = this.getView()
-			.byId("Table")
-			.getBinding("items") as ODataListBinding;
-
-		var oFilters = [];
-		const oRangeSlider = oEvent.getSource();
-		const fMinValue = oRangeSlider.getValue();
-		const fMaxValue = oRangeSlider.getValue2();
-
-		const oPriceFilter = new Filter(
-			"finalAmount",
-			FilterOperator.BT,
-			fMinValue,
-			fMaxValue
-		);
-		oFilters.push(oPriceFilter);
-		oBinding.filter([oPriceFilter]);
-	}
+		// Clear the existing timeout if the function is called again before the timeout is completed
+		if (this.debounceTimeout) {
+			clearTimeout(this.debounceTimeout);
+		}
+	
+		// Set a new timeout
+		this.debounceTimeout = setTimeout(() => {
+			const oBinding = this.getView()
+				.byId("Table")
+				.getBinding("items") as ODataListBinding;
+	
+			var oFilters = [];
+			const oRangeSlider = oEvent.getSource();
+			const fMinValue = oRangeSlider.getValue();
+			const fMaxValue = oRangeSlider.getValue2();
+	
+			const oPriceFilter = new Filter(
+				"netAmount",
+				FilterOperator.BT,
+				fMinValue,
+				fMaxValue
+			);
+			oFilters.push(oPriceFilter);
+			oBinding.filter([oPriceFilter]);
+		}, 300); 
+	}	
 	public onSearch(): void {
 		let sQuery = (this.getView().byId("search") as Input).getValue();
 
