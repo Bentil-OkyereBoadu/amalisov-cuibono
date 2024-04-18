@@ -38,7 +38,10 @@
     "build:cds": "cds build --production",
     "cleanup:ts": "npx rimraf -v -g gen/srv/srv/**/*.ts",
     "deploy": "npm i && npm run build-mta && cf deploy gen/mta.tar --delete-services --abort-on-error && npm i",
-    "start-fe": "cd ./amalisov.cuibono && npm run start"
+    "start-fe": "cd ./amalisov.cuibono && npm run start",
+    "install-app": "cd ./app && npm install",
+    "install-fe": "cd ./amalisov.cuibono && npm install",
+    "install-all": "npm run install-app && npm run install-fe"
   },
   "imports": {
     "#cds-models/*": "./@cds-models/*/index.js"
