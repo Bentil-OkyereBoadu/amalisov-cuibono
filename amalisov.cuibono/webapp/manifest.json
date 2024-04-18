@@ -12,35 +12,35 @@
 		},
 		"dataSources": {
 			"bonusTranche": {
-				"uri": "/odata/v4/bonusTranche/",
+				"uri": "https://80f97835trial-dev-amalisov-cuibono-srv.cfapps.us10-001.hana.ondemand.com/odata/odata/v4/bonusTranche/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "4.0"
 				}
 			},
 			"bonusTrancheV2": {
-				"uri": "/v2/odata/v4/bonusTranche/",
+				"uri": "https://80f97835trial-dev-amalisov-cuibono-srv.cfapps.us10-001.hana.ondemand.com/odata/v2/odata/v4/bonusTranche/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0"
 				}
 			},
 			"participant": {
-				"uri": "/odata/v4/bonusTranche/",
+				"uri": "https://80f97835trial-dev-amalisov-cuibono-srv.cfapps.us10-001.hana.ondemand.com/odata/odata/v4/bonusTranche/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "4.0"
 				}
 			},
 			"BonusCalculation": {
-				"uri": "/odata/v4/participantData/",
+				"uri": "https://80f97835trial-dev-amalisov-cuibono-srv.cfapps.us10-001.hana.ondemand.com/odata/odata/v4/participantData/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "4.0"
 				}
 			},
 			"target": {
-				"uri": "/odata/v4/targetAmount/",
+				"uri": "https://80f97835trial-dev-amalisov-cuibono-srv.cfapps.us10-001.hana.ondemand.com/odata/odata/v4/targetAmount/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "4.0"
