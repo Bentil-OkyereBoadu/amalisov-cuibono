@@ -138,7 +138,7 @@
                                 <Label text="{i18n>trancheWeight}" />
                                 <Input
                                     id="weightInput"
-                                    type="Text"
+                                    type="Number"
                                     value="{updateModel>/weight}"
                                     class="sapUiSmallMarginBottom inputs textInput"
                                 />

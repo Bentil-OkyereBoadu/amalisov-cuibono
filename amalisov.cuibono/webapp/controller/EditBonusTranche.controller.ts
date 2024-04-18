@@ -232,6 +232,42 @@ export default class EditBonusTranche extends BaseController {
 		}
 	}
 
+	public validateInputs(): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+		const oNameInput = this.getView().byId("nameInput") as Input
+		const sName: string = oNameInput.getValue();
+		const oStartDatePicker = this.getView().byId("startDateInput") as DatePicker;
+		const sStartDateValue = oStartDatePicker.getValue();
+		const oEndDatePicker = this.getView().byId("endDateInput") as DatePicker;
+		const sEndDateValue = oEndDatePicker.getValue();
+
+		const startDate = new Date(sStartDateValue);
+		const endDate = new Date(sEndDateValue);
+
+		const resourceBundle: ResourceBundle = await this.getResourceBundle();
+		
+		if(!sName){
+			oNameInput.setValueState("Error")
+			reject(new Error(resourceBundle.getText("nameError")));
+		} else if (!sStartDateValue) {
+			oStartDatePicker.setValueState("Error")
+			reject(new Error(resourceBundle.getText("dateError")));
+		} else if (!sEndDateValue) {
+			oEndDatePicker.setValueState("Error")
+			reject(new Error(resourceBundle.getText("dateError")));
+		} else if (startDate >= endDate) {
+			oEndDatePicker.setValueState("Error")
+			oStartDatePicker.setValueState("Error")
+			reject(new Error(resourceBundle.getText("startDateError")));
+		} else {
+			oNameInput.setValueState("None")
+			oStartDatePicker.setValueState("None")
+			oEndDatePicker.setValueState("None")
+			resolve();
+		}
+	});
+	}
+
 	public limitDates(oEvent: any): void {
 		const sStartDate = this.getView().byId("startDateInput") as DatePicker;
 		const oEndDatePicker = this.getView().byId("endDateInput") as DatePicker;
@@ -239,13 +275,13 @@ export default class EditBonusTranche extends BaseController {
 			"originDateInput"
 		) as DatePicker;
 
-		const sDatePicked = oEvent.getSource().getDateValue();
-
+		const sDatePicked = oEvent.getSource().getValue();
 		const sStartDatePicked = sStartDate.getDateValue();
 		const sStartDateValue = sStartDate.getValue();
 
 		const sEndDate = oEndDatePicker.getDateValue();
 		const sEndDateValue = oEndDatePicker.getValue();
+		const sOriginDateValue = oOriginDatePicker.getDateValue()
 
 		//limit date range
 		if (sDatePicked !== "") {
@@ -262,29 +298,20 @@ export default class EditBonusTranche extends BaseController {
 		if (sEndDateValue && sStartDateValue) {
 			const startDate = new Date(sStartDateValue);
 			const endDate = new Date(sEndDateValue);
-
+			const originDate = new Date(sOriginDateValue);
+			
 			if (startDate > endDate) {
 				sStartDate.setValueState("Error");
 				oEndDatePicker.setValueState("Error");
-			} else {
+			} else if (endDate > originDate) {
+				oEndDatePicker.setValueState("Error");
+				oOriginDatePicker.setValueState("Error");
+			}else {
 				sStartDate.setValueState("None");
 				oEndDatePicker.setValueState("None");
+				oOriginDatePicker.setValueState("None");
 			}
 		}
-	}
-
-	public checkDate(oData: TrancheData): Promise<void> {
-		return new Promise(async (resolve, reject) => {
-			const startDate = new Date(oData.startDate);
-			const endDate = new Date(oData.endDate);
-			const resourceBundle: ResourceBundle = await this.getResourceBundle();
-
-			if (startDate >= endDate) {
-				reject(new Error(resourceBundle.getText("startDateError")));
-			} else {
-				resolve();
-			}
-		});
 	}
 
 	public async onSaveTranche(): Promise<void> {
@@ -317,7 +344,7 @@ export default class EditBonusTranche extends BaseController {
 		}
 
 		try {
-			await this.checkDate(oData);
+			await this.validateInputs();
 		} catch (error) {
 			if (error instanceof Error) {
 				MessageBox.error(error.message);
