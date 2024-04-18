@@ -30,7 +30,7 @@ export default {
     },
 
     saveVisibility(Status: string, totalWeight:number): boolean {
-        return (Status === "Open" || Status === "Running") && totalWeight <=100;
+        return (Status === "Open" || Status === "Running");
     },
 
     lockVisibility(Status: string, totalWeight:number): boolean {

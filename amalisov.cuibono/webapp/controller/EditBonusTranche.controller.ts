@@ -246,6 +246,11 @@ export default class EditBonusTranche extends BaseController {
 		const startDate = new Date(sStartDateValue);
 		const endDate = new Date(sEndDateValue);
 
+		const oUpdateModel = this.getView().getModel("updateModel") as JSONModel;
+		const aTargets = oUpdateModel.getProperty("/targets");
+
+
+
 		const resourceBundle: ResourceBundle = await this.getResourceBundle();
 		
 		if(!sName || sName.length < 4){
@@ -263,6 +268,9 @@ export default class EditBonusTranche extends BaseController {
 			oEndDatePicker.setValueState("Error")
 			oStartDatePicker.setValueState("Error")
 			reject(new Error(resourceBundle.getText("startDateError")));
+		} else if (!aTargets) {
+			
+			reject(new Error(resourceBundle.getText("targetError")));
 		} else {
 			oNameInput.setValueState("None")
 			oStartDatePicker.setValueState("None")
