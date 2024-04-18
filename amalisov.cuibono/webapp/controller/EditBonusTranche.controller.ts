@@ -27,7 +27,7 @@ interface TrancheData {
 	location?: string;
 	startDate?: string;
 	endDate?: string;
-	originDate?: string;
+	orignDate?: string;
 	weight?: number;
 	Status?: string;
 	targets?: Target[];
@@ -77,12 +77,13 @@ export default class EditBonusTranche extends BaseController {
 						location: oData.location,
 						startDate: !isDuplicate ? oData.startDate : "",
 						endDate: !isDuplicate ? oData.endDate : "",
-						originDate: !isDuplicate ? oData.originDate : "",
+						orignDate: !isDuplicate ? oData.orignDate : "",
 						weight: oData.weight,
 						description: oData.description,
 						Status: isDuplicate ? "Open" : oData.Status,
 						targets: oData.targets,
 					};
+					console.log(oTrancheData)
 			oUpdateModel.setData(oTrancheData);
 			this.calculateTotalWeight();
 			this.changeTitle(sTrancheId);
@@ -391,7 +392,7 @@ export default class EditBonusTranche extends BaseController {
 		const aTargets = oUpdateModel.getProperty("/targets");
 		const sStartDate = oUpdateModel.getProperty("/startDate");
 		const sEndDate = oUpdateModel.getProperty("/endDate");
-		const sOriginDate = oUpdateModel.getProperty("/originDate") || "";
+		const sOriginDate = oUpdateModel.getProperty("/orignDate") || "";
 		const sTrancheId = oUpdateModel.getProperty("/ID");
 		const sStatus = oUpdateModel.getProperty("/Status");
 
@@ -406,7 +407,7 @@ export default class EditBonusTranche extends BaseController {
 			location: sLocation,
 			startDate: formattedStartDate,
 			endDate: formattedEndDate,
-			originDate: formattedOriginDate,
+			orignDate: formattedOriginDate,
 			weight: nTrancheWeight,
 			description: sDescription,
 			Status: sStatus,

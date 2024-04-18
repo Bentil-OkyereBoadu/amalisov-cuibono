@@ -16,7 +16,7 @@ interface Tranche {
     location: string;
     startDate: string;
     endDate: string;
-	originDate: string;
+	orignDate: string;
     weight: number;
     description: string;
     Status: string;
@@ -39,7 +39,7 @@ export default {
             location: "",
             startDate: "",
             endDate: "",
-			originDate: "",
+			orignDate: "",
             weight: 0,
             description: "",
             Status: "Open",

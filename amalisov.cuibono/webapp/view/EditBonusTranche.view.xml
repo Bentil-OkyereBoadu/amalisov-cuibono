@@ -150,7 +150,7 @@
                                     id="originDateInput"
                                     placeholder="{i18n>datePlaceholder}"
                                     change=".limitDates"
-                                    value="{updateModel>/originDate}"
+                                    value="{updateModel>/orignDate}"
                                     class="sapUiSmallMarginBottom inputs"
                                 />
                             </VBox>
@@ -262,7 +262,7 @@
                 />
                 <Button
                     type="Accept"
-                    text="{i18n>completedStatus}"
+                    text="{i18n>completedText}"
                     icon="sap-icon://complete"
                     press=".onCompleteTranche"
                     visible="{path: 'updateModel>/Status', formatter: 'formatter.showComplete', targetType:'any'}"

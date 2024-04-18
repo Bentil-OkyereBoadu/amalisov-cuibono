@@ -13,10 +13,6 @@ export default {
     
 	},
 
-    statusEnabled(Status: string): boolean {
-        return Status !== "Locked" && Status !== "Completed"
-    },
-
     statusLocked(Status: string): boolean {
         return Status !== "Completed";
     },

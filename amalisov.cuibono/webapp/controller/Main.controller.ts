@@ -21,7 +21,7 @@ interface Tranche {
     location: string;
     startDate: string;
     endDate: string;
-	originDate: string;
+	orignDate: string;
     weight: number;
     description: string;
     Status: string;
@@ -113,7 +113,7 @@ export default class Main extends BaseController {
 			location: sLocation,
 			startDate: includeDates ? oContext.getProperty("startDate") : "",
 			endDate: includeDates ? oContext.getProperty("endDate") : "",
-			originDate: includeDates ? oContext.getProperty("orignDate") : "",
+			orignDate: includeDates ? oContext.getProperty("orignDate") : "",
 			weight: nTrancheWeight,
 			description: sDescription,
 			Status: sStatus,
