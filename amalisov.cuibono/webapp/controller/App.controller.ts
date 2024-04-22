@@ -1,3 +1,4 @@
+import JSONModel from "sap/ui/model/json/JSONModel";
 import BaseController from "./BaseController";
 import ResourceBundle from "sap/base/i18n/ResourceBundle";
 
@@ -11,6 +12,11 @@ export default class App extends BaseController {
 		this.getView().addStyleClass(
 			this.getOwnerComponent().getContentDensityClass()
 		);
+		const oConfigModel = new JSONModel({
+			currency: "USD",
+			percentage:"%"
+		});
+		this.getView().setModel(oConfigModel, "unit");
 		// eslint-disable-next-line @typescript-eslint/unbound-method
 	}
 

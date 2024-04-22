@@ -9,6 +9,8 @@ import DatePicker from "sap/m/DatePicker";
 import FilterOperator from "sap/ui/model/FilterOperator";
 import Filter from "sap/ui/model/Filter";
 import Page from "sap/m/Page";
+import Select from "sap/m/Select";
+import TextArea from "sap/m/TextArea";
 
 /**
  * @namespace amalisov.cuibono.controller
@@ -26,7 +28,7 @@ interface TrancheData {
 	location?: string;
 	startDate?: string;
 	endDate?: string;
-	originDate?: string;
+	orignDate?: string;
 	weight?: number;
 	Status?: string;
 	targets?: Target[];
@@ -76,12 +78,13 @@ export default class EditBonusTranche extends BaseController {
 						location: oData.location,
 						startDate: !isDuplicate ? oData.startDate : "",
 						endDate: !isDuplicate ? oData.endDate : "",
-						originDate: !isDuplicate ? oData.originDate : "",
+						orignDate: !isDuplicate ? oData.orignDate : "",
 						weight: oData.weight,
 						description: oData.description,
 						Status: isDuplicate ? "Open" : oData.Status,
 						targets: oData.targets,
 					};
+					console.log(oTrancheData)
 			oUpdateModel.setData(oTrancheData);
 			this.calculateTotalWeight();
 			this.changeTitle(sTrancheId);
@@ -110,6 +113,44 @@ export default class EditBonusTranche extends BaseController {
 		const oNewTarget = this.getModel("newTargets") as JSONModel;
 		oNewTarget.setData({});
 		oDialog.close();
+	}
+	
+	public validateTargetInputs(): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+		const oNameInput = this.getView().byId("targetName") as Input
+		const sName: string = oNameInput.getValue();
+		const oWeightInput = this.getView().byId("targetWeight") as Input;
+		const sWeightValue = Number(oWeightInput.getValue());
+		const oAchievementInput = this.getView().byId("targetAchievement") as Input;
+		const sAchievementValue = oAchievementInput.getValue();
+		const oDescriptionInput = this.getView().byId("targetDescription") as TextArea;
+		const sDescriptionValue = oDescriptionInput.getValue();
+
+		const resourceBundle: ResourceBundle = await this.getResourceBundle();
+		
+		if(!sName || sName.length < 4){
+			oNameInput.setValueState("Error")
+			reject(new Error(resourceBundle.getText("targetNameError")));
+		} else if (!sWeightValue || sWeightValue > 100) {
+			oNameInput.setValueState("None")
+			oWeightInput.setValueState("Error")
+			reject(new Error(resourceBundle.getText("weightError")));
+		} else if (!sAchievementValue) {
+			oWeightInput.setValueState("None")
+			oAchievementInput.setValueState("Error")
+			reject(new Error(resourceBundle.getText("achievementError")));
+		} else if (!sDescriptionValue) {
+			oAchievementInput.setValueState("None")
+			oDescriptionInput.setValueState("Error")
+			reject(new Error(resourceBundle.getText("descriptionError")));
+		} else {
+			oNameInput.setValueState("None")
+			oWeightInput.setValueState("None")
+			oAchievementInput.setValueState("None")
+			oDescriptionInput.setValueState("None")
+			resolve();
+		}
+	});
 	}
 
 	public onSaveTarget(): void {
@@ -189,7 +230,15 @@ export default class EditBonusTranche extends BaseController {
 		this.calculateTotalWeight();
 	}
 
-	public onSave(): void {
+	public async onSave(): Promise<void> {
+		try {
+			await this.validateTargetInputs();
+		} catch (error) {
+			if (error instanceof Error) {
+				MessageBox.error(error.message);
+			}
+			return;
+		}
 		switch (this.currentAction) {
 			case "save":
 				this.onSaveTarget();
@@ -232,6 +281,52 @@ export default class EditBonusTranche extends BaseController {
 		}
 	}
 
+	public validateInputs(): Promise<void> {
+		return new Promise(async (resolve, reject) => {
+		const oNameInput = this.getView().byId("nameInput") as Input
+		const sName: string = oNameInput.getValue();
+		const oStartDatePicker = this.getView().byId("startDateInput") as DatePicker;
+		const sStartDateValue = oStartDatePicker.getValue();
+		const oEndDatePicker = this.getView().byId("endDateInput") as DatePicker;
+		const sEndDateValue = oEndDatePicker.getValue();
+
+		const startDate = new Date(sStartDateValue);
+		const endDate = new Date(sEndDateValue);
+
+		const oUpdateModel = this.getView().getModel("updateModel") as JSONModel;
+		const aTargets = oUpdateModel.getProperty("/targets");
+
+
+
+		const resourceBundle: ResourceBundle = await this.getResourceBundle();
+		
+		if(!sName || sName.length < 4){
+			oNameInput.setValueState("Error")
+			reject(new Error(resourceBundle.getText("nameError")));
+		} else if (!sStartDateValue) {
+			oNameInput.setValueState("None")
+			oStartDatePicker.setValueState("Error")
+			reject(new Error(resourceBundle.getText("dateError")));
+		} else if (!sEndDateValue) {
+			oStartDatePicker.setValueState("None")
+			oEndDatePicker.setValueState("Error")
+			reject(new Error(resourceBundle.getText("dateError")));
+		} else if (startDate >= endDate) {
+			oEndDatePicker.setValueState("Error")
+			oStartDatePicker.setValueState("Error")
+			reject(new Error(resourceBundle.getText("startDateError")));
+		} else if (!aTargets) {
+			
+			reject(new Error(resourceBundle.getText("targetError")));
+		} else {
+			oNameInput.setValueState("None")
+			oStartDatePicker.setValueState("None")
+			oEndDatePicker.setValueState("None")
+			resolve();
+		}
+	});
+	}
+
 	public limitDates(oEvent: any): void {
 		const sStartDate = this.getView().byId("startDateInput") as DatePicker;
 		const oEndDatePicker = this.getView().byId("endDateInput") as DatePicker;
@@ -240,12 +335,12 @@ export default class EditBonusTranche extends BaseController {
 		) as DatePicker;
 
 		const sDatePicked = oEvent.getSource().getDateValue();
-
 		const sStartDatePicked = sStartDate.getDateValue();
 		const sStartDateValue = sStartDate.getValue();
 
 		const sEndDate = oEndDatePicker.getDateValue();
 		const sEndDateValue = oEndDatePicker.getValue();
+		const sOriginDateValue = oOriginDatePicker.getDateValue()
 
 		//limit date range
 		if (sDatePicked !== "") {
@@ -262,34 +357,25 @@ export default class EditBonusTranche extends BaseController {
 		if (sEndDateValue && sStartDateValue) {
 			const startDate = new Date(sStartDateValue);
 			const endDate = new Date(sEndDateValue);
-
+			const originDate = new Date(sOriginDateValue);
+			
 			if (startDate > endDate) {
 				sStartDate.setValueState("Error");
 				oEndDatePicker.setValueState("Error");
-			} else {
+			} else if (endDate > originDate) {
+				oOriginDatePicker.setValueState("Error");
+			}else {
 				sStartDate.setValueState("None");
 				oEndDatePicker.setValueState("None");
+				oOriginDatePicker.setValueState("None");
 			}
 		}
-	}
-
-	public checkDate(oData: TrancheData): Promise<void> {
-		return new Promise(async (resolve, reject) => {
-			const startDate = new Date(oData.startDate);
-			const endDate = new Date(oData.endDate);
-			const resourceBundle: ResourceBundle = await this.getResourceBundle();
-
-			if (startDate >= endDate) {
-				reject(new Error(resourceBundle.getText("startDateError")));
-			} else {
-				resolve();
-			}
-		});
 	}
 
 	public async onSaveTranche(): Promise<void> {
 		const oView = this.getView();
 		const oModel = oView.getModel("tranches") as ODataModel;
+		const oParticipantModel = oView.getModel("participant") as ODataModel;
 		const resourceBundle: ResourceBundle = await this.getResourceBundle();
 		const oUpdateModel = this.getModel("updateModel");
 		const sTrancheID = oUpdateModel.getProperty("/ID");
@@ -317,7 +403,7 @@ export default class EditBonusTranche extends BaseController {
 		}
 
 		try {
-			await this.checkDate(oData);
+			await this.validateInputs();
 		} catch (error) {
 			if (error instanceof Error) {
 				MessageBox.error(error.message);
@@ -333,6 +419,7 @@ export default class EditBonusTranche extends BaseController {
 				onClose: () => {
 					this.getRouter().navTo("main");
 					oModel.refresh();
+					oParticipantModel.refresh();
 				},
 			});
 		} catch (error) {
@@ -356,13 +443,13 @@ export default class EditBonusTranche extends BaseController {
 	private constructTrancheData(): TrancheData {
 		const oUpdateModel = this.getModel("updateModel");
 		const sTrancheName = oUpdateModel.getProperty("/name");
-		const sLocation = oUpdateModel.getProperty("/location");
+		const sLocation = (this.getView().byId("locationSelect") as Select).getSelectedKey() || oUpdateModel.getProperty("/location");
 		const nTrancheWeight = Number(oUpdateModel.getProperty("/weight"));
 		const sDescription = oUpdateModel.getProperty("/description");
 		const aTargets = oUpdateModel.getProperty("/targets");
 		const sStartDate = oUpdateModel.getProperty("/startDate");
 		const sEndDate = oUpdateModel.getProperty("/endDate");
-		const sOriginDate = oUpdateModel.getProperty("/originDate") || "";
+		const sOriginDate = oUpdateModel.getProperty("/orignDate") || "";
 		const sTrancheId = oUpdateModel.getProperty("/ID");
 		const sStatus = oUpdateModel.getProperty("/Status");
 
@@ -377,7 +464,7 @@ export default class EditBonusTranche extends BaseController {
 			location: sLocation,
 			startDate: formattedStartDate,
 			endDate: formattedEndDate,
-			// originDate: formattedOriginDate,
+			orignDate: formattedOriginDate,
 			weight: nTrancheWeight,
 			description: sDescription,
 			Status: sStatus,

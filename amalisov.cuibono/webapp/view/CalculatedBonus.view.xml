@@ -73,10 +73,13 @@
                 <items>
                     <ColumnListItem vAlign="Middle">
                         <cells>
-                            <Text text="{path:'payable>localId', formatter:'formatter.limitText'}" />
+                            <Text text="{path:'payable>localId', formatter:'formatter.limitText'}" tooltip="{payable>localId}" />
                             <Text text="{payable>name}" />
                             <Text text="{payable>fiscalYear}" />
-                            <Text text="{path:'payable>netAmount', formatter:'formatter.formatAmount'}" />
+                            <ObjectNumber
+                                number="{path: 'payable>netAmount', formatter: 'formatter.formatAmount'}"
+                                unit="{unit>/currency}"
+                            />
                         </cells>
                     </ColumnListItem>
                 </items>

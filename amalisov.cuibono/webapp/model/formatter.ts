@@ -26,15 +26,15 @@ export default {
     },
 
     limitText(sVal: string): string {
-		return sVal && sVal.length > 10 ? sVal.substring(0, 10) + '...' : sVal;
+		return sVal && sVal.length > 7 ? sVal.substring(0, 7) + '...' : sVal;
 	},
 
     totalWeight(totalWeight: number): boolean {
       return totalWeight > 100
     },
 
-    saveVisibility(Status: string, totalWeight:number): boolean {
-        return (Status === "Open" || Status === "Running") && totalWeight <=100;
+    saveVisibility(Status: string): boolean {
+        return (Status === "Open" || Status === "Running");
     },
 
     lockVisibility(Status: string, totalWeight:number): boolean {

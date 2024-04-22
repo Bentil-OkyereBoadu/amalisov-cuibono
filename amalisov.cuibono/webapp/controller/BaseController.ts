@@ -423,7 +423,7 @@ export default abstract class BaseController extends Controller {
 			const sCellStatus = item.getCells()[5].getText();
 			const oSelectedData = item.getBindingContext("participant").getObject();
 	
-			if (sCellStatus !== "Completed") {
+			if (sCellStatus !== "Completed" && sCellStatus !== "Locked") {
 				oCheckBoxCell.setSelected(bCheckboxState);
 	
 				if (bCheckboxState) {
