@@ -25,6 +25,7 @@ import MessageToast from "sap/m/MessageToast";
 import CheckBox from "sap/m/CheckBox";
 import ODataModel from "sap/ui/model/odata/v4/ODataModel";
 import Input from "sap/m/Input";
+import JSONModel from "sap/ui/model/json/JSONModel";
 
 
 /**
@@ -404,19 +405,28 @@ export default abstract class BaseController extends Controller {
 	public onSelectChange(oEvent: any): void {
 		const oCheckBox = oEvent.getSource();
 		const oSelectedData = oCheckBox.getBindingContext("participant").getObject();
+		const oUpdateModel = this.getModel("updateModel") as JSONModel;
+		let allSelectedItems = oUpdateModel.getProperty("/allSelectedItems") || [];
 	
 		if (oCheckBox.getSelected()) {
-			this.selectedItems.push({ ID: oSelectedData.ID, excluded: oSelectedData.excluded });
+			allSelectedItems.push({ ID: oSelectedData.ID, excluded: oSelectedData.excluded });
 		} else {
-			this.selectedItems = this.selectedItems.filter(function(item: any) {
+			allSelectedItems = allSelectedItems.filter(function(item: any) {
 				return item.ID !== oSelectedData.ID;
 			});
 		}
+	
+		oUpdateModel.setProperty("/allSelectedItems", allSelectedItems);
+		oUpdateModel.refresh(true)
+		this.selectedItems = [...allSelectedItems];
+
 	}
 	
 	public onSelectAll(oEvent: any): void {
 		const oTable = this.getView().byId('Table') as Table;
 		const bCheckboxState = oEvent.getParameter('selected');
+		const oUpdateModel = this.getModel("updateModel") as JSONModel;
+		let allSelectedItems = oUpdateModel.getProperty("/allSelectedItems") || [];
 	
 		oTable.getItems().forEach((item: any) => {
 			const oCheckBoxCell = item.getCells()[0] as CheckBox;
@@ -427,22 +437,35 @@ export default abstract class BaseController extends Controller {
 				oCheckBoxCell.setSelected(bCheckboxState);
 	
 				if (bCheckboxState) {
-					this.selectedItems.push({ ID: oSelectedData.ID, excluded: oSelectedData.excluded });
+					allSelectedItems.push({ ID: oSelectedData.ID, excluded: oSelectedData.excluded });
 				} else {
-					this.selectedItems = this.selectedItems.filter(function(item: any) {
+					allSelectedItems = allSelectedItems.filter(function(item: any) {
 						return item.ID !== oSelectedData.ID;
 					});
 				}
 			}
 		});
+	
+		oUpdateModel.setProperty("/allSelectedItems", allSelectedItems);
+		oUpdateModel.refresh(true)
+		this.selectedItems = [...allSelectedItems];
 	}
 
-	public resetCheckBoxes(): void{
+	public resetCheckBoxes(): void {
 		const oTable = this.getView().byId('Table') as Table;
+		const oUpdateModel = this.getModel("updateModel") as JSONModel;
+	
 		oTable.getItems().forEach((item: any) => {
 			const oCheckBoxCell = item.getCells()[0] as CheckBox;
-			oCheckBoxCell.setSelected(false)
+			oCheckBoxCell.setSelected(false);
 		});
+		oUpdateModel.setProperty("/allSelectedItems", []);
+		oUpdateModel.refresh(true)
+		this.selectedItems = [];
+	}
+
+	public isButtonEnabled(allSelectedItems: any[]): boolean {
+		return allSelectedItems && allSelectedItems.length > 0;
 	}
 	
 	public onClearFilter(): void {

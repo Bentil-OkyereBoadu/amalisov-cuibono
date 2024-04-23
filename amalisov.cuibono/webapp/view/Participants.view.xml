@@ -38,12 +38,14 @@
                             text="{i18n>excludeTranche}"
                             class="btn"
                             press=".onDialogOpen"
+                            enabled="{path: 'updateModel>/allSelectedItems', formatter: '.isButtonEnabled'}"
                         />
                         <Button
                             id="overRuleButton"
                             text="{i18n>overRule}"
                             class="btn"
                             press=".onDialogOpen"
+                            enabled="{path: 'updateModel>/allSelectedItems', formatter: '.isButtonEnabled'}"
                         />
                         <Button
                             icon="sap-icon://sort"
