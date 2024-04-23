@@ -440,6 +440,16 @@ export default class EditBonusTranche extends BaseController {
 
 	}
 
+	private formatName(name:string):string {
+        const words = name.split(" ");
+		const formattedwords = words.map(word =>{
+			const lowerCaseWord = word.toLowerCase();
+			return lowerCaseWord.charAt(0).toUpperCase() + lowerCaseWord.slice(1)
+		});
+		const formttedName =formattedwords.join(" ");
+		return formttedName
+	}
+
 	private constructTrancheData(): TrancheData {
 		const oUpdateModel = this.getModel("updateModel");
 		const sTrancheName = oUpdateModel.getProperty("/name");
@@ -457,10 +467,11 @@ export default class EditBonusTranche extends BaseController {
 		const formattedStartDate = this.formatDate(sStartDate);
 		const formattedEndDate = this.formatDate(sEndDate);
 		const formattedOriginDate = this.formatDate(sOriginDate);
+		const formattedName = this.formatName(sTrancheName);
 
 
 		const oData: TrancheData = {
-			name: sTrancheName,
+			name: formattedName,
 			location: sLocation,
 			startDate: formattedStartDate,
 			endDate: formattedEndDate,
