@@ -39,7 +39,7 @@
                             press=".onOpenSortDialog"
                         />
                         <core:Fragment
-                            fragmentName="amalisov.cuibono.view.fragments.SortDialog"
+                            fragmentName="amalisov.cuibono.view.fragments.CalculatedBonusSorter"
                             type="XML"
                         />
                     </Toolbar>
