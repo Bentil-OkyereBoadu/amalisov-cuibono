@@ -92,7 +92,7 @@
                                 icon="sap-icon://edit"
                                 class="mainIcon"
                                 press=".onEditPress"
-                                enabled="{path: 'tranches>Status', formatter: 'formatter.statusLocked', targetType:'any'}"
+                                enabled="{path: 'tranches>Status', formatter: 'formatter.statusEnabled', targetType:'any'}"
                             />
                             <Button
                                 icon="sap-icon://copy"

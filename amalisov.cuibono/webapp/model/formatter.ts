@@ -18,7 +18,7 @@ export default {
     },
 
     statusLocked(Status: string): boolean {
-        return Status !== "Completed";
+        return Status !== "Completed" && Status !== "Locked";
     },
     
     showComplete(Status: string): boolean {
