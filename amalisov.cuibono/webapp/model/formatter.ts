@@ -21,8 +21,8 @@ export default {
         return Status !== "Completed" && Status !== "Locked";
     },
     
-    showComplete(Status: string): boolean {
-        return Status === "Locked" || Status === "Completed";
+    showComplete(Status: string, totalWeight:number): boolean {
+        return (Status === "Locked" || Status === "Completed") && totalWeight === 100;
     },
 
     limitText(sVal: string): string {
