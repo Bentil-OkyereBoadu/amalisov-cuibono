@@ -1,0 +1,23 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <ViewSettingsDialog
+        class="sapUiResponsiveMargin"
+        id="sortDialog"
+        confirm=".onSortChange"
+    >
+        <sortItems>
+            <ViewSettingsItem
+                text="{i18n>name}"
+                key="1"
+                id="1"
+            />
+            <ViewSettingsItem
+                text="{i18n>Status}"
+                key="3"
+                id="3"
+            />
+        </sortItems>
+    </ViewSettingsDialog>
+</core:FragmentDefinition>

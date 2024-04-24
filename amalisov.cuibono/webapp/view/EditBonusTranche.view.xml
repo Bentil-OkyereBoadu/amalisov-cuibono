@@ -265,14 +265,14 @@
                     text="{i18n>completedText}"
                     icon="sap-icon://complete"
                     press=".onCompleteTranche"
-                    visible="{path: 'updateModel>/Status', formatter: 'formatter.showComplete', targetType:'any'}"
+                    visible="{parts: [{path: 'updateModel>/Status'}, {path: 'updateModel>/totalWeight'}], formatter: 'formatter.showComplete', targetType:'any'}"
                 />
                 <Button
                     type="Ghost"
                     text="{i18n>reopen}"
                     icon="sap-icon://unlocked"
                     press=".onReOpenTranche"
-                    visible="{path: 'updateModel>/Status', formatter: 'formatter.showComplete', targetType:'any'}"
+                    visible="{parts: [{path: 'updateModel>/Status'}, {path: 'updateModel>/totalWeight'}], formatter: 'formatter.showComplete', targetType:'any'}"
                 />
                 <Button
                     type="Reject"

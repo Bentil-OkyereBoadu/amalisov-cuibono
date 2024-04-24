@@ -21,7 +21,8 @@ interface Tranche {
     description: string;
     Status: string;
     targets: Target[];
-    totalWeight: number
+    totalWeight: number;
+    allSelectedItems: []
 }
 
 
@@ -44,7 +45,8 @@ export default {
             description: "",
             Status: "Open",
             targets: [],
-            totalWeight: 0
+            totalWeight: 0,
+            allSelectedItems: []
 		};
 		const oModel = new JSONModel();
         oModel.setData(oData);
