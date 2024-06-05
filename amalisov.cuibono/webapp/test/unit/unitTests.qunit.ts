@@ -1,7 +1,12 @@
+import Core from "sap/ui/core/Core"
+import "./AllTests"
+
 // https://api.qunitjs.com/config/autostart/
 QUnit.config.autostart = false;
 
-// import all your QUnit tests here
-void Promise.all([import("unit/controller/Main.qunit")]).then(() => {
-	QUnit.start();
-});
+(async (): Promise<void> => {
+    "use strict";
+    await Core.ready();
+    QUnit.start();
+})();
+
