@@ -59,7 +59,11 @@ QUnit.test("should correctly format a text exactly 7 characters", assert => {
 });
 
 QUnit.test("should correctly format text longer than 7", assert => {
-    assert.strictEqual(formatter.limitText('Formatted fff' as string,), "Formatt...", "Correctly shortens texts");
+    assert.strictEqual(formatter.limitText('Formatted Text' as string,), "Formatt...", "Correctly shortens texts");
+});
+
+QUnit.test("should correctly format two words longer than 7", assert => {
+    assert.strictEqual(formatter.limitText('Test Text' as string,), "Test Te...", "Correctly shortens texts");
 });
 
 QUnit.test("should return null for null input", assert => {
