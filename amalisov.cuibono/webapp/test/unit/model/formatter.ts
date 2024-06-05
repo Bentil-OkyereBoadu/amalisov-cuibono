@@ -47,3 +47,25 @@ QUnit.test("formatDate - null date", assert => {
 QUnit.test("formatDate - empty string date", assert => {
     dateStateTestCase({ Date: "" }, "");
 });
+
+//Limit text Test
+QUnit.module("Limit Text", {});
+
+QUnit.test("should correctly format a text less than 7 characters", assert => {
+    assert.strictEqual(formatter.limitText("Test" as string), "Test", "Formats strings less than 7 correctly");
+});
+QUnit.test("should correctly format a text exactly 7 characters", assert => {
+    assert.strictEqual(formatter.limitText("Testing" as string), "Testing", "Formats strings with 7 characters correctly");
+});
+
+QUnit.test("should correctly format text longer than 7", assert => {
+    assert.strictEqual(formatter.limitText('Formatted fff' as string,), "Formatt...", "Correctly shortens texts");
+});
+
+QUnit.test("should return null for null input", assert => {
+    assert.strictEqual(formatter.limitText(null as null), null, "Returns null for null input");
+});
+
+QUnit.test("should correctly format an empty string", assert => {
+    assert.strictEqual(formatter.limitText("" as string,), "", "Correctly Formats an empty string");
+});
