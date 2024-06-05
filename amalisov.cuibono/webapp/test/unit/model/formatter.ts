@@ -24,15 +24,11 @@ QUnit.test("should handle non-numeric characters", assert => {
 });
 
 // format Date tests
-QUnit.module("FormatDate Tests",{});
-
-import Formatter from  "amalisov/cuibono/model/formatter";
-
-QUnit.module("Date Format");
+QUnit.module("Date Format", {});
 
 function dateStateTestCase(oOptions: {Date: string | null}, expected: string) {
     //Act: call formatter with data
-    const sFormattedDate = Formatter.formatDate(oOptions.Date);
+    const sFormattedDate = formatter.formatDate(oOptions.Date);
 
     //Assert: check if the formatted date matches the value
     QUnit.assert.strictEqual(sFormattedDate, expected, `Date ${oOptions.Date} should be formatted as ${expected}`)
