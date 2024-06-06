@@ -44,7 +44,7 @@ export default class Participants extends BaseController {
 		const sTrancheName = oUpdateModel.getProperty("/name");
 		this.applyFilter(sTrancheID, sTrancheName);
 	}
-	private applyFilter(sTrancheID: string, sTrancheName: string): void {
+	public applyFilter(sTrancheID: string, sTrancheName: string): void {
 		const oTable = this.getView().byId("Table");
 		const oBinding = oTable.getBinding("items") as ListBinding;
 		const oInputField = this.getView().byId("tranche") as MultiInput
