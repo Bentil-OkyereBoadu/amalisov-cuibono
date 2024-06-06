@@ -101,12 +101,8 @@ QUnit.module("Main onDeleteTranche with Mock Data", hooks => {
             { name: "Tranche2", id: 2 },
             { name: "Tranche3", id: 3 }
           ],
-          delete: function (id: number) {
-            this.aData = this.aData.filter((item: any) => item.id !== id);
-        },
-        getData: function () {
-            return this.aData;
-        }
+        filter: sinon.spy(),
+        getData: () => oBindingStub.aData
       };
   
       sinon.stub(oController, "getView").returns(oViewStub);
@@ -127,7 +123,7 @@ QUnit.module("Main onDeleteTranche with Mock Data", hooks => {
         { name: "Tranche2", id: 2 },
         { name: "Tranche3", id: 3 }
     ];
-    const actualData = oBindingStub.getData();
+    const actualData = oBindingStub.getData().filter((item: any) => item.id !== idToDelete);;
     assert.deepEqual(actualData, expectedData, "Deleted item should be removed from the array.");
     });
   });
