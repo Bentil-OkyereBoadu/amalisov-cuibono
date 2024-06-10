@@ -1,5 +1,5 @@
-import * as sinon from 'sinon';
-import Main from 'amalisov/cuibono/controller/Main.controller';
+import * as sinon from "sinon";
+import Main from "amalisov/cuibono/controller/Main.controller";
 import Table from "sap/m/Table";
 import Input from "sap/m/Input";
 import MessageBox from 'sap/m/MessageBox';
@@ -79,7 +79,6 @@ QUnit.module("Main onSearch with Mock Data", hooks => {
     assert.deepEqual(actualFilteredData, expectedFilteredData, "Should return all data if query is empty");
   });
 });
-
 
 //Delete Tranche
 
