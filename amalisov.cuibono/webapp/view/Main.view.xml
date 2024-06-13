@@ -44,6 +44,7 @@
                             text="{i18n>createTranche}"
                             class="btn"
                             press=".onCreateNewTranche"
+                            id="createTranche"
                         />
                         <Button
                             icon="sap-icon://sort"
@@ -89,12 +90,14 @@
                         />
                         <HBox>
                             <Button
+                            id="editIcon"
                                 icon="sap-icon://edit"
                                 class="mainIcon"
                                 press=".onEditPress"
                                 enabled="{path: 'tranches>Status', formatter: 'formatter.statusEnabled', targetType:'any'}"
                             />
                             <Button
+                            id="duplicateIcon"
                                 icon="sap-icon://copy"
                                 class="mainIcon"
                                 press=".onDuplicate"

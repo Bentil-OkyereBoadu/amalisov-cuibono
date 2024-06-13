@@ -2,6 +2,6 @@
 QUnit.config.autostart = false;
 
 // import all your OPA journeys here
-void Promise.all([import("integration/HelloJourney")]).then(() => {
+void Promise.all([import("amalisov/cuibono/test/integration/MainJourney")]).then(() => {
 	QUnit.start();
 });
