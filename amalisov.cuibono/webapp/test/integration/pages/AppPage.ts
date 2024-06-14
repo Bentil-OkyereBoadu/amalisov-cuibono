@@ -1,9 +1,5 @@
 import Opa5 from "sap/ui/test/Opa5";
 import Press from "sap/ui/test/actions/Press";
-import BindingPath from "sap/ui/test/matchers/BindingPath";
-import AggregationLengthEquals from "sap/ui/test/matchers/AggregationLengthEquals";
-import AggregationContainsPropertyEqual from "sap/ui/test/matchers/AggregationContainsPropertyEqual";
-import EnterText from "sap/ui/test/actions/EnterText";
 
 const viewName = "amalisov.cuibono.view.App";
 
@@ -38,7 +34,6 @@ export default class AppPage extends Opa5 {
     // Assertions
     iShouldSeeTheParticipantsPage() {
         return this.waitFor({
-            // controlType: "sap.m.Page",
             viewName: "amalisov.cuibono.view.Participants", 
             success: function() {
                 Opa5.assert.ok(true, "Navigated to the Participants page");
@@ -49,7 +44,6 @@ export default class AppPage extends Opa5 {
 
     iShouldSeeTheCalculatedBonusPage() {
         return this.waitFor({
-            // controlType: "sap.m.Page",
             viewName: "amalisov.cuibono.view.CalculatedBonus", 
             success: function() {
                 Opa5.assert.ok(true, "Navigated to the CalculatedBonus page");

@@ -64,7 +64,7 @@
                         minScreenWidth="Tablet"
                         demandPopin="true"
                     >
-                        <CheckBox select=".onSelectAll" />
+                        <CheckBox select=".onSelectAll" id="headerCheck"/>
                     </Column>
                     <Column
                         minScreenWidth="Tablet"
@@ -152,6 +152,7 @@
                     <ColumnListItem vAlign="Middle">
                         <cells>
                             <CheckBox
+                            id="tableCheck"
                                 enabled="{ 
                                 path: 'participant>Status', 
                                 formatter: 'formatter.statusEnabled',

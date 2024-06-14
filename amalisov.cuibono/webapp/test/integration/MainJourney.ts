@@ -2,9 +2,13 @@
 import opaTest from "sap/ui/test/opaQunit";
 import MainPage from "./pages/MainPage";
 import AppPage from "./pages/AppPage";
+import ParticipantsPage from "./pages/ParticipantsPage";
 
+const onTheParticipantsPage = new ParticipantsPage();
 const onTheMainPage = new MainPage();
 const onTheAppPage = new AppPage();
+
+
 
 //-------------- APP PAGE ---------------//  
 
@@ -51,6 +55,7 @@ opaTest("Should navigate to Calculated Bonus page when button is pressed", funct
 });
 
 
+/////////----------MAIN PAGE---------///////////
 
 
 // QUnit.module("On Edit Press Journey");
@@ -110,4 +115,31 @@ opaTest("Should enter text into search field and filter table data", function (G
 
     // Cleanup
     Then.iTeardownMyApp();
+});
+
+
+/////////----------PARTICIPANTS PAGE---------///////////
+
+QUnit.module("Participants Checkbox Journey")
+
+opaTest("Should Check all checkboxes on Participants page when button is pressed", function(Then: any) {
+
+    //Arrangements
+    onTheParticipantsPage.iStartMyUIComponent({
+        componentConfig: {
+            name: "amalisov.cuibono"
+        }
+    });
+
+    // Actions
+    onTheAppPage.iPressOnTheParticipantsButton();
+    onTheParticipantsPage.iPressOnTheCheckBox();
+
+    //Assertions
+    onTheParticipantsPage.allCheckBoxesMustBeSelected();
+    
+
+    // Cleanup
+    Then.iTeardownMyApp();
+
 });
