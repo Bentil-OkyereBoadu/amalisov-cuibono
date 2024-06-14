@@ -58,25 +58,25 @@ opaTest("Should navigate to Calculated Bonus page when button is pressed", funct
 /////////----------MAIN PAGE---------///////////
 
 
-// QUnit.module("On Edit Press Journey");
+QUnit.module("On Edit Press Journey");
+opaTest("Should navigate to the edit page when the edit button is pressed", function (Given: any, When: any, Then: any) {
+    // Arrangements
+    onTheMainPage.iStartMyUIComponent({
+				componentConfig: {
+					name: "amalisov.cuibono"
+				}
+			});
 
-// opaTest("Should navigate to the edit page when the edit button is pressed", function (Given: any, When: any, Then: any) {
-//     // Arrangements
-//     onTheMainPage.iStartMyUIComponent({
-// 				componentConfig: {
-// 					name: "amalisov.cuibono"
-// 				}
-// 			});
+    // Actions
+    onTheMainPage.iPressOnTheEditButton();
 
-//     // Actions
-//     onTheMainPage.iPressOnTheEditButton();
+    // Assertions
+    onTheMainPage.iShouldSeeTheEditPage();
 
-//     // Assertions
-//     onTheMainPage.iShouldSeeTheEditPage();
+    // Cleanup
+    Then.iTeardownMyApp();
+});
 
-//     // Cleanup
-//     Then.iTeardownMyApp();
-// });
 
 QUnit.module("On Create tranche Press Journey");
 opaTest("Should navigate to the Create page when the create tranche button is pressed", function (Given: any, When: any, Then: any) {

@@ -26,26 +26,25 @@ export default class MainPage extends Opa5 {
 		});
 	}
 
-	iPressOnTheEditButton () {
-		return this.waitFor({
-			// id: "editIcon",
+    iPressOnTheEditButton() {
+        return this.waitFor({
+            //we get id using RegExp in OPA5 test for SAPUI5 applications bcz it is way to target controls to get an exact ID based 
+            //on a pattern in their IDs  since we have multiple button with id but some are enabled and disbaled 
+            id: new RegExp("editIcon"),
             controlType: "sap.m.Button",
-			viewName,
-
+            viewName,
+    
             success: function(aEditButtons: any[]) {
-                let bAllEnabled = aEditButtons
-                .filter(oEditBtn => oEditBtn.getEnabled())
-                .every(oEditBtn => oEditBtn.getSelected());
+                // Filter to get only enabled buttons
+                let bAllEnabled = aEditButtons.filter(oEditBtn => oEditBtn.getEnabled());
+                if (bAllEnabled.length > 0) {
+                    bAllEnabled[0]; // Press the first enabled button
+                }
             },
-
-			// matchers:  new BindingPath({
-			// 	path: `/edit-tranche/${sId}/false`
-			// }),
-            
-			actions: new Press(),
-			errorMessage: "Did not find the Edit button on the main view"
-		});
-	}
+            actions: new Press(), 
+            errorMessage: "Did not find the Edit button on the main view"
+        });
+    }
 
     iEnterTextForSearchAndPressEnter () {
         return this.waitFor({
