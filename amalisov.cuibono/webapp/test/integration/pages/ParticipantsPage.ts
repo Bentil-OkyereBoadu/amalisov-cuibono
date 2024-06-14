@@ -23,6 +23,15 @@ export default class ParticipantsPage extends Opa5 {
 		});
 	}
 
+    iPressOnTheExcludeFromTrancheButton () {
+		return this.waitFor({
+			id: "excludeTrancheButton",
+			viewName,
+			actions: new Press(),
+			errorMessage: "Did not find the exclude tranche button"
+		});
+	}
+    
 
     // Assertions
 
@@ -41,7 +50,18 @@ export default class ParticipantsPage extends Opa5 {
     });
     }
 
+    iShouldSeeTheDialogOpen(){
+        return this.waitFor({
+            controlType: "sap.m.Dialog",
+            viewName,
+            success: function() {
+                Opa5.assert.ok(true, "dialog is open");
+            },
+            errorMessage: "Dialog did not open"
+        });
+    }
 
+      // clean up
     iTeardownMyApp(): void {
         return this.iTeardownMyUIComponent();
     }
