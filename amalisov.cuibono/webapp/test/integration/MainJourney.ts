@@ -117,6 +117,26 @@ opaTest("Should enter text into search field and filter table data", function (G
     Then.iTeardownMyApp();
 });
 
+QUnit.module("Sorter");
+
+opaTest("Should open sorter dialog and filter table data", function (Given: any, When: any, Then: any) {
+    // Arrangements
+    onTheMainPage.iStartMyUIComponent({
+				componentConfig: {
+					name: "amalisov.cuibono"
+				}
+			});
+
+    // Actions
+    onTheMainPage.iPressOnTheSortButton();
+    // onTheMainPage.iPressOnTheSortCloseButton()
+
+    // Assertions
+    onTheMainPage.iShouldSeeTheSortDialog();
+
+    // Cleanup
+    Then.iTeardownMyApp();
+});
 
 /////////----------PARTICIPANTS PAGE---------///////////
 

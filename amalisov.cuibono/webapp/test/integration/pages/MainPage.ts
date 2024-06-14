@@ -28,11 +28,20 @@ export default class MainPage extends Opa5 {
 
 	iPressOnTheEditButton () {
 		return this.waitFor({
-			id: "editIcon",
+			// id: "editIcon",
+            controlType: "sap.m.Button",
 			viewName,
+
+            success: function(aEditButtons: any[]) {
+                let bAllEnabled = aEditButtons
+                .filter(oEditBtn => oEditBtn.getEnabled())
+                .every(oEditBtn => oEditBtn.getSelected());
+            },
+
 			// matchers:  new BindingPath({
 			// 	path: `/edit-tranche/${sId}/false`
 			// }),
+            
 			actions: new Press(),
 			errorMessage: "Did not find the Edit button on the main view"
 		});
@@ -46,6 +55,24 @@ export default class MainPage extends Opa5 {
             errorMessage: "The text could not be entered in the search"
         });
     }
+
+    iPressOnTheSortButton () {
+		return this.waitFor({
+			id: "sortTranche",
+			viewName,
+			actions: new Press(),
+			errorMessage: "Did not find the Sort button on the main view"
+		});
+	}
+
+    iPressOnTheSortCloseButton () {
+		return this.waitFor({
+			id: "1",
+			viewName: "TrancheSorter",
+			actions: new Press(),
+			errorMessage: "Did not find the Sort button on the main view"
+		});
+	}
 
     // Assertions
     iShouldSeeTheCreatePage() {
@@ -83,6 +110,17 @@ export default class MainPage extends Opa5 {
                 Opa5.assert.ok(true, "The expected search result is displayed in the table");
             },
             errorMessage: "The expected search result was not found in the table"
+        });
+    }
+
+    iShouldSeeTheSortDialog() {
+        return this.waitFor({
+            controlType: "sap.m.Dialog",
+            viewName: "amalisov.cuibono.view.fragments.TrancheSorter", 
+            success: function() {
+                Opa5.assert.ok(true, "Navigated to the Create page");
+            },
+            errorMessage: "Did not navigate to the Create page"
         });
     }
     

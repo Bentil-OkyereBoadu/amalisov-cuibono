@@ -48,7 +48,7 @@
                         />
                         <Button
                             icon="sap-icon://sort"
-                            id="sortParticipant"
+                            id="sortTranche"
                             press=".onOpenSortDialog"
                         />
                         <core:Fragment
