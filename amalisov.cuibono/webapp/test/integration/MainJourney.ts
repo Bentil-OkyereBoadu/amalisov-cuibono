@@ -17,11 +17,7 @@ QUnit.module("App Navigation Journey")
 opaTest("Should navigate to Participants page when button is pressed", function(Then: any) {
 
     //Arrangements
-    onTheAppPage.iStartMyUIComponent({
-        componentConfig: {
-            name: "amalisov.cuibono"
-        }
-    });
+    onTheAppPage.iStartMyApp();
 
     // Actions
     onTheAppPage.iPressOnTheParticipantsButton();
@@ -37,11 +33,7 @@ opaTest("Should navigate to Participants page when button is pressed", function(
 opaTest("Should navigate to Calculated Bonus page when button is pressed", function(Then: any) {
 
     //Arrangements
-    onTheAppPage.iStartMyUIComponent({
-        componentConfig: {
-            name: "amalisov.cuibono"
-        }
-    });
+    onTheAppPage.iStartMyApp();
 
     // Actions
     onTheAppPage.iPressOnTheCalculatedBonusButton();
@@ -55,17 +47,13 @@ opaTest("Should navigate to Calculated Bonus page when button is pressed", funct
 });
 
 
-/////////----------MAIN PAGE---------///////////
+/////////----------MAIN PAGE---------/////////// 
 
 
 QUnit.module("On Edit Press Journey");
 opaTest("Should navigate to the edit page when the edit or duplicate button are pressed", function (Given: any, When: any, Then: any) {
     // Arrangements
-    onTheMainPage.iStartMyUIComponent({
-				componentConfig: {
-					name: "amalisov.cuibono"
-				}
-			});
+    onTheMainPage.iStartMyApp();
 
     // Actions
     
@@ -95,11 +83,7 @@ opaTest("Should navigate to the edit page when the edit or duplicate button are 
 QUnit.module("On Create tranche Press Journey");
 opaTest("Should navigate to the Create page when the create tranche button is pressed", function (Given: any, When: any, Then: any) {
     // Arrangements
-    onTheMainPage.iStartMyUIComponent({
-				componentConfig: {
-					name: "amalisov.cuibono"
-				}
-			});
+    onTheMainPage.iStartMyApp();
 
     // Actions
     onTheMainPage.iPressOnTheCreateButton();
@@ -111,18 +95,45 @@ opaTest("Should navigate to the Create page when the create tranche button is pr
     Then.iTeardownMyApp();
 });
 
+ 
+
+QUnit.module("On Edit Press Journey");
+opaTest("Should navigate to the edit page when the edit or duplicate button are pressed", function (Given: any, When: any, Then: any) {
+    // Arrangements
+    onTheMainPage.iStartMyApp();
+
+    // Actions
+    
+    // click on the edit icon button
+    onTheMainPage.iPressOnTheEditButton();
+
+    // i should see the edit page
+    onTheMainPage.iShouldSeeTheEditPage();
+
+    // click on the main button page in navbar
+    onTheAppPage.iPressOnTheMainPageButton();
+     
+    // i should the main page
+    onTheAppPage.iShouldSeeTheMainPage();
+  
+    // click on the duplicate button
+    onTheMainPage.iPressOnTheDuplicateButton();
+ 
+    // i  should see the edit page
+    onTheMainPage.iShouldSeeTheEditPage();
+
+    // Cleanup
+    Then.iTeardownMyApp();
+});
+
 QUnit.module("Search");
 
 opaTest("Should enter text into search field and filter table data", function (Given: any, When: any, Then: any) {
     // Arrangements
-    onTheMainPage.iStartMyUIComponent({
-				componentConfig: {
-					name: "amalisov.cuibono"
-				}
-			});
+    onTheMainPage.iStartMyApp();
 
     // Actions
-    onTheMainPage.iEnterTextForSearchAndPressEnter();
+    onTheMainPage.iEnterTextForSearch();
 
     // Assertions
     onTheMainPage.iSeeExpectedSearchResults();
@@ -133,37 +144,34 @@ opaTest("Should enter text into search field and filter table data", function (G
 
 // QUnit.module("Sorter");
 
-// opaTest("Should open sorter dialog and filter table data", function (Given: any, When: any, Then: any) {
-//     // Arrangements
-//     onTheMainPage.iStartMyUIComponent({
-// 				componentConfig: {
-// 					name: "amalisov.cuibono"
-// 				}
-// 			});
+opaTest("Should open sorter dialog and filter table data", function (Given: any, When: any, Then: any) {
+    // Arrangements
+    onTheMainPage.iStartMyApp();
 
-//     // Actions
-//     onTheMainPage.iPressOnTheSortButton();
-//     // onTheMainPage.iPressOnTheSortCloseButton()
+    // Actions
+    onTheMainPage.iPressOnTheSortButton();
+    // onTheMainPage.iPressOnTheSortCloseButton();
+    // onTheMainPage.iPressOnTheSortConfirmButton();
+    // onTheMainPage.iSelectViewSettingsItem();
+
 
 //     // Assertions
 //     onTheMainPage.iShouldSeeTheSortDialog();
 
 //     // Cleanup
 //     Then.iTeardownMyApp();
-// });
+});
+ 
 
-/////////----------PARTICIPANTS PAGE---------///////////
+
+/////////---------- PARTICIPANTS PAGE ---------///////////
 
 QUnit.module("Participants Checkbox Journey and open a dialog with exclude button")
 
 opaTest("Should Check all checkboxes on Participants page when button is pressed and click exclude button to open a dialog", function(Then: any) {
 
     //Arrangements
-    onTheParticipantsPage.iStartMyUIComponent({
-        componentConfig: {
-            name: "amalisov.cuibono"
-        }
-    });
+    onTheParticipantsPage.iStartMyApp();
 
     // Actions
 
@@ -190,11 +198,8 @@ QUnit.module("Participants Checkbox Journey and open a dialog with overRule butt
 opaTest("Should Check all checkboxes on Participants page when button is pressed and click overRule button to open a dialog", function(Then: any) {
 
     //Arrangements
-    onTheParticipantsPage.iStartMyUIComponent({
-        componentConfig: {
-            name: "amalisov.cuibono"
-        }
-    });
+    onTheParticipantsPage.iStartMyApp();
+
 
     // Actions
 
@@ -214,4 +219,4 @@ opaTest("Should Check all checkboxes on Participants page when button is pressed
 
     // Cleanup
     Then.iTeardownMyApp();
-});
+})

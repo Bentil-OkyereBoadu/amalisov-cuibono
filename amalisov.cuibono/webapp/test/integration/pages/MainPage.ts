@@ -4,6 +4,7 @@ import BindingPath from "sap/ui/test/matchers/BindingPath";
 import AggregationLengthEquals from "sap/ui/test/matchers/AggregationLengthEquals";
 import AggregationContainsPropertyEqual from "sap/ui/test/matchers/AggregationContainsPropertyEqual";
 import EnterText from "sap/ui/test/actions/EnterText";
+import PropertyStrictEquals from "sap/ui/test/matchers/PropertyStrictEquals";
 
 const viewName = "amalisov.cuibono.view.Main";
 
@@ -64,7 +65,7 @@ export default class MainPage extends Opa5 {
         });
     }
 
-    iEnterTextForSearchAndPressEnter () {
+    iEnterTextForSearch () {
         return this.waitFor({
             id: "search",
             viewName,
@@ -82,15 +83,46 @@ export default class MainPage extends Opa5 {
 		});
 	}
 
-    iPressOnTheSortCloseButton () {
-		return this.waitFor({
-			id: "1",
-			viewName: "TrancheSorter",
-			actions: new Press(),
-			errorMessage: "Did not find the Sort button on the main view"
-		});
-	}
+    iPressOnTheSortConfirmButton() {
+        return this.waitFor({
+            controlType: "sap.m.Button",
+            matchers: new PropertyStrictEquals({
+                name: "text",
+                value: "OK"
+            }),
+            actions: new Press(),
+            errorMessage: "Did not find the Sort Confirm button in the ViewSettingsDialog"
+        });
+    }
 
+    iSelectViewSettingsItem () {
+        return this.waitFor({
+            controlType: "sap.m.ViewSettingsItem",
+            matchers: new PropertyStrictEquals({
+                name: "text",
+                value: "Status"
+            }),
+            actions: new Press(),
+            errorMessage: `Did not find the ViewSettingsItem with text `
+        });
+    }
+
+    // iPressOnTheSortCloseButton() {
+    //     console.log("cancelled")
+    //     return this.waitFor({
+    //         controlType: "sap.m.Button",
+    //         matchers: new PropertyStrictEquals({
+    //             name: "text",
+    //             value: "Cancel"
+    //         }),
+    //         actions: new Press(),
+    //         errorMessage: "Did not find the Sort Close button in the ViewSettingsDialog"
+    //     });
+    // }
+
+
+
+    
     // Assertions
     iShouldSeeTheCreatePage() {
         return this.waitFor({
@@ -123,7 +155,7 @@ export default class MainPage extends Opa5 {
                 name: "items",
 				length: 1
             }),
-            success: function (oTable: any) {
+            success: function () {
                 Opa5.assert.ok(true, "The expected search result is displayed in the table");
             },
             errorMessage: "The expected search result was not found in the table"
@@ -132,14 +164,25 @@ export default class MainPage extends Opa5 {
 
     iShouldSeeTheSortDialog() {
         return this.waitFor({
-            controlType: "sap.m.Dialog",
-            viewName: "amalisov.cuibono.view.fragments.TrancheSorter", 
+            controlType: "sap.m.ViewSettingsDialog",
+            viewName, 
             success: function() {
-                Opa5.assert.ok(true, "Navigated to the Create page");
+                Opa5.assert.ok(true, "Opened the Sort Dialog");
             },
-            errorMessage: "Did not navigate to the Create page"
+            errorMessage: "Did not opened the Sort Dialog"
         });
     }
+
+    // iShouldNotSeeDialog () {
+    //     return this.waitFor({
+    //         id: "dialogID",
+    //         visible: false,
+    //         success: function (oDialog) {
+    //             Opa5.assert.notOk(oDialog.getVisible(), "Dialog is not visible -- OK");
+    //         },
+    //         errorMessage: "Checking Field: dialogID -- Assertion Failed"
+    //     });
+    // }
     
 
     iTeardownMyApp(): void {
