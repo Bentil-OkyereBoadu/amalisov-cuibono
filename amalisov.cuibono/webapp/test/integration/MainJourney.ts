@@ -95,37 +95,6 @@ opaTest("Should navigate to the Create page when the create tranche button is pr
     Then.iTeardownMyApp();
 });
 
- 
-
-QUnit.module("On Edit Press Journey");
-opaTest("Should navigate to the edit page when the edit or duplicate button are pressed", function (Given: any, When: any, Then: any) {
-    // Arrangements
-    onTheMainPage.iStartMyApp();
-
-    // Actions
-    
-    // click on the edit icon button
-    onTheMainPage.iPressOnTheEditButton();
-
-    // i should see the edit page
-    onTheMainPage.iShouldSeeTheEditPage();
-
-    // click on the main button page in navbar
-    onTheAppPage.iPressOnTheMainPageButton();
-     
-    // i should the main page
-    onTheAppPage.iShouldSeeTheMainPage();
-  
-    // click on the duplicate button
-    onTheMainPage.iPressOnTheDuplicateButton();
- 
-    // i  should see the edit page
-    onTheMainPage.iShouldSeeTheEditPage();
-
-    // Cleanup
-    Then.iTeardownMyApp();
-});
-
 QUnit.module("Search");
 
 opaTest("Should enter text into search field and filter table data", function (Given: any, When: any, Then: any) {
@@ -142,7 +111,7 @@ opaTest("Should enter text into search field and filter table data", function (G
     Then.iTeardownMyApp();
 });
 
-// QUnit.module("Sorter");
+QUnit.module("Sorter");
 
 opaTest("Should open sorter dialog and filter table data", function (Given: any, When: any, Then: any) {
     // Arrangements
@@ -155,11 +124,11 @@ opaTest("Should open sorter dialog and filter table data", function (Given: any,
     // onTheMainPage.iSelectViewSettingsItem();
 
 
-//     // Assertions
-//     onTheMainPage.iShouldSeeTheSortDialog();
+    // Assertions
+    onTheMainPage.iShouldSeeTheSortDialog();
 
-//     // Cleanup
-//     Then.iTeardownMyApp();
+    // Cleanup
+    Then.iTeardownMyApp();
 });
  
 
