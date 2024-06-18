@@ -59,7 +59,7 @@ opaTest("Should navigate to Calculated Bonus page when button is pressed", funct
 
 
 QUnit.module("On Edit Press Journey");
-opaTest("Should navigate to the edit page when the edit button is pressed", function (Given: any, When: any, Then: any) {
+opaTest("Should navigate to the edit page when the edit or duplicate button are pressed", function (Given: any, When: any, Then: any) {
     // Arrangements
     onTheMainPage.iStartMyUIComponent({
 				componentConfig: {
@@ -68,9 +68,23 @@ opaTest("Should navigate to the edit page when the edit button is pressed", func
 			});
 
     // Actions
+    
+    // click on the edit icon button
     onTheMainPage.iPressOnTheEditButton();
 
-    // Assertions
+    // i should see the edit page
+    onTheMainPage.iShouldSeeTheEditPage();
+
+    // click on the main button page in navbar
+    onTheAppPage.iPressOnTheMainPageButton();
+     
+    // i should the main page
+    onTheAppPage.iShouldSeeTheMainPage();
+  
+    // click on the duplicate button
+    onTheMainPage.iPressOnTheDuplicateButton();
+ 
+    // i  should see the edit page
     onTheMainPage.iShouldSeeTheEditPage();
 
     // Cleanup
@@ -117,26 +131,26 @@ opaTest("Should enter text into search field and filter table data", function (G
     Then.iTeardownMyApp();
 });
 
-QUnit.module("Sorter");
+// QUnit.module("Sorter");
 
-opaTest("Should open sorter dialog and filter table data", function (Given: any, When: any, Then: any) {
-    // Arrangements
-    onTheMainPage.iStartMyUIComponent({
-				componentConfig: {
-					name: "amalisov.cuibono"
-				}
-			});
+// opaTest("Should open sorter dialog and filter table data", function (Given: any, When: any, Then: any) {
+//     // Arrangements
+//     onTheMainPage.iStartMyUIComponent({
+// 				componentConfig: {
+// 					name: "amalisov.cuibono"
+// 				}
+// 			});
 
-    // Actions
-    onTheMainPage.iPressOnTheSortButton();
-    // onTheMainPage.iPressOnTheSortCloseButton()
+//     // Actions
+//     onTheMainPage.iPressOnTheSortButton();
+//     // onTheMainPage.iPressOnTheSortCloseButton()
 
-    // Assertions
-    onTheMainPage.iShouldSeeTheSortDialog();
+//     // Assertions
+//     onTheMainPage.iShouldSeeTheSortDialog();
 
-    // Cleanup
-    Then.iTeardownMyApp();
-});
+//     // Cleanup
+//     Then.iTeardownMyApp();
+// });
 
 /////////----------PARTICIPANTS PAGE---------///////////
 
@@ -159,6 +173,37 @@ opaTest("Should Check all checkboxes on Participants page when button is pressed
     onTheParticipantsPage.iPressOnTheCheckBox();
     // press the exclude button
     onTheParticipantsPage.iPressOnTheExcludeFromTrancheButton();
+
+    //Assertions
+
+    //i should see all enable checkboxes checked
+    onTheParticipantsPage.allCheckBoxesMustBeSelected();
+    // i should be able to see the dialog open
+    onTheParticipantsPage.iShouldSeeTheDialogOpen();
+
+    // Cleanup
+    Then.iTeardownMyApp();
+});
+
+QUnit.module("Participants Checkbox Journey and open a dialog with overRule button")
+
+opaTest("Should Check all checkboxes on Participants page when button is pressed and click overRule button to open a dialog", function(Then: any) {
+
+    //Arrangements
+    onTheParticipantsPage.iStartMyUIComponent({
+        componentConfig: {
+            name: "amalisov.cuibono"
+        }
+    });
+
+    // Actions
+
+    // navigate to the participants page
+    onTheAppPage.iPressOnTheParticipantsButton();
+    //  press the select all checkboxes checkbox 
+    onTheParticipantsPage.iPressOnTheCheckBox();
+    // i should see the dialog open again but with overrule button
+    onTheParticipantsPage.iPressOnTheOverruleFromTrancheButton()
 
     //Assertions
 

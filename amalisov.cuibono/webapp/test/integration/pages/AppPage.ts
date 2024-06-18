@@ -13,6 +13,15 @@ export default class AppPage extends Opa5 {
         });
     }
 
+    iPressOnTheMainPageButton () {
+		return this.waitFor({
+			id: "bonusNav",
+			viewName,
+			actions: new Press(),
+			errorMessage: "Did not find the bonus tranche button"
+		});
+	}
+
     iPressOnTheParticipantsButton () {
 		return this.waitFor({
 			id: "participantNav",
@@ -32,6 +41,16 @@ export default class AppPage extends Opa5 {
 	}
 
     // Assertions
+    iShouldSeeTheMainPage() {
+        return this.waitFor({
+            viewName: "amalisov.cuibono.view.Main", 
+            success: function() {
+                Opa5.assert.ok(true, "Navigated to the Main page");
+            },
+            errorMessage: "Did not navigate to the Main page"
+        });
+    }
+
     iShouldSeeTheParticipantsPage() {
         return this.waitFor({
             viewName: "amalisov.cuibono.view.Participants", 

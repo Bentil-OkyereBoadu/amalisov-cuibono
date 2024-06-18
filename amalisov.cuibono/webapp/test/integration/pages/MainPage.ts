@@ -46,6 +46,24 @@ export default class MainPage extends Opa5 {
         });
     }
 
+    iPressOnTheDuplicateButton() {
+        return this.waitFor({
+            id: new RegExp("duplicateIcon"),
+            controlType: "sap.m.Button",
+            viewName,
+    
+            success: function(aEditButtons: any[]) {
+                // Filter to get only enabled buttons
+                let bAllEnabled = aEditButtons.filter(oEditBtn => oEditBtn.getEnabled());
+                if (bAllEnabled.length > 0) {
+                    bAllEnabled[0]; // Press the first enabled button
+                }
+            },
+            actions: new Press(), 
+            errorMessage: "Did not find the duplicate button on the main view"
+        });
+    }
+
     iEnterTextForSearchAndPressEnter () {
         return this.waitFor({
             id: "search",

@@ -31,7 +31,15 @@ export default class ParticipantsPage extends Opa5 {
 			errorMessage: "Did not find the exclude tranche button"
 		});
 	}
-    
+
+    iPressOnTheOverruleFromTrancheButton () {
+		return this.waitFor({
+			id: "overRuleButton",
+			viewName,
+			actions: new Press(),
+			errorMessage: "Did not find the overRule tranche button"
+		});
+	}         
 
     // Assertions
 
