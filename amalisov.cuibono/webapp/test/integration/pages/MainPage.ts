@@ -5,6 +5,7 @@ import AggregationLengthEquals from "sap/ui/test/matchers/AggregationLengthEqual
 import AggregationContainsPropertyEqual from "sap/ui/test/matchers/AggregationContainsPropertyEqual";
 import EnterText from "sap/ui/test/actions/EnterText";
 import PropertyStrictEquals from "sap/ui/test/matchers/PropertyStrictEquals";
+import ViewSettingsDialog from "sap/m/ViewSettingsDialog";
 
 const viewName = "amalisov.cuibono.view.Main";
 
@@ -95,30 +96,53 @@ export default class MainPage extends Opa5 {
         });
     }
 
-    iSelectViewSettingsItem () {
-        return this.waitFor({
-            controlType: "sap.m.ViewSettingsItem",
-            matchers: new PropertyStrictEquals({
-                name: "text",
-                value: "Status"
-            }),
-            actions: new Press(),
-            errorMessage: `Did not find the ViewSettingsItem with text `
-        });
-    }
-
-    // iPressOnTheSortCloseButton() {
-    //     console.log("cancelled")
+    // iSelectViewSettingsItem () {
     //     return this.waitFor({
-    //         controlType: "sap.m.Button",
+    //         controlType: "sap.m.ViewSettingsItem",
     //         matchers: new PropertyStrictEquals({
     //             name: "text",
-    //             value: "Cancel"
+    //             value: "Status"
     //         }),
     //         actions: new Press(),
-    //         errorMessage: "Did not find the Sort Close button in the ViewSettingsDialog"
+    //         errorMessage: `Did not find the ViewSettingsItem with text `
     //     });
     // }
+
+    // iSelectSortItem () {
+    //     return this.waitFor({
+    //         controlType: "sap.m.ViewSettingsDialog",
+    //         matchers: new PropertyStrictEquals({
+    //             name: "id",
+    //             value: "sortDialog"
+    //         }),
+    //         actions: function(oDialog: any) {
+    //             var aSortItems = oDialog.getSortItems();
+    //             var oItemToSelect = aSortItems.find((item: any) => item.getId() === "2");
+    //             if (oItemToSelect) {
+    //                 oDialog.setSelectedSortItem(oItemToSelect);
+    //                 oDialog.fireConfirm({
+    //                     sortItem: oItemToSelect
+    //                 });
+    //             } else {
+    //                 Opa5.assert.ok(false, "Could not find the sort item with id '2'");
+    //             }
+    //         },
+    //         errorMessage: "Could not find the sort dialog."
+    //     });
+    // }
+
+    iPressOnTheSortCloseButton() {
+        console.log("cancelled")
+        return this.waitFor({
+            controlType: "sap.m.Button",
+            matchers: new PropertyStrictEquals({
+                name: "text",
+                value: "Cancel"
+            }),
+            actions: new Press(),
+            errorMessage: "Did not find the Sort Close button in the ViewSettingsDialog"
+        });
+    }
 
 
 
@@ -175,15 +199,29 @@ export default class MainPage extends Opa5 {
 
     // iShouldNotSeeDialog () {
     //     return this.waitFor({
-    //         id: "dialogID",
+    //         controlType: "sap.m.ViewSettingsDialog",
+    //         id: "sortDialog",
     //         visible: false,
-    //         success: function (oDialog) {
+    //         success: function (oDialog: any) {
     //             Opa5.assert.notOk(oDialog.getVisible(), "Dialog is not visible -- OK");
     //         },
     //         errorMessage: "Checking Field: dialogID -- Assertion Failed"
     //     });
     // }
     
+    iShouldSeeSelectOptionMessageBox () {
+        return this.waitFor({
+            controlType: "sap.m.Dialog",
+            matchers: new PropertyStrictEquals({
+                name: "title",
+                value: "Information"
+            }),
+            success: function(aDialogs: any) {
+                Opa5.assert.ok(aDialogs.length > 0, "The Information MessageBox is shown");
+            },
+            errorMessage: "Did not find the expected MessageBox"
+        });
+    }
 
     iTeardownMyApp(): void {
         return this.iTeardownMyUIComponent();

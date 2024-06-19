@@ -59,19 +59,18 @@ opaTest("Should navigate to the edit page when the edit or duplicate button are 
     
     // click on the edit icon button
     onTheMainPage.iPressOnTheEditButton();
-
     // i should see the edit page
     onTheMainPage.iShouldSeeTheEditPage();
 
+
     // click on the main button page in navbar
     onTheAppPage.iPressOnTheMainPageButton();
-     
     // i should the main page
     onTheAppPage.iShouldSeeTheMainPage();
   
+
     // click on the duplicate button
     onTheMainPage.iPressOnTheDuplicateButton();
- 
     // i  should see the edit page
     onTheMainPage.iShouldSeeTheEditPage();
 
@@ -119,13 +118,21 @@ opaTest("Should open sorter dialog and filter table data", function (Given: any,
 
     // Actions
     onTheMainPage.iPressOnTheSortButton();
-    // onTheMainPage.iPressOnTheSortCloseButton();
-    // onTheMainPage.iPressOnTheSortConfirmButton();
+    // Assertion
+    onTheMainPage.iShouldSeeTheSortDialog();
+
+   // Actions
+   onTheMainPage.iPressOnTheSortConfirmButton();
+   // Assertion
+   onTheMainPage.iShouldSeeSelectOptionMessageBox();
+
+
     // onTheMainPage.iSelectViewSettingsItem();
+    // onTheMainPage.iPressOnTheSortCloseButton();
 
 
     // Assertions
-    onTheMainPage.iShouldSeeTheSortDialog();
+    
 
     // Cleanup
     Then.iTeardownMyApp();
