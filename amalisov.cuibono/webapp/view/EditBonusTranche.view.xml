@@ -173,6 +173,7 @@
                             <ToolbarSpacer />
                             <Button
                                 type="Accept"
+                                id="addTarget"
                                 text="{i18n>newTarget}"
                                 press=".onAddTarget"
                                 class="btn"

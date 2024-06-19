@@ -3,10 +3,12 @@ import opaTest from "sap/ui/test/opaQunit";
 import MainPage from "./pages/MainPage";
 import AppPage from "./pages/AppPage";
 import ParticipantsPage from "./pages/ParticipantsPage";
+import EditBonusTranchePage from "./pages/EditBonusTranchePage";
 
 const onTheParticipantsPage = new ParticipantsPage();
 const onTheMainPage = new MainPage();
 const onTheAppPage = new AppPage();
+const onTheEditPage = new EditBonusTranchePage();
 
 
 
@@ -47,6 +49,9 @@ opaTest("Should navigate to Calculated Bonus page when button is pressed", funct
 });
 
 
+
+
+
 /////////----------MAIN PAGE---------/////////// 
 
 
@@ -79,20 +84,7 @@ opaTest("Should navigate to the edit page when the edit or duplicate button are 
 });
 
 
-QUnit.module("On Create tranche Press Journey");
-opaTest("Should navigate to the Create page when the create tranche button is pressed", function (Given: any, When: any, Then: any) {
-    // Arrangements
-    onTheMainPage.iStartMyApp();
 
-    // Actions
-    onTheMainPage.iPressOnTheCreateButton();
-
-    // Assertions
-    onTheMainPage.iShouldSeeTheCreatePage();
-
-    // Cleanup
-    Then.iTeardownMyApp();
-});
 
 QUnit.module("Search");
 
@@ -138,6 +130,8 @@ opaTest("Should open sorter dialog and filter table data", function (Given: any,
     Then.iTeardownMyApp();
 });
  
+
+
 
 
 /////////---------- PARTICIPANTS PAGE ---------///////////
@@ -196,3 +190,67 @@ opaTest("Should Check all checkboxes on Participants page when button is pressed
     // Cleanup
     Then.iTeardownMyApp();
 })
+
+
+
+
+
+///////////// EDIT TRANCHE PAGE //////////////
+
+QUnit.module("On Create tranche Press Journey");
+
+opaTest("Should navigate to the Create page when the create tranche button is pressed", function (Given: any, When: any, Then: any) {
+    // Arrangements
+    onTheMainPage.iStartMyApp();
+
+    // Actions
+    onTheMainPage.iPressOnTheCreateButton();
+
+    // Assertions
+    onTheMainPage.iShouldSeeTheCreatePage();
+
+});
+
+opaTest("Should enter fill tranche creation form", function () {
+    // Actions
+    onTheEditPage.iEnterTextIntoTrancheNameField();
+
+    // Asserions
+    onTheEditPage.iShouldSeeTheCorrectTrancheNameInput();
+})
+
+opaTest("Should open the Add Target Dialog when the Add Target button is pressed", function (Given: any, When: any, Then: any) {
+
+    // Actions
+    onTheEditPage.iPressOnTheAddTargetButton();
+
+    // Assertions
+    onTheEditPage.iShouldSeeTheTargetDialogOpen();
+
+});
+opaTest("Should enter text into the target name input the", function (Given: any, When: any, Then: any) {   
+
+    // Actions
+    onTheEditPage.iEnterTextIntoTargetNameField();
+
+    // Assertions
+    onTheEditPage.iShouldSeeTheCorrectTargetNameInInput();
+
+    // Action
+    onTheEditPage.iEnterTextIntoTargetWeightField();
+    // Assertion
+    onTheEditPage.iShouldSeeTheCorrectTargetWeightInInput();
+
+     // Action
+     onTheEditPage.iEnterTextIntoAchievementField();
+     // Assertion
+     onTheEditPage.iShouldSeeTheCorrectTargetAchievementInInput();
+
+      // Action
+    onTheEditPage.iEnterTextIntoTargetDescriptionField();
+    // Assertion
+    onTheEditPage.iShouldSeeTheCorrectTargetDescriptionInInput();
+
+    // Cleanup
+    Then.iTeardownMyApp();
+});
