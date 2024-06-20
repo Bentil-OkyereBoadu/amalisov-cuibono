@@ -262,7 +262,7 @@ export default class EditBonusTranche extends BaseController {
 		const resourceBundle: ResourceBundle = await this.getResourceBundle();
 
 		if (sTargetId) {
-			MessageBox.confirm(resourceBundle.getText("confirmDeleteTranche"), {
+			MessageBox.confirm(resourceBundle.getText("confirmDeleteTarget"), {
 				actions: [MessageBox.Action.YES, MessageBox.Action.NO],
 				onClose: async (sAction: string) => {
 					if (sAction === MessageBox.Action.YES) {

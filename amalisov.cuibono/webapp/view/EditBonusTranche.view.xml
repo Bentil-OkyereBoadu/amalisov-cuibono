@@ -13,7 +13,7 @@
         id="editPage"
         showNavButton="true"
         navButtonPress=".onNavBack"
-        title="" 
+        title=""
         floatingFooter="true"
     >
         <IconTabHeader mode="Inline">
@@ -199,16 +199,17 @@
                             <Text text="{updateModel>weight}" />
                             <Text text="{updateModel>achievement}" />
                             <HBox class="interactionIcons">
-                                <core:Icon
-                                    src="sap-icon://edit"
-                                    class="icon"
+                                <Button
+                                    id="editTarget"
+                                    icon="sap-icon://edit"
+                                    class="mainIcon"
                                     press=".onOpenEditTarget"
                                 />
 
-                                <core:Icon
-                                    src="sap-icon://delete"
+                                <Button
+                                    icon="sap-icon://delete"
+                                    class="mainIcon"
                                     press=".onDeleteTarget"
-                                    class="icon"
                                 />
                             </HBox>
                         </ColumnListItem>
@@ -216,22 +217,26 @@
                 </Table>
                 <Table width="45%">
                     <columns>
-                        <Column>
-                  
-                        </Column>
+                        <Column />
                     </columns>
                     <items>
                         <ColumnListItem>
                             <HBox class="total">
-                               <Label text="{i18n>total}" class="boldText"/>
-                               <HBox>
+                                <Label
+                                    text="{i18n>total}"
+                                    class="boldText"
+                                />
+                                <HBox>
                                     <Button
                                         type="Reject"
                                         icon=" sap-icon://alert"
                                         visible="{path: 'updateModel>/totalWeight', formatter: 'formatter.totalWeight', targetType:'any'}"
                                     />
-                                  <Text text="{updateModel>/totalWeight}" class="totalWeight"/> 
-                               </HBox>
+                                    <Text
+                                        text="{updateModel>/totalWeight}"
+                                        class="totalWeight"
+                                    />
+                                </HBox>
                             </HBox>
                         </ColumnListItem>
                     </items>

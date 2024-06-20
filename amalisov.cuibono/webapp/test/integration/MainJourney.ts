@@ -66,6 +66,7 @@ opaTest("Should navigate to the edit page when the edit or duplicate button are 
     onTheMainPage.iPressOnTheEditButton();
     // i should see the edit page
     onTheMainPage.iShouldSeeTheEditPage();
+    onTheEditPage.iShouldSeeTheDateFilled();
 
 
     // click on the main button page in navbar
@@ -78,6 +79,7 @@ opaTest("Should navigate to the edit page when the edit or duplicate button are 
     onTheMainPage.iPressOnTheDuplicateButton();
     // i  should see the edit page
     onTheMainPage.iShouldSeeTheEditPage();
+    onTheEditPage.iShouldSeeTheDateEmpty()
 
     // Cleanup
     Then.iTeardownMyApp();
@@ -199,7 +201,7 @@ opaTest("Should Check all checkboxes on Participants page when button is pressed
 
 QUnit.module("On Create tranche Press Journey");
 
-opaTest("Should navigate to the Create page when the create tranche button is pressed", function (Given: any, When: any, Then: any) {
+opaTest("Should navigate to the Create page when the create tranche button is pressed", function () {
     // Arrangements
     onTheMainPage.iStartMyApp();
 
@@ -219,7 +221,7 @@ opaTest("Should enter fill tranche creation form", function () {
     onTheEditPage.iShouldSeeTheCorrectTrancheNameInput();
 })
 
-opaTest("Should open the Add Target Dialog when the Add Target button is pressed", function (Given: any, When: any, Then: any) {
+opaTest("Should open the Add Target Dialog when the Add Target button is pressed", function () {
 
     // Actions
     onTheEditPage.iPressOnTheAddTargetButton();
@@ -228,7 +230,7 @@ opaTest("Should open the Add Target Dialog when the Add Target button is pressed
     onTheEditPage.iShouldSeeTheTargetDialogOpen();
 
 });
-opaTest("Should enter text into the target name input the", function (Given: any, When: any, Then: any) {   
+opaTest("Should enter text into the target name input the", function () {   
 
     // Actions
     onTheEditPage.iEnterTextIntoTargetNameField();
@@ -241,16 +243,38 @@ opaTest("Should enter text into the target name input the", function (Given: any
     // Assertion
     onTheEditPage.iShouldSeeTheCorrectTargetWeightInInput();
 
-     // Action
-     onTheEditPage.iEnterTextIntoAchievementField();
-     // Assertion
-     onTheEditPage.iShouldSeeTheCorrectTargetAchievementInInput();
+    // Action
+    onTheEditPage.iEnterTextIntoAchievementField();
+    // Assertion
+    onTheEditPage.iShouldSeeTheCorrectTargetAchievementInInput();
 
-      // Action
+    // Action
     onTheEditPage.iEnterTextIntoTargetDescriptionField();
     // Assertion
     onTheEditPage.iShouldSeeTheCorrectTargetDescriptionInInput();
 
-    // Cleanup
-    Then.iTeardownMyApp();
+  
 });
+
+opaTest("Should Save the new target data", function ( Then: any) {
+
+    // Actions
+    onTheEditPage.iPressOnTheSaveTargetButton();
+
+    // Assertions
+    onTheEditPage.theTableHasNewItem();
+
+
+
+});
+
+opaTest("should press the edit button and see the edit target dialog", function (Then: any) {
+
+    // Actions
+    onTheEditPage.iPressOnTheEditTargetButton();
+
+    // Assertion
+    onTheEditPage.iShouldSeeTheTargetDialogOpen();
+        // Cleanup
+        Then.iTeardownMyApp();
+})

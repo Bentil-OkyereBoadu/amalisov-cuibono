@@ -26,7 +26,7 @@ server:
       mountPath: /odata
       afterMiddleware: compression
       configuration:
-        baseUri: https://80f97835trial-dev-amalisov-cuibono-srv.cfapps.us10-001.hana.ondemand.com/odata
+        baseUri: https://0d85bd20trial-dev-amalisov-cuibono-srv.cfapps.us10-001.hana.ondemand.com/odata
         
         
 

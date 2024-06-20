@@ -2,6 +2,7 @@ import CheckBox from "sap/m/CheckBox";
 import Opa5 from "sap/ui/test/Opa5";
 import EnterText from "sap/ui/test/actions/EnterText";
 import Press from "sap/ui/test/actions/Press";
+import AggregationLengthEquals from "sap/ui/test/matchers/AggregationLengthEquals";
 
 const viewName = "amalisov.cuibono.view.EditBonusTranche";
 
@@ -23,6 +24,14 @@ export default class EditBonusTranchePage extends Opa5 {
     }
 
 // target actions
+iPressOnTheEditTargetButton() {
+    return this.waitFor({
+        id: "editTarget",
+        viewName,
+        actions: new Press(),
+        errorMessage: "Did not find the edit Target button",
+    });
+}
 
 	iPressOnTheAddTargetButton() {
 		return this.waitFor({
@@ -67,7 +76,39 @@ export default class EditBonusTranchePage extends Opa5 {
         });
     }
 
+    iPressOnTheSaveTargetButton() {
+		return this.waitFor({
+			id: "saveTarget",
+			viewName,
+			actions: new Press(),
+			errorMessage: "Did not find the Add Target button",
+		});
+	}
+
 	// Assertions
+
+    iShouldSeeTheDateFilled() {
+        return this.waitFor({
+            id: "startDateInput",
+            viewName,
+            success: (oInput: any) => {
+                Opa5.assert.ok(oInput.getValue().length > 0, "The Date field was already filled. This is the edit page");
+            },
+            errorMessage: "Dates werent filled",
+        });
+    }
+
+    iShouldSeeTheDateEmpty() {
+        return this.waitFor({
+            id: "startDateInput",
+            viewName,
+            success: (oInput: any) => {
+                Opa5.assert.notOk(oInput.getValue().length > 0, "The Date field was empty. This is the duplicate page");
+            },
+            errorMessage: "Dates were filled",
+        });
+    }
+
     iShouldSeeTheCorrectTrancheNameInput() {
         return this.waitFor({
             id: "nameInput",
@@ -129,6 +170,36 @@ export default class EditBonusTranchePage extends Opa5 {
                 Opa5.assert.strictEqual(oInput.getValue(), "Integration target 1 descrip", "The input field contains the correct text");
             },
             errorMessage: "Input didnt contain the text",
+        });
+    }
+
+    // theTableHasNewItem () {
+    //     return this.waitFor({
+    //         id: "trancheTable",
+    //         viewName,
+    //         matchers: new AggregationLengthEquals({
+    //             name: "items",
+    //             length: 1
+    //         }),
+    //         success: function () {
+    //             Opa5.assert.ok(true, "The table contains the added entry");
+    //         },
+    //         errorMessage: "The table does not contain the item."
+    //     });
+    // }
+
+    theTableHasNewItem () {
+        return this.waitFor({
+            id: "trancheTable",
+            viewName,
+            matchers: new AggregationLengthEquals({
+                name: "items",
+                length: 1
+            }),
+            success: function () {
+                Opa5.assert.ok(true, "The table contains the added entry");
+            },
+            errorMessage: "The table does not contain the item."
         });
     }
 

@@ -46,6 +46,7 @@
         </content>
         <buttons>
             <Button
+            id="saveTarget"
                 text="{i18n>save}"
                 press=".onSave"
             />

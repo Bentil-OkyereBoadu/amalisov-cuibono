@@ -70,7 +70,7 @@ export default class MainPage extends Opa5 {
         return this.waitFor({
             id: "search",
             viewName,
-            actions: [new EnterText({text: "Demo Tranche New"})],
+            actions: [new EnterText({text: "New Tranche 1"})],
             errorMessage: "The text could not be entered in the search"
         });
     }
