@@ -1,5 +1,6 @@
 import CheckBox from "sap/m/CheckBox";
 import Opa5 from "sap/ui/test/Opa5";
+import EnterText from "sap/ui/test/actions/EnterText";
 import Press from "sap/ui/test/actions/Press";
 
 const viewName = "amalisov.cuibono.view.Participants";
@@ -66,6 +67,14 @@ export default class ParticipantsPage extends Opa5 {
                 Opa5.assert.ok(true, "dialog is open");
             },
             errorMessage: "Dialog did not open"
+        });
+    }
+    iEnterAJustification (sName: string) {
+        return this.waitFor({
+            id: "excludeId",
+            viewName,
+            actions: [new EnterText({text: sName})],
+            errorMessage: "The text could not be entered in the Input field"
         });
     }
 

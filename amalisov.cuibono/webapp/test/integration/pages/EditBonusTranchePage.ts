@@ -24,14 +24,6 @@ export default class EditBonusTranchePage extends Opa5 {
     }
 
 // target actions
-iPressOnTheEditTargetButton() {
-    return this.waitFor({
-        id: "editTarget",
-        viewName,
-        actions: new Press(),
-        errorMessage: "Did not find the edit Target button",
-    });
-}
 
 	iPressOnTheAddTargetButton() {
 		return this.waitFor({
@@ -41,12 +33,12 @@ iPressOnTheEditTargetButton() {
 			errorMessage: "Did not find the Add Target button",
 		});
 	}
-
-    iEnterTextIntoTargetNameField () {
+//data input actions for targets
+    iEnterTextIntoTargetNameField (sName: string) {
         return this.waitFor({
             id: "targetName",
             viewName,
-            actions: [new EnterText({text: "Integration target 1"})],
+            actions: [new EnterText({text: sName})],
             errorMessage: "The text could not be entered in the Input field"
         });
     }
@@ -84,6 +76,16 @@ iPressOnTheEditTargetButton() {
 			errorMessage: "Did not find the Add Target button",
 		});
 	}
+
+    iPressOnTheEditTargetButton() {
+        return this.waitFor({
+            id: new RegExp("editTarget"),
+            controlType: "sap.m.Button",
+            viewName,
+            actions: new Press(), 
+            errorMessage: "Did not find the duplicate button on the main view"
+        });
+    }
 
 	// Assertions
 
@@ -131,7 +133,7 @@ iPressOnTheEditTargetButton() {
             errorMessage: "Dialog did not open"
         });
     }
-
+// data input assertions for target
     iShouldSeeTheCorrectTargetNameInInput() {
         return this.waitFor({
             id: "targetName",
@@ -173,21 +175,6 @@ iPressOnTheEditTargetButton() {
         });
     }
 
-    // theTableHasNewItem () {
-    //     return this.waitFor({
-    //         id: "trancheTable",
-    //         viewName,
-    //         matchers: new AggregationLengthEquals({
-    //             name: "items",
-    //             length: 1
-    //         }),
-    //         success: function () {
-    //             Opa5.assert.ok(true, "The table contains the added entry");
-    //         },
-    //         errorMessage: "The table does not contain the item."
-    //     });
-    // }
-
     theTableHasNewItem () {
         return this.waitFor({
             id: "trancheTable",
@@ -200,6 +187,28 @@ iPressOnTheEditTargetButton() {
                 Opa5.assert.ok(true, "The table contains the added entry");
             },
             errorMessage: "The table does not contain the item."
+        });
+    }
+
+    iShouldSeeTargetDataFilled() {
+        return this.waitFor({
+            id: "targetName",
+            viewName,
+            success: (oInput: any) => {
+                Opa5.assert.ok(oInput.getValue().length > 0, "The Target name field was already filled.");
+            },
+            errorMessage: "Target name wasnt filled",
+        });
+    }
+
+    iShouldSeeTheEditedTargetNameInInput() {
+        return this.waitFor({
+            id: "targetName",
+            viewName,
+            success: (oInput: any) => {
+                Opa5.assert.strictEqual(oInput.getValue(), "Edited name", "The input field is edited");
+            },
+            errorMessage: "Input didnt contain the text",
         });
     }
 
